@@ -1,0 +1,435 @@
+﻿<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="GENERATOR" content="Microsoft Visual Studio">
+    <meta charset="utf-8">
+    <title>kakaoMap</title>
+    <style type="text/css">
+        html, body {
+            width: 99%;
+            height: 99%;
+            font-size: 11.0px;
+        }
+
+        .category, .category * {
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+
+        .category {
+            position: absolute;
+            overflow: hidden;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: 80px;
+            z-index: 10;
+            border: 1px solid black;
+            font-family: 'Malgun Gothic','맑은 고딕',sans-serif;
+            font-size: 12px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .category .menu_selected {
+            background: #FF5F4A;
+            color: #fff;
+            border-left: 1px solid #915B2F;
+            border-right: 1px solid #915B2F;
+            margin: 0 -1px;
+        }
+
+        .category .map_selected {
+            background: #d5b816;
+            color: #fff;
+            border-left: 1px solid #915B2F;
+            border-right: 1px solid #915B2F;
+            margin: 0 -1px;
+        }
+
+        .category .node_selected {
+            background: #3672ed;
+            color: #fff;
+            border-left: 1px solid #915B2F;
+            border-right: 1px solid #915B2F;
+            margin: 0 -1px;
+        }
+
+        .category li {
+            list-style: none;
+            float: left;
+            width: 80px;
+            height: 80PX;
+            padding-top: 5px;
+            cursor: pointer;
+        }
+
+        .category .ico_comm {
+            display: block;
+            margin: 0 auto 2px;
+            width: 24px;
+            height: 35px;
+            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png') no-repeat;
+        }
+
+        .category .ico_map {
+            display: block;
+            margin: 0 auto 2px;
+            width: 35px;
+            height: 35px;
+            background: url('https://image.flaticon.com/icons/png/512/235/235861.png') no-repeat;
+            background-size: 35px 35px;
+        }
+
+        .category .ico_node {
+            display: block;
+            margin: 0 auto 2px;
+            width: 30px;
+            height: 35px;
+            background: url('https://t1.daumcdn.net/mapjsapi/images/marker.png') no-repeat;
+            background-size: 25px 35px;
+        }
+
+        table {
+            width: 100%;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #444444;
+        }
+    </style>
+</head>
+<body>
+    <!-- 지도 위에 표시될 마커 카테고리 -->
+    <div class="category">
+        <ul >
+            <li id="map_li" class="map_selected" sytle="margin-right:5px;" onclick="toggleShowMap()">
+                <span class="ico_map"></span>
+                카카오<br />지도
+            </li>
+            <li id="node_li" class="node_selected" sytle="margin-right:5px;" onclick="toggleShowNode()">
+                <span class="ico_node"></span>
+                노드
+            </li>
+        </ul>
+        <ul id="ul_components"></ul>
+    </div>
+    <div id="map" style="width:100%; height:100%;"></div>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7691c7a412434624df5ca14f0ea5ef2&libraries=services"></script>
+    <script>
+        // 컴포넌트 class 정보
+        var isLoaded = false; // 화면이 열리고 최초로 맵 로딩이 완료 되었는지 여부
+        var componentsClassList = [];
+        var componentsMarkerMap = new Map();
+        var nodeMarkerList = [];
+        var mapOption = {
+            center: new kakao.maps.LatLng(getParam("centerLat"), getParam("centerLng")),
+            level: 9
+        };
+        var map = new kakao.maps.Map(document.getElementById('map'), mapOption);
+
+        // Tileset을 생성하고 지도 오버레이로 추가합니다
+        kakao.maps.Tileset.add('TILE_NUMBER',
+            new kakao.maps.Tileset({
+                width: 256,
+                height: 256,
+                getTile: function (x, y, z) {
+                    var div = document.createElement('div');
+                    div.style.background = '#FFFFFF';
+                    return div;
+                }
+            }));
+
+        // 맵 로딩완료 이벤트
+        kakao.maps.event.addListener(map, 'tilesloaded', function () {
+            // 초기 셋팅
+            if (!isLoaded) {
+                // 코드 내부 함수 호출
+                // 링크 그리기
+                window.external.DrawLinks();
+                // 노드 그리기
+                window.external.DrawNodes();
+                // 컴포넌트 그리기
+                window.external.DrawComponents();
+                isLoaded = true;
+            }
+        });
+
+        // 지도 ON/OFF 
+        function toggleShowMap() {
+            var li = document.getElementById("map_li");
+            var className = "map_selected";
+            if (li.className.indexOf(className) >= 0) {
+                // OFF
+                li.className = '';
+                map.addOverlayMapTypeId(kakao.maps.MapTypeId.TILE_NUMBER);
+            } else {
+                // ON
+                li.className = className;
+                map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TILE_NUMBER);
+            }
+        }
+
+        // 노드 ON/OFF 
+        function toggleShowNode() {
+            var li = document.getElementById("node_li");
+            var className = "node_selected";
+            if (li.className.indexOf(className) >= 0) {
+                // OFF
+                li.className = '';
+                setMarkers(nodeMarkerList, null);
+            } else {
+                // ON
+                li.className = className;
+                setMarkers(nodeMarkerList, map);
+            }
+        }
+
+        // 중심좌표로 이동
+        function moveTo(lat, lng) {
+            var loc = new kakao.maps.LatLng(lat, lng);
+            map.setCenter(loc);
+        }
+
+        // 부드럽게 중심좌료로 이동
+        function panTo(lat, lng) {
+            var loc = new kakao.maps.LatLng(lat, lng);
+            map.panTo(loc);
+        }
+
+        // 로도망 그리기
+        function drawPolyLine(jsonStr) {
+            var linePath = [];
+            var geoPoints = JSON.parse(jsonStr);
+            var length = geoPoints.length;
+            for (var i = 0; i < length; i++) {
+                var geoPoint = geoPoints[i];
+                linePath.push(new kakao.maps.LatLng(geoPoint.lat, geoPoint.lng));
+            }
+            var polyline = new kakao.maps.Polyline({
+                path: linePath, // 선을 구성하는 좌표배열 입니다
+                strokeWeight: 5, // 선의 두께 입니다
+                strokeColor: '#39f', // 선의 색깔입니다
+                strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid' // 선의 스타일입니다
+            });
+            polyline.setMap(map);
+        }
+
+        // 노드 그리기
+        function drawNodes(jsonStr) {
+            var items = JSON.parse(jsonStr);
+            var length = items.length;
+            var imageSrc = 'https://t1.daumcdn.net/mapjsapi/images/marker.png'; // 마커이미지의 주소입니다
+            // 마커 이미지의 이미지 크기 입니다
+            var imageSize = new kakao.maps.Size(30, 37);
+            // 커스텀 좌표 이미지 반환 함수 
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+            for (var i = 0; i < length; i++) {
+                var item = items[i];
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    image: markerImage,
+                    title: item.name,
+                    position: new kakao.maps.LatLng(item.lat, item.lng), // 마커의 위치
+                });
+                // visible/invisible을 위해 저장
+                nodeMarkerList.push(marker)
+            }
+        }
+
+        // 마커 그리기
+        function drawComponents(name, jsonStr, image) {
+            var markerPositions = [];
+            var items = JSON.parse(jsonStr);
+            var length = items.length;
+
+            // 인포윈도우를 표시하는 클로저를 만드는 함수
+            function makeOverListener(map, marker, infowindow) {
+                return function () {
+                    infowindow.open(map, marker);
+                };
+            }
+
+            // 인포윈도우를 닫는 클로저를 만드는 함수
+            function makeOutListener(infowindow) {
+                return function () {
+                    infowindow.close();
+                };
+            }
+
+            var imageSrc = (image == undefined || image == "") ? 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png' : image; // 마커이미지의 주소입니다
+            // 마커 이미지의 이미지 크기 입니다
+            var imageSize = new kakao.maps.Size(24, 35);
+            // 커스텀 좌표 이미지 반환 함수 
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            var markers = [];
+            // 마커 생성 
+            for (var i = 0; i < length; i++) {
+                var item = items[i];
+
+                var content = '';
+                content += '<table>';
+                content += '    <thead>';
+                content += '        <tr>';
+                content += '            <th>key</th>';
+                content += '            <th>value</th>';
+                content += '        </tr>';
+                content += '    </thead>';
+                content += '<tbody>';
+                if (item.attributes !== undefined) {
+                    for (var j = 0; j < item.attributes.length; j++) {
+                        content += ('<tr><td>' + item.attributes[j].label + "</td><td>" + item.attributes[j].value + '</td></tr>');
+                    }
+                }
+                content += '    </table>';
+                content += '</table>';
+                
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    image: markerImage,
+                    title: name,
+                    position: new kakao.maps.LatLng(item.lat, item.lng) // 마커의 위치
+                });
+
+                var iwContent = content; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+                // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성
+                var infoWindow = new kakao.maps.InfoWindow({
+                    content: iwContent,
+                    position: marker.getPosition(),
+                    removable: iwRemoveable
+                });
+
+                // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+                // 이벤트 리스너로는 클로저를 만들어 등록합니다
+                // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+                kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infoWindow));
+
+                // visible/invisible을 위해 저장
+                markers.push(marker);
+            }
+
+            
+            // 마커 생성
+            for (var i = 0; i < markerPositions.length; i++) {
+                
+            }
+
+            // 동적으로 컴포넌트 ON/OFF 화면을 생성
+            //<li id="cp0" onclick="changeMarker('cp0')"><span class="ico_comm"></span>name</li>
+            var liId = "cp" + componentsClassList.length;
+            var li = document.createElement("li");
+            li.setAttribute('id', liId);
+            li.setAttribute('class', "menu_selected");
+            li.onclick = function () {
+                toggleComponetMarker(liId);
+            }
+            var span = document.createElement("span");
+            span.setAttribute('class', "ico_comm");
+            li.appendChild(span);
+            li.appendChild(document.createTextNode(name));
+            var ul = document.getElementById("ul_components");
+            ul.appendChild(li);
+            componentsClassList.push(liId);
+            componentsMarkerMap.set(liId, markers);
+        }
+
+        // 줌인
+        function zoomIn() {
+            var level = map.getLevel();
+            map.setLevel(level - 1);
+        }
+
+        // 줌아웃
+        function zoomOut() {
+            var level = map.getLevel();
+            map.setLevel(level + 1);
+        }
+
+        function geo(address) {  // "송파구 가락동 10-1", "동남로 12길" 형태.
+            var geocoder = new kakao.maps.services.Geocoder();
+            geocoder.addressSearch(address, function (result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    var marker = new kakao.maps.Marker({ map: map, position: coords });
+                    var infowindow = new kakao.maps.InfoWindow({ content: '<div style="width:150px;text-align:center;padding:6px 0;">여기!!</div>' });
+                    infowindow.open(map, marker);
+                    map.setCenter(coords);
+                }
+            });
+        }
+
+        // url 에서 parameter 추출
+        function getParam(sname) {
+            var params = location.search.substr(location.search.indexOf("?") + 1);
+            var sval = "";
+            params = params.split("&");
+            for (var i = 0; i < params.length; i++) {
+                temp = params[i].split("=");
+                if ([temp[0]] == sname) { sval = temp[1]; }
+            }
+            return sval;
+        }
+
+        // 컴포넌트 클릭 시 현재 상태에 따라 visible을 ON/OFF하는 함수
+        function toggleComponetMarker(type) {
+            for (var i = 0; i < componentsClassList.length; i++) {
+                var liId = componentsClassList[i];
+                var li = document.getElementById(liId);
+                if (type === liId) {
+                    if (li.className.indexOf('menu_selected') >= 0) {
+                        // off
+                        li.className = '';
+                        componentsMarkerMap.forEach(function (value, key) {
+                            if (type === key) {
+                                setMarkers(value, null);
+                            }
+                        });
+                    } else {
+                        // on
+                        li.className = 'menu_selected';
+                        componentsMarkerMap.forEach(function (value, key) {
+                            if (type === key) {
+                                setMarkers(value, map);
+                            }
+                        });
+                    }
+                    return;
+                }
+            }
+        } 
+        // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경
+        function changeMarker(type) {
+            for (var i = 0; i < componentsClassList.length; i++) {
+                var liId = componentsClassList[i];
+                var li = document.getElementById(liId);
+                if (type === liId) {
+                    li.className = 'menu_selected';
+                    componentsMarkerMap.forEach(function (value, key) {
+                        if (type === key) {
+                            setMarkers(value, map);
+                        }
+                    });
+                } else {
+                    li.className = '';
+                }
+            }
+        } 
+
+        // 마커들의 지도 표시 여부를 설정
+        function setMarkers(list, m) {
+            list.forEach(function (markers) {
+                markers.setMap(m);
+            });
+        }
+        
+    </script>
+</body>
+</html>

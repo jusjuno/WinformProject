@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{2e85e1a2-f612-4d28-a1db-89e4748155fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{034de741-a4d3-484c-be73-0309492745a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\steps">
+      <UniqueIdentifier>{5bcaf56f-3155-450a-b958-1327d46d72e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\steps">
+      <UniqueIdentifier>{7a490d18-14ec-4d6b-80f0-881e0128bd64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\shape">
+      <UniqueIdentifier>{19c1e9b4-fbb9-40b5-a558-f96fa99eb81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shape">
+      <UniqueIdentifier>{e66ceb7f-0fe4-4833-ad00-fdfcf72a9cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\shape\struct">
+      <UniqueIdentifier>{b430c683-95ad-4b7d-918e-0bad7a862929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\exp">
+      <UniqueIdentifier>{63dd051a-94c2-4ae7-a76f-24a7919e0fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\NeXTA">
+      <UniqueIdentifier>{23c5adce-e282-4e4e-9bf1-af7a18b477ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dev">
+      <UniqueIdentifier>{366ab1b3-18fc-4c0c-8f62-200558fbb79c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\result">
+      <UniqueIdentifier>{8321fc2d-f91e-4ecb-af0c-8a9a91dfdad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dataset">
+      <UniqueIdentifier>{a339b7a2-cb0e-4369-88e1-4d0031a07ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\NeXTA\input">
+      <UniqueIdentifier>{99523b25-180c-4f40-912e-2817770d9d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\html">
+      <UniqueIdentifier>{3f18fe6f-b777-49ab-83e8-a86591377ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images">
+      <UniqueIdentifier>{f40a7aed-7273-41bc-a504-99f85b0d78ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NewProjectForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Step1Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeChart.cpp">
+      <Filter>Source Files\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Step2Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step3Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step4Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step5Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step6Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step7Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step8Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Step10Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step12Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step11Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step10bForm.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step9Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="NeXTAInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Step0Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+    <ClCompile Include="Step13Form.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileDlgUtil.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewProjectForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Step1Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeChart.h">
+      <Filter>Header Files\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyObject.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="MBR.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoPoint.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Step2Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step3Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="LegendItemInfo.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Step4Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step5Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step6Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcelUtil.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="FragilityCurve.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="Alert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Step7Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step8Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFormValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficModule.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="MonteCarioModule.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="Step10Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step12Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVFileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Step11Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeProperty.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="DBFColumnInfo.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomMath.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeNode.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeChartAttribute.h">
+      <Filter>Header Files\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Step10bForm.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step9Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Preference.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayOptions.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentClassInfo.h">
+      <Filter>Header Files\shape\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartHotspotAttrDialog.h">
+      <Filter>Header Files\dev</Filter>
+    </ClInclude>
+    <ClInclude Include="RecoveryCost.h">
+      <Filter>Header Files\result</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDataSet.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDataSetBinder.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageAnalyzer.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="CommConst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficScenario.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentInfo.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLinkType.h">
+      <Filter>Header Files\NeXTA\input</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultDataSet.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="Zone.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputSummary.h">
+      <Filter>Header Files\NeXTA\input</Filter>
+    </ClInclude>
+    <ClInclude Include="SoilAmp.h">
+      <Filter>Header Files\exp</Filter>
+    </ClInclude>
+    <ClInclude Include="NeXTAInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NeXTAHelper.h">
+      <Filter>Header Files\NeXTA</Filter>
+    </ClInclude>
+    <ClInclude Include="Step0Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="Step13Form.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DocumentForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step1Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step2Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step3Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step4Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step5Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step6Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step7Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step8Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step10Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step12Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step11Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step10bForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step9Form.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartHotspotAttrDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WinformProject.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="kakaoMap.html">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

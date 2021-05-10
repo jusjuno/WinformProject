@@ -1,0 +1,9 @@
+scenario_no,scenario_name,number_of_assignment_days,traffic_flow_model,traffic_assignment_method,ODME_mode,emission_data_output,demand_multiplier,random_seed,default_arterial_k_jam,default_cycle_length,ODME_start_iteration,ODME_max_percentage_deviation_wrt_hist_demand,ODME_step_size,freeway_bias_factor,ue_gap_calculation_method,agent_demand_input_mode,calibration_data_start_time_in_min,calibration_data_end_time_in_min
+0,test0,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+1,test02,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+2,test12,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+3,test22,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+4,test32,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+5,test33,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+6,test34,2,2,0,0,0,1,100,250,110,20,30,0.05,1,0,0,840,1440
+

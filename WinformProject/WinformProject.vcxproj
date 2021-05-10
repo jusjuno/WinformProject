@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Deployed|Win32">
+      <Configuration>Deployed</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Deployed|x64">
+      <Configuration>Deployed</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{3D334790-1E9A-41C0-8FD1-C8D7084E2C0F}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>WinformProject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <EntryPointSymbol>Main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Deployed|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="netchartdir">
+      <HintPath>Lib\ChartDirector\standard\netchartdir.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseForm.cpp" />
+    <ClCompile Include="DocumentForm.cpp" />
+    <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="NewProjectForm.cpp" />
+    <ClCompile Include="NeXTAInput.cpp" />
+    <ClCompile Include="ShapeChart.cpp" />
+    <ClCompile Include="Step0Form.cpp" />
+    <ClCompile Include="Step10bForm.cpp" />
+    <ClCompile Include="Step10Form.cpp" />
+    <ClCompile Include="Step11Form.cpp" />
+    <ClCompile Include="Step12Form.cpp" />
+    <ClCompile Include="Step13Form.cpp" />
+    <ClCompile Include="Step1Form.cpp" />
+    <ClCompile Include="Step2Form.cpp" />
+    <ClCompile Include="Step3Form.cpp" />
+    <ClCompile Include="Step4Form.cpp" />
+    <ClCompile Include="Step5Form.cpp" />
+    <ClCompile Include="Step6Form.cpp" />
+    <ClCompile Include="Step7Form.cpp" />
+    <ClCompile Include="Step8Form.cpp" />
+    <ClCompile Include="Step9Form.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Alert.h" />
+    <ClInclude Include="BaseForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ComponentClassInfo.h" />
+    <ClInclude Include="ChartHotspotAttrDialog.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="CommConst.h" />
+    <ClInclude Include="CommonHeader.h" />
+    <ClInclude Include="ComponentInfo.h" />
+    <ClInclude Include="CSVFileManager.h" />
+    <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="DamageAnalyzer.h" />
+    <ClInclude Include="DBFColumnInfo.h" />
+    <ClInclude Include="DisplayOptions.h" />
+    <ClInclude Include="DocumentForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ExcelUtil.h" />
+    <ClInclude Include="FileDlgUtil.h" />
+    <ClInclude Include="FileUtil.h" />
+    <ClInclude Include="FragilityCurve.h" />
+    <ClInclude Include="GeoPoint.h" />
+    <ClInclude Include="IFormValidator.h" />
+    <ClInclude Include="LegendItemInfo.h" />
+    <ClInclude Include="MainForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MBR.h" />
+    <ClInclude Include="MonteCarioModule.h" />
+    <ClInclude Include="NewProjectForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="NeXTAHelper.h" />
+    <ClInclude Include="NeXTAInput.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="OutputSummary.h" />
+    <ClInclude Include="Preference.h" />
+    <ClInclude Include="RecoveryCost.h" />
+    <ClInclude Include="ResultDataSet.h" />
+    <ClInclude Include="ShapeChartAttribute.h" />
+    <ClInclude Include="ShapeNode.h" />
+    <ClInclude Include="ProjectDataSet.h" />
+    <ClInclude Include="ProjectDataSetBinder.h" />
+    <ClInclude Include="ShapeProperty.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="PolyObject.h" />
+    <ClInclude Include="ShapeChart.h" />
+    <ClInclude Include="SoilAmp.h" />
+    <ClInclude Include="Step0Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step10bForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step10Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step11Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step12Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step13Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step1Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step2Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step3Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step4Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step5Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step6Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step7Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step8Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Step9Form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="TrafficModule.h" />
+    <ClInclude Include="TrafficScenario.h" />
+    <ClInclude Include="InputLinkType.h" />
+    <ClInclude Include="Zone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChartHotspotAttrDialog.resx">
+      <DependentUpon>ChartHotspotAttrDialog.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DocumentForm.resx">
+      <DependentUpon>DocumentForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectForm.resx">
+      <DependentUpon>NewProjectForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NeXTAInput.resx">
+      <DependentUpon>NeXTAInput.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step0Form.resx">
+      <DependentUpon>Step0Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step10bForm.resx">
+      <DependentUpon>Step10bForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step10Form.resx">
+      <DependentUpon>Step10Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step11Form.resx">
+      <DependentUpon>Step11Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step12Form.resx">
+      <DependentUpon>Step12Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step13Form.resx">
+      <DependentUpon>Step13Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step1Form.resx">
+      <DependentUpon>Step1Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step2Form.resx">
+      <DependentUpon>Step2Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step3Form.resx">
+      <DependentUpon>Step3Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step4Form.resx">
+      <DependentUpon>Step4Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step5Form.resx">
+      <DependentUpon>Step5Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step6Form.resx">
+      <DependentUpon>Step6Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step7Form.resx">
+      <DependentUpon>Step7Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step8Form.resx">
+      <DependentUpon>Step8Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step9Form.resx">
+      <DependentUpon>Step9Form.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Excel.1.7.dll">
+      <Guid>00020813-0000-0000-c000-000000000046</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WinformProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="kakaoMap.html" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
