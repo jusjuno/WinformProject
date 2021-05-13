@@ -373,6 +373,9 @@
     <EmbeddedResource Include="Step10Form.resx">
       <DependentUpon>Step10Form.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Step11Form.ko.resx">
+      <DependentUpon>Step11Form.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Step11Form.resx">
       <DependentUpon>Step11Form.h</DependentUpon>
     </EmbeddedResource>

@@ -118,145 +118,136 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="FileNewMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 31</value>
   </data>
-  <data name="FileNewMenuItem.Text" xml:space="preserve">
-    <value>새로만들기</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>재현주기</value>
   </data>
-  <data name="FileOpenMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="cboRecurrencePeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 35</value>
   </data>
-  <data name="FileOpenMenuItem.Text" xml:space="preserve">
-    <value>열기</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>도로망 기준</value>
   </data>
-  <data name="FileSaveMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>시설물 기준</value>
   </data>
-  <data name="FileSaveMenuItem.Text" xml:space="preserve">
-    <value>저장</value>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 31</value>
   </data>
-  <data name="FilePreferencesMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>샘플</value>
   </data>
-  <data name="FilePreferencesMenuItem.Text" xml:space="preserve">
-    <value>설정</value>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 31</value>
   </data>
-  <data name="FileExitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label12.Text" xml:space="preserve">
+    <value>지진원</value>
   </data>
-  <data name="FileExitMenuItem.Text" xml:space="preserve">
-    <value>종료</value>
+  <data name="cboSeismicSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 4</value>
   </data>
-  <data name="FileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 24</value>
+  <data name="cboSample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 66</value>
   </data>
-  <data name="FileMenuItem.Text" xml:space="preserve">
-    <value>파일</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ProjectStep0MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>도로망 직접피해예측(천원)</value>
   </data>
-  <data name="ProjectStep0MenuItem.Text" xml:space="preserve">
-    <value>지도</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ProjectStep1MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>도로망 간접피해예측(천원)</value>
   </data>
-  <data name="ProjectStep1MenuItem.Text" xml:space="preserve">
-    <value>도로망</value>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ProjectStep2MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>총피해예측(천원)</value>
   </data>
-  <data name="ProjectStep2MenuItem.Text" xml:space="preserve">
-    <value>시설물분류</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 38</value>
   </data>
-  <data name="ProjectStep3MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>도로망 회복역량지수</value>
   </data>
-  <data name="ProjectStep3MenuItem.Text" xml:space="preserve">
-    <value>시설물제원</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ProjectStep4MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>경제지수</value>
   </data>
-  <data name="ProjectStep4MenuItem.Text" xml:space="preserve">
-    <value>취약도곡선</value>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ProjectStep5MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label7.Text" xml:space="preserve">
+    <value>연결지수</value>
   </data>
-  <data name="ProjectStep5MenuItem.Text" xml:space="preserve">
-    <value>지진동강도</value>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 36</value>
   </data>
-  <data name="ProjectStep6MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>환경지수</value>
   </data>
-  <data name="ProjectStep6MenuItem.Text" xml:space="preserve">
-    <value>시설물 취약도 계산</value>
+  <data name="tbTotNetStructCost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 4</value>
   </data>
-  <data name="ProjectStep7MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="tbTotNetStructCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="ProjectStep7MenuItem.Text" xml:space="preserve">
-    <value>복구기간&amp;복구비용</value>
+  <data name="tbTotTrafficCost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 37</value>
   </data>
-  <data name="ProjectStep8MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="tbTotTrafficCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="ProjectStep8MenuItem.Text" xml:space="preserve">
-    <value>교통시나리오</value>
+  <data name="tbTotCost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 70</value>
   </data>
-  <data name="ProjectMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
+  <data name="tbTotCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="ProjectMenuItem.Text" xml:space="preserve">
-    <value>프로젝트</value>
+  <data name="tbEconomv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 141</value>
   </data>
-  <data name="NeXTAInputMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 26</value>
+  <data name="tbEconomv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="NeXTAInputMenuItem.Text" xml:space="preserve">
-    <value>교통수요 입력</value>
+  <data name="tbConnectivity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 174</value>
   </data>
-  <data name="NeXTARunMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 26</value>
+  <data name="tbConnectivity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="NeXTARunMenuItem.Text" xml:space="preserve">
-    <value>교통해석 수행</value>
+  <data name="tbEnvironment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 207</value>
   </data>
-  <data name="ResultStep10MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+  <data name="tbEnvironment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="ResultStep10MenuItem.Text" xml:space="preserve">
-    <value>의사결정지원 지표1</value>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 33</value>
   </data>
-  <data name="ResultStep10bMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+  <data name="label10.Text" xml:space="preserve">
+    <value>시설물 직접피해예측(천원)</value>
   </data>
-  <data name="ResultStep10bMenuItem.Text" xml:space="preserve">
-    <value>의사결정지원 지표2</value>
+  <data name="tbCompStructCost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 47</value>
   </data>
-  <data name="ResultStep11MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+  <data name="tbCompStructCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 25</value>
   </data>
-  <data name="ResultStep11MenuItem.Text" xml:space="preserve">
-    <value>의사결정지원 지표3</value>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 35</value>
   </data>
-  <data name="ResultStep12MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>시설물 선택</value>
   </data>
-  <data name="decisionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
-  </data>
-  <data name="decisionToolStripMenuItem.Text" xml:space="preserve">
-    <value>의사결정</value>
-  </data>
-  <data name="ResultMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 24</value>
-  </data>
-  <data name="ResultMenuItem.Text" xml:space="preserve">
-    <value>결과</value>
+  <data name="cboComponent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 4</value>
   </data>
 </root>

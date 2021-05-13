@@ -96,6 +96,7 @@ namespace WinformProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Step11Form::typeid));
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->cboRecurrencePeriod = (gcnew System::Windows::Forms::ComboBox());
@@ -135,10 +136,7 @@ namespace WinformProject {
 			// 
 			// tableLayoutPanel1
 			// 
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
+			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
 			this->tableLayoutPanel1->Controls->Add(this->label1, 0, 1);
 			this->tableLayoutPanel1->Controls->Add(this->cboRecurrencePeriod, 1, 1);
 			this->tableLayoutPanel1->Controls->Add(this->groupBox1, 0, 4);
@@ -147,41 +145,19 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->label12, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSample, 1, 2);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 7;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 220)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 90)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(484, 426);
-			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// label1
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label1->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(3, 26);
+			resources->ApplyResources(this->label1, L"label1");
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(126, 26);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Recurrence period";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// cboRecurrencePeriod
 			// 
 			this->cboRecurrencePeriod->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboRecurrencePeriod->FormattingEnabled = true;
-			this->cboRecurrencePeriod->Location = System::Drawing::Point(135, 29);
+			resources->ApplyResources(this->cboRecurrencePeriod, L"cboRecurrencePeriod");
 			this->cboRecurrencePeriod->Name = L"cboRecurrencePeriod";
-			this->cboRecurrencePeriod->Size = System::Drawing::Size(213, 20);
-			this->cboRecurrencePeriod->TabIndex = 1;
 			this->cboRecurrencePeriod->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step11Form::cboRecurrencePeriod_SelectionChangeCommitted);
 			// 
 			// groupBox1
@@ -189,21 +165,13 @@ namespace WinformProject {
 			this->groupBox1->BackColor = System::Drawing::SystemColors::ControlLight;
 			this->tableLayoutPanel1->SetColumnSpan(this->groupBox1, 2);
 			this->groupBox1->Controls->Add(this->tableLayoutPanel2);
-			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox1->Font = (gcnew System::Drawing::Font(L"±¼¸²", 10, System::Drawing::FontStyle::Bold));
-			this->groupBox1->Location = System::Drawing::Point(3, 101);
+			resources->ApplyResources(this->groupBox1, L"groupBox1");
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(478, 214);
-			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Network level";
 			// 
 			// tableLayoutPanel2
 			// 
-			this->tableLayoutPanel2->ColumnCount = 2;
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
+			resources->ApplyResources(this->tableLayoutPanel2, L"tableLayoutPanel2");
 			this->tableLayoutPanel2->Controls->Add(this->label2, 0, 0);
 			this->tableLayoutPanel2->Controls->Add(this->label3, 0, 1);
 			this->tableLayoutPanel2->Controls->Add(this->label4, 0, 2);
@@ -217,329 +185,161 @@ namespace WinformProject {
 			this->tableLayoutPanel2->Controls->Add(this->tbEconomv, 1, 4);
 			this->tableLayoutPanel2->Controls->Add(this->tbConnectivity, 1, 5);
 			this->tableLayoutPanel2->Controls->Add(this->tbEnvironment, 1, 6);
-			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 19);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-			this->tableLayoutPanel2->RowCount = 7;
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 30)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(472, 192);
-			this->tableLayoutPanel2->TabIndex = 0;
 			// 
 			// label2
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label2->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label2->Location = System::Drawing::Point(3, 0);
+			resources->ApplyResources(this->label2, L"label2");
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(259, 27);
-			this->label2->TabIndex = 0;
-			this->label2->Text = L"Estimated total network structural cost";
-			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label3
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label3->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label3->Location = System::Drawing::Point(3, 27);
+			resources->ApplyResources(this->label3, L"label3");
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(259, 27);
-			this->label3->TabIndex = 0;
-			this->label3->Text = L"Estimated total traffic cost";
-			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label4
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label4->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label4->Location = System::Drawing::Point(3, 54);
+			resources->ApplyResources(this->label4, L"label4");
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(259, 27);
-			this->label4->TabIndex = 0;
-			this->label4->Text = L"Estimated total cost";
-			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label5
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label5->Font = (gcnew System::Drawing::Font(L"±¼¸²", 10, System::Drawing::FontStyle::Bold));
-			this->label5->Location = System::Drawing::Point(3, 81);
+			resources->ApplyResources(this->label5, L"label5");
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(259, 30);
-			this->label5->TabIndex = 0;
-			this->label5->Text = L"Resilience indices";
-			this->label5->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
 			// 
 			// label6
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label6->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label6->Location = System::Drawing::Point(3, 111);
+			resources->ApplyResources(this->label6, L"label6");
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(259, 27);
-			this->label6->TabIndex = 0;
-			this->label6->Text = L"economv";
-			this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label7
 			// 
-			this->label7->AutoSize = true;
-			this->label7->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label7->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label7->Location = System::Drawing::Point(3, 138);
+			resources->ApplyResources(this->label7, L"label7");
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(259, 27);
-			this->label7->TabIndex = 0;
-			this->label7->Text = L"connectivity";
-			this->label7->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label8
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label8->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label8->Location = System::Drawing::Point(3, 165);
+			resources->ApplyResources(this->label8, L"label8");
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(259, 27);
-			this->label8->TabIndex = 0;
-			this->label8->Text = L"environment";
-			this->label8->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// tbTotNetStructCost
 			// 
-			this->tbTotNetStructCost->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbTotNetStructCost->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbTotNetStructCost->Location = System::Drawing::Point(268, 3);
+			resources->ApplyResources(this->tbTotNetStructCost, L"tbTotNetStructCost");
 			this->tbTotNetStructCost->Name = L"tbTotNetStructCost";
 			this->tbTotNetStructCost->ReadOnly = true;
-			this->tbTotNetStructCost->Size = System::Drawing::Size(201, 21);
-			this->tbTotNetStructCost->TabIndex = 1;
-			this->tbTotNetStructCost->Text = L"0";
-			this->tbTotNetStructCost->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tbTotTrafficCost
 			// 
-			this->tbTotTrafficCost->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbTotTrafficCost->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbTotTrafficCost->Location = System::Drawing::Point(268, 30);
+			resources->ApplyResources(this->tbTotTrafficCost, L"tbTotTrafficCost");
 			this->tbTotTrafficCost->Name = L"tbTotTrafficCost";
 			this->tbTotTrafficCost->ReadOnly = true;
-			this->tbTotTrafficCost->Size = System::Drawing::Size(201, 21);
-			this->tbTotTrafficCost->TabIndex = 1;
-			this->tbTotTrafficCost->Text = L"0";
-			this->tbTotTrafficCost->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tbTotCost
 			// 
-			this->tbTotCost->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbTotCost->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbTotCost->Location = System::Drawing::Point(268, 57);
+			resources->ApplyResources(this->tbTotCost, L"tbTotCost");
 			this->tbTotCost->Name = L"tbTotCost";
 			this->tbTotCost->ReadOnly = true;
-			this->tbTotCost->Size = System::Drawing::Size(201, 21);
-			this->tbTotCost->TabIndex = 1;
-			this->tbTotCost->Text = L"0";
-			this->tbTotCost->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tbEconomv
 			// 
-			this->tbEconomv->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbEconomv->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbEconomv->Location = System::Drawing::Point(268, 114);
+			resources->ApplyResources(this->tbEconomv, L"tbEconomv");
 			this->tbEconomv->Name = L"tbEconomv";
 			this->tbEconomv->ReadOnly = true;
-			this->tbEconomv->Size = System::Drawing::Size(201, 21);
-			this->tbEconomv->TabIndex = 1;
-			this->tbEconomv->Text = L"0.0";
-			this->tbEconomv->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tbConnectivity
 			// 
-			this->tbConnectivity->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbConnectivity->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbConnectivity->Location = System::Drawing::Point(268, 141);
+			resources->ApplyResources(this->tbConnectivity, L"tbConnectivity");
 			this->tbConnectivity->Name = L"tbConnectivity";
 			this->tbConnectivity->ReadOnly = true;
-			this->tbConnectivity->Size = System::Drawing::Size(201, 21);
-			this->tbConnectivity->TabIndex = 1;
-			this->tbConnectivity->Text = L"0.0";
-			this->tbConnectivity->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tbEnvironment
 			// 
-			this->tbEnvironment->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbEnvironment->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbEnvironment->Location = System::Drawing::Point(268, 168);
+			resources->ApplyResources(this->tbEnvironment, L"tbEnvironment");
 			this->tbEnvironment->Name = L"tbEnvironment";
 			this->tbEnvironment->ReadOnly = true;
-			this->tbEnvironment->Size = System::Drawing::Size(201, 21);
-			this->tbEnvironment->TabIndex = 1;
-			this->tbEnvironment->Text = L"0.0";
-			this->tbEnvironment->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// groupBox2
 			// 
 			this->groupBox2->BackColor = System::Drawing::SystemColors::ControlLight;
 			this->tableLayoutPanel1->SetColumnSpan(this->groupBox2, 2);
 			this->groupBox2->Controls->Add(this->tableLayoutPanel3);
-			this->groupBox2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox2->Font = (gcnew System::Drawing::Font(L"±¼¸²", 10, System::Drawing::FontStyle::Bold));
-			this->groupBox2->Location = System::Drawing::Point(3, 341);
+			resources->ApplyResources(this->groupBox2, L"groupBox2");
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(478, 84);
-			this->groupBox2->TabIndex = 3;
 			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Component level";
 			// 
 			// tableLayoutPanel3
 			// 
-			this->tableLayoutPanel3->ColumnCount = 2;
-			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
-			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
+			resources->ApplyResources(this->tableLayoutPanel3, L"tableLayoutPanel3");
 			this->tableLayoutPanel3->Controls->Add(this->label10, 0, 1);
 			this->tableLayoutPanel3->Controls->Add(this->tbCompStructCost, 1, 1);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel4, 0, 0);
-			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel3->Location = System::Drawing::Point(3, 19);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-			this->tableLayoutPanel3->RowCount = 2;
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel3->Size = System::Drawing::Size(472, 62);
-			this->tableLayoutPanel3->TabIndex = 0;
 			// 
 			// label10
 			// 
-			this->label10->AutoSize = true;
-			this->label10->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label10->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label10->Location = System::Drawing::Point(3, 34);
+			resources->ApplyResources(this->label10, L"label10");
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(247, 28);
-			this->label10->TabIndex = 2;
-			this->label10->Text = L"Estimated component structural cost";
-			this->label10->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// tbCompStructCost
 			// 
-			this->tbCompStructCost->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tbCompStructCost->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->tbCompStructCost->Location = System::Drawing::Point(256, 37);
+			resources->ApplyResources(this->tbCompStructCost, L"tbCompStructCost");
 			this->tbCompStructCost->Name = L"tbCompStructCost";
 			this->tbCompStructCost->ReadOnly = true;
-			this->tbCompStructCost->Size = System::Drawing::Size(213, 21);
-			this->tbCompStructCost->TabIndex = 3;
-			this->tbCompStructCost->Text = L"0";
-			this->tbCompStructCost->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// tableLayoutPanel4
 			// 
-			this->tableLayoutPanel4->ColumnCount = 2;
+			resources->ApplyResources(this->tableLayoutPanel4, L"tableLayoutPanel4");
 			this->tableLayoutPanel3->SetColumnSpan(this->tableLayoutPanel4, 2);
-			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
-			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
 			this->tableLayoutPanel4->Controls->Add(this->label9, 0, 0);
 			this->tableLayoutPanel4->Controls->Add(this->cboComponent, 1, 0);
-			this->tableLayoutPanel4->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel4->Location = System::Drawing::Point(3, 3);
 			this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
-			this->tableLayoutPanel4->RowCount = 1;
-			this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel4->Size = System::Drawing::Size(466, 28);
-			this->tableLayoutPanel4->TabIndex = 1;
 			// 
 			// label9
 			// 
-			this->label9->AutoSize = true;
-			this->label9->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label9->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold));
-			this->label9->Location = System::Drawing::Point(3, 0);
+			resources->ApplyResources(this->label9, L"label9");
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(123, 28);
-			this->label9->TabIndex = 0;
-			this->label9->Text = L"Select component";
-			this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// cboComponent
 			// 
 			this->cboComponent->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->cboComponent->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9));
+			resources->ApplyResources(this->cboComponent, L"cboComponent");
 			this->cboComponent->FormattingEnabled = true;
-			this->cboComponent->Location = System::Drawing::Point(132, 3);
 			this->cboComponent->Name = L"cboComponent";
-			this->cboComponent->Size = System::Drawing::Size(214, 20);
-			this->cboComponent->TabIndex = 1;
 			this->cboComponent->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step11Form::cboComponent_SelectionChangeCommitted);
 			// 
 			// label11
 			// 
-			this->label11->AutoSize = true;
-			this->label11->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label11->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label11->Location = System::Drawing::Point(3, 52);
+			resources->ApplyResources(this->label11, L"label11");
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(126, 26);
-			this->label11->TabIndex = 0;
-			this->label11->Text = L"Sample";
-			this->label11->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label12
 			// 
-			this->label12->AutoSize = true;
-			this->label12->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label12->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label12->Location = System::Drawing::Point(3, 0);
+			resources->ApplyResources(this->label12, L"label12");
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(126, 26);
-			this->label12->TabIndex = 0;
-			this->label12->Text = L"Seismic source";
-			this->label12->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// cboSeismicSource
 			// 
 			this->cboSeismicSource->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSeismicSource->FormattingEnabled = true;
-			this->cboSeismicSource->Location = System::Drawing::Point(135, 3);
+			resources->ApplyResources(this->cboSeismicSource, L"cboSeismicSource");
 			this->cboSeismicSource->Name = L"cboSeismicSource";
-			this->cboSeismicSource->Size = System::Drawing::Size(213, 20);
-			this->cboSeismicSource->TabIndex = 1;
 			this->cboSeismicSource->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step11Form::cboSeismicSource_SelectionChangeCommitted);
 			// 
 			// cboSample
 			// 
 			this->cboSample->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSample->FormattingEnabled = true;
-			this->cboSample->Location = System::Drawing::Point(135, 55);
+			resources->ApplyResources(this->cboSample, L"cboSample");
 			this->cboSample->Name = L"cboSample";
-			this->cboSample->Size = System::Drawing::Size(213, 20);
-			this->cboSample->TabIndex = 1;
 			this->cboSample->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step11Form::cboSample_SelectionChangeCommitted);
 			// 
 			// Step11Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(7, 12);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(484, 426);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(500, 465);
-			this->MinimumSize = System::Drawing::Size(500, 465);
 			this->Name = L"Step11Form";
-			this->Text = L"Step11Form";
 			this->Load += gcnew System::EventHandler(this, &Step11Form::Step11Form_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();

@@ -132,8 +132,6 @@ namespace WinformProject {
 	}
 	private: System::Void radioEng_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		
-
 		if (this->m_dataSet != nullptr) {
 			this->m_dataSet->UiLang = "en-US";
 		}

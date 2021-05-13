@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="FileNewMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="FileNewMenuItem.Text" xml:space="preserve">
     <value>New</value>
@@ -135,7 +135,7 @@
     <value>Ctrl+O</value>
   </data>
   <data name="FileOpenMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="FileOpenMenuItem.Text" xml:space="preserve">
     <value>Open</value>
@@ -144,7 +144,7 @@
     <value>Ctrl+S</value>
   </data>
   <data name="FileSaveMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="FileSaveMenuItem.Text" xml:space="preserve">
     <value>Save</value>
@@ -154,13 +154,16 @@
     <value>False</value>
   </data>
   <data name="FilePreferencesMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="FilePreferencesMenuItem.Text" xml:space="preserve">
     <value>Preferences</value>
   </data>
+  <data name="FilePreferencesMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="FileExitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="FileExitMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -253,15 +256,15 @@
     <value>NeXTA</value>
   </data>
   <data name="UnistRunMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="UnistRunMenuItem.Text" xml:space="preserve">
     <value>Run(UNIST)</value>
   </data>
-  <data name="uNISTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="UnistMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 24</value>
   </data>
-  <data name="uNISTToolStripMenuItem.Text" xml:space="preserve">
+  <data name="UnistMenuItem.Text" xml:space="preserve">
     <value>UNIST</value>
   </data>
   <data name="ResultStep10MenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -327,9 +330,6 @@
   <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ko</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -462,10 +462,10 @@
   <data name="&gt;&gt;NeXTARunMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;uNISTToolStripMenuItem.Name" xml:space="preserve">
-    <value>uNISTToolStripMenuItem</value>
+  <data name="&gt;&gt;UnistMenuItem.Name" xml:space="preserve">
+    <value>UnistMenuItem</value>
   </data>
-  <data name="&gt;&gt;uNISTToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;UnistMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UnistRunMenuItem.Name" xml:space="preserve">

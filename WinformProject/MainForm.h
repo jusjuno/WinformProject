@@ -16,6 +16,7 @@
 #include "Step7Form.h"
 #include "Step8Form.h"
 #include "Step9Form.h"
+#include "Step9bForm.h"
 
 /////////////////////////////
 #include "NeXTAInput.h"
@@ -91,6 +92,7 @@ namespace WinformProject {
 		Step7Form^					m_step7Form;
 		Step8Form^					m_step8Form;
 		Step9Form^					m_step9Form;
+		Step9bForm^                 m_step9bForm;//UNIST
 		/////////////////////////////////////////////////
 		NeXTAInput^					m_neXTAInput;
 		/////////////////////////////////////////////////
@@ -131,7 +133,8 @@ namespace WinformProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ NeXTARunMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ ProjectStep0MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ decisionToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ uNISTToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ UnistMenuItem;
+
 	private: System::Windows::Forms::ToolStripMenuItem^ UnistRunMenuItem;
 
 
@@ -170,7 +173,7 @@ namespace WinformProject {
 			this->NeXTAMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->NeXTAInputMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->NeXTARunMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->uNISTToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->UnistMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->UnistRunMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultStep10MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -186,7 +189,7 @@ namespace WinformProject {
 			this->menuStrip->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->FileMenuItem, this->ProjectMenuItem,
-					this->NeXTAMenuItem, this->uNISTToolStripMenuItem, this->ResultMenuItem
+					this->NeXTAMenuItem, this->UnistMenuItem, this->ResultMenuItem
 			});
 			resources->ApplyResources(this->menuStrip, L"menuStrip");
 			this->menuStrip->Name = L"menuStrip";
@@ -315,16 +318,17 @@ namespace WinformProject {
 			resources->ApplyResources(this->NeXTARunMenuItem, L"NeXTARunMenuItem");
 			this->NeXTARunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::NeXTARunMenuItem_Click);
 			// 
-			// uNISTToolStripMenuItem
+			// UnistMenuItem
 			// 
-			this->uNISTToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->UnistRunMenuItem });
-			this->uNISTToolStripMenuItem->Name = L"uNISTToolStripMenuItem";
-			resources->ApplyResources(this->uNISTToolStripMenuItem, L"uNISTToolStripMenuItem");
+			this->UnistMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->UnistRunMenuItem });
+			this->UnistMenuItem->Name = L"UnistMenuItem";
+			resources->ApplyResources(this->UnistMenuItem, L"UnistMenuItem");
 			// 
 			// UnistRunMenuItem
 			// 
 			this->UnistRunMenuItem->Name = L"UnistRunMenuItem";
 			resources->ApplyResources(this->UnistRunMenuItem, L"UnistRunMenuItem");
+			this->UnistRunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::UnistRunMenuItem_Click);
 			// 
 			// ResultMenuItem
 			// 
@@ -445,12 +449,17 @@ namespace WinformProject {
 				if (this->m_projectDataSetBinder->IsRunTrafficSimulation) {
 					ResultMenuItem->Enabled = true;
 				}
+
+				UnistMenuItem->Enabled = true;
+				FilePreferencesMenuItem->Enabled = true;
 			}
 			else {
 				// If there is not project, all of menu group is disable
 				ProjectMenuItem->Enabled = false;
 				NeXTAMenuItem->Enabled = false;
 				ResultMenuItem->Enabled = false;
+				UnistMenuItem->Enabled = false;
+				FilePreferencesMenuItem->Enabled = false;
 			}
 		}
 		// save file
@@ -905,5 +914,18 @@ namespace WinformProject {
 
 	}
 
+	private: System::Void UnistRunMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (!IsCreatedFormInstance(m_step9bForm)) {
+			Step9bForm^ _form = gcnew Step9bForm(m_projectDataSetBinder);
+			if (!_form->IsValidToOpenForm()) {
+				return;
+			}
+			_form->Text = ((ToolStripMenuItem^)sender)->Text;
+			_form->MdiParent = this;
+			_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+			m_step9bForm = _form;
+			m_step9bForm->Show();
+		}
+	}
 };
 }
