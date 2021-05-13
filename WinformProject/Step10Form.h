@@ -6,6 +6,7 @@
 #include "OutputSummary.h"
 #include "RecoveryCost.h"
 #include "NeXTAHelper.h"
+#include "UNISTHelper.h"
 #include <algorithm> 
 #include "FileUtil.h"
 
@@ -39,6 +40,8 @@ namespace WinformProject {
 
 		RecoveryCost^				m_recoveryCost;
 
+		UNISTHelper^                m_UNISTHelper;//UNIST
+
 		FileUtil^ m_fileUtil = gcnew FileUtil();
 
 	public:
@@ -50,6 +53,7 @@ namespace WinformProject {
 			//
 			this->m_dataSet = dataSet;
 			this->m_recoveryCost = gcnew RecoveryCost(this->m_dataSet);
+			this->m_UNISTHelper = gcnew UNISTHelper(this->m_dataSet);
 		}
 	protected:
 		/// <summary>
@@ -943,9 +947,27 @@ namespace WinformProject {
 		}
 		
 
-
 		// update charts
 		void UpdateCharts() {
+			if (!this->m_isCalculated) {
+				return;
+			}
+			String^ sRunExeName = this->m_dataSet->RunExeName;
+			if (String::IsNullOrEmpty(sRunExeName)) {
+				UpdateCharts_NEXTA();
+			}
+			else {
+				if (sRunExeName->Equals("NEXTA")) {
+					UpdateCharts_NEXTA();
+				}
+				if (sRunExeName->Equals("UNIST")) {
+					UpdateCharts_UNIST();
+				}
+			}
+		}
+
+		// update charts
+		void UpdateCharts_NEXTA() {
 			if (!this->m_isCalculated) {
 				return;
 			}
@@ -1077,19 +1099,51 @@ namespace WinformProject {
 		UpdateCharts();
 	}
 	private: System::Void btnCalculate_Click(System::Object^  sender, System::EventArgs^  e) {
+		/*
 		this->m_isCalculated = CalculateAdditionalCost();
 		this->m_isCalculated = CalculateNetworkStructuralCost();
 
-
 		SaveComponentScenarios();
-
-
-
 
 		UpdateCharts();
 		OnSaveDataChanged();
+		*/
+
+
+		String^ sRunExeName = this->m_dataSet->RunExeName;
+		if (String::IsNullOrEmpty(sRunExeName)) {
+			Debug::WriteLine("=============================>sRunExeName IsNullOrEmpty!");
+			CalculateNEXTA();
+		}
+		else {
+			if (sRunExeName->Equals("NEXTA")) {
+				Debug::WriteLine("=============================>NEXTA");
+				CalculateNEXTA();
+			}
+			if (sRunExeName->Equals("UNIST")) {
+				Debug::WriteLine("=============================>UNIST");
+				CalculateUNIST();
+			}
+		}
+
 	}
-			 // only 숫자 입력만 가능
+
+	private: System::Void CalculateNEXTA() {
+		this->m_isCalculated = CalculateAdditionalCost();
+		this->m_isCalculated = CalculateNetworkStructuralCost();
+		SaveComponentScenarios();
+		UpdateCharts_NEXTA();
+		OnSaveDataChanged();
+	}
+
+	private: System::Void CalculateUNIST() {
+		this->m_isCalculated = CalculateAdditionalCost_UNIST();
+		this->m_isCalculated = CalculateNetworkStructuralCost_UNIST();
+		UpdateCharts_UNIST();
+		OnSaveDataChanged();
+	}
+
+    // only 숫자 입력만 가능
 	private: System::Void numberTypeTextBox_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
 		// Accept only digits and the Backspace character
 		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) {
@@ -1114,5 +1168,264 @@ namespace WinformProject {
 	private: System::Void chartViewer2_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
 		UpdateCharts();
 	}
+
+
+
+
+	private: bool CalculateAdditionalCost_UNIST() {
+
+
+
+
+		try {
+			//
+			this->m_dataSet->ValueOfTime = m_valueOfTime;
+			this->m_dataSet->PenaltyCost = m_penaltyCost;
+			// chart1, chart2 x data
+//				this->m_dataX = gcnew array<double>(4);
+			this->m_dataX = gcnew array<double>(5);
+			if (!m_dataSet->IsSameAllTrafficCarryingParam) {
+				// 현재는 같은 것만 처리 가능 
+				Alert::Info("Traffic carrying parameters are each different.\nIt can support only same parameters.");
+
+				return false;
+			}
+			else {
+				this->m_dataX[0] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE1;
+				this->m_dataX[1] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE2;
+				this->m_dataX[2] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE3;
+				this->m_dataX[3] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
+				this->m_dataX[4] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4 + 50;
+
+			}
+
+			String^ filename = "output_Resilience_curve.xlsx";
+			DataTable^ dtOutputFile = m_UNISTHelper->ReadOutputFile(filename);
+
+			if (dtOutputFile != nullptr) {
+				//dtOutputFile->Columns->Count;//250
+
+				array<double>^ arrTmpFunctionality = gcnew array<double>(dtOutputFile->Columns->Count);
+				for (int i = 0; i < dtOutputFile->Rows->Count; i++) {
+					for (int j = 0; j < dtOutputFile->Columns->Count; j++) {
+						Double::TryParse(dtOutputFile->Rows[i][j]->ToString(), arrTmpFunctionality[j]);
+					}
+				}
+
+				//방법이 없어서 50개씩 끊어서 계산해서 5개배열에 넣음
+				array<double>^ arrFunctionality = gcnew array<double>(this->m_dataX->Length);
+				//가장 큰 값가져옴
+				double dMaxVal = 0;
+				double dTR0 = 0;//전체차량대수
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 50; j++) {
+						int k = i * 50 + j;
+						Debug::WriteLine("=================>k:" + k);
+						double dVal = arrTmpFunctionality[k];
+						Debug::WriteLine("=================>dVal:" + dVal);
+						if (dVal > dMaxVal) {
+							dMaxVal = dVal;
+						}
+						if (dVal > dTR0) {
+							dTR0 = dVal;
+						}
+					}
+					Debug::WriteLine("=================>dMaxVal:" + dMaxVal);
+					arrFunctionality[i] = dMaxVal;
+				}
+				Debug::WriteLine("=================>dTR0:" + dTR0);
+
+
+
+				array<array<double>^>^ functionalityData = gcnew array<array<double>^>(this->m_dataSet->TrafficScenarios->Length + 1);
+				array<array<double>^>^ additionalCostData = gcnew array<array<double>^>(this->m_dataSet->TrafficScenarios->Length + 1);
+				for (int i = 0; i < this->m_dataSet->TrafficScenarios->Length; i++)
+				{
+					functionalityData[i] = gcnew array<double>(this->m_dataX->Length + 1);
+					additionalCostData[i] = gcnew array<double>(this->m_dataX->Length + 1);
+
+					TrafficScenario^ scenario = this->m_dataSet->TrafficScenarios[i];
+					//array<int>^ tmpClosedLinkCount = TrafficModule::GetClosedLinkCount(scenario, this->m_dataX->Length);
+					int preRecoveryDay = 0;
+
+					for (int j = 0; j < this->m_dataX->Length; j++)
+					{
+						int damageState = j + 1;
+						// NeXTA 시뮬레이션 결과가 없으면 정상하고 같음
+						String^ key = NeXTAHelper::GetScenarioId(scenario->TrafficScenarioNo, damageState);
+
+						//임의로 만들어 줌
+						OutputSummary^ outputSummary = gcnew OutputSummary();
+						//this->m_dataSet->NeXTAOutputSummaryDictionary->Add(key, outputSummary);
+
+
+						//OutputSummary^ outputSummary = nullptr;
+						//if (this->m_dataSet->NeXTAOutputSummaryDictionary->ContainsKey(key)) {
+							//outputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[key];
+
+							/*
+							int totalLinkCount = this->m_dataSet->ShapeData->m_nRecords;
+							//functionalityData[i][j] = (1.0 - ((double)tmpClosedLinkCount[j] / totalLinkCount)) * 100.0;
+							// 기능감소율로 계산
+							functionalityData[i][j] = ((double)tmpClosedLinkCount[j] / totalLinkCount) * 100.0;
+							*/
+						functionalityData[i][j] = (1.0 - (arrFunctionality[j] / dTR0)) * 100.0;
+
+						outputSummary->TR1 = arrFunctionality[j];
+						outputSummary->TR0 = dTR0;
+
+
+
+						// 지진 직후 차량 평균 이동시간
+						double avgTravelTime_NoDamaged = outputSummary->VT0 / outputSummary->TR0;
+
+						// 도로망 진입 및 진출 차량 대수가 동일한 경우, 다시말해 진입한 모든 차량이 모두 진출한 경우  
+						if (outputSummary->TR1 == outputSummary->TR0) {
+							double extraVT = outputSummary->VT1 - outputSummary->VT0;
+							additionalCostData[i][j] = (extraVT * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2) * (m_dataX[j] - preRecoveryDay);
+						}
+						// 도로망 진입한 모든 차량이 모두 진출 실패한 경우  
+						else if (outputSummary->TR1 == 0) {
+							double extraTR = outputSummary->TR0 - outputSummary->TR1;
+							additionalCostData[i][j] = (extraTR * m_trafficFactor1 * m_trafficFactor2 * m_penaltyCost) * (m_dataX[j] - preRecoveryDay);
+						}
+						// 도로망 진입한 차량중 일부만 진출한 경우
+						else {
+							// 추가비용 = max((진출차량VT1_VOT - 진출차량VT0_VOT),0) + 비진출차량VT1_VOT
+
+							// 전체차량대수              = outputSummary->TR0
+							// 진출차량대수              = outputSummary->TR1
+							// 비진출차량대수            = (outputSummary->TR0 - outputSummary->TR1)
+							double totalVehicleNo = outputSummary->TR0;
+							double leavingVehicleNo = outputSummary->TR1;
+							double noLeavingVehicleNo = (outputSummary->TR0 - outputSummary->TR1);
+
+							// 진출차량VT0               = (outputSummary->TR1 * avgTravelTime_NoDamaged);
+							// 진출차량VT1               = outputSummary->VT1
+							double leavingVehicle_VT0 = (outputSummary->TR1 * avgTravelTime_NoDamaged);
+							double leavingVehicle_VT1 = outputSummary->VT1;
+
+							// 진출차량VT0_VOT               = 진출차량VTO * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2;
+							// 진출차량VT1_VOT               = 진출차량VT1 * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2
+							// 비진출차량VT1_VOT             = 비진출차량대수 * m_dataSet->PenaltyCost * m_trafficFactor1 * m_trafficFactor2
+							double leavingVehicle_VT0_VOT = leavingVehicle_VT0 * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2;
+							double leavingVehicle_VT1_VOT = leavingVehicle_VT1 * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2;
+							double noLeavingVehicle_VT1_VOT = (outputSummary->TR0 - outputSummary->TR1) * m_dataSet->PenaltyCost * m_trafficFactor1 * m_trafficFactor2;
+
+							// 추가비용 = (max((진출차량VT1_VOT - 진출차량VT0_VOT),0) + 비진출차량VT1_VOT) * 복구일수
+							additionalCostData[i][j] = (std::max((leavingVehicle_VT1_VOT - leavingVehicle_VT0_VOT), 0.0) + noLeavingVehicle_VT1_VOT) * (m_dataX[j] - preRecoveryDay);
+						}
+
+						/*
+													double extraVT = outputSummary->VT1 - outputSummary->VT0;
+													double extraTR = abs(outputSummary->TR1 - outputSummary->TR0);
+													//double extraTR = outputSummary->TR1;
+													additionalCostData[i][j] = (extraVT * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2 +
+														extraTR * m_trafficFactor1 * m_trafficFactor2 * m_penaltyCost) * (m_dataX[j] - preRecoveryDay);
+						*/
+						//}
+						//else {
+						//	//outputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[NeXTAHelper::NORMAL_SCENARIO_ID];
+						//	//functionalityData[i][j] = 100.0;
+						//	functionalityData[i][j] = 0.0;
+						//	additionalCostData[i][j] = 0;
+						//}
+						preRecoveryDay = m_dataX[j];
+						//int totalLinkCount = this->m_dataSet->ShapeData->m_nRecords;
+						// 전체 링크 대비 사용가능한(열린) 링크 확률
+						//functionalityData[i][j] = (1.0 - ((double)tmpClosedLinkCount[j] / totalLinkCount)) * 100.0;
+						//additionalCostData[i][j] = outputSummary->Total * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2;
+					}
+				}
+
+				/*
+				functionalityData[this->m_dataSet->TrafficScenarios->Length] = gcnew array<double>(this->m_dataX->Length + 1);
+				additionalCostData[this->m_dataSet->TrafficScenarios->Length] = gcnew array<double>(this->m_dataX->Length + 1);
+				for (int j = 0; j < this->m_dataX->Length; j++) {
+					functionalityData[this->m_dataSet->TrafficScenarios->Length][j] = 0.0;
+					additionalCostData[this->m_dataSet->TrafficScenarios->Length][j] = 0;
+				}
+				*/
+
+				this->m_dataSet->ResultData->Functionalities = functionalityData;
+				this->m_dataSet->ResultData->AdditionalCosts = additionalCostData;
+			}
+
+
+			return true;
+		}
+		catch (IndexOutOfRangeException^ e) {
+			Debug::WriteLine(e);
+			return false;
+		}
+		catch (Exception^ e) {
+			Alert::Error("Chart data calculation failed.");
+			return false;
+		}
+	}
+
+
+	private: bool CalculateNetworkStructuralCost_UNIST() {
+		try {
+			array<Dictionary<String^, long>^>^ result = gcnew array<Dictionary<String^, long>^>(this->m_dataSet->TrafficScenarios->Length);
+			for (int i = 0; i < this->m_dataSet->TrafficScenarios->Length; i++)
+			{
+				TrafficScenario^ scenario = this->m_dataSet->TrafficScenarios[i];
+				result[i] = gcnew Dictionary<String^, long>();
+				for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++)
+				{
+					DataRow^ row = this->m_dataSet->NetworkCompnentData->Rows[j];
+					String^ compID = row[NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+					long value = m_recoveryCost->GetEstimatedTotalComponentStructCost(scenario->SourceName, scenario->RecurrencePeriodName, scenario->Sample.ToString(), compID);
+					result[i]->Add(compID, value);
+				}
+			}
+			this->m_dataSet->ResultData->NetworkStructuralCosts = result;
+			return true;
+		}
+		catch (Exception^ e) {
+			Alert::Error("Network structural cost calculation failed.");
+			return false;
+		}
+
+	}
+
+	private: void UpdateCharts_UNIST() {
+		if (!this->m_isCalculated) {
+			return;
+		}
+		//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboRecurrencePeriod->SelectedIndex, cboSample->SelectedIndex + 1);
+		//DrawChart1(this->m_dataX, this->m_dataSet->ResultData->GetFunctionality(trafficScenarioNo));
+		//DrawChart2(this->m_dataX, this->m_dataSet->ResultData->GetAdditionalCost(trafficScenarioNo));
+
+		///////////////////////////////////////////////////////////////////////////////
+		// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+		///////////////////////////////////////////////////////////////////////////////
+		array<double>^ sumFunctionality = gcnew array<double>(5);  // damage state는 4단계 와 1단계의 정상상태로 5단계 구성됨
+		array<double>^ sumAdditionalCost = gcnew array<double>(5);
+		for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+
+			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboRecurrencePeriod->SelectedIndex, cboSample->SelectedIndex + 1, j + 1);
+			if (trafficScenarioNo > -1) {
+				for (int index = 0; index < 5; index++) {
+					//비정상(감소)율로 계산된 도로기능
+					sumFunctionality[index] = sumFunctionality[index] + this->m_dataSet->ResultData->GetFunctionality(trafficScenarioNo)[index];
+					sumAdditionalCost[index] = sumAdditionalCost[index] + this->m_dataSet->ResultData->GetAdditionalCost(trafficScenarioNo)[index];
+				}
+			}
+		}
+
+		//정상비율로 도로기능을 다시 계산
+		for (int index = 0; index < 5; index++) {
+			sumFunctionality[index] = 100. - sumFunctionality[index];
+		}
+
+		DrawChart1(this->m_dataX, sumFunctionality);
+		DrawChart2(this->m_dataX, sumAdditionalCost);
+
+
+	}
+
+
 	};
 }
