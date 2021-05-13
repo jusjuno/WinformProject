@@ -22,6 +22,7 @@ public protected:
 		this->m_soilAmps = gcnew DataTable();
 		this->m_seismicSources = gcnew DataTable();
 		this->m_seismicSourceDictionary = gcnew Dictionary<String^, DataTable^>();
+		this->m_seismicSourceContentDictionary = gcnew Dictionary<String^, DataTable^>();
 		this->m_trafficCarryingParams = gcnew DataTable();
 		this->m_repairCostRatioParams = gcnew DataTable();
 		this->m_trafficScenarioSamples = gcnew array<String^>(0);
@@ -99,6 +100,7 @@ public protected:
 
 	DataTable^							m_seismicSources;
 	Dictionary<String^, DataTable^>^	m_seismicSourceDictionary;
+	Dictionary<String^, DataTable^>^    m_seismicSourceContentDictionary;//파일별 진앙지 엑셀 정보
 
 	array<String^>^						m_intensityMeasureData;
 	array<String^>^						m_recurrencePeriodData;
@@ -155,6 +157,9 @@ public protected:
 
 	array<Zone>^						m_zoneGroupData;
 	DataTable^							m_zoneGroupProperties;
+
+	String^ m_runExeName; // 실행파일[NEXTA, UNIST]: 최근실행파일 정보 저장
+	String^ m_uiLang; // 화면에서 다국어 설정[en-US, ko-KR]
 
 
 };

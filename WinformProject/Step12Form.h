@@ -75,6 +75,7 @@ namespace WinformProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Step12Form::typeid));
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->chartViewerSub1 = (gcnew ChartDirector::WinChartViewer());
 			this->chartViewerSub2 = (gcnew ChartDirector::WinChartViewer());
@@ -95,15 +96,7 @@ namespace WinformProject {
 			// 
 			// tableLayoutPanel1
 			// 
-			this->tableLayoutPanel1->ColumnCount = 4;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				25)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				25)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				25)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				25)));
+			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
 			this->tableLayoutPanel1->Controls->Add(this->chartViewerSub1, 0, 1);
 			this->tableLayoutPanel1->Controls->Add(this->chartViewerSub2, 1, 1);
 			this->tableLayoutPanel1->Controls->Add(this->chartViewerSub3, 2, 1);
@@ -113,132 +106,76 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->label2, 2, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSample, 3, 0);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 3;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 30)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 70)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1549, 1142);
-			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// chartViewerSub1
 			// 
-			this->chartViewerSub1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewerSub1->Location = System::Drawing::Point(4, 38);
-			this->chartViewerSub1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			resources->ApplyResources(this->chartViewerSub1, L"chartViewerSub1");
 			this->chartViewerSub1->Name = L"chartViewerSub1";
-			this->chartViewerSub1->Size = System::Drawing::Size(379, 324);
-			this->chartViewerSub1->TabIndex = 0;
 			this->chartViewerSub1->TabStop = false;
 			this->chartViewerSub1->SizeChanged += gcnew System::EventHandler(this, &Step12Form::chartViewerSub1_SizeChanged);
 			// 
 			// chartViewerSub2
 			// 
-			this->chartViewerSub2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewerSub2->Location = System::Drawing::Point(391, 38);
-			this->chartViewerSub2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			resources->ApplyResources(this->chartViewerSub2, L"chartViewerSub2");
 			this->chartViewerSub2->Name = L"chartViewerSub2";
-			this->chartViewerSub2->Size = System::Drawing::Size(379, 324);
-			this->chartViewerSub2->TabIndex = 0;
 			this->chartViewerSub2->TabStop = false;
 			this->chartViewerSub2->SizeChanged += gcnew System::EventHandler(this, &Step12Form::chartViewerSub2_SizeChanged);
 			// 
 			// chartViewerSub3
 			// 
-			this->chartViewerSub3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewerSub3->Location = System::Drawing::Point(778, 38);
-			this->chartViewerSub3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			resources->ApplyResources(this->chartViewerSub3, L"chartViewerSub3");
 			this->chartViewerSub3->Name = L"chartViewerSub3";
-			this->chartViewerSub3->Size = System::Drawing::Size(379, 324);
-			this->chartViewerSub3->TabIndex = 0;
 			this->chartViewerSub3->TabStop = false;
 			this->chartViewerSub3->SizeChanged += gcnew System::EventHandler(this, &Step12Form::chartViewerSub3_SizeChanged);
 			// 
 			// chartViewerSub4
 			// 
-			this->chartViewerSub4->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewerSub4->Location = System::Drawing::Point(1165, 38);
-			this->chartViewerSub4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			resources->ApplyResources(this->chartViewerSub4, L"chartViewerSub4");
 			this->chartViewerSub4->Name = L"chartViewerSub4";
-			this->chartViewerSub4->Size = System::Drawing::Size(380, 324);
-			this->chartViewerSub4->TabIndex = 0;
 			this->chartViewerSub4->TabStop = false;
 			this->chartViewerSub4->SizeChanged += gcnew System::EventHandler(this, &Step12Form::chartViewerSub4_SizeChanged);
 			// 
 			// chartViewer
 			// 
+			resources->ApplyResources(this->chartViewer, L"chartViewer");
 			this->tableLayoutPanel1->SetColumnSpan(this->chartViewer, 4);
-			this->chartViewer->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewer->Location = System::Drawing::Point(4, 370);
-			this->chartViewer->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->chartViewer->Name = L"chartViewer";
-			this->chartViewer->Size = System::Drawing::Size(1541, 768);
-			this->chartViewer->TabIndex = 0;
 			this->chartViewer->TabStop = false;
 			this->chartViewer->SizeChanged += gcnew System::EventHandler(this, &Step12Form::chartViewer_SizeChanged);
 			// 
 			// label1
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(4, 0);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			resources->ApplyResources(this->label1, L"label1");
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(379, 34);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Seismic source";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// label2
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label2->Location = System::Drawing::Point(778, 0);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			resources->ApplyResources(this->label2, L"label2");
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(379, 34);
-			this->label2->TabIndex = 0;
-			this->label2->Text = L"Sample";
-			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// cboSeismicSource
 			// 
+			resources->ApplyResources(this->cboSeismicSource, L"cboSeismicSource");
 			this->cboSeismicSource->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSeismicSource->FormattingEnabled = true;
-			this->cboSeismicSource->Location = System::Drawing::Point(391, 4);
-			this->cboSeismicSource->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->cboSeismicSource->Name = L"cboSeismicSource";
-			this->cboSeismicSource->Size = System::Drawing::Size(303, 26);
-			this->cboSeismicSource->TabIndex = 1;
 			this->cboSeismicSource->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step12Form::cboSeismicSource_SelectionChangeCommitted);
 			// 
 			// cboSample
 			// 
+			resources->ApplyResources(this->cboSample, L"cboSample");
 			this->cboSample->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSample->FormattingEnabled = true;
-			this->cboSample->Location = System::Drawing::Point(1165, 4);
-			this->cboSample->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->cboSample->Name = L"cboSample";
-			this->cboSample->Size = System::Drawing::Size(303, 26);
-			this->cboSample->TabIndex = 1;
 			this->cboSample->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step12Form::cboSample_SelectionChangeCommitted);
 			// 
 			// Step12Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1549, 1142);
 			this->Controls->Add(this->tableLayoutPanel1);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"Step12Form";
-			this->Text = L"Step12Form";
 			this->Load += gcnew System::EventHandler(this, &Step12Form::Step12Form_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();

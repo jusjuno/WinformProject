@@ -16,6 +16,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step11Form에 대한 요약입니다.
@@ -483,7 +484,11 @@ namespace WinformProject {
 			String^ sample = cboSample->SelectedItem->ToString();
 			String^ period = cboRecurrencePeriod->SelectedItem->ToString();
 			String^ title = String::Format("Seismic source: {0} - Scenario: {1} years", scenarioName, period);
-
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format("지진원: {0} - 시나리오: {1} years", scenarioName, period);
+			}
 			XYChart^ c = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
 
 			int plotAreaWidth = chartViewer->Size.Width - 180;
@@ -491,10 +496,18 @@ namespace WinformProject {
 			c->setPlotArea(80, 80, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
 			c->addLegend(80 + plotAreaWidth + 30, 80, true);
 			c->addTitle(title, "Times New Roman Bold", 17);
-			c->xAxis()->setTitle("Time (days)", "Arial Bold", 12);
+			//다국어
+			String^ sXAxis = L"Time (days)";
+			String^ sYAxis = L"Loss factor";
+			if (sUiLang->Equals("ko-KR")) {
+				sXAxis = L"시간(일)";
+				sYAxis = L"손실 계수";
+			}
+			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
 			c->xAxis()->setLinearScale(localDataX[0], localDataX[localDataX->Length - 1]);
-			c->yAxis()->setTitle("Loss factor", "Arial Bold", 12);
+			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
 			c->yAxis()->setLinearScale(-0.2, 1.2);
+
 			StepLineLayer^ layerECO = c->addStepLineLayer(localECOY, 0x0000FF, "ECO");
 			layerECO->setXData(localDataX);
 			layerECO->setLineWidth(2);
@@ -1000,6 +1013,47 @@ namespace WinformProject {
 		// set combobox datasource for sample
 		this->cboSample->Items->AddRange(this->m_dataSet->TrafficScenarioSamples);
 		this->cboSample->SelectedIndex = 0;
+
+
+
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sGroupBox1 = L"POI Connectivity";
+		String^ sGroupBox2 = L"Environment";
+
+		String^ sLabel1 = L"Seismic source";
+		String^ sLabel2 = L"Recurrence period";
+		String^ sLabel3 = L"Sample";
+		String^ sLabel4 = L"# of environmentally sensitive";
+		String^ sLabel5 = L"# of";
+
+		String^ sCalculate = L"Calculate";
+
+		if (sUiLang->Equals("ko-KR")) {
+			sGroupBox1 = L"연결지수 입력정보";
+			sGroupBox2 = L"환경지수 입력정보";
+
+			sLabel1 = L"지진원";
+			sLabel2 = L"재현주기";
+			sLabel3 = L"샘플";
+			sLabel4 = L"환경민감 노선 개수";
+			sLabel5 = L"구역 총개수";
+
+			sCalculate = L"계산";
+		}
+		this->groupBox1->Text = sGroupBox1;
+		this->groupBox2->Text = sGroupBox2;
+
+		this->label1->Text = sLabel1;
+		this->label2->Text = sLabel2;
+		this->label3->Text = sLabel3;
+		this->label4->Text = sLabel4;
+		this->label5->Text = sLabel5;
+
+		this->btnCalculate->Text = sCalculate;
+
+
+
 	}
 	private: System::Void cboSeismicSource_SelectionChangeCommitted(System::Object^  sender, System::EventArgs^  e) {
 		UpdateChart();
@@ -1024,6 +1078,26 @@ namespace WinformProject {
 		this->dgvConnectivity->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvConnectivity->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvConnectivity->EnableHeadersVisualStyles = false;
+
+		/*literal String^ GRID_POI_CONNECTIVITY_COL1 = L"Link ID";
+		literal String^ GRID_POI_CONNECTIVITY_COL2 = L"Zone";
+		*/
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sLinkId = "Link ID";//노선번호
+		String^ sZone = "Zone";//구역번호
+		if (sUiLang->Equals("ko-KR")) {
+			sLinkId = "노선번호";
+			sZone = "구역번호";
+		}
+
+		//Debug::WriteLine("==========================================>Count:" + this->dgvConnectivity->Columns->Count);
+		if (this->dgvConnectivity->Columns->Count > 0) {
+			this->dgvConnectivity->Columns[0]->HeaderText = sLinkId;
+			this->dgvConnectivity->Columns[1]->HeaderText = sZone;
+		}
+
+
 	}
 	private: System::Void dgvConnectivityZone_DataBindingComplete(System::Object^  sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^  e) {
 		int i = 1;
@@ -1035,6 +1109,25 @@ namespace WinformProject {
 		this->dgvConnectivityZone->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvConnectivityZone->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvConnectivityZone->EnableHeadersVisualStyles = false;
+
+
+
+		/*literal String^ GRID_POI_CONNECTIVITY_ZONE_COL1 = L"Zone";
+		literal String^ GRID_POI_CONNECTIVITY_ZONE_COL2 = L"# of POIs";
+		*/
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sZone = "Zone";//구역번호
+		String^ sOfPOIs = "# of POIs";//방재거점 개수
+		if (sUiLang->Equals("ko-KR")) {
+			sZone = "구역번호";
+			sOfPOIs = "방재거점 개수";
+		}
+		if (this->dgvConnectivityZone->Columns->Count > 0) {
+			this->dgvConnectivityZone->Columns[0]->HeaderText = sZone;
+			this->dgvConnectivityZone->Columns[1]->HeaderText = sOfPOIs;
+		}
+
 	}
 	private: System::Void dgvEnvironment_DataBindingComplete(System::Object^  sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^  e) {
 		int i = 1;

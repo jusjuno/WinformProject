@@ -123,6 +123,12 @@
     <ClCompile Include="Step13Form.cpp">
       <Filter>Source Files\steps</Filter>
     </ClCompile>
+    <ClCompile Include="PreferenceForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Step9bForm.cpp">
+      <Filter>Source Files\steps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -304,6 +310,15 @@
     </ClInclude>
     <ClInclude Include="Step13Form.h">
       <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="PreferenceForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Step9bForm.h">
+      <Filter>Header Files\steps</Filter>
+    </ClInclude>
+    <ClInclude Include="UNISTHelper.h">
+      <Filter>Header Files\NeXTA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -723,4 +723,38 @@ public:
 	}
 
 
+
+	// 최근실행파일 정보
+	property String^ RunExeName {
+		String^ get() {
+			return this->m_dataSet->m_runExeName;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_runExeName = value;
+		}
+	}
+
+
+	// 화면에서 다국어 설정
+	property String^ UiLang {
+		String^ get() {
+			return this->m_dataSet->m_uiLang;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_uiLang = value;
+		}
+	}
+
+
+
+	//파일별 진앙지 엑셀 정보
+	property Dictionary<String^, DataTable^>^ SeismicSourceContentDictionary {
+		Dictionary<String^, DataTable^>^ get() {
+			return this->m_dataSet->m_seismicSourceContentDictionary;
+		}
+		void set(Dictionary<String^, DataTable^>^ value) {
+			this->m_dataSet->m_seismicSourceContentDictionary = value;
+		}
+	}
+
 };

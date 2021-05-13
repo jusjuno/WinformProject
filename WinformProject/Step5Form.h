@@ -16,6 +16,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step5Form에 대한 요약입니다.
@@ -294,7 +295,11 @@ namespace WinformProject {
 			int recurrencePeriodIndex = cboRecurrPeriods->SelectedIndex;
 			String^ period = cboRecurrPeriods->Items[recurrencePeriodIndex]->ToString();
 			String^ title = String::Format("Intensity Measure Distribution\nSeismic source: {0} - Scenario: {1}", scenarioName, period);
-
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format(L"진도분포\n 진원지: {0} - Scenario: {1}", scenarioName, period);
+			}
 			m_chart->DrawSeismicDistribution(chartViewer, title, m_dataX, m_dataY, m_dataZ);
 		}
 

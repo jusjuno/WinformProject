@@ -11,6 +11,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step7Form에 대한 요약입니다.
@@ -262,6 +263,21 @@ namespace WinformProject {
 		// 동일 값 여부에 따라 그리드 읽기전용 여부 설정
 		SetReadOnlyTrafficCarryingGrid();
 		SetReadOnlyRepairCostRatioGrid();
+
+
+
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sLabel1 = L"Is the \"traffic carrying capacity - time\" relationship the same for all the";
+		String^ sLabel2 = L"Is the \"Repaire Cost Ratio\" array the same for all the";
+		if (sUiLang->Equals("ko-KR")) {
+			sLabel1 = L"복구기간(일)은 시설물분류 기준으로 동일한가";
+			sLabel2 = L"복구비용(율)은 시설물분류 기준으로 동일한가";
+		}
+		this->label1->Text = sLabel1;
+		this->label2->Text = sLabel2;
+
+
 	}
 	private: System::Void cboTrafficCarryingSameParam_SelectionChangeCommitted(System::Object^  sender, System::EventArgs^  e) {
 		SetReadOnlyTrafficCarryingGrid();

@@ -120,4 +120,400 @@
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FileNewMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FileNewMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 26</value>
+  </data>
+  <data name="FileNewMenuItem.Text" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="FileOpenMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="FileOpenMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 26</value>
+  </data>
+  <data name="FileOpenMenuItem.Text" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="FileSaveMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="FileSaveMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 26</value>
+  </data>
+  <data name="FileSaveMenuItem.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FilePreferencesMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FilePreferencesMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 26</value>
+  </data>
+  <data name="FilePreferencesMenuItem.Text" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="FileExitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 26</value>
+  </data>
+  <data name="FileExitMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="FileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
+  </data>
+  <data name="FileMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="ProjectStep0MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep0MenuItem.Text" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="ProjectStep1MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep1MenuItem.Text" xml:space="preserve">
+    <value>Definition of Road Network</value>
+  </data>
+  <data name="ProjectStep2MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep2MenuItem.Text" xml:space="preserve">
+    <value>Definition network component classes</value>
+  </data>
+  <data name="ProjectStep3MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep3MenuItem.Text" xml:space="preserve">
+    <value>Definition of network component properties</value>
+  </data>
+  <data name="ProjectStep4MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep4MenuItem.Text" xml:space="preserve">
+    <value>Seismic fragility of network components</value>
+  </data>
+  <data name="ProjectStep5MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep5MenuItem.Text" xml:space="preserve">
+    <value>Seismic hazard</value>
+  </data>
+  <data name="ProjectStep6MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep6MenuItem.Text" xml:space="preserve">
+    <value>Couple hazard to fragility</value>
+  </data>
+  <data name="ProjectStep7MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep7MenuItem.Text" xml:space="preserve">
+    <value>Traffic carrying capacity - Repair cost ratio</value>
+  </data>
+  <data name="ProjectStep8MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 26</value>
+  </data>
+  <data name="ProjectStep8MenuItem.Text" xml:space="preserve">
+    <value>Traffic scenarios</value>
+  </data>
+  <data name="ProjectMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ProjectMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 24</value>
+  </data>
+  <data name="ProjectMenuItem.Text" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="NeXTAInputMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 26</value>
+  </data>
+  <data name="NeXTAInputMenuItem.Text" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="NeXTARunMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 26</value>
+  </data>
+  <data name="NeXTARunMenuItem.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="NeXTAMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 24</value>
+  </data>
+  <data name="NeXTAMenuItem.Text" xml:space="preserve">
+    <value>NeXTA</value>
+  </data>
+  <data name="UnistRunMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 26</value>
+  </data>
+  <data name="UnistRunMenuItem.Text" xml:space="preserve">
+    <value>Run(UNIST)</value>
+  </data>
+  <data name="uNISTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 24</value>
+  </data>
+  <data name="uNISTToolStripMenuItem.Text" xml:space="preserve">
+    <value>UNIST</value>
+  </data>
+  <data name="ResultStep10MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="ResultStep10MenuItem.Text" xml:space="preserve">
+    <value>Qualitative Indicators1</value>
+  </data>
+  <data name="ResultStep10bMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="ResultStep10bMenuItem.Text" xml:space="preserve">
+    <value>Qualitative Indicators2</value>
+  </data>
+  <data name="ResultStep11MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="ResultStep11MenuItem.Text" xml:space="preserve">
+    <value>Qualitative Indicators3</value>
+  </data>
+  <data name="ResultStep12MenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="ResultStep12MenuItem.Text" xml:space="preserve">
+    <value>Decision BackData</value>
+  </data>
+  <data name="decisionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="decisionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+  <data name="ResultMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
+  </data>
+  <data name="ResultMenuItem.Text" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="menuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 2, 0, 2</value>
+  </data>
+  <data name="menuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>698, 28</value>
+  </data>
+  <data name="menuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="menuStrip.Text" xml:space="preserve">
+    <value>menuStrip</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Name" xml:space="preserve">
+    <value>menuStrip</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ko</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 15</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>698, 385</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>노후 도로시설 내진성능관리 의사결정시스템</value>
+  </data>
+  <data name="&gt;&gt;FileMenuItem.Name" xml:space="preserve">
+    <value>FileMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileNewMenuItem.Name" xml:space="preserve">
+    <value>FileNewMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileNewMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileOpenMenuItem.Name" xml:space="preserve">
+    <value>FileOpenMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileOpenMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileSaveMenuItem.Name" xml:space="preserve">
+    <value>FileSaveMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileSaveMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FilePreferencesMenuItem.Name" xml:space="preserve">
+    <value>FilePreferencesMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FilePreferencesMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileExitMenuItem.Name" xml:space="preserve">
+    <value>FileExitMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileExitMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectMenuItem.Name" xml:space="preserve">
+    <value>ProjectMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep0MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep0MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep0MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep1MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep1MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep1MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep2MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep2MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep2MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep3MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep3MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep3MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep4MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep4MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep4MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep5MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep5MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep5MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep6MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep6MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep6MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep7MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep7MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep7MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep8MenuItem.Name" xml:space="preserve">
+    <value>ProjectStep8MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProjectStep8MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NeXTAMenuItem.Name" xml:space="preserve">
+    <value>NeXTAMenuItem</value>
+  </data>
+  <data name="&gt;&gt;NeXTAMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NeXTAInputMenuItem.Name" xml:space="preserve">
+    <value>NeXTAInputMenuItem</value>
+  </data>
+  <data name="&gt;&gt;NeXTAInputMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NeXTARunMenuItem.Name" xml:space="preserve">
+    <value>NeXTARunMenuItem</value>
+  </data>
+  <data name="&gt;&gt;NeXTARunMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;uNISTToolStripMenuItem.Name" xml:space="preserve">
+    <value>uNISTToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;uNISTToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UnistRunMenuItem.Name" xml:space="preserve">
+    <value>UnistRunMenuItem</value>
+  </data>
+  <data name="&gt;&gt;UnistRunMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultMenuItem.Name" xml:space="preserve">
+    <value>ResultMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ResultMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultStep10MenuItem.Name" xml:space="preserve">
+    <value>ResultStep10MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ResultStep10MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultStep10bMenuItem.Name" xml:space="preserve">
+    <value>ResultStep10bMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ResultStep10bMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultStep11MenuItem.Name" xml:space="preserve">
+    <value>ResultStep11MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ResultStep11MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultStep12MenuItem.Name" xml:space="preserve">
+    <value>ResultStep12MenuItem</value>
+  </data>
+  <data name="&gt;&gt;ResultStep12MenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;decisionToolStripMenuItem.Name" xml:space="preserve">
+    <value>decisionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;decisionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

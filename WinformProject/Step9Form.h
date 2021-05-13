@@ -14,6 +14,8 @@ namespace WinformProject {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Threading;
+	using namespace System::Globalization;
+
 
 	/// <summary>
 	/// Step9Form에 대한 요약입니다.

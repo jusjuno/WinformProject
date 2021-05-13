@@ -10,6 +10,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step2Form에 대한 요약입니다.
@@ -124,6 +125,20 @@ namespace WinformProject {
 		this->dgvCompClass->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvCompClass->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvCompClass->EnableHeadersVisualStyles = false;
+
+
+		//다국어
+		//System::Windows::Forms::DataGridViewColumnCollection^ aaa			= this->dgvCompClass->Columns;
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sClassId = "Class ID";//분류번호
+		String^ sDescription = "Description";//설명
+		if (sUiLang->Equals("ko-KR")) {
+			sClassId = "분류번호";
+			sDescription = "설명";
+		}
+		this->dgvCompClass->Columns[0]->HeaderText = sClassId;
+		this->dgvCompClass->Columns[1]->HeaderText = sDescription;
+
 	}
 	};
 }

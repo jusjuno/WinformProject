@@ -257,15 +257,16 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 2, 0);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 5;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 45)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 45)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 45)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1031, 700);
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 17)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(825, 583);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// cboIndirectDamage
@@ -275,10 +276,9 @@ namespace WinformProject {
 			this->cboIndirectDamage->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboIndirectDamage->FormattingEnabled = true;
 			this->cboIndirectDamage->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"내진보강(전)", L"내진보강(후)" });
-			this->cboIndirectDamage->Location = System::Drawing::Point(858, 387);
-			this->cboIndirectDamage->Margin = System::Windows::Forms::Padding(4);
+			this->cboIndirectDamage->Location = System::Drawing::Point(687, 321);
 			this->cboIndirectDamage->Name = L"cboIndirectDamage";
-			this->cboIndirectDamage->Size = System::Drawing::Size(169, 26);
+			this->cboIndirectDamage->Size = System::Drawing::Size(135, 23);
 			this->cboIndirectDamage->TabIndex = 24;
 			this->cboIndirectDamage->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboIndirectDamage_SelectionChangeCommitted);
 			// 
@@ -289,10 +289,9 @@ namespace WinformProject {
 			this->cboDirectDamage->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboDirectDamage->FormattingEnabled = true;
 			this->cboDirectDamage->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"내진보강(전)", L"내진보강(후)" });
-			this->cboDirectDamage->Location = System::Drawing::Point(348, 387);
-			this->cboDirectDamage->Margin = System::Windows::Forms::Padding(4);
+			this->cboDirectDamage->Location = System::Drawing::Point(279, 321);
 			this->cboDirectDamage->Name = L"cboDirectDamage";
-			this->cboDirectDamage->Size = System::Drawing::Size(162, 26);
+			this->cboDirectDamage->Size = System::Drawing::Size(130, 23);
 			this->cboDirectDamage->TabIndex = 23;
 			this->cboDirectDamage->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboDirectDamage_SelectionChangeCommitted);
 			// 
@@ -302,10 +301,9 @@ namespace WinformProject {
 			this->cboSeismicPeriod->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboSeismicPeriod->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSeismicPeriod->FormattingEnabled = true;
-			this->cboSeismicPeriod->Location = System::Drawing::Point(518, 4);
-			this->cboSeismicPeriod->Margin = System::Windows::Forms::Padding(4);
+			this->cboSeismicPeriod->Location = System::Drawing::Point(415, 3);
 			this->cboSeismicPeriod->Name = L"cboSeismicPeriod";
-			this->cboSeismicPeriod->Size = System::Drawing::Size(162, 26);
+			this->cboSeismicPeriod->Size = System::Drawing::Size(130, 23);
 			this->cboSeismicPeriod->TabIndex = 22;
 			this->cboSeismicPeriod->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboSeismicPeriod_SelectionChangeCommitted);
 			// 
@@ -314,12 +312,11 @@ namespace WinformProject {
 			this->label9->AutoSize = true;
 			this->tableLayoutPanel1->SetColumnSpan(this->label9, 2);
 			this->label9->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label9->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label9->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label9->Location = System::Drawing::Point(348, 0);
-			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label9->Location = System::Drawing::Point(279, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(162, 45);
+			this->label9->Size = System::Drawing::Size(130, 37);
 			this->label9->TabIndex = 21;
 			this->label9->Text = L"Period";
 			this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
@@ -334,10 +331,9 @@ namespace WinformProject {
 				L"노선별 직접 피해기준", L"노설별 간접 피해기준", L"노선별 총합 피해기준",
 					L"노선별 보강 효과기준"
 			});
-			this->cboSRoad->Location = System::Drawing::Point(858, 60);
-			this->cboSRoad->Margin = System::Windows::Forms::Padding(4);
+			this->cboSRoad->Location = System::Drawing::Point(687, 48);
 			this->cboSRoad->Name = L"cboSRoad";
-			this->cboSRoad->Size = System::Drawing::Size(169, 26);
+			this->cboSRoad->Size = System::Drawing::Size(135, 23);
 			this->cboSRoad->TabIndex = 20;
 			this->cboSRoad->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboSRoad_SelectionChangeCommitted);
 			// 
@@ -345,12 +341,11 @@ namespace WinformProject {
 			// 
 			this->label8->AutoSize = true;
 			this->label8->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label8->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label8->Location = System::Drawing::Point(773, 45);
-			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label8->Location = System::Drawing::Point(619, 37);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(77, 45);
+			this->label8->Size = System::Drawing::Size(62, 37);
 			this->label8->TabIndex = 19;
 			this->label8->Text = L"S-Road";
 			this->label8->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
@@ -365,10 +360,9 @@ namespace WinformProject {
 				L"시설별 직접피해", L"노선별 직접피해", L"노선별 간접피해", L"노선별 경제지수",
 					L"도로망 연결지수", L"도로망 환경지수"
 			});
-			this->cboEffect->Location = System::Drawing::Point(603, 60);
-			this->cboEffect->Margin = System::Windows::Forms::Padding(4);
+			this->cboEffect->Location = System::Drawing::Point(483, 48);
 			this->cboEffect->Name = L"cboEffect";
-			this->cboEffect->Size = System::Drawing::Size(162, 26);
+			this->cboEffect->Size = System::Drawing::Size(130, 23);
 			this->cboEffect->TabIndex = 18;
 			this->cboEffect->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboEffect_SelectionChangeCommitted);
 			// 
@@ -376,12 +370,11 @@ namespace WinformProject {
 			// 
 			this->label7->AutoSize = true;
 			this->label7->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label7->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label7->Location = System::Drawing::Point(518, 45);
-			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label7->Location = System::Drawing::Point(415, 37);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(77, 45);
+			this->label7->Size = System::Drawing::Size(62, 37);
 			this->label7->TabIndex = 17;
 			this->label7->Text = L"Effect";
 			this->label7->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
@@ -396,10 +389,9 @@ namespace WinformProject {
 				L"시설별 직접 피해기준", L"노선별 직접 피해기준", L"노선별 간접 피해기준",
 					L"노선별 종합 피해기준"
 			});
-			this->cboBudget->Location = System::Drawing::Point(348, 60);
-			this->cboBudget->Margin = System::Windows::Forms::Padding(4);
+			this->cboBudget->Location = System::Drawing::Point(279, 48);
 			this->cboBudget->Name = L"cboBudget";
-			this->cboBudget->Size = System::Drawing::Size(162, 26);
+			this->cboBudget->Size = System::Drawing::Size(130, 23);
 			this->cboBudget->TabIndex = 16;
 			this->cboBudget->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboBudget_SelectionChangeCommitted);
 			// 
@@ -407,12 +399,11 @@ namespace WinformProject {
 			// 
 			this->label6->AutoSize = true;
 			this->label6->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label6->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label6->Location = System::Drawing::Point(262, 45);
-			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Location = System::Drawing::Point(210, 37);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(78, 45);
+			this->label6->Size = System::Drawing::Size(63, 37);
 			this->label6->TabIndex = 15;
 			this->label6->Text = L"Budget";
 			this->label6->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
@@ -422,12 +413,11 @@ namespace WinformProject {
 			this->label5->AutoSize = true;
 			this->tableLayoutPanel1->SetColumnSpan(this->label5, 4);
 			this->label5->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label5->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label5->Location = System::Drawing::Point(518, 372);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(415, 310);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(332, 45);
+			this->label5->Size = System::Drawing::Size(266, 37);
 			this->label5->TabIndex = 14;
 			this->label5->Text = L"Indirect Damage(Traffic Cost)";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
@@ -437,12 +427,11 @@ namespace WinformProject {
 			this->label4->AutoSize = true;
 			this->tableLayoutPanel1->SetColumnSpan(this->label4, 4);
 			this->label4->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label4->Location = System::Drawing::Point(4, 372);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(3, 310);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(336, 45);
+			this->label4->Size = System::Drawing::Size(270, 37);
 			this->label4->TabIndex = 13;
 			this->label4->Text = L"Direct Damage(Structure Cost)";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
@@ -451,12 +440,11 @@ namespace WinformProject {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label3->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label3->Location = System::Drawing::Point(4, 45);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(3, 37);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(78, 45);
+			this->label3->Size = System::Drawing::Size(63, 37);
 			this->label3->TabIndex = 12;
 			this->label3->Text = L"Priority";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
@@ -471,10 +459,9 @@ namespace WinformProject {
 				L"시설별 직접 피해기준", L"노선별 직접 피해기준", L"노선별 간접 피해기준",
 					L"노선별 종합 피해기준"
 			});
-			this->cboPriority->Location = System::Drawing::Point(90, 60);
-			this->cboPriority->Margin = System::Windows::Forms::Padding(4);
+			this->cboPriority->Location = System::Drawing::Point(72, 48);
 			this->cboPriority->Name = L"cboPriority";
-			this->cboPriority->Size = System::Drawing::Size(164, 26);
+			this->cboPriority->Size = System::Drawing::Size(132, 23);
 			this->cboPriority->TabIndex = 11;
 			this->cboPriority->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboPriority_SelectionChangeCommitted);
 			// 
@@ -484,12 +471,11 @@ namespace WinformProject {
 			this->dgvSRoad->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvSRoad, 3);
 			this->dgvSRoad->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvSRoad->Location = System::Drawing::Point(773, 94);
-			this->dgvSRoad->Margin = System::Windows::Forms::Padding(4);
+			this->dgvSRoad->Location = System::Drawing::Point(619, 77);
 			this->dgvSRoad->Name = L"dgvSRoad";
 			this->dgvSRoad->RowHeadersWidth = 62;
 			this->dgvSRoad->RowTemplate->Height = 23;
-			this->dgvSRoad->Size = System::Drawing::Size(254, 274);
+			this->dgvSRoad->Size = System::Drawing::Size(203, 230);
 			this->dgvSRoad->TabIndex = 10;
 			this->dgvSRoad->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step13Form::dgvSRoad_DataBindingComplete);
 			// 
@@ -499,12 +485,11 @@ namespace WinformProject {
 			this->dgvEffect->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvEffect, 3);
 			this->dgvEffect->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvEffect->Location = System::Drawing::Point(518, 94);
-			this->dgvEffect->Margin = System::Windows::Forms::Padding(4);
+			this->dgvEffect->Location = System::Drawing::Point(415, 77);
 			this->dgvEffect->Name = L"dgvEffect";
 			this->dgvEffect->RowHeadersWidth = 62;
 			this->dgvEffect->RowTemplate->Height = 23;
-			this->dgvEffect->Size = System::Drawing::Size(247, 274);
+			this->dgvEffect->Size = System::Drawing::Size(198, 230);
 			this->dgvEffect->TabIndex = 9;
 			this->dgvEffect->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step13Form::dgvEffect_DataBindingComplete);
 			// 
@@ -514,12 +499,11 @@ namespace WinformProject {
 			this->dgvBudget->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvBudget, 3);
 			this->dgvBudget->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvBudget->Location = System::Drawing::Point(262, 94);
-			this->dgvBudget->Margin = System::Windows::Forms::Padding(4);
+			this->dgvBudget->Location = System::Drawing::Point(210, 77);
 			this->dgvBudget->Name = L"dgvBudget";
 			this->dgvBudget->RowHeadersWidth = 62;
 			this->dgvBudget->RowTemplate->Height = 23;
-			this->dgvBudget->Size = System::Drawing::Size(248, 274);
+			this->dgvBudget->Size = System::Drawing::Size(199, 230);
 			this->dgvBudget->TabIndex = 8;
 			this->dgvBudget->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step13Form::dgvBudget_DataBindingComplete);
 			// 
@@ -529,12 +513,11 @@ namespace WinformProject {
 			this->dgvPriority->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvPriority, 3);
 			this->dgvPriority->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvPriority->Location = System::Drawing::Point(4, 94);
-			this->dgvPriority->Margin = System::Windows::Forms::Padding(4);
+			this->dgvPriority->Location = System::Drawing::Point(3, 77);
 			this->dgvPriority->Name = L"dgvPriority";
 			this->dgvPriority->RowHeadersWidth = 62;
 			this->dgvPriority->RowTemplate->Height = 23;
-			this->dgvPriority->Size = System::Drawing::Size(250, 274);
+			this->dgvPriority->Size = System::Drawing::Size(201, 230);
 			this->dgvPriority->TabIndex = 7;
 			this->dgvPriority->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step13Form::dgvPriority_DataBindingComplete);
 			// 
@@ -545,12 +528,11 @@ namespace WinformProject {
 			this->dgvDirectDamage->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvDirectDamage, 6);
 			this->dgvDirectDamage->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvDirectDamage->Location = System::Drawing::Point(4, 421);
-			this->dgvDirectDamage->Margin = System::Windows::Forms::Padding(4);
+			this->dgvDirectDamage->Location = System::Drawing::Point(3, 350);
 			this->dgvDirectDamage->Name = L"dgvDirectDamage";
 			this->dgvDirectDamage->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
 			this->dgvDirectDamage->RowTemplate->Height = 23;
-			this->dgvDirectDamage->Size = System::Drawing::Size(506, 275);
+			this->dgvDirectDamage->Size = System::Drawing::Size(406, 230);
 			this->dgvDirectDamage->TabIndex = 6;
 			this->dgvDirectDamage->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step13Form::dgvDirectDamage_DataBindingComplete);
 			// 
@@ -558,10 +540,9 @@ namespace WinformProject {
 			// 
 			this->tableLayoutPanel1->SetColumnSpan(this->chartViewer, 6);
 			this->chartViewer->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewer->Location = System::Drawing::Point(518, 421);
-			this->chartViewer->Margin = System::Windows::Forms::Padding(4);
+			this->chartViewer->Location = System::Drawing::Point(415, 350);
 			this->chartViewer->Name = L"chartViewer";
-			this->chartViewer->Size = System::Drawing::Size(509, 275);
+			this->chartViewer->Size = System::Drawing::Size(407, 230);
 			this->chartViewer->TabIndex = 5;
 			this->chartViewer->TabStop = false;
 			this->chartViewer->SizeChanged += gcnew System::EventHandler(this, &Step13Form::chartViewer_SizeChanged);
@@ -571,12 +552,11 @@ namespace WinformProject {
 			this->label2->AutoSize = true;
 			this->tableLayoutPanel1->SetColumnSpan(this->label2, 2);
 			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label2->Location = System::Drawing::Point(688, 0);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(551, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(162, 45);
+			this->label2->Size = System::Drawing::Size(130, 37);
 			this->label2->TabIndex = 0;
 			this->label2->Text = L"Sample";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
@@ -586,12 +566,11 @@ namespace WinformProject {
 			this->label1->AutoSize = true;
 			this->tableLayoutPanel1->SetColumnSpan(this->label1, 2);
 			this->label1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(4, 0);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(3, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(164, 45);
+			this->label1->Size = System::Drawing::Size(132, 37);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Source";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
@@ -602,10 +581,9 @@ namespace WinformProject {
 			this->cboSample->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboSample->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSample->FormattingEnabled = true;
-			this->cboSample->Location = System::Drawing::Point(858, 4);
-			this->cboSample->Margin = System::Windows::Forms::Padding(4);
+			this->cboSample->Location = System::Drawing::Point(687, 3);
 			this->cboSample->Name = L"cboSample";
-			this->cboSample->Size = System::Drawing::Size(169, 26);
+			this->cboSample->Size = System::Drawing::Size(135, 23);
 			this->cboSample->TabIndex = 4;
 			this->cboSample->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboSample_SelectionChangeCommitted);
 			// 
@@ -615,19 +593,19 @@ namespace WinformProject {
 			this->cboSeismicSource->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboSeismicSource->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSeismicSource->FormattingEnabled = true;
-			this->cboSeismicSource->Location = System::Drawing::Point(176, 4);
-			this->cboSeismicSource->Margin = System::Windows::Forms::Padding(4);
+			this->cboSeismicSource->Location = System::Drawing::Point(141, 3);
 			this->cboSeismicSource->Name = L"cboSeismicSource";
-			this->cboSeismicSource->Size = System::Drawing::Size(164, 26);
+			this->cboSeismicSource->Size = System::Drawing::Size(132, 23);
 			this->cboSeismicSource->TabIndex = 2;
 			this->cboSeismicSource->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboSeismicSource_SelectionChangeCommitted);
 			// 
 			// Step13Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1031, 700);
+			this->ClientSize = System::Drawing::Size(825, 583);
 			this->Controls->Add(this->tableLayoutPanel1);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Step13Form";
 			this->Text = L"Step13Form";
 			this->Load += gcnew System::EventHandler(this, &Step13Form::Step13Form_Load);

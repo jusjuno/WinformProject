@@ -70,10 +70,7 @@ namespace WinformProject {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::Windows::Forms::TreeNode^  treeNode1 = (gcnew System::Windows::Forms::TreeNode(L"ID"));
-			System::Windows::Forms::TreeNode^  treeNode2 = (gcnew System::Windows::Forms::TreeNode(L"Link", gcnew cli::array< System::Windows::Forms::TreeNode^  >(1) { treeNode1 }));
-			System::Windows::Forms::TreeNode^  treeNode3 = (gcnew System::Windows::Forms::TreeNode(L"ID"));
-			System::Windows::Forms::TreeNode^  treeNode4 = (gcnew System::Windows::Forms::TreeNode(L"Node", gcnew cli::array< System::Windows::Forms::TreeNode^  >(1) { treeNode3 }));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Step1Form::typeid));
 			this->chartViewer = (gcnew ChartDirector::WinChartViewer());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->viewPortControl = (gcnew ChartDirector::WinViewPortControl(this->components));
@@ -90,15 +87,12 @@ namespace WinformProject {
 			// 
 			// chartViewer
 			// 
-			this->chartViewer->Dock = System::Windows::Forms::DockStyle::Fill;
+			resources->ApplyResources(this->chartViewer, L"chartViewer");
 			this->chartViewer->HotSpotCursor = System::Windows::Forms::Cursors::Hand;
-			this->chartViewer->Location = System::Drawing::Point(153, 3);
 			this->chartViewer->MouseUsage = ChartDirector::WinChartMouseUsage::ScrollOnDrag;
 			this->chartViewer->Name = L"chartViewer";
 			this->tableLayoutPanel1->SetRowSpan(this->chartViewer, 2);
 			this->chartViewer->ScrollDirection = ChartDirector::WinChartDirection::HorizontalVertical;
-			this->chartViewer->Size = System::Drawing::Size(928, 755);
-			this->chartViewer->TabIndex = 0;
 			this->chartViewer->TabStop = false;
 			this->chartViewer->ZoomDirection = ChartDirector::WinChartDirection::HorizontalVertical;
 			this->chartViewer->ZoomInHeightLimit = 0.1;
@@ -108,117 +102,68 @@ namespace WinformProject {
 			// 
 			// tableLayoutPanel1
 			// 
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				150)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
+			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
 			this->tableLayoutPanel1->Controls->Add(this->chartViewer, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->viewPortControl, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 1);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 2;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 150)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1084, 761);
-			this->tableLayoutPanel1->TabIndex = 1;
 			// 
 			// viewPortControl
 			// 
-			this->viewPortControl->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->viewPortControl->Location = System::Drawing::Point(3, 3);
+			resources->ApplyResources(this->viewPortControl, L"viewPortControl");
 			this->viewPortControl->Name = L"viewPortControl";
-			this->viewPortControl->Size = System::Drawing::Size(144, 144);
-			this->viewPortControl->TabIndex = 1;
 			this->viewPortControl->TabStop = false;
 			this->viewPortControl->Viewer = this->chartViewer;
 			// 
 			// tableLayoutPanel2
 			// 
-			this->tableLayoutPanel2->ColumnCount = 1;
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
+			resources->ApplyResources(this->tableLayoutPanel2, L"tableLayoutPanel2");
 			this->tableLayoutPanel2->Controls->Add(this->btnZoomOut, 0, 2);
 			this->tableLayoutPanel2->Controls->Add(this->btnZoomIn, 0, 1);
 			this->tableLayoutPanel2->Controls->Add(this->tvDisplayOptions, 0, 3);
 			this->tableLayoutPanel2->Controls->Add(this->btnPoint, 0, 0);
-			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 153);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-			this->tableLayoutPanel2->RowCount = 4;
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 35)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 35)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 35)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(144, 605);
-			this->tableLayoutPanel2->TabIndex = 2;
 			// 
 			// btnZoomOut
 			// 
-			this->btnZoomOut->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->btnZoomOut->Location = System::Drawing::Point(3, 73);
+			resources->ApplyResources(this->btnZoomOut, L"btnZoomOut");
 			this->btnZoomOut->Name = L"btnZoomOut";
-			this->btnZoomOut->Size = System::Drawing::Size(138, 29);
-			this->btnZoomOut->TabIndex = 6;
-			this->btnZoomOut->Text = L"ZoomOut";
 			this->btnZoomOut->UseVisualStyleBackColor = true;
 			this->btnZoomOut->Click += gcnew System::EventHandler(this, &Step1Form::btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
-			this->btnZoomIn->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->btnZoomIn->Location = System::Drawing::Point(3, 38);
+			resources->ApplyResources(this->btnZoomIn, L"btnZoomIn");
 			this->btnZoomIn->Name = L"btnZoomIn";
-			this->btnZoomIn->Size = System::Drawing::Size(138, 29);
-			this->btnZoomIn->TabIndex = 5;
-			this->btnZoomIn->Text = L"ZoomIn";
 			this->btnZoomIn->UseVisualStyleBackColor = true;
 			this->btnZoomIn->Click += gcnew System::EventHandler(this, &Step1Form::btnZoomIn_Click);
 			// 
 			// tvDisplayOptions
 			// 
+			resources->ApplyResources(this->tvDisplayOptions, L"tvDisplayOptions");
 			this->tvDisplayOptions->CheckBoxes = true;
-			this->tvDisplayOptions->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tvDisplayOptions->Location = System::Drawing::Point(3, 108);
 			this->tvDisplayOptions->Name = L"tvDisplayOptions";
-			treeNode1->Name = L"LinkID";
-			treeNode1->Text = L"ID";
-			treeNode2->Checked = true;
-			treeNode2->Name = L"Link";
-			treeNode2->Text = L"Link";
-			treeNode3->Name = L"NodeID";
-			treeNode3->Text = L"ID";
-			treeNode4->Name = L"Node";
-			treeNode4->Text = L"Node";
-			this->tvDisplayOptions->Nodes->AddRange(gcnew cli::array< System::Windows::Forms::TreeNode^  >(2) { treeNode2, treeNode4 });
+			this->tvDisplayOptions->Nodes->AddRange(gcnew cli::array< System::Windows::Forms::TreeNode^  >(2) {
+				(cli::safe_cast<System::Windows::Forms::TreeNode^>(resources->GetObject(L"tvDisplayOptions.Nodes"))),
+					(cli::safe_cast<System::Windows::Forms::TreeNode^>(resources->GetObject(L"tvDisplayOptions.Nodes1")))
+			});
 			this->tvDisplayOptions->ShowPlusMinus = false;
-			this->tvDisplayOptions->Size = System::Drawing::Size(138, 494);
-			this->tvDisplayOptions->TabIndex = 3;
 			this->tvDisplayOptions->AfterCheck += gcnew System::Windows::Forms::TreeViewEventHandler(this, &Step1Form::tvDisplayOptions_AfterCheck);
 			this->tvDisplayOptions->AfterCollapse += gcnew System::Windows::Forms::TreeViewEventHandler(this, &Step1Form::tvDisplayOptions_AfterCollapse);
 			// 
 			// btnPoint
 			// 
-			this->btnPoint->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->btnPoint->Location = System::Drawing::Point(3, 3);
+			resources->ApplyResources(this->btnPoint, L"btnPoint");
 			this->btnPoint->Name = L"btnPoint";
-			this->btnPoint->Size = System::Drawing::Size(138, 29);
-			this->btnPoint->TabIndex = 4;
-			this->btnPoint->Text = L"Pointer";
 			this->btnPoint->UseVisualStyleBackColor = true;
 			this->btnPoint->Click += gcnew System::EventHandler(this, &Step1Form::btnPoint_Click);
 			// 
 			// Step1Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(7, 12);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1084, 761);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Name = L"Step1Form";
-			this->Text = L"Definition of Road Network";
 			this->Load += gcnew System::EventHandler(this, &Step1Form::Step1Form_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartViewer))->EndInit();
 			this->tableLayoutPanel1->ResumeLayout(false);
@@ -344,9 +289,15 @@ namespace WinformProject {
 		m_chart->Draw(chartViewer, viewPortControl, "Road Network");
 	}
 	private: System::Void chartViewer_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
-		DrawChart();
+
+		//Step1Form 보다 먼저 호출 되면서 오류 발생함
+		//DrawChart();
+		if (this->m_dataSet != nullptr) {
+			DrawChart();
+		}
 	}
-			 // chartViewer에 연결된 viewport 값이 변경되면 실행 됨
+			 
+	// chartViewer에 연결된 viewport 값이 변경되면 실행 됨
 	private: System::Void chartViewer_ViewPortChanged(System::Object^  sender, ChartDirector::WinViewPortEventArgs^  e) {
 		ZoomChartViewer();
 		// Update the chart if necessary

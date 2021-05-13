@@ -117,4 +117,295 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Seismic source</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chartViewer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1233, 641</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chartViewerSub4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cboSeismicSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cboSample.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="chartViewerSub1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 32</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub2.Name" xml:space="preserve">
+    <value>chartViewerSub2</value>
+  </data>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Step12Form</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="chartViewerSub1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub4.Type" xml:space="preserve">
+    <value>ChartDirector.WinChartViewer, netchartdir, Version=6.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt, style=Bold</value>
+  </data>
+  <data name="chartViewerSub1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 270</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub3.Name" xml:space="preserve">
+    <value>chartViewerSub3</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Step12Form</value>
+  </data>
+  <data name="chartViewerSub3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>621, 32</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1239, 952</value>
+  </data>
+  <data name="chartViewerSub2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 32</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="cboSeismicSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chartViewerSub2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 29</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chartViewer.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub4.Name" xml:space="preserve">
+    <value>chartViewerSub4</value>
+  </data>
+  <data name="cboSeismicSource.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cboSeismicSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 23</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 15</value>
+  </data>
+  <data name="&gt;&gt;cboSample.Name" xml:space="preserve">
+    <value>cboSample</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 29</value>
+  </data>
+  <data name="chartViewerSub3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 270</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chartViewer.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>621, 0</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboSeismicSource.Name" xml:space="preserve">
+    <value>cboSeismicSource</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartViewer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 308</value>
+  </data>
+  <data name="chartViewerSub1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartViewer.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림, 9pt, style=Bold</value>
+  </data>
+  <data name="chartViewerSub4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub1.Type" xml:space="preserve">
+    <value>ChartDirector.WinChartViewer, netchartdir, Version=6.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chartViewerSub2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 270</value>
+  </data>
+  <data name="cboSample.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 23</value>
+  </data>
+  <data name="&gt;&gt;cboSeismicSource.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;cboSample.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="&gt;&gt;chartViewer.Type" xml:space="preserve">
+    <value>ChartDirector.WinChartViewer, netchartdir, Version=6.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Sample</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub3.Type" xml:space="preserve">
+    <value>ChartDirector.WinChartViewer, netchartdir, Version=6.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chartViewerSub1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chartViewerSub2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="chartViewerSub3" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="chartViewerSub4" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="chartViewer" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cboSeismicSource" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboSample" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,25,Percent,25" /&gt;&lt;Rows Styles="AutoSize,0,Percent,30,Percent,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="chartViewerSub3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartViewerSub3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub2.Type" xml:space="preserve">
+    <value>ChartDirector.WinChartViewer, netchartdir, Version=6.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="chartViewerSub4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>930, 32</value>
+  </data>
+  <data name="&gt;&gt;cboSample.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="chartViewerSub4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 270</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub1.Name" xml:space="preserve">
+    <value>chartViewerSub1</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1239, 952</value>
+  </data>
+  <data name="&gt;&gt;cboSeismicSource.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="cboSample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>930, 3</value>
+  </data>
+  <data name="&gt;&gt;chartViewer.Name" xml:space="preserve">
+    <value>chartViewer</value>
+  </data>
+  <data name="cboSample.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartViewer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chartViewerSub4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chartViewerSub2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ko</value>
+  </metadata>
 </root>

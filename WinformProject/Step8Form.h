@@ -11,6 +11,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step8Form에 대한 요약입니다.
@@ -319,6 +320,11 @@ namespace WinformProject {
 			String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
 			String^ sample = cboSample->SelectedItem->ToString();
 			String^ title = String::Format("Seismic source: {0} - Scenario: {1}", scenarioName, period);
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format("진원: {0} - 시나리오: {1}", scenarioName, period);
+			}
 
 			// The data for the chart
 //			array<double>^ dataX = gcnew array<double>(4);
@@ -387,9 +393,18 @@ namespace WinformProject {
 
 			c->addTitle(title, "Times New Roman Bold", 18);
 
-			c->xAxis()->setTitle("Recovery period(days)", "Arial Bold", 12);
-			c->yAxis()->setTitle("Traffic capacity(num of closed links)", "Arial Bold", 12);
 
+			//다국어
+			String^ sXAxis = L"Recovery period(days)";
+			String^ sYAxis = L"Traffic capacity(num of closed links)";
+			if (sUiLang->Equals("ko-KR")) {
+				sXAxis = L"회복기간(days)";
+				sYAxis = L"교통용량(폐쇄노선수)";
+			}
+			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
+			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
+
+		
 			StepLineLayer^ layer0 = c->addStepLineLayer(dataY, 0x0000FF, "");
 			layer0->setXData(dataX);
 			layer0->setLineWidth(2);

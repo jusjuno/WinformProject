@@ -549,15 +549,25 @@ void WinformProject::ShapeChart::Draw(WinChartViewer^ chartViewer, WinViewPortCo
 // get chart property 
 XYChart^ WinformProject::ShapeChart::CreateShapeChartProperty(String^ title, int chartWidth, int chartHeight, int plotAreaX, int plotAreaY, int plotAreaWidth, int plotAreaHeight)
 {
+	//다국어
+	String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+	Debug::WriteLine("========CreateShapeChartProperty===>sUiLang:" + sUiLang);
+	String^ sLongitude = "Longitude";//경도
+	String^ sLatitude = "Latitude";//위도
+	if (sUiLang->Equals("ko-KR")) {
+		sLongitude = "경도";//경도
+		sLatitude = "위도";//위도
+	}
+
 	XYChart^ chart = gcnew XYChart(chartWidth, chartHeight);
 	chart->setPlotArea(plotAreaX, plotAreaY, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
 	chart->addTitle(title, "Times New Roman Bold", 18);
 
-	chart->xAxis()->setTitle("Longitude", "Arial Bold", 12);
+	chart->xAxis()->setTitle(sLongitude, "Arial Bold", 12);
 	chart->xAxis()->setWidth(3);
 	chart->xAxis()->setTickLength(10, 0);
 
-	chart->yAxis()->setTitle("Latitude", "Arial Bold", 12);
+	chart->yAxis()->setTitle(sLatitude, "Arial Bold", 12);
 	chart->yAxis()->setWidth(3);
 	chart->xAxis()->setTickLength(10, 0);
 	

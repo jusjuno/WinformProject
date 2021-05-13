@@ -16,6 +16,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step6Form에 대한 요약입니다.
@@ -321,7 +322,11 @@ namespace WinformProject {
 			String^ period = cboRecurrencePeriod->Items[cboRecurrencePeriod->SelectedIndex]->ToString();
 			String^ state = cboDamageState->Items[cboDamageState->SelectedIndex]->ToString();
 			String^ title = String::Format("Vulnerability Map\nDamage State: {0} - Seismic source: {1} - Scenario: {2}", state, scenarioName, period);
-
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format("취약성 지도\n 피해단계: {0} - 진원: {1} - Scenario: {2}", state, scenarioName, period);
+			}
 			m_chart->DrawVulnerabilityMap(chartViewer, title, m_chartDataX, m_chartDataY, m_chartDataZ);
 		}
 		// create vulnerability chart data

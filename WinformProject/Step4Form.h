@@ -12,6 +12,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
 
 	/// <summary>
 	/// Step4Form에 대한 요약입니다.
@@ -117,6 +118,8 @@ namespace WinformProject {
 			this->dgvFragCurveParams->RowTemplate->Height = 23;
 			this->dgvFragCurveParams->Size = System::Drawing::Size(1078, 227);
 			this->dgvFragCurveParams->TabIndex = 0;
+			this->dgvFragCurveParams->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step4Form::dgvFragCurveParams_DataBindingComplete);
+
 			// 
 			// cboComponentCurves
 			// 
@@ -218,6 +221,17 @@ namespace WinformProject {
 			// Set default text color to dark grey (0x333333)
 			chart->setColor(ChartDirector::Chart::TextColor, 0x333333);
 
+
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			String^ sTitle = "Fragility curve(Class ID:";//취약도곡선
+			String^ sXAxisTitle = "Sa(g)";//지반가속도
+			String^ sYAxisTitle = "P[D>dsi/Sa]";//피해초과률
+			if (sUiLang->Equals("ko-KR")) {
+				sTitle = "취약도곡선(분류번호:";
+				sXAxisTitle = "지반가속도";
+				sYAxisTitle = "피해초과률";
+			}
+
 			// Add a title box using grey (0x555555) 20pt Arial font
 			chart->addTitle("Fragility curve(Class ID:" + classID + ")", "굴림 Bold", 20, 0x000000);
 
@@ -237,12 +251,12 @@ namespace WinformProject {
 			chart->xAxis()->setColors(ChartDirector::Chart::Transparent, ChartDirector::Chart::TextColor, ChartDirector::Chart::TextColor, 0x333333);
 			chart->xAxis()->setTickLength(10, 0);
 			chart->xAxis()->setTickDensity(80);
-			chart->xAxis()->setTitle("Sa(g)", "굴림 Bold", 12, 0x000000);
+			chart->xAxis()->setTitle(sXAxisTitle, "굴림 Bold", 12, 0x000000);
 			chart->xAxis()->setWidth(3);
 
 			chart->yAxis()->setColors(ChartDirector::Chart::Transparent);
 			chart->yAxis()->setTickDensity(40);
-			chart->yAxis()->setTitle("P[D>dsi/Sa]", "굴림 Bold", 12, 0x000000);
+			chart->yAxis()->setTitle(sYAxisTitle, "굴림 Bold", 12, 0x000000);
 			chart->yAxis()->setLinearScale(0, 1, 0.1);
 			chart->yAxis()->setWidth(3);
 
@@ -278,6 +292,16 @@ namespace WinformProject {
 		cboComponentCurves->DataSource = m_networkComponent->Data;
 		cboComponentCurves->DisplayMember = m_networkComponent->GetColumnName(NetworkComponent::COL_NETWORK_COMP_ID);
 		cboComponentCurves->ValueMember = m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID);
+
+
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sLabelText = "Component curves";//시설물취약도곡선
+		if (sUiLang->Equals("ko-KR")) {
+			sLabelText = "시설물취약도곡선";
+		}
+		this->label1->Text = sLabelText;
+
 	}
 	private: System::Void chartViewer_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
 		this->DrawFragilityCurves();
@@ -285,5 +309,55 @@ namespace WinformProject {
 	private: System::Void cboComponentCurves_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 		this->DrawFragilityCurves();
 	}
+
+	private: System::Void dgvFragCurveParams_DataBindingComplete(System::Object^ sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^ e) {
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		/*
+		* 	// define fragility curve parameter grid columns.
+			literal String^ GRID_FRAG_CURVE_PARAM_COL1 = L"Class ID";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL2 = L"DS1 IMm";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL3 = L"DS1 β";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL4 = L"DS2 IMm";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL5 = L"DS2 β";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL6 = L"DS3 IMm";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL7 = L"DS3 β";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL8 = L"DS4 IMm";
+			literal String^ GRID_FRAG_CURVE_PARAM_COL9 = L"DS4 β";
+		*/
+		String^ sClassId = "Class ID";//분류번호
+		String^ sDS1_M = "DS1 IMm";//피해1단계 평균
+		String^ sDS1_B = "DS1 β";//피해1단계 분산
+		String^ sDS2_M = "DS2 IMm";//피해2단계 평균
+		String^ sDS2_B = "DS2 β";//피해2단계 분산
+		String^ sDS3_M = "DS3 IMm";//피해3단계 평균
+		String^ sDS3_B = "DS3 β";//피해3단계 분산
+		String^ sDS4_M = "DS4 IMm";//피해4단계 평균
+		String^ sDS4_B = "DS4 β";//피해4단계 분산
+
+		if (sUiLang->Equals("ko-KR")) {
+			sClassId = "분류번호";
+			sDS1_M = "피해1단계 평균";
+			sDS1_B = "피해1단계 분산";
+			sDS2_M = "피해2단계 평균";
+			sDS2_B = "피해2단계 분산";
+			sDS3_M = "피해3단계 평균";
+			sDS3_B = "피해3단계 분산";
+			sDS4_M = "피해4단계 평균";
+			sDS4_B = "피해4단계 분산";
+		}
+		this->dgvFragCurveParams->Columns[0]->HeaderText = sClassId;
+		this->dgvFragCurveParams->Columns[1]->HeaderText = sDS1_M;
+		this->dgvFragCurveParams->Columns[2]->HeaderText = sDS1_B;
+		this->dgvFragCurveParams->Columns[3]->HeaderText = sDS2_M;
+		this->dgvFragCurveParams->Columns[4]->HeaderText = sDS2_B;
+		this->dgvFragCurveParams->Columns[5]->HeaderText = sDS3_M;
+		this->dgvFragCurveParams->Columns[6]->HeaderText = sDS3_B;
+		this->dgvFragCurveParams->Columns[7]->HeaderText = sDS4_M;
+		this->dgvFragCurveParams->Columns[8]->HeaderText = sDS4_B;
+
+	}
+
+
 	};
 }

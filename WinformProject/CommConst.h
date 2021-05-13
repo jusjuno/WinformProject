@@ -120,4 +120,8 @@ public:
 	literal String^ FACILITY_TYPE3 = L"사면";
 	literal String^ FACILITY_TYPE4 = L"옹벽";
 
+
+	//UNIST 실행 시 필요한 행 갯수 
+	literal int UNIST_RUN_REQ_ROWS = 262;
+
 };

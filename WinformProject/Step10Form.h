@@ -17,6 +17,8 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
+
 
 	/// <summary>
 	/// Step10Form에 대한 요약입니다.
@@ -597,7 +599,11 @@ namespace WinformProject {
 			String^ sample = cboSample->SelectedItem->ToString();
 			String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
 			String^ title = String::Format("Functionality vs Time relationship\nSeismic source: {0} - Scenario: {1} years", scenarioName, period);
-
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format("교통기능 vs 시간\n 지진원: {0} - Scenario: {1} years", scenarioName, period);
+			}
 			XYChart^ c = gcnew XYChart(chartViewer1->Size.Width, chartViewer1->Size.Height);
 
 			int plotAreaWidth = chartViewer1->Size.Width - 130;
@@ -605,11 +611,18 @@ namespace WinformProject {
 			c->setPlotArea(80, 80, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
 
 			c->addTitle(title, "Times New Roman Bold", 17);
-
-			c->xAxis()->setTitle("Time (days)", "Arial Bold", 12);
+			//다국어
+			String^ sXAxis = L"Time (days)";
+			String^ sYAxis = L"TrafficFunctionality%(a)";
+			if (sUiLang->Equals("ko-KR")) {
+				sXAxis = L"시간(일)";
+				sYAxis = L"교통기능%(a)";
+			}
+			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
 			c->xAxis()->setLinearScale(0, 500);
-			c->yAxis()->setTitle("Functionality%(a)", "Arial Bold", 12);
+			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
 			c->yAxis()->setLinearScale(0, 100);
+
 
 			//DataX 최상위1열 및 DataY 최하위 1열 추가 및 값(=0)로 셋팅
 			/*
@@ -655,7 +668,11 @@ namespace WinformProject {
 			String^ sample = cboSample->SelectedItem->ToString();
 			String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
 			String^ title = String::Format("Additional cost vs Time\nSeismic source: {0} - Scenario: {1} years", scenarioName, period);
-
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			if (sUiLang->Equals("ko-KR")) {
+				title = String::Format("추가비용 vs 시간\n 지진원: {0} - Scenario: {1} years", scenarioName, period);
+			}
 			XYChart^ c = gcnew XYChart(chartViewer2->Size.Width, chartViewer2->Size.Height);
 
 			int plotAreaWidth = chartViewer2->Size.Width - 130;
@@ -663,12 +680,19 @@ namespace WinformProject {
 			c->setPlotArea(80, 80, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
 
 			c->addTitle(title, "Times New Roman Bold", 17);
-
-			c->xAxis()->setTitle("Time (days)", "Arial Bold", 12);
+			//다국어
+			String^ sXAxis = L"Time (days)";
+			String^ sYAxis = L"Additional cost per day (￦)";
+			if (sUiLang->Equals("ko-KR")) {
+				sXAxis = L"시간(일)";
+				sYAxis = L"일단위 추가비용(￦)";
+			}
+			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
 			c->xAxis()->setLinearScale(0, 500);
-			c->yAxis()->setTitle("Functionality%(a)", "Arial Bold", 12);
-			c->yAxis()->setTitle("Additional cost per day (￦)", "Arial Bold", 12);
+			//c->yAxis()->setTitle("Functionality%(a)", "Arial Bold", 12);
+			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
 
+		
 			//DataX 최상위1열 및 DataY 최하위 1열 추가 및 값(=0)로 셋팅
 			/*
 			StepLineLayer^ layer0 = c->addStepLineLayer(dataY, 0x0000FF, "");
@@ -972,6 +996,59 @@ namespace WinformProject {
 		// set recurrence periods datasource
 		this->cboRecurrencePeriod->Items->AddRange(this->m_dataSet->RecurrencePeriodData);
 		this->cboRecurrencePeriod->SelectedIndex = 0;
+
+
+
+
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sLabel1 = L"PenaltyCost(￦1000)";
+		String^ sLabel2 = L"Traffic simulation of typical day";
+		String^ sLabel3 = L"Value of Time (￦1000)";
+		String^ sLabel4 = L"Traffic factor 1 (from simulated hour to typical day)";
+		String^ sLabel5 = L"Traffic factor 2 (from a day of simulated month to a day of a typical month)";
+		String^ sLabel6 = L"Seismic source";
+		String^ sLabel7 = L"Recurrence period";
+		String^ sLabel8 = L"Sample";
+
+		String^ sGroupBox1 = L"Value of Time definition (VOT)";
+		String^ sGroupBox2 = L"Non feasable trips";
+		String^ sGroupBox3 = L"Output";
+
+		String^ sCalculate = L"Calculate";
+
+
+		if (sUiLang->Equals("ko-KR")) {
+			sLabel1 = L"교통포기비용(천원)";
+			sLabel2 = L"교통해석 표준화 여부";
+			sLabel3 = L"통행시간 가치(천원)";
+			sLabel4 = L"교통계수 1 (단위시간 - 통행량 vs 日통행량 변환계수)";
+			sLabel5 = L"교통계수 2 (日단위 - 통행량 vs 月평균 - 日통행량 변환계수)";
+			sLabel6 = L"지진원";
+			sLabel7 = L"재현주기";
+			sLabel8 = L"샘플";
+
+			sGroupBox1 = L"통행시간 가치정의(VOT)";
+			sGroupBox2 = L"교통통행 불가";
+			sGroupBox3 = L"해석결과";
+
+			sCalculate = L"계산";
+		}
+		this->label1->Text = sLabel1;
+		this->label2->Text = sLabel2;
+		this->label3->Text = sLabel3;
+		this->label4->Text = sLabel4;
+		this->label5->Text = sLabel5;
+		this->label6->Text = sLabel6;
+		this->label7->Text = sLabel7;
+		this->label8->Text = sLabel8;
+
+		this->groupBox1->Text = sGroupBox1;
+		this->groupBox2->Text = sGroupBox2;
+		this->groupBox3->Text = sGroupBox3;
+
+		this->btnCalculate->Text = sCalculate;
+
 	}
 	private: System::Void radTypicalDays_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 		RadioButton^ rad = (RadioButton^)sender;

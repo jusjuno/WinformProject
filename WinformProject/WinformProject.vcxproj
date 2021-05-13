@@ -211,6 +211,7 @@
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="NewProjectForm.cpp" />
     <ClCompile Include="NeXTAInput.cpp" />
+    <ClCompile Include="PreferenceForm.cpp" />
     <ClCompile Include="ShapeChart.cpp" />
     <ClCompile Include="Step0Form.cpp" />
     <ClCompile Include="Step10bForm.cpp" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Step6Form.cpp" />
     <ClCompile Include="Step7Form.cpp" />
     <ClCompile Include="Step8Form.cpp" />
+    <ClCompile Include="Step9bForm.cpp" />
     <ClCompile Include="Step9Form.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="OutputSummary.h" />
     <ClInclude Include="Preference.h" />
+    <ClInclude Include="PreferenceForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="RecoveryCost.h" />
     <ClInclude Include="ResultDataSet.h" />
     <ClInclude Include="ShapeChartAttribute.h" />
@@ -323,6 +328,9 @@
     <ClInclude Include="Step8Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Step9bForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Step9Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -330,6 +338,7 @@
     <ClInclude Include="TrafficModule.h" />
     <ClInclude Include="TrafficScenario.h" />
     <ClInclude Include="InputLinkType.h" />
+    <ClInclude Include="UNISTHelper.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +348,10 @@
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.ko.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
@@ -347,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NeXTAInput.resx">
       <DependentUpon>NeXTAInput.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreferenceForm.resx">
+      <DependentUpon>PreferenceForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Step0Form.resx">
       <DependentUpon>Step0Form.h</DependentUpon>
@@ -360,11 +376,17 @@
     <EmbeddedResource Include="Step11Form.resx">
       <DependentUpon>Step11Form.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Step12Form.ko.resx">
+      <DependentUpon>Step12Form.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Step12Form.resx">
       <DependentUpon>Step12Form.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Step13Form.resx">
       <DependentUpon>Step13Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step1Form.ko.resx">
+      <DependentUpon>Step1Form.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Step1Form.resx">
       <DependentUpon>Step1Form.h</DependentUpon>

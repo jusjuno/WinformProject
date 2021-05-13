@@ -11,6 +11,8 @@ using namespace System::Collections;
 using namespace System::Collections::Generic;
 using namespace System::Drawing;
 using namespace System::Windows;
+using namespace System::Globalization;
+
 namespace WinformProject {
 	/// <summary>
 	/// shape data chart class

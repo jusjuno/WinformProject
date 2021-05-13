@@ -14,6 +14,8 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Globalization;
+
 
 	/// <summary>
 	/// Step3Form에 대한 요약입니다.
@@ -200,8 +202,18 @@ namespace WinformProject {
 		}
 	private:
 		void DrawNetworkComponentChart() {
-			m_chart->DrawNetworkComponents(chartViewer, "Network components", m_chartDatas);
+		
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			Debug::WriteLine("========DrawNetworkComponentChart===>sUiLang:" + sUiLang);
+			String^ sTitle = "Network components";
+			if (sUiLang->Equals("ko-KR")) {
+				sTitle = "도로망시설물";
+			}
+
+			//m_chart->DrawNetworkComponents(chartViewer, "Network components", m_chartDatas);
+			m_chart->DrawNetworkComponents(chartViewer, sTitle, m_chartDatas);
 		}
+
 		void CreateNetworkComponentChartData() {
 			// 클래스 단위로 데이터를 표시하기 위해 클래스 단위로 그룹핑 데이터 생성
 			m_chartDatas = gcnew array<ComponentClassInfo>(m_dataSet->ComponentClassData->Rows->Count);
@@ -277,7 +289,17 @@ namespace WinformProject {
 		this->dgvNetworkComponent->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvNetworkComponent->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvNetworkComponent->EnableHeadersVisualStyles = false;
+
+		//다국어
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sCompId = "Compo_ID";//분류번호
+		if (sUiLang->Equals("ko-KR")) {
+			sCompId = "시설물번호";
+		}
+		this->dgvNetworkComponent->Columns[0]->HeaderText = sCompId;
+
 	}
+
 	private: System::Void dgvCompClass_DataBindingComplete(System::Object^  sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^  e) {
 		// Set grid row number and style
 		int i = 1;
@@ -289,7 +311,21 @@ namespace WinformProject {
 		this->dgvCompClass->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvCompClass->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
 		this->dgvCompClass->EnableHeadersVisualStyles = false;
+
+		//다국어
+		//System::Windows::Forms::DataGridViewColumnCollection^ aaa			= this->dgvCompClass->Columns;
+		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+		String^ sClassId = "Class ID";//분류번호
+		String^ sDescription = "Description";//설명
+		if (sUiLang->Equals("ko-KR")) {
+			sClassId = "분류번호";
+			sDescription = "설명";
+		}
+		this->dgvCompClass->Columns[0]->HeaderText = sClassId;
+		this->dgvCompClass->Columns[1]->HeaderText = sDescription;
 	}
+
+
 	private: System::Void chartViewer_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
 		DrawNetworkComponentChart();
 	}
