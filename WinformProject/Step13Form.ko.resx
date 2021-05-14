@@ -133,7 +133,7 @@
     <value>직접피해(Structure Cost)</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>우선순위</value>
+    <value>재현주기</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>샘플</value>
