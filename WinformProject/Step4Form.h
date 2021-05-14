@@ -127,7 +127,8 @@ namespace WinformProject {
 			this->cboComponentCurves->Location = System::Drawing::Point(219, 236);
 			this->cboComponentCurves->Name = L"cboComponentCurves";
 			this->cboComponentCurves->Size = System::Drawing::Size(235, 20);
-			this->cboComponentCurves->DropDownStyle = ComboBoxStyle::DropDownList;
+			//this->cboComponentCurves->DropDownStyle = ComboBoxStyle::DropDownList;
+			this->cboComponentCurves->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboComponentCurves->TabIndex = 1;
 			this->cboComponentCurves->SelectedIndexChanged += gcnew System::EventHandler(this, &Step4Form::cboComponentCurves_SelectedIndexChanged);
 			// 
