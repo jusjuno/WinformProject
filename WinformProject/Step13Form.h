@@ -2002,6 +2002,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				}
 
 				//선택된 지진소스, 재현주기에 대한 Sorting된 직접피해비 화면 표출력
+				dgvPriority->DataSource = nullptr;//이전설정이 남아서 초기화함
 				dgvPriority->DataSource = componentPriorityTable;
 
 			}
@@ -2040,6 +2041,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					odPriorityTable->Rows->Add(newRow);
 				}
 
+				dgvPriority->DataSource = nullptr;//이전설정이 남아서 초기화함
 				dgvPriority->DataSource = odPriorityTable;
 			}// end of selection 1 : 노선의 직접피해별 우선순위 선정 
 			
@@ -2123,6 +2125,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					odPriorityTable->Rows->Add(newRow);
 				}
 
+				dgvPriority->DataSource = nullptr;//이전설정이 남아서 초기화함
 				dgvPriority->DataSource = odPriorityTable;
 
 			}
@@ -2208,6 +2211,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					odPriorityTable->Rows->Add(newRow);
 				}
 
+				dgvPriority->DataSource = nullptr;//이전설정이 남아서 초기화함
 				dgvPriority->DataSource = odPriorityTable;
 			}
 
