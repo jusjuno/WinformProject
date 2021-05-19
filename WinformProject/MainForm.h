@@ -29,7 +29,7 @@
 #include "Step13Form.h"
 
 #include "PreferenceForm.h"
-
+#include "DataViewForm.h"
 
 
 namespace WinformProject {
@@ -103,6 +103,7 @@ namespace WinformProject {
 		Step13Form^					m_step13Form;
 
 		PreferenceForm^             m_preferenceForm;
+		DataViewForm^				m_dataViewForm;
 
 	private: System::ComponentModel::IContainer^  components;
 	private: System::Windows::Forms::MenuStrip^  menuStrip;
@@ -136,6 +137,7 @@ namespace WinformProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ UnistMenuItem;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ UnistRunMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ViewDataMenuItem;
 
 
 
@@ -181,6 +183,7 @@ namespace WinformProject {
 			this->ResultStep11MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultStep12MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->decisionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ViewDataMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -196,9 +199,9 @@ namespace WinformProject {
 			// 
 			// FileMenuItem
 			// 
-			this->FileMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->FileMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->FileNewMenuItem,
-					this->FileOpenMenuItem, this->FileSaveMenuItem, this->FilePreferencesMenuItem, this->FileExitMenuItem
+					this->FileOpenMenuItem, this->FileSaveMenuItem, this->FilePreferencesMenuItem, this->FileExitMenuItem, this->ViewDataMenuItem
 			});
 			this->FileMenuItem->Name = L"FileMenuItem";
 			resources->ApplyResources(this->FileMenuItem, L"FileMenuItem");
@@ -368,6 +371,12 @@ namespace WinformProject {
 			this->decisionToolStripMenuItem->Name = L"decisionToolStripMenuItem";
 			resources->ApplyResources(this->decisionToolStripMenuItem, L"decisionToolStripMenuItem");
 			this->decisionToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::decisionToolStripMenuItem_Click);
+			// 
+			// ViewDataMenuItem
+			// 
+			this->ViewDataMenuItem->Name = L"ViewDataMenuItem";
+			resources->ApplyResources(this->ViewDataMenuItem, L"ViewDataMenuItem");
+			this->ViewDataMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ViewDataMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -927,5 +936,21 @@ namespace WinformProject {
 			m_step9bForm->Show();
 		}
 	}
+	private: System::Void ViewDataMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		// TODO:: not prepared
+		if (!IsCreatedFormInstance(m_dataViewForm)) {
+			DataViewForm^ _form = gcnew DataViewForm(m_projectDataSetBinder);
+
+			_form->MdiParent = this;
+			//_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+			m_dataViewForm = _form;
+			m_dataViewForm->Show();
+		}
+
+	}
+
+
+
+
 };
 }

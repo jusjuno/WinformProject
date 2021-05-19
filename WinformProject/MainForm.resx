@@ -168,6 +168,12 @@
   <data name="FileExitMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ViewDataMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="ViewDataMenuItem.Text" xml:space="preserve">
+    <value>View Data</value>
+  </data>
   <data name="FileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 24</value>
   </data>
@@ -256,7 +262,7 @@
     <value>NeXTA</value>
   </data>
   <data name="UnistRunMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>171, 26</value>
   </data>
   <data name="UnistRunMenuItem.Text" xml:space="preserve">
     <value>Run(UNIST)</value>
@@ -508,6 +514,12 @@
     <value>decisionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;decisionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ViewDataMenuItem.Name" xml:space="preserve">
+    <value>ViewDataMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ViewDataMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

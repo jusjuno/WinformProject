@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseForm.cpp" />
+    <ClCompile Include="DataViewForm.cpp" />
     <ClCompile Include="DocumentForm.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="NewProjectForm.cpp" />
@@ -245,6 +246,9 @@
     <ClInclude Include="CSVFileManager.h" />
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="DamageAnalyzer.h" />
+    <ClInclude Include="DataViewForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="DBFColumnInfo.h" />
     <ClInclude Include="DisplayOptions.h" />
     <ClInclude Include="DocumentForm.h">
@@ -344,6 +348,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ChartHotspotAttrDialog.resx">
       <DependentUpon>ChartHotspotAttrDialog.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataViewForm.resx">
+      <DependentUpon>DataViewForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.h</DependentUpon>
