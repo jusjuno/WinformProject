@@ -129,6 +129,9 @@
     <ClCompile Include="Step9bForm.cpp">
       <Filter>Source Files\steps</Filter>
     </ClCompile>
+    <ClCompile Include="DataViewForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="UNISTHelper.h">
       <Filter>Header Files\NeXTA</Filter>
+    </ClInclude>
+    <ClInclude Include="DataViewForm.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
