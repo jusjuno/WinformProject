@@ -190,6 +190,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Interop.Microsoft.Office.Interop.Excel.1.7">
+      <HintPath>..\..\..\..\Desktop\Work\01. 수탁과제\01 내진과제\02 프로그램 개발\NEXTA 프로그램\Githumb Code Reading\CppCLR_WinformsProjekt1\Interop\Interop.Microsoft.Office.Interop.Excel.1.7.dll</HintPath>
+    </Reference>
     <Reference Include="netchartdir">
       <HintPath>Lib\ChartDirector\standard\netchartdir.dll</HintPath>
     </Reference>
@@ -428,16 +431,6 @@
     <EmbeddedResource Include="Step9Form.resx">
       <DependentUpon>Step9Form.h</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Excel.1.7.dll">
-      <Guid>00020813-0000-0000-c000-000000000046</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>false</Isolated>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinformProject.rc" />
