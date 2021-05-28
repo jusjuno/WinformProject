@@ -52,7 +52,7 @@ namespace WinformProject {
 		void ConvertCsvToXlsx(String^ filePath) {
 			Excel::Workbook^ wb = nullptr;
 			try {
-				Excel::Application^ exApp = gcnew Excel::Application();
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 
 				wb = exApp->Workbooks->Open(m_basePath + cvsTempFileName, 0, true, 5, "", "", true, Excel::XlPlatform::xlWindows, "\t", false, false, 0, true, 1, 0);
 				
@@ -93,16 +93,20 @@ namespace WinformProject {
 				*/
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
+
 
 				//Data 저장.
 				DataTable^ dtNetComp = this->m_dataSet->NetworkCompnentData;
 				for (int i = 0; i < dtNetComp->Rows->Count; i++) {
-					String^ sCompId = dtNetComp->Rows[i][NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
-					String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
+					//String^ sCompId = dtNetComp->Rows[i][NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+					//String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
+					String^ sCompId = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+					String^ sClassId = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_CLASS_ID]->ToString();
+
 					Debug::WriteLine("=================>sCompId[" + i + "]:" + sCompId);
 					Debug::WriteLine("=================>sClassId["+i+"]:" + sClassId);
 
@@ -194,18 +198,23 @@ namespace WinformProject {
 				
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
 				DataTable^ dtNetComp = this->m_dataSet->NetworkCompnentData;
 				for (int i = 0; i < dtNetComp->Rows->Count; i++) {
-					String^ sCompId = dtNetComp->Rows[i][NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
-					String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
-					String^ sX = dtNetComp->Rows[i][NetworkComponent::COL_X]->ToString();
-					String^ sY = dtNetComp->Rows[i][NetworkComponent::COL_Y]->ToString();
+					String^ sCompId = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+					String^ sClassId = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_CLASS_ID]->ToString();
+					String^ sX = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_X]->ToString();
+					String^ sY = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_Y]->ToString();
 		
 					Debug::WriteLine("=================>sCompId[" + i + "]:" + sCompId);
 					Debug::WriteLine("=================>sClassId[" + i + "]:" + sClassId);
@@ -259,9 +268,14 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
@@ -282,8 +296,8 @@ namespace WinformProject {
 					double dSumYCoord = 0.0;
 
 					for (int i = 0; i < iRowCnt; i++) {
-						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL1]->ToString(), dXCoord);
-						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL2]->ToString(), dYCoord);
+						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL1)]->ToString(), dXCoord);
+						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL2)]->ToString(), dYCoord);
 						//double^ d1000 = dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL6]->ToString();
 
 						Debug::WriteLine(String::Format("========>dXCoord[{0}]", dXCoord));
@@ -347,9 +361,14 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
@@ -368,7 +387,7 @@ namespace WinformProject {
 					double dSum1000Year = 0.0;
 
 					for (int i = 0; i < iRowCnt; i++) {
-						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL6]->ToString(), d1000Year);
+						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL6)]->ToString(), d1000Year);
 					
 						Debug::WriteLine(String::Format("========>d1000Year[{0}]", d1000Year));
 			
@@ -423,9 +442,14 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
@@ -466,9 +490,14 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
@@ -520,9 +549,14 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				Excel::Application^ exApp = gcnew Excel::Application();
+				/*Excel::Application^ exApp = gcnew Excel::Application();
 				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]);
+				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
+
+				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+				wb = exApp->Workbooks->Add(true);
+				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
+
 				exApp->DisplayAlerts = false;//덮어쓰기 메세지 없애기.
 
 				//Data 저장.
@@ -556,7 +590,12 @@ namespace WinformProject {
 
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
-
+			int totalColumnNumber = CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE4;
+			array<String^>^ columns = gcnew array<String^>(totalColumnNumber);
+			for (int i = 0; i < totalColumnNumber; i++) {
+				columns[i] = "A" + String::Format("{0}", i);
+			}
+			/*
 			array<String^>^ columns = {
 			"A001","A002","A003","A004","A005","A006","A007","A008","A009","A010"
 			,"A011","A012","A013","A014","A015","A016","A017","A018","A019","A020"
@@ -583,6 +622,7 @@ namespace WinformProject {
 			,"A221","A222","A223","A224","A225","A226","A227","A228","A229","A230"
 			,"A231","A232","A233","A234","A235","A236","A237","A238","A239","A240"
 			,"A241","A242","A243","A244","A245","A246","A247","A248","A249","A250" };
+			*/
 
 			System::Data::DataTable^ dt = ExcelUtil::ExcelToDataTable(filePath, columns );
 

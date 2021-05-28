@@ -2464,7 +2464,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					DataRow^ newRow = odPriorityTable->NewRow();
 
 					newRow[0] = indirectCostOrder[i] + 1;
-					newRow[1] = int(totalIndirectCost[i]);
+					newRow[1] = int(totalIndirectCost[indirectCostOrder[i]]);
 
 					odPriorityTable->Rows->Add(newRow);
 				
