@@ -501,6 +501,18 @@ namespace WinformProject {
 
 
 
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// 리스트 선택 시 데이터를 불러오기위해 dictionary에 filename을 key로 datatable을 추가 - 엑셀로 추가한 진앙지 정보 2021.04.10 khd 추가
+				if (this->m_dataSet->SeismicSourceContentDictionary != nullptr) {
+					this->m_dataSet->SeismicSourceContentDictionary->Add(_filename, dt);
+				}
+				else {
+					Alert::Info("이전 prd 파일입니다. 처음부터 다시 시작해야 합니다!");
+					return;
+				}
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 				DataRow^ row = this->m_dataSet->SeismicSourceData->NewRow(); // create new row
 				row[CommConst::GRID_SEISMIC_SOURCES_LIST_COL1] = _filename;
 				row[CommConst::GRID_SEISMIC_SOURCES_LIST_COL2] = filename;
