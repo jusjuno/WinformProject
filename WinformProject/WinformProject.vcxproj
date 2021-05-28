@@ -258,6 +258,7 @@
     <ClInclude Include="FileDlgUtil.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="FragilityCurve.h" />
+    <ClInclude Include="FragilityDataSet.h" />
     <ClInclude Include="GeoPoint.h" />
     <ClInclude Include="IFormValidator.h" />
     <ClInclude Include="LegendItemInfo.h" />
@@ -430,21 +431,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Excel.1.7.dll">
-      <Guid>00020813-0000-0000-c000-000000000046</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>false</Isolated>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="WinformProject.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="kakaoMap.html" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Excel.1.7.dll">
+      <VersionMinor>7</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>00020813-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

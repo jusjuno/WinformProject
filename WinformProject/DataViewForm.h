@@ -2,6 +2,7 @@
 #include "CommonHeader.h"
 #include "ProjectDataSetBinder.h"
 #include "CommConst.h"
+#include "FragilityDataSet.h"
 
 namespace WinformProject {
 
@@ -130,7 +131,7 @@ namespace WinformProject {
 
 
 		//cboDataName √ ±‚»≠
-		array<String^>^ strArr = gcnew array<String^>(18);
+		array<String^>^ strArr = gcnew array<String^>(19);
 		strArr[0] = "Define Class";
 		strArr[1] = "Define Component";
 		strArr[2] = "Fragility Curve Parameter";
@@ -149,6 +150,7 @@ namespace WinformProject {
 		strArr[15] = "recurrence periods data";//recurrence periods data - RecurrencePeriodData
 		strArr[16] = "damage state data";//damage state data - DamageStateData
 		strArr[17] = "traffic scenario sample";//traffic scenario sample - TrafficScenarioSamples
+		strArr[18] = "FragilityCurvData";//m_FragilityCurvData
 
 		this->cboDataName->Items->AddRange(strArr);
 	}
@@ -259,7 +261,10 @@ namespace WinformProject {
 			this->dgvViewData->DataSource = nullptr;
 			this->dgvViewData->DataSource = dt;
 		}
-	
+		else if (this->cboDataName->SelectedIndex == 18) {
+			this->dgvViewData->DataSource = nullptr;
+			this->dgvViewData->DataSource = WinformProject::FragilityDataSet::FragilityCurvData;
+		}
 
 	}
 

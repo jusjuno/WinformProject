@@ -124,4 +124,15 @@ public:
 	//UNIST 실행 시 필요한 행 갯수 
 	literal int UNIST_RUN_REQ_ROWS = 262;
 
+
+	// define traffic carrying parameter grid columns.
+	literal String^ DT_FRAG_CURV_DATA_COL01 = L"FILE";
+	literal String^ DT_FRAG_CURV_DATA_COL02 = L"PGA";
+	literal String^ DT_FRAG_CURV_DATA_COL03 = L"Slight";
+	literal String^ DT_FRAG_CURV_DATA_COL04 = L"Moderate";
+	literal String^ DT_FRAG_CURV_DATA_COL05 = L"Severe";
+	literal String^ DT_FRAG_CURV_DATA_COL06 = L"Collapse";
+
+
+
 };

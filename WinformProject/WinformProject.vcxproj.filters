@@ -326,6 +326,9 @@
     <ClInclude Include="DataViewForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FragilityDataSet.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
