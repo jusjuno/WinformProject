@@ -500,7 +500,7 @@ namespace WinformProject {
 				this->m_dataSet->SeismicSourceDictionary->Add(_filename, newTable);
 
 
-
+				//수정사항
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// 리스트 선택 시 데이터를 불러오기위해 dictionary에 filename을 key로 datatable을 추가 - 엑셀로 추가한 진앙지 정보 2021.04.10 khd 추가
 				if (this->m_dataSet->SeismicSourceContentDictionary != nullptr) {
