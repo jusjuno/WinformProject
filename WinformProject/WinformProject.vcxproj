@@ -259,6 +259,7 @@
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="FragilityCurve.h" />
     <ClInclude Include="FragilityDataSet.h" />
+    <ClInclude Include="FragilityFile.h" />
     <ClInclude Include="GeoPoint.h" />
     <ClInclude Include="IFormValidator.h" />
     <ClInclude Include="LegendItemInfo.h" />

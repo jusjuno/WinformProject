@@ -3,6 +3,10 @@
 #include "ProjectDataSetBinder.h"
 #include "FragilityCurve.h"
 #include "NetworkComponent.h"
+#include "FragilityDataSet.h"
+#include "FileUtil.h"
+#include "CSVFileManager.h"
+#include "FragilityFile.h"
 
 namespace WinformProject {
 	using namespace ChartDirector;
@@ -189,9 +193,198 @@ namespace WinformProject {
 			DataRowView^ r = (DataRowView^)cboComponentCurves->SelectedItem;
 			String^ classID = r[m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID)]->ToString();
 
-			int samplingSize = SAMPLING_SIZE;
+			String^ upperType = StringUtil::nullToString(r[NetworkComponent::COL_UPPER_TYPE],"-");
+			String^ continuity = StringUtil::nullToString(r[NetworkComponent::COL_CONTINUITY], "-");
+			String^ bridgeHeight = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_HEIGHT], "-");
+			String^ bottomType = StringUtil::nullToString(r[NetworkComponent::COL_BOTTOM_TYPE], "-");
+			String^ elastomericShoe = StringUtil::nullToString(r[NetworkComponent::COL_ELASTOMERIC_SHOE], "-");
+			String^ briddgeFoundation = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_FOUNDATION], "-");
+			String^ seismicDesignYn = StringUtil::nullToString(r[NetworkComponent::COL_SEISMIC_DESIGN_YN], "-");
+			String^ oldBridge = StringUtil::nullToString(r[NetworkComponent::COL_OLD_BRIDGE], "-");
+			String^ oldShoe = StringUtil::nullToString(r[NetworkComponent::COL_OLD_SHOE], "-");
+			String^ repairBridge = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_BRIDGE], "-");
+			String^ repairShoe = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_SHOE], "-");
+
+			String^ selectComponentKey = upperType+"_"+ continuity + "_" + bridgeHeight + "_" + bottomType + "_" 
+				                         + elastomericShoe + "_" + briddgeFoundation + "_" + seismicDesignYn + "_" 
+				                         + oldBridge + "_" + oldShoe + "_" + repairBridge + "_" + repairShoe ;
+
+			Dictionary<String^, String^>^ fragilityCurvDict = WinformProject::FragilityDataSet::FragilityCurvDict;
+
+			//m_FragilityCurvDict->Add("PSC Beam_다경간_5m이하_단주_일반_말뚝_C_X_X_X_O","PB301203_00000_0001");
+			//연속성	교고	하부구조	교좌	기초	내진설계여부	노후도(교각)	노후도(교좌)	보수보강(교각)	보수보강(교좌)
+			/*
+			literal int COL_OLD_BRIDGE = 13;//노후도(교각)
+		literal int COL_OLD_SHOE = 14;//노후도(교좌)
+		literal int COL_REPAIR_BRIDGE = 15;//보수보강(교각)
+		literal int COL_REPAIR_SHOE = 16;//보수보강(교좌)
+			*/
+			//PSC Beam_다경간_5m이하_단주_일반_확대_C_O_O_X_X   "PB301203_00010_1100"
+	
+			String^ sFragilityCurvFileName = nullptr;
+			if (fragilityCurvDict->ContainsKey(selectComponentKey)) {
+				sFragilityCurvFileName = fragilityCurvDict[selectComponentKey];
+
+				String^ sPath = "C:\\sample\\Fragility_Curve_Library\\";
+
+				CSVFileManager^ csv = gcnew CSVFileManager(sPath + sFragilityCurvFileName +".csv");
+				String^ output = csv->Read();
+
+				FragilityDataSet^ fragilityDataSet = gcnew FragilityDataSet();
+
+				if (!String::IsNullOrEmpty(output)) {
+					array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+					int outputRowCount = dataArray->Length;
+					Debug::WriteLine(String::Format("Number of output summary lines:{0}", outputRowCount));
+
+
+					bool isFind = false;
+					FragilityFile^ fragilityFile = nullptr;
+					
+
+					for (int i = 0; i < outputRowCount; i++)
+					{
+						String^ outputLineData = dataArray[i];
+						Debug::WriteLine("=================>outputLineData:" + outputLineData);
+
+						double dPGA = 0;
+						double dSlight = 0;
+						double dModerate = 0;
+						double dSevere = 0;
+						double dCollapse = 0;
+
+	
+						if (isFind) {
+							array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
+
+							Double::TryParse(values[0], dPGA);
+							Double::TryParse(values[1], dSlight);
+							Double::TryParse(values[2], dModerate);
+							Double::TryParse(values[3], dSevere);
+							Double::TryParse(values[4], dCollapse);
+
+							fragilityFile = gcnew FragilityFile();
+							fragilityFile->FileName = sFragilityCurvFileName;
+							fragilityFile->PGA = dPGA;
+							fragilityFile->Slight = dSlight;
+							fragilityFile->Moderate = dModerate;
+							fragilityFile->Severe = dSevere;
+							fragilityFile->Collapse = dCollapse;
+
+
+							fragilityDataSet->m_FragilityFileDict->Add(dPGA, fragilityFile);
+						}
+
+						if (outputLineData->IndexOf("PGA") >= 0) {
+							isFind = true;
+						}
+					}
+				}
+
+
+				//Debug::WriteLine("=================>count:" + fragilityDataSet->m_FragilityFileDict->Count);
+
+				
+				int samplingSize = fragilityDataSet->m_FragilityFileDict->Count;
+				array<double>^ m_dataX = gcnew array<double>(samplingSize);
+
+				// damage stats 1
+				array<double>^ dataY0 = gcnew array<double>(samplingSize);
+				// damage stats 2
+				array<double>^ dataY1 = gcnew array<double>(samplingSize);
+				// damage stats 3
+				array<double>^ dataY2 = gcnew array<double>(samplingSize);
+				// damage stats 4
+				array<double>^ dataY3 = gcnew array<double>(samplingSize);
+				
+				// damage stats 1, damage stats 2, damage stats 3, damage stats 4
+				int i = 0;
+				for each (KeyValuePair<double, FragilityFile^> ^ pair in fragilityDataSet->m_FragilityFileDict)
+				{
+					double dPGA = pair->Key;
+					FragilityFile^ fragilityFile = pair->Value;
+
+					m_dataX[i] = fragilityFile->PGA;
+					dataY0[i] = fragilityFile->Slight;
+					dataY1[i] = fragilityFile->Moderate;
+					dataY2[i] = fragilityFile->Severe;
+					dataY3[i] = fragilityFile->Collapse;
+
+					i++;
+				}
+				
+
+				// Create a XYChart object
+				ChartDirector::XYChart^ chart = gcnew ChartDirector::XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
+
+				// Set default text color to dark grey (0x333333)
+				chart->setColor(ChartDirector::Chart::TextColor, 0x333333);
+
+
+				String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+				String^ sTitle = "Fragility curve(Class ID:";//취약도곡선
+				String^ sXAxisTitle = "Sa(g)";//지반가속도
+				String^ sYAxisTitle = "P[D>dsi/Sa]";//피해초과률
+				if (sUiLang->Equals("ko-KR")) {
+					sTitle = "취약도곡선(분류번호:";
+					sXAxisTitle = "지반가속도";
+					sYAxisTitle = "피해초과률";
+				}
+
+				// Add a title box using grey (0x555555) 20pt Arial font
+				chart->addTitle("Fragility curve(Class ID:" + classID + ")", "굴림 Bold", 20, 0x000000);
+
+				chart->setPlotArea(80, 100, chartViewer->Size.Width - 130, chartViewer->Size.Height - 170, ChartDirector::Chart::Transparent, -1, ChartDirector::Chart::Transparent, 0xcccccc);
+
+				// Add a legend box with horizontal layout above the plot area. Use 12pt
+				// Arial font, transparent background and border, and line style legend icon.
+				ChartDirector::LegendBox^ legend = chart->addLegend(80, 35, false, "굴림 Bold", 12);
+				legend->setBackground(ChartDirector::Chart::Transparent, ChartDirector::Chart::Transparent);
+				legend->setLineStyleKey();
+
+				// Set axis label font to 12pt Arial
+				chart->xAxis()->setLabelStyle("굴림", 12);
+				chart->yAxis()->setLabelStyle("굴림", 12);
+
+				// Set the x and y axis stems to transparent, and the x-axis tick color to grey
+				chart->xAxis()->setColors(ChartDirector::Chart::Transparent, ChartDirector::Chart::TextColor, ChartDirector::Chart::TextColor, 0x333333);
+				chart->xAxis()->setTickLength(10, 0);
+				chart->xAxis()->setTickDensity(80);
+				chart->xAxis()->setTitle(sXAxisTitle, "굴림 Bold", 12, 0x000000);
+				chart->xAxis()->setWidth(3);
+
+				chart->yAxis()->setColors(ChartDirector::Chart::Transparent);
+				chart->yAxis()->setTickDensity(40);
+				chart->yAxis()->setTitle(sYAxisTitle, "굴림 Bold", 12, 0x000000);
+				chart->yAxis()->setLinearScale(0, 1, 0.1);
+				chart->yAxis()->setWidth(3);
+
+				// Add a line layer to the chart with 3-pixel line width
+				ChartDirector::SplineLayer^ layer = chart->addSplineLayer();
+				layer->setLineWidth(3);
+
+				// The x-coordinates for the line layer
+				layer->setXData(m_dataX);
+
+				// Add 4 data series to the line layer
+				layer->addDataSet(dataY0, 0x5588cc, "DS1(β=" + m_fragilityCurve->GetBc(classID, 1) + ")");
+				layer->addDataSet(dataY1, 0xee9944, "DS2(β=" + m_fragilityCurve->GetBc(classID, 2) + ")");
+				layer->addDataSet(dataY2, 0x99bb55, "DS3(β=" + m_fragilityCurve->GetBc(classID, 3) + ")");
+				layer->addDataSet(dataY3, 0x002233, "DS4(β=" + m_fragilityCurve->GetBc(classID, 4) + ")");
+
+				// Output the chart
+				chartViewer->Chart = chart;
+
+			}
+			else {
+				Alert::Error("No matching data!");
+			}
+
+
+			/*
+			int samplingSize = SAMPLING_SIZE;//100
 			//double xTick = 1.0 / samplingSize;
-			double xTick = 2.0 / samplingSize;
+			double xTick = 2.0 / samplingSize;//0.02
 			if (m_dataX == nullptr) {
 				m_dataX = gcnew array<double>(samplingSize);
 				for (int i = 0; i < samplingSize; i++) {
@@ -276,7 +469,11 @@ namespace WinformProject {
 
 			// Output the chart
 			chartViewer->Chart = chart;
+			*/
 		}
+
+
+
 	private: System::Void Step4Form_Load(System::Object^  sender, System::EventArgs^  e) {
 		this->dataGridViewCellStyle = (gcnew DataGridViewCellStyle());
 		this->dataGridViewCellStyle->Alignment = DataGridViewContentAlignment::MiddleLeft;
