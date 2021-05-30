@@ -142,4 +142,68 @@ public:
 		
 		return data;
 	}
+
+
+	//칼럼명 없는 CSV파일 쓰기
+	bool Write(DataTable^ table) {
+		String^ contents = GenerateData(table);
+		if (String::IsNullOrEmpty(contents)) {
+			return false;
+		}
+		return this->m_fileUtil->WriteText(this->m_filePath, contents);
+	}
+
+	// Datatable의 데이터를 csv용 String으로 변경
+	String^ GenerateData(DataTable^ table) {
+		String^ data = "";
+
+		if (table->Columns->Count < 1) {
+			return data;
+		}
+
+		int columnSize = table->Columns->Count;
+		if (!IsVertical) {
+
+			// generate data
+			for each (DataRow ^ row in table->Rows)
+			{
+				for (int i = 0; i < columnSize; i++)
+				{
+					if (!row->IsNull(i)) {
+						data += row[i];
+					}
+
+					if (i + 1 == columnSize) {
+						data += LF;
+					}
+					else {
+						data += this->m_delimiter;
+					}
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < columnSize; i++) {
+				// generate data
+				for (int rowCnt = 0; rowCnt < table->Rows->Count; rowCnt++)
+				{
+					DataRow^ row = table->Rows[rowCnt];
+					if (!row->IsNull(i)) {
+						if (m_isWriteColumnNames) {
+							data += this->m_delimiter;
+						}
+						data += row[i];
+					}
+					if (rowCnt + 1 < table->Rows->Count) {
+						data += this->m_delimiter;
+					}
+				}
+				data += LF;
+			}
+		}
+
+		return data;
+	}
+
+
 };

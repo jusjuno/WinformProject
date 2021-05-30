@@ -757,4 +757,24 @@ public:
 		}
 	}
 
+
+	// Unist 교통해석 결과 저장
+	// key: OD번호,진원지번호,재현주기번호,샘플링번호
+	// value: 교통량(차량대수)
+	property Dictionary<String^, array<String^>^>^ TrafficVolumeStatus {
+		Dictionary<String^, array<String^>^>^ get() {
+			return this->m_dataSet->m_trafficVolumeStatus;
+		}
+		void set(Dictionary<String^, array<String^>^>^ value) {
+			this->m_dataSet->m_trafficVolumeStatus = value;
+		}
+	}
+
+
+
+
+
+
+
+
 };

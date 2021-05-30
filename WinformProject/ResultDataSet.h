@@ -15,13 +15,14 @@ public ref class ResultDataSet
 public:
 	ResultDataSet(int totalTrafficScenarioCount)
 	//ResultDataSet(ProjectDataSetBinder^ dataSet)
+	//ResultDataSet()
 	{
-		//this->m_dataSet = dataSet;
+		//this->m_dataSet = dataSet; 
 		this->m_isCalculatedFunctionality = false;
 		this->m_isCalculatedAdditionalCost = false;
 		this->m_isCalculatedLossfactor = false;
 		this->m_isNetworkStructuralCost = false;
-		this->m_totalTrafficScenarioCount = totalTrafficScenarioCount;
+		//this->m_totalTrafficScenarioCount ;
 		//this->m_totalTrafficScenarioCount ;
 		this->m_functionalities = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
 		//this->m_additionalCosts = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
@@ -29,6 +30,9 @@ public:
 		this->m_ecoLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
 		this->m_conLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
 		this->m_envLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
+
+		this->m_networkStructuralCosts = gcnew array<Dictionary<String^, long>^> (this->m_totalTrafficScenarioCount);
+
 	}
 private:
 	bool m_isCalculatedFunctionality;
@@ -43,8 +47,8 @@ private:
 	int m_damageStateCount;
 
 	// total number of damage state 
-	//int m_totalTrafficScenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
 	int m_totalTrafficScenarioCount;
+	//int m_totalTrafficScenarioCount = this->m_dataSet->TrafficVolumeStatus->Count;
 
 	array<array<double>^>^ m_functionalities;
 
@@ -131,6 +135,8 @@ public:
 	// 1-array: traffic scenario number
 	// 2-array: value of each damage states
 	property array<Dictionary<String^, long>^>^ NetworkStructuralCosts {
+		//this->m_networkStructuralCosts = gcnew array<Dictionary<String^, long>^>(this->m_totalTrafficScenarioCount);
+		//this->m_networkStructuralCosts = ;
 		void set(array<Dictionary<String^, long>^>^ value) {
 			this->m_networkStructuralCosts = value;
 			this->m_isNetworkStructuralCost = (value != nullptr);

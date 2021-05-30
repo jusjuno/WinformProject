@@ -57,6 +57,7 @@ namespace WinformProject {
 			for (int i = 0; i < closedLink->Length; i++)
 			{
 				closedLink[i] = 0;
+
 			}
 
 			/*

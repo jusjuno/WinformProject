@@ -71,6 +71,10 @@ public protected:
 		this->m_zoneGroupProperties = gcnew DataTable();
 
 
+		this->m_trafficVolumeStatus = gcnew Dictionary<String^, array<String^>^>(); // 시나리오별 UNIST 결과 저장
+
+
+
 	}
 
 public protected:	
@@ -160,6 +164,9 @@ public protected:
 
 	String^ m_runExeName; // 실행파일[NEXTA, UNIST]: 최근실행파일 정보 저장
 	String^ m_uiLang; // 화면에서 다국어 설정[en-US, ko-KR]
+
+
+	Dictionary<String^, array<String^>^>^ m_trafficVolumeStatus; //Unist 결과를 읽고 저장
 
 
 };

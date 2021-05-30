@@ -44,6 +44,14 @@ namespace WinformProject {
 
 		FileUtil^ m_fileUtil = gcnew FileUtil();
 
+		array<double>^ m_xTrafficDay; // 교통 회복일수(day)
+		array<double>^ trafficVolume; // 교통 회복일(day)별 교통량
+		array<double>^ trafficCost;   // 교통 회복일(day)까지의 교통지연비용(원)
+
+
+
+
+
 	public:
 		Step10Form(ProjectDataSetBinder^ dataSet)
 		{
@@ -617,16 +625,24 @@ namespace WinformProject {
 			c->addTitle(title, "Times New Roman Bold", 17);
 			//다국어
 			String^ sXAxis = L"Time (days)";
-			String^ sYAxis = L"TrafficFunctionality%(a)";
+			String^ sYAxis = L"TrafficVolume%(a)";
 			if (sUiLang->Equals("ko-KR")) {
 				sXAxis = L"시간(일)";
-				sYAxis = L"교통기능%(a)";
+				sYAxis = L"교통량%(a)";
 			}
 			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
-			c->xAxis()->setLinearScale(0, 500);
-			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
-			c->yAxis()->setLinearScale(0, 100);
 
+			//maxTrafficDay
+			int maxTrafficDay = dataX->Length;
+			//c->xAxis()->setLinearScale(0, 500);
+			c->xAxis()->setLinearScale(0, maxTrafficDay);
+
+
+			//maxTrafficVolume
+			int maxTrafficVolume = dataY[dataY->Length - 1];
+			c->yAxis()->setTitle("TrafficVolume%(a)", "Arial Bold", 12);
+			//c->yAxis()->setLinearScale(0, 100);
+			c->yAxis()->setLinearScale(0, maxTrafficVolume);
 
 			//DataX 최상위1열 및 DataY 최하위 1열 추가 및 값(=0)로 셋팅
 			/*
@@ -641,13 +657,16 @@ namespace WinformProject {
 				if ((i == 0) || (i == dataX->Length))
 				{
 					if (i == 0) { localDataX[i] = 0; localDataY[i] = dataY[i]; }
-					else if (i == dataX->Length) { localDataX[i] = dataX[i - 1]; localDataY[i] = 100; }
+					//else if (i == dataX->Length) { localDataX[i] = dataX[i - 1]; localDataY[i] = 100; }
+					else if (i == dataX->Length) { localDataX[i] = dataX[i - 1]; localDataY[i] = maxTrafficVolume; }
 				}
 				else {
 					localDataX[i] = dataX[i-1]; 
 					localDataY[i] = dataY[i];
 				}
 			}
+
+
 			StepLineLayer^ layer0 = c->addStepLineLayer(localDataY, 0x0000FF, "");
 			layer0->setXData(localDataX);
 			// 추가 및 변경된 코드 끝 라인
@@ -692,9 +711,15 @@ namespace WinformProject {
 				sYAxis = L"일단위 추가비용(￦)";
 			}
 			c->xAxis()->setTitle(sXAxis, "Arial Bold", 12);
-			c->xAxis()->setLinearScale(0, 500);
-			//c->yAxis()->setTitle("Functionality%(a)", "Arial Bold", 12);
+			//maxTrafficDay
+			int maxTrafficDay = dataX->Length;
+			//c->xAxis()->setLinearScale(0, 500);
+			c->xAxis()->setLinearScale(0, maxTrafficDay);
+
+			//maxTrafficVolume
+			int maxTrafficCost = dataY[dataY->Length - 1];
 			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
+			//c->yAxis()->setLinearScale(0, maxTrafficCost);
 
 		
 			//DataX 최상위1열 및 DataY 최하위 1열 추가 및 값(=0)로 셋팅
@@ -705,6 +730,9 @@ namespace WinformProject {
 			*/
 			array<double>^ localDataX = gcnew array<double>(dataX->Length + 1);
 			array<double>^ localDataY = gcnew array<double>(dataY->Length + 1);
+			
+			
+			/*
 			int preRecoveryDay=0;
 			for (int i = 0; i <= dataX->Length; i++)
 			{
@@ -720,6 +748,29 @@ namespace WinformProject {
 					preRecoveryDay = m_dataX[i];
 				}
 			}
+			*/
+
+
+			for (int i = 0; i <= dataX->Length; i++)
+			{
+				if ((i == 0) || (i == dataX->Length))
+				{
+					if (i == 0) { localDataX[i] = 0; localDataY[i] = dataY[i]; }
+					//else if (i == dataX->Length) { localDataX[i] = dataX[i - 1]; localDataY[i] = 100; }
+					else if (i == dataX->Length) { localDataX[i] = dataX[i - 1]; localDataY[i] = maxTrafficCost; }
+				}
+				else {
+					localDataX[i] = dataX[i - 1];
+					localDataY[i] = dataY[i];
+				}
+			}
+
+
+
+
+
+
+
 			StepLineLayer^ layer0 = c->addStepLineLayer(localDataY, 0x0000FF, "");
 			layer0->setXData(localDataX);
 			layer0->setLineWidth(2);
@@ -905,6 +956,11 @@ namespace WinformProject {
 						newTable->Rows->Add(newRow);
 					}
 				}
+
+				this->m_dataSet->ResultData = gcnew ResultDataSet(this->m_dataSet->TotalTrafficScenarioCount);
+
+
+
 				this->m_dataSet->ResultData->NetworkStructuralCosts = result;
 				csv->Write(columns, newTable);
 
@@ -1002,6 +1058,9 @@ namespace WinformProject {
 			DrawChart2(this->m_dataX, sumAdditionalCost);
 
 		}
+
+
+
 	private: System::Void Step10Form_Load(System::Object^  sender, System::EventArgs^  e) {
 		this->m_isCalculated = false;
 		this->radTypicalDayNo->Checked = true;
@@ -1044,8 +1103,8 @@ namespace WinformProject {
 			sLabel1 = L"교통포기비용(천원)";
 			sLabel2 = L"교통해석 표준화 여부";
 			sLabel3 = L"통행시간 가치(천원)";
-			sLabel4 = L"교통계수 1 (단위시간 - 통행량 vs 日통행량 변환계수)";
-			sLabel5 = L"교통계수 2 (日단위 - 통행량 vs 月평균 - 日통행량 변환계수)";
+			sLabel4 = L"교통계수 1 (단위시간_통행량 vs 日통행량 변환계수)";
+			sLabel5 = L"교통계수 2 (日단위_통행량 vs 月평균_日통행량 변환계수)";
 			sLabel6 = L"지진원";
 			sLabel7 = L"재현주기";
 			sLabel8 = L"샘플";
@@ -1138,7 +1197,8 @@ namespace WinformProject {
 
 	private: System::Void CalculateUNIST() {
 		this->m_isCalculated = CalculateAdditionalCost_UNIST();
-		this->m_isCalculated = CalculateNetworkStructuralCost_UNIST();
+//		this->m_isCalculated = CalculateNetworkStructuralCost_UNIST();
+		this->m_isCalculated = CalculateNetworkStructuralCost();
 		UpdateCharts_UNIST();
 		OnSaveDataChanged();
 	}
@@ -1175,8 +1235,7 @@ namespace WinformProject {
 	private: bool CalculateAdditionalCost_UNIST() {
 
 
-
-
+		/*
 		try {
 			//
 			this->m_dataSet->ValueOfTime = m_valueOfTime;
@@ -1198,9 +1257,9 @@ namespace WinformProject {
 				this->m_dataX[4] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4 + 50;
 
 			}
-
+			String^ scenarioKey = "1111";
 			String^ filename = "output_Resilience_curve.xlsx";
-			DataTable^ dtOutputFile = m_UNISTHelper->ReadOutputFile(filename);
+			DataTable^ dtOutputFile = m_UNISTHelper->ReadOutputFile(filename,scenarioKey);
 
 			if (dtOutputFile != nullptr) {
 				//dtOutputFile->Columns->Count;//250
@@ -1263,12 +1322,6 @@ namespace WinformProject {
 						//if (this->m_dataSet->NeXTAOutputSummaryDictionary->ContainsKey(key)) {
 							//outputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[key];
 
-							/*
-							int totalLinkCount = this->m_dataSet->ShapeData->m_nRecords;
-							//functionalityData[i][j] = (1.0 - ((double)tmpClosedLinkCount[j] / totalLinkCount)) * 100.0;
-							// 기능감소율로 계산
-							functionalityData[i][j] = ((double)tmpClosedLinkCount[j] / totalLinkCount) * 100.0;
-							*/
 						functionalityData[i][j] = (1.0 - (arrFunctionality[j] / dTR0)) * 100.0;
 
 						outputSummary->TR1 = arrFunctionality[j];
@@ -1315,45 +1368,64 @@ namespace WinformProject {
 							// 추가비용 = (max((진출차량VT1_VOT - 진출차량VT0_VOT),0) + 비진출차량VT1_VOT) * 복구일수
 							additionalCostData[i][j] = (std::max((leavingVehicle_VT1_VOT - leavingVehicle_VT0_VOT), 0.0) + noLeavingVehicle_VT1_VOT) * (m_dataX[j] - preRecoveryDay);
 						}
-
-						/*
-													double extraVT = outputSummary->VT1 - outputSummary->VT0;
-													double extraTR = abs(outputSummary->TR1 - outputSummary->TR0);
-													//double extraTR = outputSummary->TR1;
-													additionalCostData[i][j] = (extraVT * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2 +
-														extraTR * m_trafficFactor1 * m_trafficFactor2 * m_penaltyCost) * (m_dataX[j] - preRecoveryDay);
-						*/
-						//}
-						//else {
-						//	//outputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[NeXTAHelper::NORMAL_SCENARIO_ID];
-						//	//functionalityData[i][j] = 100.0;
-						//	functionalityData[i][j] = 0.0;
-						//	additionalCostData[i][j] = 0;
-						//}
 						preRecoveryDay = m_dataX[j];
-						//int totalLinkCount = this->m_dataSet->ShapeData->m_nRecords;
-						// 전체 링크 대비 사용가능한(열린) 링크 확률
-						//functionalityData[i][j] = (1.0 - ((double)tmpClosedLinkCount[j] / totalLinkCount)) * 100.0;
-						//additionalCostData[i][j] = outputSummary->Total * m_valueOfTime * m_trafficFactor1 * m_trafficFactor2;
 					}
 				}
-
-				/*
-				functionalityData[this->m_dataSet->TrafficScenarios->Length] = gcnew array<double>(this->m_dataX->Length + 1);
-				additionalCostData[this->m_dataSet->TrafficScenarios->Length] = gcnew array<double>(this->m_dataX->Length + 1);
-				for (int j = 0; j < this->m_dataX->Length; j++) {
-					functionalityData[this->m_dataSet->TrafficScenarios->Length][j] = 0.0;
-					additionalCostData[this->m_dataSet->TrafficScenarios->Length][j] = 0;
-				}
-				*/
 
 				this->m_dataSet->ResultData->Functionalities = functionalityData;
 				this->m_dataSet->ResultData->AdditionalCosts = additionalCostData;
 			}
 
 
+
+
+
+
+
+
 			return true;
 		}
+		*/
+
+	
+		try {
+			//
+			this->m_dataSet->ValueOfTime = m_valueOfTime;
+			this->m_dataSet->PenaltyCost = m_penaltyCost;
+
+			// 교통통행량 회복추세 데이타와 교통지연에 따른 추가비용 추세데이타 계산
+			int odIndex = 1;
+			String^ trafficScenarioKey = String::Format("{0}{1}{2}{3}", cboSeismicSource->SelectedIndex, cboRecurrencePeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex);
+			//this->m_dataSet->TrafficVolumeStatus[trafficScenarioKey];
+			array<String^>^ trafficVolumeStatus = this->m_dataSet->TrafficVolumeStatus[trafficScenarioKey];
+
+			int totalTrafficDay = trafficVolumeStatus->Length;
+			this->m_xTrafficDay = gcnew array<double>(totalTrafficDay);
+			this->trafficVolume = gcnew array<double>(totalTrafficDay);
+			this->trafficCost = gcnew array<double>(totalTrafficDay);
+			//
+			for (int i = 0; i < totalTrafficDay; i++) {
+				this->m_xTrafficDay[i] = i;
+				this->trafficVolume[i] = double::Parse(trafficVolumeStatus[i]->ToString());
+			}
+
+			// 지진(전)교통량 대비 지진(후)교통량이 5% 이하일 경우, 교통포기가 발생하는 것으로 산정
+			// 이는 서로게이트 모델의 불확실성을 고려하기 위함
+			double currentTrafficeVolume;
+			double normalTrafficVolume = this->trafficVolume[totalTrafficDay-1];
+
+			for (int i = 0; i < totalTrafficDay; i++) {
+				currentTrafficeVolume = this->trafficVolume[i];
+				if (currentTrafficeVolume < 0.05 * normalTrafficVolume) {
+					this->trafficCost[i] += (normalTrafficVolume - currentTrafficeVolume) * m_penaltyCost;
+				}
+				else {
+					this->trafficCost[i] += (normalTrafficVolume - currentTrafficeVolume) * m_valueOfTime;
+				}
+			}
+			return true;
+		}
+		
 		catch (IndexOutOfRangeException^ e) {
 			Debug::WriteLine(e);
 			return false;
@@ -1394,13 +1466,11 @@ namespace WinformProject {
 		if (!this->m_isCalculated) {
 			return;
 		}
-		//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboRecurrencePeriod->SelectedIndex, cboSample->SelectedIndex + 1);
-		//DrawChart1(this->m_dataX, this->m_dataSet->ResultData->GetFunctionality(trafficScenarioNo));
-		//DrawChart2(this->m_dataX, this->m_dataSet->ResultData->GetAdditionalCost(trafficScenarioNo));
-
 		///////////////////////////////////////////////////////////////////////////////
 		// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
 		///////////////////////////////////////////////////////////////////////////////
+
+		/*
 		array<double>^ sumFunctionality = gcnew array<double>(5);  // damage state는 4단계 와 1단계의 정상상태로 5단계 구성됨
 		array<double>^ sumAdditionalCost = gcnew array<double>(5);
 		for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
@@ -1420,8 +1490,25 @@ namespace WinformProject {
 			sumFunctionality[index] = 100. - sumFunctionality[index];
 		}
 
-		DrawChart1(this->m_dataX, sumFunctionality);
-		DrawChart2(this->m_dataX, sumAdditionalCost);
+		//DrawChart1(this->m_dataX, sumFunctionality);
+		//DrawChart2(this->m_dataX, sumAdditionalCost);
+		*/
+
+		
+		// 차트그림1은 교통통행량 회복추세를, 차트그림2는 교통지연에 따른 추가비용 추세를 나타냄
+
+
+		DrawChart1(this->m_xTrafficDay, this->trafficVolume);
+		DrawChart2(this->m_xTrafficDay, this->trafficCost);
+
+
+
+
+
+
+
+
+
 
 
 	}

@@ -68,11 +68,12 @@ namespace WinformProject {
 					wb->Close(false, filePath, nullptr);
 				}
 			};
-			
 
 		}
 
 		//시설물별 손상단계(1~4단계)
+
+		/*
 		bool WriteBridgeFragilityCurve(String^ filename) {
 
 			Debug::WriteLine("=================>filename:" + filename);
@@ -84,13 +85,6 @@ namespace WinformProject {
 			int iExcelRow = 0;
 			try {
 				//파일 확인
-				/*
-				FileInfo^ fileInfo = gcnew FileInfo(filePath);
-				if (fileInfo->Exists) {
-					Debug::WriteLine("=================>filename:있음......" + filename);
-					fileInfo->Delete();
-				}
-				*/
 
 				//엑셀 생성
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
@@ -184,8 +178,43 @@ namespace WinformProject {
 			return true;
 		}
 
+		*/
+
+
+
+		bool WriteBridgeFragilityCurve(String^ filename) {
+
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^> (CommConst::DAMAGE_STATE_COUNT);
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = nullptr;
+
+
+			DataTable^ dtNetComp = this->m_dataSet->NetworkCompnentData;
+			for (int i = 0; i < dtNetComp->Rows->Count; i++) {
+				newRow = newTable->NewRow(); // create new row
+				// 시설물별 Class 확인
+				String^ sCompId = dtNetComp->Rows[i][NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+				String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
+
+				// Class 정보(평균값 확인 및 시설물에 할당)
+				array<DataRow^>^ foundRows = this->m_dataSet->FragParameterData->Select(String::Format("[{0}]='{1}'", CommConst::GRID_FRAG_CURVE_PARAM_COL1, sClassId));
+				newRow[0] = foundRows[0][1]->ToString();
+				newRow[1] = foundRows[0][3]->ToString();
+				newRow[2] = foundRows[0][5]->ToString();
+				newRow[3] = foundRows[0][7]->ToString();
+
+				newTable->Rows->Add(newRow);
+			}
+
+			return csv->Write(newTable);
+
+		}
 
 		//시설물 위치.
+		/*
 		bool WriteLocationBr(String^ filename) {
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
@@ -196,11 +225,6 @@ namespace WinformProject {
 			int iExcelRow = 0;
 			try {
 				
-
-				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
 
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
@@ -254,8 +278,42 @@ namespace WinformProject {
 
 			return true;
 		}
+		*/
+
+
+		bool WriteLocationBr(String^ filename) {
+
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(2); // x coord, y coord
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = nullptr;
+
+			//Data 저장.
+			DataTable^ dtNetComp = this->m_dataSet->NetworkCompnentData;
+			for (int i = 0; i < dtNetComp->Rows->Count; i++) {
+				newRow = newTable->NewRow(); // create new row
+
+				String^ sCompId = dtNetComp->Rows[i][NetworkComponent::COL_NETWORK_COMP_ID]->ToString();
+				String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
+				String^ sX = dtNetComp->Rows[i][NetworkComponent::COL_X]->ToString();
+				String^ sY = dtNetComp->Rows[i][NetworkComponent::COL_Y]->ToString();
+
+				newRow[0] = sX;
+				newRow[1] = sY;
+				newTable->Rows->Add(newRow);
+			}
+
+			return csv->Write(newTable);
+		}
+
+
+
 
 		//지진 진원지 위치 좌표
+
+		/*
 		bool WriteLocationEq(String^ filename) {
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
@@ -268,10 +326,6 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
-
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
 				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
@@ -296,8 +350,8 @@ namespace WinformProject {
 					double dSumYCoord = 0.0;
 
 					for (int i = 0; i < iRowCnt; i++) {
-						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL1)]->ToString(), dXCoord);
-						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL2)]->ToString(), dYCoord);
+						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL1]->ToString(), dXCoord);
+						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL2]->ToString(), dYCoord);
 						//double^ d1000 = dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL6]->ToString();
 
 						Debug::WriteLine(String::Format("========>dXCoord[{0}]", dXCoord));
@@ -346,8 +400,64 @@ namespace WinformProject {
 
 			return true;
 		}
+		*/
+
+		bool WriteLocationEq(String^ filename, String^ sSourceName) {
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(2); // x coor 및 y coord
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = newTable->NewRow(); // create new row
+
+			DataTable^ dtSeismicSourceContent = this->m_dataSet->SeismicSourceContentDictionary[sSourceName];
+			int iRowCnt = dtSeismicSourceContent->Rows->Count;
+			Debug::WriteLine(String::Format("========>iRowCnt[{0}]", iRowCnt));
+			double dXCoord = 0.0;
+			double dYCoord = 0.0;
+			double dSumXCoord = 0.0;
+			double dSumYCoord = 0.0;
+
+			for (int i = 0; i < iRowCnt; i++) {
+				Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL1]->ToString(), dXCoord);
+				Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL2]->ToString(), dYCoord);
+				//double^ d1000 = dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL6]->ToString();
+
+				Debug::WriteLine(String::Format("========>dXCoord[{0}]", dXCoord));
+				Debug::WriteLine(String::Format("========>dYCoord[{0}]", dYCoord));
+
+				dSumXCoord += dXCoord;
+				dSumYCoord += dYCoord;
+				Debug::WriteLine(String::Format("========>dSumXCoord[{0}]", dSumXCoord));
+				Debug::WriteLine(String::Format("========>dSumYCoord[{0}]", dSumYCoord));
+			}
+
+
+			dSumXCoord = dSumXCoord / iRowCnt;
+			dSumYCoord = dSumYCoord / iRowCnt;
+			Debug::WriteLine(String::Format("========>dSumXCoord[{0}]", dSumXCoord));
+			Debug::WriteLine(String::Format("========>dSumYCoord[{0}]", dSumYCoord));
+
+			//소숫점 3자리 반올림.
+			dSumXCoord = Math::Round(dSumXCoord * 1000) / 1000;
+			dSumYCoord = Math::Round(dSumYCoord * 1000) / 1000;
+			Debug::WriteLine(String::Format("========>dSumXCoord[{0}]", dSumXCoord));
+			Debug::WriteLine(String::Format("========>dSumYCoord[{0}]", dSumYCoord));
+
+
+			newRow[0] = dSumXCoord.ToString();
+			newRow[1] = dSumYCoord.ToString();
+			newTable->Rows->Add(newRow);
+
+
+		return csv->Write(newTable);
+
+		}
+
 
 		//지진 진원지 강도.
+
+		/*
 		bool WriteMEq(String^ filename) {
 
 			Debug::WriteLine("=================>filename:" + filename);
@@ -361,10 +471,6 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
-
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
 				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
@@ -387,7 +493,7 @@ namespace WinformProject {
 					double dSum1000Year = 0.0;
 
 					for (int i = 0; i < iRowCnt; i++) {
-						Double::TryParse(dtSeismicSourceContent->Rows[i]->ItemArray[int::Parse(CommConst::GRID_SEISMIC_SOURCES_COL6)]->ToString(), d1000Year);
+						Double::TryParse(dtSeismicSourceContent->Rows[i][CommConst::GRID_SEISMIC_SOURCES_COL6]->ToString(), d1000Year);
 					
 						Debug::WriteLine(String::Format("========>d1000Year[{0}]", d1000Year));
 			
@@ -427,9 +533,42 @@ namespace WinformProject {
 
 			return true;
 		}
+		*/
+
+		bool WriteMEq(String^ filename, String^ sSourceName, String^ recurrencePeriod) {
+
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(1); // 1개의 진원지 지진강도
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = newTable->NewRow(); // create new row
+
+			DataTable^ dtSeismicSourceContent = this->m_dataSet->SeismicSourceContentDictionary[sSourceName];
+			int iRowCnt = dtSeismicSourceContent->Rows->Count;
+			Debug::WriteLine(String::Format("========>iRowCnt[{0}]", iRowCnt));
+			double intensity = 0.0;
+			double aveageIntensity = 0.0;
+
+			for (int i = 0; i < iRowCnt; i++) {
+				Double::TryParse(dtSeismicSourceContent->Rows[i][recurrencePeriod]->ToString(), intensity);
+				aveageIntensity += intensity;
+			}
+
+			//평균 및 소숫점 1자리 반올림.
+			aveageIntensity = Math::Round(aveageIntensity / iRowCnt * 10) / 10;
+
+			newRow[0] = aveageIntensity;
+			newTable->Rows->Add(newRow);
+
+			return csv->Write(newTable);
+		}
+
 
 		//도로시설물 복구일수는 피해규모에 따라 WinformProject에서는 0/7/150/450로 되어 있으며,
 		//최대 복구기간 일수는 최대값+50 (예. 500=450+50)으로 셋팅
+
+		/*
 		bool WriteMaxday(String^ filename) {
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
@@ -442,10 +581,6 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
-
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
 				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
@@ -475,8 +610,29 @@ namespace WinformProject {
 			};
 			return true;
 		}
+		*/
+
+		bool WriteMaxday(String^ filename) {
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(1); // 1개의 max day
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = newTable->NewRow(); // create new row
+
+			int additionalRecoveryDay = 20;
+			int recoveryDayRefernce = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4 + additionalRecoveryDay;
+
+			newRow[0] = recoveryDayRefernce;
+			newTable->Rows->Add(newRow);
+
+			return csv->Write(newTable);
+
+		}
+
 
 		//default값인 3000을 사용
+		/*
 		bool WriteNoSamples(String^ filename) {
 
 			Debug::WriteLine("=================>filename:" + filename);
@@ -490,10 +646,6 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
-
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
 				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
@@ -521,22 +673,29 @@ namespace WinformProject {
 
 			return true;
 		}
+		*/
+
+		bool WriteNoSamples(String^ filename) {
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(1); // 1개의 max day
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = newTable->NewRow(); // create new row
+			
+			//default값인 3000을 사용
+			int totalSampleNumber = 500;
+
+			newRow[0] = totalSampleNumber;
+			newTable->Rows->Add(newRow);
+
+			return csv->Write(newTable);
+		}
+
+
 
 		/*
-		Resilience_estimation_main.exe에서는 default값으로, 0.6/2.5/75/230입니다만, WinformProject에서는 0/7/150/450로 되어 있고, 
-		이 값들은 Step7Form.h의 SetReadOnlyTrafficCarryingGrid() 함수를 이용하여 해당 값들을 input_Restoration_days.csv에 넣어시면 됩니다.
-		*/
-		//0.6	2.5	75	230
 		bool WriteRestorationDays(String^ filename) {
-
-			/*
-			newRow[CommConst::GRID_TRAFFIC_CARRYING_COL1] = classID;
-			newRow[CommConst::GRID_TRAFFIC_CARRYING_COL2] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE1;
-			newRow[CommConst::GRID_TRAFFIC_CARRYING_COL3] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE2;
-			newRow[CommConst::GRID_TRAFFIC_CARRYING_COL4] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE3;
-			newRow[CommConst::GRID_TRAFFIC_CARRYING_COL5] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
-			*/
-
 
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
@@ -549,10 +708,6 @@ namespace WinformProject {
 
 
 				//엑셀 생성
-				/*Excel::Application^ exApp = gcnew Excel::Application();
-				wb = exApp->Workbooks->Add(true);
-				ws = safe_cast<Excel::Worksheet^>(wb->Worksheets->Item[1]); */
-
 				Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 				wb = exApp->Workbooks->Add(true);
 				ws = safe_cast<Excel::Worksheet^>(exApp->ActiveSheet);
@@ -583,19 +738,56 @@ namespace WinformProject {
 
 			return true;
 		}
+		*/
 
+
+		bool WriteRestorationDays(String^ filename) {
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			array<String^>^ columns = gcnew array<String^>(CommConst::DAMAGE_STATE_COUNT);
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ newTable = NewTable(columns);
+			DataRow^ newRow = newTable->NewRow(); // create new row
+		
+			newRow[0] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE1;
+			newRow[1] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE2;
+			newRow[2] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE3;
+			newRow[3] = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
+			newTable->Rows->Add(newRow);
+
+			return csv->Write(newTable);	
+		}
+
+
+		bool WriteOD(String^ filename, int ODindex) {
+			// CSV파일 입출력 준비
+			String^ filePath = m_basePath + filename;
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			DataTable^ dummyTable = this->m_dataSet->ODZoneParamData;
+			DataRow^ dummyRow = dummyTable->Rows[ODindex - 1]; 
+
+			DataTable^ newTable = dummyTable->Clone(); 
+			DataRow^ newRow = newTable->NewRow(); // create new row
+
+			newRow[0] = dummyRow[0];
+			newRow[1] = dummyRow[1];
+			newTable->Rows->Add(newRow);
+
+			return csv->Write(newTable);
+		}
 
 		// read output  file
-		System::Data::DataTable^ ReadOutputFile(String^ filename) {
 
+		/*
+		System::Data::DataTable^ ReadOutputFile(String^ filename, String^ scenarioKey) {
 			Debug::WriteLine("=================>filename:" + filename);
 			String^ filePath = m_basePath + filename;
-			int totalColumnNumber = CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE4;
+			int totalColumnNumber = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
 			array<String^>^ columns = gcnew array<String^>(totalColumnNumber);
 			for (int i = 0; i < totalColumnNumber; i++) {
 				columns[i] = "A" + String::Format("{0}", i);
 			}
-			/*
+			
 			array<String^>^ columns = {
 			"A001","A002","A003","A004","A005","A006","A007","A008","A009","A010"
 			,"A011","A012","A013","A014","A015","A016","A017","A018","A019","A020"
@@ -622,12 +814,39 @@ namespace WinformProject {
 			,"A221","A222","A223","A224","A225","A226","A227","A228","A229","A230"
 			,"A231","A232","A233","A234","A235","A236","A237","A238","A239","A240"
 			,"A241","A242","A243","A244","A245","A246","A247","A248","A249","A250" };
-			*/
 
 			System::Data::DataTable^ dt = ExcelUtil::ExcelToDataTable(filePath, columns );
+			
+			return dt;
+		}
+		*/
+
+		System::Data::DataTable^ ReadOutputFile(String^ filename, String^ scenarioKey) {
+
+			String^ filePath = m_basePath + filename;
+			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+			String^ output = csv->Read();
+
+			array<String^>^ dummyOutput = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+			String^ outputSummary = dummyOutput[0]; // 1줄만 생성되므로
+			array<String^>^ trafficStatus = CSVFileManager::Parse(outputSummary, ",");
+
+			this->m_dataSet->TrafficVolumeStatus->Add(scenarioKey, trafficStatus); //시나리오별 교통복구 현황 저장
+
+
+
+			int totalColumnNumber = CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
+			array<String^>^ columns = gcnew array<String^>(totalColumnNumber);
+			for (int i = 0; i < totalColumnNumber; i++) {
+				columns[i] = "A" + String::Format("{0}", i);
+			}
+
+			System::Data::DataTable^ dt = ExcelUtil::ExcelToDataTable(filePath, columns);
+
 
 			return dt;
 		}
+
 
 	};
 
