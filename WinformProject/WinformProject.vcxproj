@@ -257,6 +257,7 @@
     <ClInclude Include="ExcelUtil.h" />
     <ClInclude Include="FileDlgUtil.h" />
     <ClInclude Include="FileUtil.h" />
+    <ClInclude Include="FragilityCompList.h" />
     <ClInclude Include="FragilityCurve.h" />
     <ClInclude Include="FragilityDataSet.h" />
     <ClInclude Include="FragilityFile.h" />

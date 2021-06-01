@@ -332,6 +332,9 @@
     <ClInclude Include="FragilityFile.h">
       <Filter>Header Files\dataset</Filter>
     </ClInclude>
+    <ClInclude Include="FragilityCompList.h">
+      <Filter>Header Files\dataset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">

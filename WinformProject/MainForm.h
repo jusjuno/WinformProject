@@ -32,7 +32,7 @@
 #include "DataViewForm.h"
 
 
-#include "FragilityDataSet.h"
+#include "FragilityCompList.h"
 
 
 
@@ -545,15 +545,7 @@ namespace WinformProject {
 
 
 		//Fragility 딕셔러리 초기화
-		WinformProject::FragilityDataSet::setFragilityCurvDict();
-		//Fragility 데이타 초기화
-		//WinformProject::FragilityDataSet::setFragilityCurvData();
-
-		/*
-		Dictionary<String^, String^>^ aaa = WinformProject::FragilityDataSet::FragilityCurvDict;
-		Debug::WriteLine("=================>aaa 1111:" + aaa["1111"]);
-		Debug::WriteLine("=================>aaa 다경간_5m이하_단주_일반_말뚝_C_X_X_X_X:" + aaa["다경간_5m이하_단주_일반_말뚝_C_X_X_X_X"]);
-		*/
+		WinformProject::FragilityCompList::setFragilityCompDict();
 
 		
 

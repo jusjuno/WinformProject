@@ -770,8 +770,15 @@ public:
 		}
 	}
 
-
-
+	//Ãë¾à¼º°î¼± dataset 
+	property Dictionary<String^, FragilityDataSet^>^ FragilityDataSetDictionary {
+		Dictionary<String^, FragilityDataSet^>^ get() {
+			return this->m_dataSet->m_FragilityDataSetDictionary;
+		}
+		void set(Dictionary<String^, FragilityDataSet^>^ value) {
+			this->m_dataSet->m_FragilityDataSetDictionary = value;
+		}
+	}
 
 
 

@@ -4,7 +4,7 @@
 #include "ResultDataSet.h"
 #include "OutputSummary.h"
 #include "Zone.h"
-
+#include "FragilityDataSet.h"
 
 using namespace System;
 using namespace System::Data;
@@ -73,7 +73,7 @@ public protected:
 
 		this->m_trafficVolumeStatus = gcnew Dictionary<String^, array<String^>^>(); // 시나리오별 UNIST 결과 저장
 
-
+		this->m_FragilityDataSetDictionary = gcnew Dictionary<String^, FragilityDataSet^>();//classId, FragilityDataSet
 
 	}
 
@@ -167,6 +167,8 @@ public protected:
 
 
 	Dictionary<String^, array<String^>^>^ m_trafficVolumeStatus; //Unist 결과를 읽고 저장
+
+	Dictionary<String^, FragilityDataSet^>^ m_FragilityDataSetDictionary;
 
 
 };
