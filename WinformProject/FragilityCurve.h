@@ -110,65 +110,21 @@ namespace WinformProject {
 
 		
 		// damageState = 0, 1, 2, 3, 4
-		double GetFragilityValue(ProjectDataSetBinder^ m_dataSet, String^ classID, int damageState, double Sa) {
+		double GetFragilityValue(ProjectDataSetBinder^ m_dataSet, String^ componentID, int damageState, double Sa) {
 
-			//파일 read
-			Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
-
-			//array<DataRow^>^ foundRows = m_dataSet->NetworkCompnentData->FindRows(NetworkComponent::COL_CLASS_ID, classID);
-			//String^ columnName  = m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID);
-			String^ columnName = m_dataSet->NetworkCompnentData->Columns[NetworkComponent::COL_CLASS_ID]->ColumnName;
-			array<DataRow^>^ foundRows = m_dataSet->NetworkCompnentData->Select(String::Format("[{0}]='{1}'", columnName, classID));
-			if (foundRows->Length < 1) {
-				return 0;
-			}
-	
-
-			//String^ classID = foundRows[0][m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID)]->ToString();
-
-			//String^ classID = foundRows[0][m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID)];
-
-
-			/*
-			String^ upperType = StringUtil::nullToString(r[NetworkComponent::COL_UPPER_TYPE], "-");
-			String^ continuity = StringUtil::nullToString(r[NetworkComponent::COL_CONTINUITY], "-");
-			String^ bridgeHeight = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_HEIGHT], "-");
-			String^ bottomType = StringUtil::nullToString(r[NetworkComponent::COL_BOTTOM_TYPE], "-");
-			String^ elastomericShoe = StringUtil::nullToString(r[NetworkComponent::COL_ELASTOMERIC_SHOE], "-");
-			String^ briddgeFoundation = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_FOUNDATION], "-");
-			String^ seismicDesignYn = StringUtil::nullToString(r[NetworkComponent::COL_SEISMIC_DESIGN_YN], "-");
-			String^ oldBridge = StringUtil::nullToString(r[NetworkComponent::COL_OLD_BRIDGE], "-");
-			String^ oldShoe = StringUtil::nullToString(r[NetworkComponent::COL_OLD_SHOE], "-");
-			String^ repairBridge = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_BRIDGE], "-");
-			String^ repairShoe = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_SHOE], "-");
-
-			String^ selectComponentKey = upperType + "_" + continuity + "_" + bridgeHeight + "_" + bottomType + "_"
-				+ elastomericShoe + "_" + briddgeFoundation + "_" + seismicDesignYn + "_"
-				+ oldBridge + "_" + oldShoe + "_" + repairBridge + "_" + repairShoe;
 
 			FragilityDataSet^ fragilityDataSet = nullptr;
-			if (m_dataSet->FragilityDataSetDictionary->ContainsKey(classID)) {
-				fragilityDataSet = m_dataSet->FragilityDataSetDictionary[classID];
+			if (m_dataSet->FragilityDataSetDictionary->ContainsKey(componentID)) {
+				fragilityDataSet = m_dataSet->FragilityDataSetDictionary[componentID];
 			}
 			else {
-				if (fragilityCompDict->ContainsKey(selectComponentKey)) {
-					String^ sFragilityCurvFileName = fragilityCompDict[selectComponentKey];
-					fragilityDataSet = gcnew FragilityDataSet(sFragilityCurvFileName);
-
-					m_dataSet->FragilityDataSetDictionary->Add(classID, fragilityDataSet);
-
-					Debug::WriteLine("=================>count:" + fragilityDataSet->m_FragilityFileDict->Count);
-				}
-				else {
-					Alert::Error("No matching data file!");
-				}
+				fragilityDataSet = GetFragilityReadFile(m_dataSet, componentID);
 			}
-			*/
+
+
 
 			//get Data
-			if (m_dataSet->FragilityDataSetDictionary->ContainsKey(classID)) {
-				FragilityDataSet^  fragilityDataSet = m_dataSet->FragilityDataSetDictionary[classID];
-
+			if (fragilityDataSet != nullptr) {
 				if (fragilityDataSet->FragilityFileDict->ContainsKey(Sa)) {
 					FragilityFile^ m_FragilityFile = fragilityDataSet->FragilityFileDict[Sa];
 					if (damageState == 1) {
@@ -190,19 +146,27 @@ namespace WinformProject {
 				else {
 					return 0;
 				}
-
 			}
 			else {
 				return 0;
 			}
+			
 		}
 		// damageState 별 fragility value를 모두 리턴
-		array<double>^ GetFragilityValues(ProjectDataSetBinder^ m_dataSet, String^ classID, double Sa) {
+		array<double>^ GetFragilityValues(ProjectDataSetBinder^ m_dataSet, String^ componentID, double Sa) {
 
 			array<double>^ dsArr = gcnew array<double>(DamageStateCount);
 
-			if (m_dataSet->FragilityDataSetDictionary->ContainsKey(classID)) {
-				FragilityDataSet^ fragilityDataSet = m_dataSet->FragilityDataSetDictionary[classID];
+
+			FragilityDataSet^ fragilityDataSet = nullptr;
+			if (m_dataSet->FragilityDataSetDictionary->ContainsKey(componentID)) {
+				fragilityDataSet = m_dataSet->FragilityDataSetDictionary[componentID];
+			}
+			else {
+				fragilityDataSet = GetFragilityReadFile(m_dataSet, componentID);
+			}
+
+			if (fragilityDataSet != nullptr) {
 				if (fragilityDataSet->FragilityFileDict->ContainsKey(Sa)) {
 					FragilityFile^ m_FragilityFile = fragilityDataSet->FragilityFileDict[Sa];
 					dsArr[0] = 0;
@@ -219,6 +183,7 @@ namespace WinformProject {
 			else {
 				return dsArr;
 			}
+			
 			/*
 			for (int i = 0; i < DamageStateCount; i++)
 			{
@@ -227,6 +192,50 @@ namespace WinformProject {
 			
 		}
 
+
+		FragilityDataSet^ GetFragilityReadFile(ProjectDataSetBinder^ m_dataSet, String^ componentID) {
+			FragilityDataSet^ fragilityDataSet = nullptr;
+			//파일 read
+			Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
+
+			String^ columnName = m_dataSet->NetworkCompnentData->Columns[NetworkComponent::COL_NETWORK_COMP_ID]->ColumnName;
+			array<DataRow^>^ foundRows = m_dataSet->NetworkCompnentData->Select(String::Format("[{0}]='{1}'", columnName, componentID));
+			if (foundRows->Length < 1) {
+				return fragilityDataSet;
+				//Alert::Error("No matching data file!");
+			}
+
+			String^ classID = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_CLASS_ID], "");
+			String^ upperType = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_UPPER_TYPE], "-");
+			String^ continuity = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_CONTINUITY], "-");
+			String^ bridgeHeight = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_BRIDGE_HEIGHT], "-");
+			String^ bottomType = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_BOTTOM_TYPE], "-");
+			String^ elastomericShoe = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_ELASTOMERIC_SHOE], "-");
+			String^ briddgeFoundation = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_BRIDGE_FOUNDATION], "-");
+			String^ seismicDesignYn = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_SEISMIC_DESIGN_YN], "-");
+			String^ oldBridge = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_OLD_BRIDGE], "-");
+			String^ oldShoe = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_OLD_SHOE], "-");
+			String^ repairBridge = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_REPAIR_BRIDGE], "-");
+			String^ repairShoe = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_REPAIR_SHOE], "-");
+
+			String^ selectComponentKey = upperType + "_" + continuity + "_" + bridgeHeight + "_" + bottomType + "_"
+				+ elastomericShoe + "_" + briddgeFoundation + "_" + seismicDesignYn + "_"
+				+ oldBridge + "_" + oldShoe + "_" + repairBridge + "_" + repairShoe;
+
+			if (fragilityCompDict->ContainsKey(selectComponentKey)) {
+				String^ sFragilityCurvFileName = fragilityCompDict[selectComponentKey];
+				fragilityDataSet = gcnew FragilityDataSet(sFragilityCurvFileName);
+
+				m_dataSet->FragilityDataSetDictionary->Add(componentID, fragilityDataSet);
+
+				Debug::WriteLine("=================>count:" + fragilityDataSet->m_FragilityFileDict->Count);
+			}
+			else {
+				return nullptr;
+				//Alert::Error("No matching data file!");
+			}
+			return fragilityDataSet;
+		}
 
 
 

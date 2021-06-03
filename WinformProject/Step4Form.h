@@ -193,7 +193,8 @@ namespace WinformProject {
 			}
 			DataRowView^ r = (DataRowView^)cboComponentCurves->SelectedItem;
 			String^ classID = r[m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID)]->ToString();
-
+			
+			String^ componentID = StringUtil::nullToString(r[NetworkComponent::COL_NETWORK_COMP_ID], "-");
 			String^ upperType = StringUtil::nullToString(r[NetworkComponent::COL_UPPER_TYPE],"-");
 			String^ continuity = StringUtil::nullToString(r[NetworkComponent::COL_CONTINUITY], "-");
 			String^ bridgeHeight = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_HEIGHT], "-");
@@ -214,31 +215,25 @@ namespace WinformProject {
 
 			//m_FragilityCurvDict->Add("PSC Beam_다경간_5m이하_단주_일반_말뚝_C_X_X_X_O","PB301203_00000_0001");
 			//연속성	교고	하부구조	교좌	기초	내진설계여부	노후도(교각)	노후도(교좌)	보수보강(교각)	보수보강(교좌)
-			/*
-			literal int COL_OLD_BRIDGE = 13;//노후도(교각)
-		literal int COL_OLD_SHOE = 14;//노후도(교좌)
-		literal int COL_REPAIR_BRIDGE = 15;//보수보강(교각)
-		literal int COL_REPAIR_SHOE = 16;//보수보강(교좌)
-			*/
-			//PSC Beam_다경간_5m이하_단주_일반_확대_C_O_O_X_X   "PB301203_00010_1100"
 	
 
 
 
-
+			//=======================================================================================================//
 			/* 이전 소스 test */
 			//double dTest = m_fragilityCurve->GetFragilityValue(classID, 1, 0.02);
 			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, 0.02);
 
-			double dTest = m_fragilityCurve->GetFragilityValue(this->m_dataSet, classID, 1, 0.02);
-			array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(this->m_dataSet, classID, 0.02);
+			//double dTest = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, 1, 0.02);
+			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(this->m_dataSet, componentID, 0.02);
 
-
+			//=======================================================================================================//
 
 
 
 
 			Debug::WriteLine("=================>classID:" + classID);
+			Debug::WriteLine("=================>componentID:" + componentID);
 
 			if (this->m_dataSet->FragilityDataSetDictionary == nullptr) {
 				Alert::Info("이전 prd 파일입니다. 처음부터 다시 시작해야 합니다!");
@@ -246,15 +241,15 @@ namespace WinformProject {
 			}
 
 			FragilityDataSet^ fragilityDataSet = nullptr;
-			if (this->m_dataSet->FragilityDataSetDictionary->ContainsKey(classID)) {
-				fragilityDataSet = this->m_dataSet->FragilityDataSetDictionary[classID];
+			if (this->m_dataSet->FragilityDataSetDictionary->ContainsKey(componentID)) {
+				fragilityDataSet = this->m_dataSet->FragilityDataSetDictionary[componentID];
 			}
 			else {
 				if (fragilityCompDict->ContainsKey(selectComponentKey)) {
 					String^ sFragilityCurvFileName = fragilityCompDict[selectComponentKey];
 					fragilityDataSet = gcnew FragilityDataSet(sFragilityCurvFileName);
 
-					this->m_dataSet->FragilityDataSetDictionary->Add(classID, fragilityDataSet);
+					this->m_dataSet->FragilityDataSetDictionary->Add(componentID, fragilityDataSet);
 
 					Debug::WriteLine("=================>count:" + fragilityDataSet->m_FragilityFileDict->Count);
 				}

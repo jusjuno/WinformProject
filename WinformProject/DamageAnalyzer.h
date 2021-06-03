@@ -42,8 +42,10 @@ namespace WinformProject {
 		}
 		// 총 직접 피해 확률
 		// 모든 damage state의 피해 확률 합
+		/*
 		double GetTotalDirectDamageRate(String^ classID, double Sa) {
 			double totalDamageRate = 0.0;
+
 			array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, Sa);
 
 			for (int i = 0; i < dsArr->Length; i++)
@@ -57,6 +59,35 @@ namespace WinformProject {
 
 			return totalDamageRate;
 		}
+		*/
+
+		double GetTotalDirectDamageRate(String^ classID, double Sa) {
+			double totalDamageRate = 0.0;
+
+			String^ columnName = m_dataSet->NetworkCompnentData->Columns[NetworkComponent::COL_CLASS_ID]->ColumnName;
+			array<DataRow^>^ foundRows = m_dataSet->NetworkCompnentData->Select(String::Format("[{0}]='{1}'", columnName, classID));
+			if (foundRows->Length < 1) {
+				return totalDamageRate;
+			}
+			String^ componentID = StringUtil::nullToString(foundRows[0][NetworkComponent::COL_NETWORK_COMP_ID], "");
+
+			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, Sa);
+			array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(this->m_dataSet, componentID, Sa);
+
+			for (int i = 0; i < dsArr->Length; i++)
+			{
+				double p1 = dsArr[i];
+				double p2 = (i + 1 == dsArr->Length) ? 0 : dsArr[i + 1];
+				totalDamageRate += (p1 - p2) * RCR[i];
+			}
+
+			return totalDamageRate;
+		}
+
+		
+
+
+
 		// 직접 피해 확률
 		// 특정 damage state의 피해 확률
 		double GetDirectDamageRate(String^ damageState) {

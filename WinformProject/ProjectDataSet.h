@@ -73,7 +73,7 @@ public protected:
 
 		this->m_trafficVolumeStatus = gcnew Dictionary<String^, array<String^>^>(); // 시나리오별 UNIST 결과 저장
 
-		this->m_FragilityDataSetDictionary = gcnew Dictionary<String^, FragilityDataSet^>();//classId, FragilityDataSet
+		this->m_FragilityDataSetDictionary = gcnew Dictionary<String^, FragilityDataSet^>();//ComponentID, FragilityDataSet
 
 	}
 

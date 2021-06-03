@@ -57,7 +57,7 @@ public:
 			for (int i = 0; i < outputRowCount; i++)
 			{
 				String^ outputLineData = dataArray[i];
-				Debug::WriteLine("=================>outputLineData:" + outputLineData);
+				//Debug::WriteLine("=================>outputLineData:" + outputLineData);
 
 				double dPGA = 0;
 				double dSlight = 0;
