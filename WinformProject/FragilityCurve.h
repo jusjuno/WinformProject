@@ -121,10 +121,68 @@ namespace WinformProject {
 				fragilityDataSet = GetFragilityReadFile(m_dataSet, componentID);
 			}
 
-
-
 			//get Data
 			if (fragilityDataSet != nullptr) {
+				/////////////////////////////////
+				// 보간법을 통한 손상 확률값 계산
+				/////////////////////////////////
+
+				// 사전에 있는 key열 확보
+				int dataCount = fragilityDataSet->FragilityFileDict->Keys->Count;
+				array<double>^ keyArray = gcnew array<double>(dataCount);
+				int index = 0;
+				fragilityDataSet->FragilityFileDict->Keys->CopyTo(keyArray, index);
+				
+				// key열의 step 크기 계산
+				double lowerStep = keyArray[1];
+				double upperStep = keyArray[2];
+				double stepSize = int( 1/(upperStep - lowerStep) );
+
+
+				// 해당 Sa에 가장 가까운 위/아래 Sa값 확보 
+				int inverseCloserSa = trunc(Sa*stepSize);
+				double residualStep = Sa - inverseCloserSa/stepSize;
+				double lowerCloserSa = inverseCloserSa / stepSize;
+				double upperCloserSa = (inverseCloserSa + 1) / stepSize;
+
+				if (fragilityDataSet->FragilityFileDict->ContainsKey(lowerCloserSa)) {
+					FragilityFile^ m_FragilityFileLower = fragilityDataSet->FragilityFileDict[lowerCloserSa];
+					FragilityFile^ m_FragilityFileUpper = fragilityDataSet->FragilityFileDict[upperCloserSa];
+
+					if (damageState == 1) {
+						double lowerValue = m_FragilityFileLower->Slight;
+						double upperValue = m_FragilityFileUpper->Slight;
+						double returnValue = lowerValue + (upperValue - lowerValue) * (residualStep * stepSize);
+						return returnValue;
+					}
+					else if (damageState == 2) {
+						double lowerValue = m_FragilityFileLower->Moderate;
+						double upperValue = m_FragilityFileUpper->Moderate;
+						double returnValue = lowerValue + (upperValue - lowerValue) * (residualStep * stepSize);
+						return returnValue;
+					}
+					else if (damageState == 3) {
+						double lowerValue = m_FragilityFileLower->Severe;
+						double upperValue = m_FragilityFileUpper->Severe;
+						double returnValue = lowerValue + (upperValue - lowerValue) * (residualStep * stepSize);
+						return returnValue;
+					}
+					else if (damageState == 4) {
+						double lowerValue = m_FragilityFileLower->Collapse;
+						double upperValue = m_FragilityFileUpper->Collapse;
+						double returnValue = lowerValue + (upperValue - lowerValue) * (residualStep * stepSize);
+						return returnValue;
+					}
+					else {
+						return 0;
+					}
+				}
+				else {
+					return 0;
+				}
+
+
+				/*
 				if (fragilityDataSet->FragilityFileDict->ContainsKey(Sa)) {
 					FragilityFile^ m_FragilityFile = fragilityDataSet->FragilityFileDict[Sa];
 					if (damageState == 1) {
@@ -146,12 +204,16 @@ namespace WinformProject {
 				else {
 					return 0;
 				}
+				*/
+
 			}
 			else {
 				return 0;
 			}
 			
 		}
+
+
 		// damageState 별 fragility value를 모두 리턴
 		array<double>^ GetFragilityValues(ProjectDataSetBinder^ m_dataSet, String^ componentID, double Sa) {
 
@@ -166,6 +228,8 @@ namespace WinformProject {
 				fragilityDataSet = GetFragilityReadFile(m_dataSet, componentID);
 			}
 
+
+			/*
 			if (fragilityDataSet != nullptr) {
 				if (fragilityDataSet->FragilityFileDict->ContainsKey(Sa)) {
 					FragilityFile^ m_FragilityFile = fragilityDataSet->FragilityFileDict[Sa];
@@ -183,7 +247,51 @@ namespace WinformProject {
 			else {
 				return dsArr;
 			}
-			
+			*/
+
+
+			if (fragilityDataSet != nullptr) {
+
+				/////////////////////////////////
+				// 보간법을 통한 손상 확률값 계산
+				/////////////////////////////////
+
+				// 사전에 있는 key열 확보
+				int dataCount = fragilityDataSet->FragilityFileDict->Keys->Count;
+				array<double>^ keyArray = gcnew array<double>(dataCount);
+				int index = 0;
+				fragilityDataSet->FragilityFileDict->Keys->CopyTo(keyArray, index);
+				double lowerStep = keyArray[1];
+				double upperStep = keyArray[2];
+
+				// key열의 step 크기 계산
+				double stepSize = upperStep - lowerStep;
+
+				// 해당 Sa에 가장 가까운 위/아래 Sa값 확보 
+				int inverseCloserSa = Sa * (1 / stepSize);
+				double residualStep = Sa - inverseCloserSa * stepSize;
+				double lowerCloserSa = inverseCloserSa * stepSize;
+				double upperCloserSa = lowerCloserSa + stepSize;
+
+				if (fragilityDataSet->FragilityFileDict->ContainsKey(lowerCloserSa)) {
+					FragilityFile^ lower = fragilityDataSet->FragilityFileDict[lowerCloserSa];
+					FragilityFile^ upper = fragilityDataSet->FragilityFileDict[upperCloserSa];
+
+					dsArr[0] = 0;
+					dsArr[1] = lower->Slight + (upper->Slight - lower->Slight) * (residualStep / stepSize);
+					dsArr[2] = lower->Moderate + (upper->Moderate - lower->Moderate) * (residualStep / stepSize);
+					dsArr[3] = lower->Severe + (upper->Severe - lower->Severe) * (residualStep / stepSize);
+					dsArr[4] = lower->Collapse + (upper->Collapse - lower->Collapse) * (residualStep / stepSize);
+					return dsArr;
+				}
+				else {
+					return dsArr;
+				}
+			}
+			else {
+				return dsArr;
+			}
+
 			/*
 			for (int i = 0; i < DamageStateCount; i++)
 			{

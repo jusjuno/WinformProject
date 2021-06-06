@@ -378,10 +378,10 @@ namespace WinformProject {
 							//sa = Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString());
 							sa = (Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString())) * soilAmpFactor;
 
-							double tempX = 1.0;
-							double tempStandardDev = 0.57;
-							double tempMean= -0.5767;
-							double tempValue = CustomMath::LOGNORMSDIST(tempX, tempMean, tempStandardDev);
+							//double tempX = 1.0;
+							//double tempStandardDev = 0.57;
+							//double tempMean= -0.5767;
+							//double tempValue = CustomMath::LOGNORMSDIST(tempX, tempMean, tempStandardDev);
 
 													   							 						  						  
 							m_chartDataX[i] = Double::Parse(xPos); // X
