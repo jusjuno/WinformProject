@@ -256,32 +256,35 @@ namespace WinformProject {
 				// 보간법을 통한 손상 확률값 계산
 				/////////////////////////////////
 
+
 				// 사전에 있는 key열 확보
 				int dataCount = fragilityDataSet->FragilityFileDict->Keys->Count;
 				array<double>^ keyArray = gcnew array<double>(dataCount);
 				int index = 0;
 				fragilityDataSet->FragilityFileDict->Keys->CopyTo(keyArray, index);
-				double lowerStep = keyArray[1];
-				double upperStep = keyArray[2];
 
 				// key열의 step 크기 계산
-				double stepSize = upperStep - lowerStep;
+				double lowerStep = keyArray[1];
+				double upperStep = keyArray[2];
+				double stepSize = int(1 / (upperStep - lowerStep));
+
 
 				// 해당 Sa에 가장 가까운 위/아래 Sa값 확보 
-				int inverseCloserSa = Sa * (1 / stepSize);
-				double residualStep = Sa - inverseCloserSa * stepSize;
-				double lowerCloserSa = inverseCloserSa * stepSize;
-				double upperCloserSa = lowerCloserSa + stepSize;
+				int inverseCloserSa = trunc(Sa * stepSize);
+				double residualStep = Sa - inverseCloserSa / stepSize;
+				double lowerCloserSa = inverseCloserSa / stepSize;
+				double upperCloserSa = (inverseCloserSa + 1) / stepSize;
+
 
 				if (fragilityDataSet->FragilityFileDict->ContainsKey(lowerCloserSa)) {
 					FragilityFile^ lower = fragilityDataSet->FragilityFileDict[lowerCloserSa];
 					FragilityFile^ upper = fragilityDataSet->FragilityFileDict[upperCloserSa];
 
 					dsArr[0] = 0;
-					dsArr[1] = lower->Slight + (upper->Slight - lower->Slight) * (residualStep / stepSize);
-					dsArr[2] = lower->Moderate + (upper->Moderate - lower->Moderate) * (residualStep / stepSize);
-					dsArr[3] = lower->Severe + (upper->Severe - lower->Severe) * (residualStep / stepSize);
-					dsArr[4] = lower->Collapse + (upper->Collapse - lower->Collapse) * (residualStep / stepSize);
+					dsArr[1] = lower->Slight + (upper->Slight - lower->Slight) * (residualStep * stepSize);
+					dsArr[2] = lower->Moderate + (upper->Moderate - lower->Moderate) * (residualStep * stepSize);
+					dsArr[3] = lower->Severe + (upper->Severe - lower->Severe) * (residualStep * stepSize);
+					dsArr[4] = lower->Collapse + (upper->Collapse - lower->Collapse) * (residualStep * stepSize);
 					return dsArr;
 				}
 				else {
