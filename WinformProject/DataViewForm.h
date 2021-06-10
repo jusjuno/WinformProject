@@ -132,7 +132,7 @@ namespace WinformProject {
 
 		//cboDataName √ ±‚»≠
 		array<String^>^ strArr = gcnew array<String^>(18);
-		strArr[0] = "Define Class";
+		strArr[0] = "Bridge List";
 		strArr[1] = "Define Component";
 		strArr[2] = "Fragility Curve Parameter";
 		strArr[3] = "Soil Amplification Facor";
@@ -176,7 +176,7 @@ namespace WinformProject {
 			//DataTable^ newTable = NewTable(columns);
 		
 			this->dgvViewData->DataSource = nullptr;
-			this->dgvViewData->DataSource = m_dataSet->ComponentClassData;
+			this->dgvViewData->DataSource = m_dataSet->BridgeList;
 
 		}
 		else if (this->cboDataName->SelectedIndex == 1) {

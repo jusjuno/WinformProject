@@ -78,6 +78,18 @@ public:
 		}
 	}
 
+
+	// List 파일 경로
+	property String^ ListFilePath {
+		String^ get() {
+			return this->m_dataSet->m_listFilePath;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_listFilePath = value;
+		}
+	}
+
+
 	// network component 파일 경로
 	property String^ NetworkFilePath {
 		String^ get() {
@@ -781,7 +793,15 @@ public:
 	}
 
 
-
+	// Bridge List define data
+	property DataTable^ BridgeList {
+		DataTable^ get() {
+			return this->m_dataSet->m_BridgeList;
+		}
+		void set(DataTable^ value) {
+			this->m_dataSet->m_BridgeList = value;
+		}
+	}
 
 
 };
