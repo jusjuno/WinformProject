@@ -211,7 +211,8 @@ namespace WinformProject {
 				                         + elastomericShoe + "_" + briddgeFoundation + "_" + seismicDesignYn + "_" 
 				                         + oldBridge + "_" + oldShoe + "_" + repairBridge + "_" + repairShoe ;
 
-			Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
+			//Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
+			Dictionary<String^, String^>^ fragilityCompDict = this->m_dataSet->FragilityCompDict;
 
 			//m_FragilityCurvDict->Add("PSC Beam_다경간_5m이하_단주_일반_말뚝_C_X_X_X_O","PB301203_00000_0001");
 			//연속성	교고	하부구조	교좌	기초	내진설계여부	노후도(교각)	노후도(교좌)	보수보강(교각)	보수보강(교좌)

@@ -75,7 +75,7 @@ public protected:
 
 		this->m_FragilityDataSetDictionary = gcnew Dictionary<String^, FragilityDataSet^>();//ComponentID, FragilityDataSet
 		this->m_BridgeList = gcnew DataTable();
-
+		this->m_FragilityCompDict = gcnew Dictionary<String^, String^>();//Bridge List Dictionary
 
 	}
 
@@ -174,6 +174,7 @@ public protected:
 
 	Dictionary<String^, FragilityDataSet^>^ m_FragilityDataSetDictionary;
 	DataTable^    m_BridgeList;
+	Dictionary<String^, String^>^ m_FragilityCompDict;
 
 };
 

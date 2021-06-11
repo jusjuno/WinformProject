@@ -6,6 +6,7 @@
 #include "ExcelUtil.h"
 #include "ProjectDataSetBinder.h"
 #include "NetworkComponent.h"
+#include "FragilityCompList.h"
 
 namespace WinformProject {
 	using namespace Microsoft::Office::Interop;
@@ -413,7 +414,9 @@ namespace WinformProject {
 		// read list file.
 		System::Void ReadListFile() {
 			try {
-				
+				Dictionary<String^, String^>^ m_CompDict = gcnew Dictionary<String^, String^>();
+				//m_CompDict->Add("PSC Beam_단경간_-_-_일반_-_-_-_X_-_X", "PB301201_00000_0000");
+
 				DataTable^ tmpDt = gcnew DataTable();
 				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL01));
 				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL02));
@@ -447,23 +450,47 @@ namespace WinformProject {
 							array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
 
 							row = tmpDt->NewRow();
-							row[CommConst::DT_BRIDGE_LIST_COL01] = values[0];
-							row[CommConst::DT_BRIDGE_LIST_COL02] = values[1];
-							row[CommConst::DT_BRIDGE_LIST_COL03] = values[2];
-							row[CommConst::DT_BRIDGE_LIST_COL04] = values[3];
-							row[CommConst::DT_BRIDGE_LIST_COL05] = values[4];
-							row[CommConst::DT_BRIDGE_LIST_COL06] = values[5];
-							row[CommConst::DT_BRIDGE_LIST_COL07] = values[6];
-							row[CommConst::DT_BRIDGE_LIST_COL08] = values[7];
-							row[CommConst::DT_BRIDGE_LIST_COL09] = values[8];
-							row[CommConst::DT_BRIDGE_LIST_COL10] = values[9];
-							row[CommConst::DT_BRIDGE_LIST_COL11] = values[10];
-							row[CommConst::DT_BRIDGE_LIST_COL12] = values[11];
+							row[CommConst::DT_BRIDGE_LIST_COL01] = StringUtil::nullToString(values[0], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL02] = StringUtil::nullToString(values[1], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL03] = StringUtil::nullToString(values[2], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL04] = StringUtil::nullToString(values[3], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL05] = StringUtil::nullToString(values[4], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL06] = StringUtil::nullToString(values[5], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL07] = StringUtil::nullToString(values[6], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL08] = StringUtil::nullToString(values[7], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL09] = StringUtil::nullToString(values[8], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL10] = StringUtil::nullToString(values[9], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL11] = StringUtil::nullToString(values[10], "-");
+							row[CommConst::DT_BRIDGE_LIST_COL12] = StringUtil::nullToString(values[11], "-");
+
+							String^ sKey = StringUtil::nullToString(values[0], "-")
+								+ "_" + StringUtil::nullToString(values[1], "-")
+								+ "_" + StringUtil::nullToString(values[2], "-")
+								+ "_" + StringUtil::nullToString(values[3], "-")
+								+ "_" + StringUtil::nullToString(values[4], "-")
+								+ "_" + StringUtil::nullToString(values[5], "-")
+								+ "_" + StringUtil::nullToString(values[6], "-")
+								+ "_" + StringUtil::nullToString(values[7], "-")
+								+ "_" + StringUtil::nullToString(values[8], "-")
+								+ "_" + StringUtil::nullToString(values[9], "-")
+								+ "_" + StringUtil::nullToString(values[10], "-");
+
+							String^ sValue = StringUtil::nullToString(values[11], "")->Replace(".xlsx", "")->Replace(".csv", "")->Replace(".xls", "");
+							m_CompDict->Add(sKey, sValue);
+
 							tmpDt->Rows->Add(row);
 						}
 					}//for end ... row
 
+					/**************************************************/
 					this->m_dataSetBinder->BridgeList = tmpDt;
+					/**************************************************/
+
+					/**************************************************/
+					//Fragility 딕셔러리 초기화
+					this->m_dataSetBinder->FragilityCompDict = m_CompDict;
+					/**************************************************/
+	
 				}
 
 			}

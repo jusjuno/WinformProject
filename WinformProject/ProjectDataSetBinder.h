@@ -803,5 +803,16 @@ public:
 		}
 	}
 
+	//Bridge List CompDict 
+	property Dictionary<String^, String^>^ FragilityCompDict {
+		Dictionary<String^, String^>^ get() {
+			return this->m_dataSet->m_FragilityCompDict;
+		}
+		void set(Dictionary<String^, String^>^ value) {
+			this->m_dataSet->m_FragilityCompDict = value;
+		}
+	}
+	
+
 
 };

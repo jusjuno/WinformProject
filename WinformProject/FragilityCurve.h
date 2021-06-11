@@ -307,7 +307,8 @@ namespace WinformProject {
 		FragilityDataSet^ GetFragilityReadFile(ProjectDataSetBinder^ m_dataSet, String^ componentID) {
 			FragilityDataSet^ fragilityDataSet = nullptr;
 			//ÆÄÀÏ read
-			Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
+			//Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
+			Dictionary<String^, String^>^ fragilityCompDict = m_dataSet->FragilityCompDict;
 
 			String^ columnName = m_dataSet->NetworkCompnentData->Columns[NetworkComponent::COL_NETWORK_COMP_ID]->ColumnName;
 			array<DataRow^>^ foundRows = m_dataSet->NetworkCompnentData->Select(String::Format("[{0}]='{1}'", columnName, componentID));

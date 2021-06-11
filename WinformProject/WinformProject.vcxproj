@@ -222,6 +222,7 @@
     <ClCompile Include="Step13Form.cpp" />
     <ClCompile Include="Step1Form.cpp" />
     <ClCompile Include="Step2Form.cpp" />
+    <ClCompile Include="Step3bForm.cpp" />
     <ClCompile Include="Step3Form.cpp" />
     <ClCompile Include="Step4Form.cpp" />
     <ClCompile Include="Step5Form.cpp" />
@@ -317,6 +318,9 @@
     <ClInclude Include="Step2Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Step3bForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Step3Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -409,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Step2Form.resx">
       <DependentUpon>Step2Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step3bForm.resx">
+      <DependentUpon>Step3bForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Step3Form.resx">
       <DependentUpon>Step3Form.h</DependentUpon>
