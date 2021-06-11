@@ -51,7 +51,7 @@ namespace WinformProject {
 	protected:
 	private: System::Windows::Forms::DataGridView^ dgvFragilityData;
 	private: System::Windows::Forms::DataGridView^ dgvNetworkComponent;
-
+	private: System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle;
 
 	protected:
 
@@ -68,8 +68,8 @@ namespace WinformProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->dgvFragilityData = (gcnew System::Windows::Forms::DataGridView());
 			this->dgvNetworkComponent = (gcnew System::Windows::Forms::DataGridView());
@@ -106,38 +106,40 @@ namespace WinformProject {
 			this->dgvFragilityData->RowTemplate->Height = 27;
 			this->dgvFragilityData->Size = System::Drawing::Size(1021, 259);
 			this->dgvFragilityData->TabIndex = 3;
+			this->dgvFragilityData->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step3bForm::dgvFragilityData_DataBindingComplete);
 			// 
 			// dgvNetworkComponent
 			// 
 			this->dgvNetworkComponent->AllowUserToAddRows = false;
 			this->dgvNetworkComponent->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::DisplayedCells;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::GrayText;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"±¼¸²", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::GrayText;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"±¼¸²", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::SystemColors::WindowText;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvNetworkComponent->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvNetworkComponent->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this->dgvNetworkComponent->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dgvNetworkComponent->Dock = System::Windows::Forms::DockStyle::Top;
+			this->dgvNetworkComponent->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dgvNetworkComponent->Location = System::Drawing::Point(3, 3);
 			this->dgvNetworkComponent->MultiSelect = false;
 			this->dgvNetworkComponent->Name = L"dgvNetworkComponent";
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle2->BackColor = System::Drawing::SystemColors::GrayText;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"±¼¸²", 12, System::Drawing::FontStyle::Bold));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::SystemColors::WindowText;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvNetworkComponent->RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle4->BackColor = System::Drawing::SystemColors::GrayText;
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"±¼¸²", 12, System::Drawing::FontStyle::Bold));
+			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle4->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvNetworkComponent->RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this->dgvNetworkComponent->RowHeadersWidth = 51;
 			this->dgvNetworkComponent->RowTemplate->Height = 23;
 			this->dgvNetworkComponent->Size = System::Drawing::Size(1021, 258);
 			this->dgvNetworkComponent->TabIndex = 2;
 			this->dgvNetworkComponent->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Step3bForm::dgvNetworkComponent_CellDoubleClick);
+			this->dgvNetworkComponent->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step3bForm::dgvNetworkComponent_DataBindingComplete);
 			// 
 			// Step3bForm
 			// 
@@ -157,6 +159,14 @@ namespace WinformProject {
 #pragma endregion
 	private: System::Void Step3bForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
+		this->dataGridViewCellStyle = (gcnew DataGridViewCellStyle());
+		this->dataGridViewCellStyle->Alignment = DataGridViewContentAlignment::MiddleLeft;
+		this->dataGridViewCellStyle->BackColor = Color::LightGray;
+		this->dataGridViewCellStyle->Font = (gcnew System::Drawing::Font(L"±¼¸²", 10, System::Drawing::FontStyle::Bold, GraphicsUnit::Point, static_cast<System::Byte>(129)));
+		this->dataGridViewCellStyle->ForeColor = System::Drawing::SystemColors::WindowText;
+		this->dataGridViewCellStyle->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+		this->dataGridViewCellStyle->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+		this->dataGridViewCellStyle->WrapMode = DataGridViewTriState::True;
 
 		dgvNetworkComponent->DataSource = m_dataSet->NetworkCompnentData;
 
@@ -165,9 +175,9 @@ namespace WinformProject {
 	}
 	private: System::Void dgvNetworkComponent_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 		
-		Debug::WriteLine("dgvNetworkComponent CellDoubleClick!!!!");
-		Debug::WriteLine("e->RowIndex:"+ e->RowIndex);
-		Debug::WriteLine("Columns count:" + this->dgvNetworkComponent->Columns->Count);
+		//Debug::WriteLine("dgvNetworkComponent CellDoubleClick!!!!");
+		//Debug::WriteLine("e->RowIndex:"+ e->RowIndex);
+		//Debug::WriteLine("Columns count:" + this->dgvNetworkComponent->Columns->Count);
 
 		DataTable^ tmpDt = gcnew DataTable();
 		tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_FRAG_CURV_DATA_COL02));
@@ -209,6 +219,34 @@ namespace WinformProject {
 	}
 
 	
+
+	private: System::Void dgvNetworkComponent_DataBindingComplete(System::Object^ sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^ e) {
+		// Set grid row number and style
+		int i = 1;
+		for each (DataGridViewRow ^ row in dgvNetworkComponent->Rows) {
+			if (row->IsNewRow) continue;
+			row->HeaderCell->Value = String::Format("{0}", i++);
+		}
+		this->dgvNetworkComponent->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
+		this->dgvNetworkComponent->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
+		this->dgvNetworkComponent->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
+		this->dgvNetworkComponent->EnableHeadersVisualStyles = false;
+	}
+
+	private: System::Void dgvFragilityData_DataBindingComplete(System::Object^ sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^ e) {
+		// Set grid row number and style
+		int i = 1;
+		for each (DataGridViewRow ^ row in dgvFragilityData->Rows) {
+			if (row->IsNewRow) continue;
+			row->HeaderCell->Value = String::Format("{0}", i++);
+		}
+		this->dgvFragilityData->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
+		this->dgvFragilityData->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle;
+		this->dgvFragilityData->RowHeadersDefaultCellStyle = dataGridViewCellStyle;
+		this->dgvFragilityData->EnableHeadersVisualStyles = false;
+	}
+
+
 
 };
 }
