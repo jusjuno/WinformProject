@@ -110,7 +110,7 @@ namespace WinformProject {
 
 		bool GenerateScenarios() {
 			// 전체 시나리오 수
-			int totalTrafficScenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
+ 			int totalTrafficScenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
 
 			Debug::WriteLine(String::Format("Total number of traffic scenario={0}", totalTrafficScenarioCount));
 

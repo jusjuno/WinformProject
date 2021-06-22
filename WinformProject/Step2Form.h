@@ -21,7 +21,7 @@ namespace WinformProject {
 	public ref class Step2Form : public WinformProject::BaseForm, IFormValidator
 	{
 	private:
-		ProjectDataSetBinder^		m_dataSet;
+		ProjectDataSetBinder^ m_dataSet;
 	public:
 		Step2Form(ProjectDataSetBinder^ dataSet)
 		{
@@ -43,13 +43,13 @@ namespace WinformProject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::DataGridView^  dgvCompClass;
+	private: System::Windows::Forms::DataGridView^ dgvCompClass;
 	private: System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle;
 	private:
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -106,7 +106,7 @@ namespace WinformProject {
 	public: virtual bool IsValidToOpenForm() = IFormValidator::IsValidToOpenForm{
 		return true;
 	}
-	private: System::Void Step2Form_Load(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void Step2Form_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridViewCellStyle = (gcnew DataGridViewCellStyle());
 		this->dataGridViewCellStyle->Alignment = DataGridViewContentAlignment::MiddleLeft;
 		this->dataGridViewCellStyle->BackColor = Color::LightGray;
@@ -118,10 +118,10 @@ namespace WinformProject {
 
 		dgvCompClass->DataSource = m_dataSet->BridgeList;
 	}
-	private: System::Void dgvCompClass_DataBindingComplete(System::Object^  sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^  e) {
+	private: System::Void dgvCompClass_DataBindingComplete(System::Object^ sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^ e) {
 		// Set grid row number and style
 		int i = 1;
-		for each(DataGridViewRow^ row in dgvCompClass->Rows) {
+		for each (DataGridViewRow ^ row in dgvCompClass->Rows) {
 			if (row->IsNewRow) continue;
 			row->HeaderCell->Value = String::Format("{0}", i++);
 		}

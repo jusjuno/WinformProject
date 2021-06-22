@@ -132,9 +132,6 @@
     <ClCompile Include="DataViewForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Step3bForm.cpp">
-      <Filter>Source Files\steps</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -331,15 +328,6 @@
     </ClInclude>
     <ClInclude Include="FragilityDataSet.h">
       <Filter>Header Files\dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="FragilityFile.h">
-      <Filter>Header Files\dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="FragilityCompList.h">
-      <Filter>Header Files\dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="Step3bForm.h">
-      <Filter>Header Files\steps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,10 @@
 #include "CommonHeader.h"
 #include "ProjectDataSetBinder.h"
 #include "UNISTHelper.h"
+#include "TrafficModule.h"
+#include "CSVFileManager.h"
+
+
 
 namespace WinformProject {
 
@@ -25,9 +29,12 @@ namespace WinformProject {
 		ProjectDataSetBinder^ m_dataSet;
 		UNISTHelper^ m_UNISTHelper;
 
+		TrafficModule^ m_trafficModule;
+
 
 		delegate void AppendLogDelegate(String^ log);
 		AppendLogDelegate^ appendLogDelegate = nullptr;
+
 
 
 	public:
@@ -38,6 +45,9 @@ namespace WinformProject {
 
 			this->m_dataSet = dataSet;
 			this->m_UNISTHelper = gcnew UNISTHelper(this->m_dataSet);
+
+			this->m_trafficModule = gcnew TrafficModule(this->m_dataSet);
+
 
 			appendLogDelegate = gcnew AppendLogDelegate(this, &Step9bForm::AppendLog);
 		}
@@ -196,7 +206,8 @@ namespace WinformProject {
 				
 				//8. input_OD.csv
 				filename = "input_OD.csv";
-				if (!m_UNISTHelper->WriteOD(filename, ODindex)) {
+				String^ unistODsetting = "node (QGIS).csv";
+				if (!m_UNISTHelper->WriteOD(filename, unistODsetting, ODindex)) {
 					Alert::Error(String::Format(errMsg, filename));
 					return false;
 				}
@@ -266,6 +277,7 @@ namespace WinformProject {
 				
 				try
 				{
+					//DataTable^ newTable;
 
 					for each (TrafficScenario^ trafficScenario in this->m_dataSet->TrafficScenarios){
 					
@@ -310,7 +322,15 @@ namespace WinformProject {
 						String^ scenarioKey = trafficScenario->TrafficScenarioKey;
 						String^ filename = "output_Resilience_curve.csv";
 						DataTable^ dtOutputFile = m_UNISTHelper->ReadOutputFile(filename, scenarioKey);
+
+						//Allocate traffic simulation result
+						//this->newTable = AllocateTrafficSimulationResult(this->newTable);
+
+
 					}
+
+
+
 
 				}
 				
@@ -335,6 +355,40 @@ namespace WinformProject {
 					this->m_dataSet->IsRunTrafficSimulation = true;
 
 					OnSaveDataChanged();
+
+					//////////////////////////////////////
+					// write result of traffic simulation
+					//////////////////////////////////////
+
+					DataTable^ newTable;
+
+					for (int i = 0; i < this->m_dataSet->TrafficScenarios->Length; i++)
+					{
+						TrafficScenario^ scenario = this->m_dataSet->TrafficScenarios[i];
+						array<String^>^ trafficVolumeStatus = this->m_dataSet->TrafficVolumeStatus[scenario->TrafficScenarioKey];
+						int totalTrafficDay = trafficVolumeStatus->Length;
+
+						if (i == 0) {
+							array<String^>^ columns = gcnew array<String^>(totalTrafficDay);
+							newTable = NewTable(columns);
+						}
+
+						DataRow^ newRow = nullptr;
+						newRow = newTable->NewRow(); // create new row
+
+						for (int j = 0; j < totalTrafficDay; j++){
+							newRow[j] = double::Parse(trafficVolumeStatus[j]->ToString());
+						}
+
+						newTable->Rows->Add(newRow);
+
+					}
+
+					//CSVFileManager^ csv = gcnew CSVFileManager(proc->StartInfo->WorkingDirectory+ "\\" + "TrafficSimulationResult_summary.csv");
+					CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "TrafficSimulationResult_summary.csv");
+					csv->Write(newTable);
+
+
 					AppendLog("Success");
 
 
@@ -351,11 +405,73 @@ namespace WinformProject {
 
 			}
 
+			System::Data::DataTable^ NewTable(array<String^>^ columns) {
+				DataTable^ table = gcnew DataTable();
+				for each (String ^ col in columns) {
+					table->Columns->Add(gcnew DataColumn(col));
+				}
+				return table;
+			}
+
+			/*
+			DataTable^ AllocateTrafficSimulationResult(DataTable^ newTable) {
+				try {
+					//read
+					CSVFileManager^ csv = gcnew CSVFileManager(proc->StartInfo->WorkingDirectory + "output_Resilience_curve.csv");
+					String^ output = csv->Read();
+
+					//allocate
+					if (!String::IsNullOrEmpty(output)) {
+					
+						array<String^>^ stringData = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+						array<String^>^ dataArray = CSVFileManager::Parse(stringData[0], ",");
+
+						array<String^>^ columns = gcnew array<String^>(dataArray->Length - 1);
+						for (int i = 0; i < columns->Length; i++) {
+							columns[i] = String::Format("{0}",i);
+						}
+						//DataTable^ newTable;
+						newTable = NewTable(columns);
+
+						DataRow^ newRow = nullptr;
+						newRow = newTable->NewRow(); // create new row
+
+						for (int i = 1; i < columns->Length; i++){
+							newRow[i] = dataArray[i];
+						}
+					
+						newTable->Rows->Add(newRow);
+						return newTable;
+					
+					}
+
+				}
+
+
+				catch (Exception^ e) {
+					Alert::Error("Network structural cost calculation failed.");
+				}
+
+
+			}
+			*/
+
+
 			System::Void Step9bForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
 
 				Debug::WriteLine("=============================>backgroundWorkerRunWorkerCompleted");
 
+				//////////////////////////////////////////////////////////////////////////////////////
+				// Traffic scenario 재구성
+				// OD를 포함한 교통시나리오가 생성되었는지 판별하고, 포함되지 않은 경우 OD관련 시나리오 생성  
+				//////////////////////////////////////////////////////////////////////////////////////
+
+				int totalTrafficScenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
+				int currentTrafficScenarioCount = this->m_dataSet->TrafficScenarios->Length;
+				if (currentTrafficScenarioCount < totalTrafficScenarioCount) {
+					bool result = this->m_trafficModule->GenerateScenarios();
+				}
 
 				// set backgroundWorker work handler
 				backgroundWorker->DoWork += gcnew DoWorkEventHandler(this, &Step9bForm::backgroundWorkerDoWork);

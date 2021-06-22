@@ -8,6 +8,9 @@
 #include "NeXTAHelper.h"
 #include <algorithm> 
 #include "TrafficModule.h"
+#include "UNISTHelper.h"
+
+
 
 
 
@@ -44,6 +47,7 @@ namespace WinformProject {
 		array<String^>^ m_subChartDataX;
 
 		NeXTAHelper^ m_nextaHelper;
+		UNISTHelper^ m_unistHelper;
 
 		double valueOfTime;
 		double penaltyCost;
@@ -57,6 +61,7 @@ namespace WinformProject {
 		// OD수만큼 OD(i)outputsummary.csv저장된 결과를 읽어 들이고, 내진보강전의 교통해석 결과를 
 		// 사전 NeXTAOutputSummaryDictionary에 저장하기 위한 for문임 
 		Dictionary<String^, OutputSummary^>^ beforeNeXTAOutputSummaryDictionary;
+		Dictionary<String^, array<String^>^ >^ beforeUnistOutputSummaryDictionary;
 
 
 
@@ -115,8 +120,11 @@ namespace WinformProject {
 			m_networkComponent = gcnew NetworkComponent(this->m_dataSet);
 
 			this->m_nextaHelper = gcnew NeXTAHelper(this->m_dataSet);
+			this->m_unistHelper = gcnew UNISTHelper(this->m_dataSet);
+
 
 			this->beforeNeXTAOutputSummaryDictionary = gcnew Dictionary<String^, OutputSummary^>();
+			this->beforeUnistOutputSummaryDictionary = gcnew Dictionary<String^, array<String^>^>();
 
 			this->valueOfTime = this->m_dataSet->ValueOfTime;
 			this->penaltyCost = this->m_dataSet->PenaltyCost;
@@ -487,10 +495,10 @@ namespace WinformProject {
 				Alert::Info("Functionality has been not calculated.");
 				return false;
 			}
-			else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
-				Alert::Info("Loss factor has been not calculated.");
-				return false;
-			}
+			//else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
+			//	Alert::Info("Loss factor has been not calculated.");
+			//	return false;
+			//}
 			else if (!this->m_dataSet->ResultData->IsNetworkStructuralCost) {
 				Alert::Info("Network structural cost has been not calculated.");
 				return false;
@@ -729,7 +737,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 //그래프 타입5: Histogram with Bell Curve  
-
+		/*
 		void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ dataY2) {
 
 			char buffer[256];
@@ -892,110 +900,150 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 		}
+		*/
+
+//그래프 타입6: 병렬 + 직렬 그래프
+
+		void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ dataY2) {
+			String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
+			String^ sample = cboSample->SelectedItem->ToString();
+			XYChart^ c = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
+
+			int plotAreaWidth = chartViewer->Size.Width - 150;
+			int plotAreaHeight = chartViewer->Size.Height - 120;
+			c->setPlotArea(100, 50, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
+			c->addTitle("", "Times New Roman Bold", 17);
+
+			LegendBox^ b = c->addLegend(120, 10, false, "Arial", 12);
+			b->setBackground(Chart::Transparent, Chart::Transparent);
+			b->setKeyBorder(Chart::SameAsMainColor);
+
+			// Set the x and y axis stems to transparent and the label font to 12pt Arial
+			c->xAxis()->setColors(Chart::Transparent);
+			c->xAxis()->setLabels(dataX);
+			c->xAxis()->setTitle("Recurrence Period (years)", "Arial Bold", 12);
+
+			c->yAxis()->setColors(Chart::Transparent);
+			c->xAxis()->setLabelStyle("Arial Bold", 12);
+			c->yAxis()->setLabelStyle("Arial Bold", 12);
+			//			c->yAxis()->setTitle("Cost (￦) 10^7", "Arial Bold", 12);
+			c->yAxis()->setTitle("백억원(￦)", "Arial Bold", 12);
+			c->yAxis()->setLabelFormat("{={value}/10000000}");
+
+			// Add a stacked bar layer
+			BarLayer^ layer = c->addBarLayer2(Chart::Stack);
+
+			// Add the three data sets to the bar layer
+			layer->addDataSet(dataY1, 0x0000FF, "structural cost");
+			layer->addDataSet(dataY2, 0xFFF000, "traffic cost");
+
+			// Set the bar border to transparent
+			layer->setBorderColor(Chart::Transparent);
+			layer->setLegendOrder(Chart::ReverseLegend);
+
+			// Output the chart
+			chartViewer->Chart = c;
+			chartViewer->ImageMap = c->getHTMLImageMap("clickable", "", "title='[{dataSetName}]: {xLabel}={value}'");
+		}
+
+
+
 
 		void DrawCharts() {
 			//if (cboSample->SelectedIndex < 0) {
 			//	return;
 			//}
 
-
-
+			// 내진보강(전)
 			if (cboIndirectDamage->SelectedIndex == 0) {
+				m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+				m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+				m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
 
-
-
-				m_chartDataX1 = gcnew array<String^>(this->m_dataSet->TrafficScenarioSamples->Length);
-				m_chartDataY1 = gcnew array<double>(this->m_dataSet->TrafficScenarioSamples->Length);
-				m_chartDataY2 = gcnew array<double>(this->m_dataSet->TrafficScenarioSamples->Length);
-
-				for (int i = 0; i < this->m_dataSet->TrafficScenarioSamples->Length; i++)
+				//교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+				for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
 				{
-					m_chartDataX1[i] = String::Format("{0}", i);
-
+					m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i];
 					///////////////////////////////////////////////////////////////////////////////
 					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
 					///////////////////////////////////////////////////////////////////////////////
-					//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1);
 					int odLocalIndex = 1;
-					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, this->cboSeismicPeriod->SelectedIndex, i + 1, odLocalIndex);
-					// The data for main chart
-					// generate estimated total network structural cost
-					m_chartDataY1[i] = this->m_dataSet->ResultData->GetTotalNetworkStructuralCost(trafficScenarioNo);
+					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
+
+					double sumCost = 0;
+					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
+						String^ localKey = String::Format("{0}", trafficScenarioNo);
+						DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+						sumCost += double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());
+					}
+					m_chartDataY1[i] = sumCost;
 
 					///////////////////////////////////////////////////////////////////////////////
 					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
 					///////////////////////////////////////////////////////////////////////////////
 					double sumTrafficCost = 0;
-					int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
-					for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
-						int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, i + 1, j + 1);
-						array<double>^ beforeAdditionalCostData = gcnew array<double>(recoveryStepCount);
+					array<double>^ beforeAdditionalCostData;
 
+					for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+						int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
 						// 0 = 내진보강전, 1= 내진보강후
 						beforeAdditionalCostData = CalculateAdditionalCost(0, localTrafficScenarioNo);
-						for (int j = 0; j < recoveryStepCount; j++)
-						{
-							sumTrafficCost += beforeAdditionalCostData[j];
+						int recoveryDayCount = beforeAdditionalCostData->Length;
+						for (int i = 0; i < recoveryDayCount; i++) {
+							sumTrafficCost += beforeAdditionalCostData[i];
 						}
 					}
-					// generate estimated total traffic cost
 					m_chartDataY2[i] = sumTrafficCost;
 
 				}
-				DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
 
+				DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
 			}
 
+
+
+			// 내진보강(후)
 			if (cboIndirectDamage->SelectedIndex == 1) {
-				m_chartDataX1 = gcnew array<String^>(this->m_dataSet->TrafficScenarioSamples->Length);
-				m_chartDataY1 = gcnew array<double>(this->m_dataSet->TrafficScenarioSamples->Length);
-				m_chartDataY2 = gcnew array<double>(this->m_dataSet->TrafficScenarioSamples->Length);
 
-				for (int i = 0; i < this->m_dataSet->TrafficScenarioSamples->Length; i++)
+				m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+				m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+				m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
+				//교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+				for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
 				{
-					m_chartDataX1[i] = String::Format("{0}", i);
+					m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i];
 
+					// The data for main chart
+					// generate estimated total network structural cost
 					///////////////////////////////////////////////////////////////////////////////
 					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
 					///////////////////////////////////////////////////////////////////////////////
 					//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1);
 					int odLocalIndex = 1;
-					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, this->cboSeismicPeriod->SelectedIndex, i + 1, odLocalIndex);
-					// The data for main chart
-					// generate estimated total network structural cost
+					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
 					m_chartDataY1[i] = this->m_dataSet->ResultData->GetTotalNetworkStructuralCost(trafficScenarioNo);
 
+					// generate estimated total traffic cost
 					///////////////////////////////////////////////////////////////////////////////
 					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
 					///////////////////////////////////////////////////////////////////////////////
-					double sumTrafficCost = 0;
+
 					int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
+
+					double sumTrafficCost = 0;
 					for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
-						//trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, this->cboSeismicPeriod->SelectedIndex, i + 1, j + 1);
-						//sumTrafficCost = sumTrafficCost + this->m_dataSet->ResultData->GetTotalTrafficCost(trafficScenarioNo);
-
-						int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, i + 1, j + 1);
-						array<double>^ currentAdditionalCostData = gcnew array<double>(recoveryStepCount);
-
-						// 0 = 내진보강전, 1= 내진보강후
-						currentAdditionalCostData = CalculateAdditionalCost(1, localTrafficScenarioNo);
-
-						for (int j = 0; j < recoveryStepCount; j++)
-						{
-							sumTrafficCost += currentAdditionalCostData[j];
-						}
+						int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
+						sumTrafficCost += this->m_dataSet->ResultData->GetTotalTrafficCost(localTrafficScenarioNo);
 					}
-					// generate estimated total traffic cost
 					m_chartDataY2[i] = sumTrafficCost;
 
 				}
+
 				DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
+
 			}
-
-
-
-
-
 
 
 		}
@@ -1114,24 +1162,10 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 		// 시나리오별 간접피해규모 계산(교통피해규모)
+
+		/*
 		array<double>^ CalculateAdditionalCost(int beforeAfterIndex, int trafficScenarioNo) {
 			try {
-				//
-				/*double valueOfTime = this->m_dataSet->ValueOfTime;
-				double penaltyCost = this->m_dataSet->PenaltyCost;
-				double trafficFactor1 = this->m_dataSet->TrafficFactor1;
-				double trafficFactor2 = this->m_dataSet->TrafficFactor2;
-
-				if (valueOfTime == 0) {
-					valueOfTime = 9;
-					penaltyCost = 20;
-					trafficFactor1 = 16.08;
-					trafficFactor2 = 1.18;
-				}*/
-
-				// additional cost Data 행렬정의
-				//array<array<double>^>^ additionalCosts = gcnew array<array<double>^>(this->m_dataSet->TotalTrafficScenarioCount);
-
 
 				//복구단계 또는 피해단계 총 개수
 				int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
@@ -1224,55 +1258,186 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 //				return;
 			}
 		}
+		*/
+
+		// Unist 교통해석을 통한 간접피해 규모계산
+		array<double>^ CalculateAdditionalCost(int beforeAfterIndex, int trafficScenarioNo) {
+
+			// 내진보강(전) 
+			if (beforeAfterIndex == 0) {
+				try {
+					String^ key = String::Format("{0}", trafficScenarioNo);
+					array<String^>^ trafficVolumeStatus = this->beforeUnistOutputSummaryDictionary[key];
+					int totalTrafficDay = trafficVolumeStatus->Length;
+
+					array<double>^ trafficVolume = gcnew array<double>(totalTrafficDay);
+					array<double>^ additionalCostData = gcnew array<double>(totalTrafficDay);
+
+					for (int j = 0; j < totalTrafficDay; j++) {
+						trafficVolume[j] = double::Parse(trafficVolumeStatus[j]->ToString());
+					}
+
+					// 지진(전)교통량 대비 지진(후)교통량이 5% 이하일 경우, 교통포기가 발생하는 것으로 산정
+					// 이는 Suroggate Model의 불확실성을 고려하기 위함
+					double currentTrafficeVolume;
+					double normalTrafficVolume = trafficVolume[totalTrafficDay - 1]; // 도로망이 정상일때의 차량통행량
+
+					for (int j = 0; j < totalTrafficDay; j++) {
+						currentTrafficeVolume = trafficVolume[j];
+						if (currentTrafficeVolume < 0.05 * normalTrafficVolume) {
+							additionalCostData[j] = (normalTrafficVolume - currentTrafficeVolume) *
+								this->trafficFactor1 * this->trafficFactor2 * this->penaltyCost;
+						}
+						else {
+							additionalCostData[j] = (normalTrafficVolume - currentTrafficeVolume) *
+								this->valueOfTime * this->trafficFactor1 * this->trafficFactor2;
+						}
+					}
+					return additionalCostData;
+
+				}
+				catch (Exception^ e) {
+					Alert::Error("Chart data calculation failed.");
+				}
+
+			}
+
+			if (beforeAfterIndex == 1) {
+				try {
+					// 내진보강(전) 
+					TrafficScenario^ scenario = this->m_dataSet->TrafficScenarios[trafficScenarioNo];
+					array<String^>^ trafficVolumeStatus = this->m_dataSet->TrafficVolumeStatus[scenario->TrafficScenarioKey];
+					int totalTrafficDay = trafficVolumeStatus->Length;
+
+					array<double>^ functionalityData = gcnew array<double>(totalTrafficDay);
+					array<double>^ additionalCostData = gcnew array<double>(totalTrafficDay);
+
+					for (int j = 0; j < totalTrafficDay; j++) {
+						functionalityData[j] = double::Parse(trafficVolumeStatus[j]->ToString());
+					}
+
+					// 지진(전)교통량 대비 지진(후)교통량이 5% 이하일 경우, 교통포기가 발생하는 것으로 산정
+					// 이는 Suroggate Model의 불확실성을 고려하기 위함
+					double currentTrafficeVolume;
+					double normalTrafficVolume = functionalityData[totalTrafficDay - 1]; // 도로망이 정상일때의 차량통행량
+
+					for (int j = 0; j < totalTrafficDay; j++) {
+						currentTrafficeVolume = functionalityData[j];
+						if (currentTrafficeVolume < 0.05 * normalTrafficVolume) {
+							additionalCostData[j] += (normalTrafficVolume - currentTrafficeVolume) *
+								this->trafficFactor1 * this->trafficFactor2 * this->penaltyCost;
+						}
+						else {
+							additionalCostData[j] += (normalTrafficVolume - currentTrafficeVolume) *
+								this->valueOfTime * this->trafficFactor1 * this->trafficFactor2;
+						}
+					}
+					return additionalCostData;
+
+				}
+				catch (Exception^ e) {
+					Alert::Error("Chart data calculation failed.");
+				}
+
+			}
+
+		}
+		
 
 		// (총)직접피해규모 계산
 		double CalculateDirectCost(int stageIndex, int odIndex) {
 
 			double totalDirectCost = 0; //총직접피해 규모 
-			// OD별 정상도로기능 상태시의 교통해석 결과 "normalOutputSummary"
-			int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
 
-			// OD노선에 속하는 시설물을 파악하기 위해 사용되는 교통시나리오 번호이며, normalOutputSummary 계산시 사용됨
-			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex+1);
-			// 전체시설물의 직접피해는 OD와 관계없이 일정, 따라서 직접피해계산함수 "GetComponentStructuralCost()","beforeDirectCostTable()"에 사용되는 "odIndex+1"값은 기본값인 "1"을 사용
+			// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
 			int trafficScenarioNoForStructureCost = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
+			String^ localKey = String::Format("{0}", trafficScenarioNoForStructureCost);
+			DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
 
-			String^ normScenarioIndex = String::Format("{0}", int((trafficScenarioNo) / (unitScenarioStep) * (unitScenarioStep * 10)));
-			OutputSummary^ normalOutputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[normScenarioIndex];
+			DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
+			int originNode = int::Parse(newRow[0]->ToString());
+			int destinNode = int::Parse(newRow[1]->ToString());
+			array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
+			int ODlinkCount = roadLink->Length;
 
-			if(stageIndex == 0) {
-				// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
-				String^ localKey = String::Format("{0}", trafficScenarioNoForStructureCost);
-				DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
-
-				// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산 
-				for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
-				{
-					String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
-					String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
-
-					// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
-					if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
-						totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+			if (stageIndex == 0) {
+				// OD별 노선수 -> 노선별 시설물개수 계산과정을 통해, OD에 포함된 (총)시설물 개수를 계산
+				for (int i = 0; i < ODlinkCount; i++) {
+					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+						if (linkID == roadLink[i]) {
+							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+						}
 					}
-				}// 전체 시설물 개수에 대한 for()
+				}
 			}
 
-			if(stageIndex == 1){
-				// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산 
-				for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
-				{
-					String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
-					String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
-
-					// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
-					if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
-						totalDirectCost += this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNoForStructureCost, compID); // 내진보강후 직접피해규모
+			if (stageIndex == 1) {
+				// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
+				// OD별 노선수 -> 노선별 시설물개수 계산과정을 통해, OD에 포함된 (총)시설물 개수를 계산
+				for (int i = 0; i < ODlinkCount; i++) {
+					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+						if (linkID == roadLink[i]) {
+							totalDirectCost += this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNoForStructureCost, compID); // 내진보강후 직접피해규모                                                                       //내진보강전 직접피해규모
+						}
 					}
-				}// 전체 시설물 개수에 대한 for()
+				}
 			}
 
 			return totalDirectCost;
+
+				/*
+				double totalDirectCost = 0; //총직접피해 규모
+				// OD별 정상도로기능 상태시의 교통해석 결과 "normalOutputSummary"
+				int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
+
+				// OD노선에 속하는 시설물을 파악하기 위해 사용되는 교통시나리오 번호이며, normalOutputSummary 계산시 사용됨
+				int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex+1);
+				// 전체시설물의 직접피해는 OD와 관계없이 일정, 따라서 직접피해계산함수 "GetComponentStructuralCost()","beforeDirectCostTable()"에 사용되는 "odIndex+1"값은 기본값인 "1"을 사용
+				int trafficScenarioNoForStructureCost = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
+
+				String^ normScenarioIndex = String::Format("{0}", int((trafficScenarioNo) / (unitScenarioStep) * (unitScenarioStep * 10)));
+				OutputSummary^ normalOutputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[normScenarioIndex];
+
+				if(stageIndex == 0) {
+					// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
+					String^ localKey = String::Format("{0}", trafficScenarioNoForStructureCost);
+					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+
+					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
+					for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
+					{
+						String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
+
+						// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
+						if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
+							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+						}
+					}// 전체 시설물 개수에 대한 for()
+				}
+
+
+				if(stageIndex == 1){
+					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
+					for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
+					{
+						String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
+
+						// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
+						if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
+							totalDirectCost += this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNoForStructureCost, compID); // 내진보강후 직접피해규모
+						}
+					}// 전체 시설물 개수에 대한 for()
+				}
+
+				*/
+
+			
 		}
 
 		// (총)간접피해규모 계산
@@ -1294,6 +1459,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			}
 			return totalIndirectCost;
 		}
+
 			   		 	  	  	   	
 		// 경제지수(ECO) 계산
 		double CalculateIndiceECO(int trafficScenarioNo, Dictionary<String^, OutputSummary^>^ outputSummaryDictionary) {
@@ -1357,7 +1523,6 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 
 		// 연결지수(CON) 계산
-		//double CalculateIndiceCON(int trafficScenarioNo, Dictionary<String^, OutputSummary^>^ outputSummaryDictionary) {
 		double CalculateIndiceCON(int stageIndex, int trafficScenarioNo, Dictionary<String^, OutputSummary^> ^ outputSummaryDictionary) {
 
 			// 계산순서
@@ -1374,7 +1539,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					//Dictionary<String^, DataTable^>^ beforeRehabStructureCost = gcnew Dictionary<String^, DataTable^>();
 					this->m_dataSet->BeforeComponentScenarios = gcnew Dictionary<String^, DataTable^>();
 
-					CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "before_ComponentScenarios_summary.csv");
+					//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "before_ComponentScenarios_summary.csv");
+					CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "before_ComponentScenarios_summary.csv");
 					String^ output = csv->Read();
 					if (!String::IsNullOrEmpty(output)) {
 
@@ -1596,7 +1762,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				//Dictionary<String^, DataTable^>^ beforeRehabStructureCost = gcnew Dictionary<String^, DataTable^>();
 				this->m_dataSet->BeforeRehabStructureCost = gcnew Dictionary<String^, DataTable^>();
 
-				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "before_structureCost_summary.csv");
+				//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "before_structureCost_summary.csv");
+				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "before_structureCost_summary.csv");
 				String^ output = csv->Read();
 				if (!String::IsNullOrEmpty(output)) {
 
@@ -1656,21 +1823,37 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			}
 
+			//////////////////////////////////////////////
 			// 기존(내진보강전) 교통해석 파일에서 결과값 읽기
 			//////////////////////////////////////////////
+			// step9b에서 OD수만큼 교통해석프로그램을 수행하고 결과값인 TrafficSimulationResult_summary.csv를
+			// OD수만큼 읽어 들이고, 내진보강전의 교통해석 결과로 
+			// 사전 UnistOutputSummaryDictionary에 저장하기 위한 for문임 
+
+			if (this->beforeUnistOutputSummaryDictionary->Count == 0) {
+				int scenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
+				// 직접피해산출 및 교통해석 결과저장 경로
+				String^ filePath = this->m_dataSet->UnistResultFilePath + "before_TrafficSimulationResult_summary.csv";
+				// 사전에 수록되는 정보는 교통시나리오 수 만큼 임
+				this->beforeUnistOutputSummaryDictionary = m_unistHelper->ReadOutputSummaryFile(filePath, scenarioCount, this->beforeUnistOutputSummaryDictionary);
+				
+			}
+
+
+			/*
 			// step9에서 OD수만큼 교통해석프로그램을 수행하고 결과값인 outputsummary.csv를 읽어들이는 것과 같이
 			// OD수만큼 OD(i)outputsummary.csv저장된 결과를 읽어 들이고, 내진보강전의 교통해석 결과를 
 			// 사전 NeXTAOutputSummaryDictionary에 저장하기 위한 for문임 
 			if (this->beforeNeXTAOutputSummaryDictionary->Count == 0) {
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					// 직접피해산출 및 교통해석 결과저장 경로
-					String^ filePath = this->m_dataSet->ResultFilePath + "before_OD" + String::Format("{0}", odIndex + 1) + "_output_summary.csv";
+					//String^ filePath = this->m_dataSet->ResultFilePath + "before_OD" + String::Format("{0}", odIndex + 1) + "_output_summary.csv";
+					String^ filePath = this->m_dataSet->UnistResultFilePath + "before_OD" + String::Format("{0}", odIndex + 1) + "_output_summary.csv";
 					// 사전에 수록되는 정보는 UnitScenarioNum * OD(수)
 					this->beforeNeXTAOutputSummaryDictionary = m_nextaHelper->ReadOutputSummaryFile(filePath, odIndex, this->beforeNeXTAOutputSummaryDictionary);
 				}
 			}
-
-
+			*/
 
 
 
@@ -1679,7 +1862,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 
-		// OD별 시설물번호 계산
+		// NEXTAHelper를 이용한 OD별 시설물번호 계산
 		array<int, 2>^ CalculateODComponent() {
 			int maxIndex = 0;   // OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
 
@@ -1727,6 +1910,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 		}
 
+		/*
 		array<int, 2>^ CalculateODComponent(int stageIndex) {
 			int maxIndex = 0;   // OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
 
@@ -1781,13 +1965,73 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			return odComponentFull;
 
 		}
+		*/
+		// UnistHelper를 이용한 OD별 시설물 번호 계산
+		array<int, 2>^ CalculateODComponent(int stageIndex) {
+
+			// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
+			int maxIndex = 0;
+			for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
+				DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
+				int originNode = int::Parse(newRow[0]->ToString());
+				int destinNode = int::Parse(newRow[1]->ToString());
+				array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
+				int ODlinkCount = roadLink->Length;
+
+				int compoCountIndex = 0;
+
+				for (int odIndex = 0; odIndex < ODlinkCount; odIndex++) {
+					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+						if (linkID == roadLink[odIndex]) {
+							compoCountIndex++;
+						}
+					}
+				}
+
+				if (maxIndex < compoCountIndex) {
+					maxIndex = compoCountIndex;
+				}
+			}
+
+
+			// OD 노선에 속해 있는 시설물 리스트 및 직접피해규모 산출
+
+			array<int, 2>^ odComponentFull = gcnew array<int, 2>(maxIndex, this->m_dataSet->ODZoneParamData->Rows->Count * 2);
+			for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
+
+				int compoIndex = 0; //시설물명(번호)에 대한 순서를 매김하기 위한 Index
+				int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex + 1);
+
+				DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
+				int originNode = int::Parse(newRow[0]->ToString());
+				int destinNode = int::Parse(newRow[1]->ToString());
+				array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
+				int ODlinkCount = roadLink->Length;
+
+				// OD별 노선수 -> 노선별 시설물개수 계산과정을 통해, OD에 포함된 (총)시설물 개수를 계산
+				for (int i = 0; i < ODlinkCount; i++) {
+					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+						if (linkID == roadLink[i]) {
+							odComponentFull[compoIndex, odIndex * 2] = int::Parse(compID); // 시설물 번호
+							odComponentFull[compoIndex, odIndex * 2 + 1] = this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNo, compID);
+							compoIndex++;
+						}
+					}
+				}
+			}
+
+			return odComponentFull;
+
+		}
 
 
 
 		// 시설물별 직접피해규모 계산
 		void UpdateComponentDirectDamage() {
-
-
 
 			if (cboDirectDamage->SelectedIndex == 0) {
 
@@ -2645,6 +2889,100 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			// 노선별 직접피해 기준으로 내진보강 효과계산
 			if (this->cboEffect->SelectedIndex == 1) {
 		
+				// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
+				int maxIndex = 0;
+				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
+					DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
+					int originNode = int::Parse(newRow[0]->ToString());
+					int destinNode = int::Parse(newRow[1]->ToString());
+					array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
+					int ODlinkCount = roadLink->Length;
+
+					int compoCountIndex = 0;
+
+					for (int i = 0; i < ODlinkCount; i++) {
+						for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+							String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+							String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+							if (linkID == roadLink[i]) {
+								compoCountIndex++;
+							}
+						}
+					}
+
+					if (maxIndex < compoCountIndex) {
+						maxIndex = compoCountIndex;
+					}
+				}
+
+				array<int, 2>^ odComponentFull = gcnew array<int, 2>(maxIndex, this->m_dataSet->ODZoneParamData->Rows->Count * 4);
+				// 여기서 int, 2 의 의미는 2개의 자연수 i와j가 있다는 것을 의미하며, [i,j]에서 i갯수=maxIndex, j갯수= OD수*3
+				//                     OD1                                                                  :                                OD2                                               .....
+				// [0,0]=1(시설번호) [0,1]=100(보강전 피해) [0,2]=100(보강후 피해) [0,3]=0  (보강효과) :  [0,4]= 5(시설번호)  [0,5]=1000(보강전 피해) [0,6]=100(보강후 피해)   [0,7]=100(보강효과)   
+				// [1,0]=3(시설번호) [1,1]=50 (보강전 피해) [1,2]=50 (보강후 피해) [1,3]=0  (보강효과) :  [1,4]=14(시설번호)  [1,5]=200 (보강전 피해)  [1,6]=50 (보강후 피해)  [1,7]=100(보강효과) 
+				//                  .                                                                  :                                .
+				//                  .                                                                  :                                .
+
+				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
+
+					int compoIndex = 0; //시설물명(번호)에 대한 순서를 매김하기 위한 Index 
+					// 도로망의 전체 직접피해(Direct Cost or Structure Cost) 계산은 OD와 관계없으므로,
+					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
+					String^ key = String::Format("{0}", trafficScenarioNo);				
+					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[key];
+
+					DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
+					int originNode = int::Parse(newRow[0]->ToString());
+					int destinNode = int::Parse(newRow[1]->ToString());
+					array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
+					int ODlinkCount = roadLink->Length;
+
+					// OD별 노선수 -> 노선별 시설물개수 계산과정을 통해, OD에 포함된 (총)시설물 개수를 계산
+					for (int i = 0; i < ODlinkCount; i++) {
+						for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+							String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+							String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+							if (linkID == roadLink[i]) {
+								odComponentFull[compoIndex, odIndex * 4] = int::Parse(compID); // 시설물 번호
+								odComponentFull[compoIndex, odIndex * 4 + 1] = double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+								odComponentFull[compoIndex, odIndex * 4 + 2] = this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNo, compID); // 내진보강후 직접피해규모
+								compoIndex++; //OD노선에 포함됨 시설물 index, 예) 전체시설물 갯수 27개중 8개가 포함됨
+							}
+						}
+					}
+
+				}// 전체 OD 개수에 대한 for()	
+
+
+				//array<String^>^ damageColumns = { "OD(i) Component", "OD(i) Damage", "OD(i++) Component", "OD(i++) Damage"};
+				array<String^>^ damageColumns = gcnew array<String^>(this->m_dataSet->ODZoneParamData->Rows->Count * 4);
+				for (int i = 0; i < this->m_dataSet->ODZoneParamData->Rows->Count; i++) {
+					damageColumns[i * 4] = "OD" + String::Format("{0}   ", i + 1) + " 시설번호";
+					damageColumns[i * 4 + 1] = "OD" + String::Format("{0}   ", i + 1) + " 보강(전)직접피해";
+					damageColumns[i * 4 + 2] = "OD" + String::Format("{0}   ", i + 1) + " 보강(후)직접피해";
+					damageColumns[i * 4 + 3] = "OD" + String::Format("{0}   ", i + 1) + " 보강효과";
+
+				}
+				DataTable^ odEffectTable = NewTable(damageColumns);
+
+				for (int i = 0; i < maxIndex; i++) {
+					DataRow^ newRow = odEffectTable->NewRow();
+
+					for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+						//newRow[j] = odComponentFull[i, j];
+						newRow[j * 4] = odComponentFull[i, j * 4];
+						newRow[j * 4 + 1] = odComponentFull[i, j * 4 + 1];
+						newRow[j * 4 + 2] = odComponentFull[i, j * 4 + 2];
+						newRow[j * 4 + 3] = odComponentFull[i, j * 4 + 1] - odComponentFull[i, j * 4 + 2];
+					}
+
+					odEffectTable->Rows->Add(newRow);
+				}
+
+				dgvEffect->DataSource = odEffectTable;
+
+
+				/*
 				int maxIndex = 0;   // OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index 
 				// OD별 노선직접피해비용 
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
@@ -2731,7 +3069,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				}
 
 				dgvEffect->DataSource = odEffectTable;
-			
+				*/
+
 			
 			}// end of selection 1 : 노선별 직접피해 기준으로 예산선정 
 
@@ -2995,6 +3334,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 
 
+		
 
 	private: System::Void Step13Form_Load(System::Object^ sender, System::EventArgs^ e) {
 
@@ -3185,4 +3525,5 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		DrawCharts();
 	}
 };
+
 }

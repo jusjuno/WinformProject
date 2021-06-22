@@ -24,14 +24,16 @@ public:
 		this->m_isNetworkStructuralCost = false;
 		//this->m_totalTrafficScenarioCount ;
 		//this->m_totalTrafficScenarioCount ;
-		this->m_functionalities = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
+		this->m_functionalities = gcnew array<array<double>^>(totalTrafficScenarioCount);
 		//this->m_additionalCosts = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
-		this->m_additionalCosts = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
-		this->m_ecoLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
-		this->m_conLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
-		this->m_envLossIndices = gcnew array<array<double>^>(this->m_totalTrafficScenarioCount);
+		this->m_additionalCosts = gcnew array<array<double>^>(totalTrafficScenarioCount);
+		this->m_ecoLossIndices = gcnew array<array<double>^>(totalTrafficScenarioCount);
+		this->m_conLossIndices = gcnew array<array<double>^>(totalTrafficScenarioCount);
+		this->m_envLossIndices = gcnew array<array<double>^>(totalTrafficScenarioCount);
 
-		this->m_networkStructuralCosts = gcnew array<Dictionary<String^, long>^> (this->m_totalTrafficScenarioCount);
+		this->m_networkStructuralCosts = gcnew array<Dictionary<String^, long>^> (totalTrafficScenarioCount);
+
+		this->m_totalTrafficScenarioCount = totalTrafficScenarioCount;
 
 	}
 private:
@@ -115,6 +117,9 @@ public:
 	// 1-array: traffic scenario number
 	// 2-array: value of each damage states
 	property array<array<double>^>^ Functionalities {
+		array<array<double>^>^ get() {
+			return this->m_functionalities;
+		}
 		void set(array<array<double>^>^ value) {
 			this->m_functionalities = value;
 			this->m_isCalculatedFunctionality = (value != nullptr);
@@ -125,6 +130,9 @@ public:
 	// 1-array: traffic scenario number
 	// 2-array: value of each damage states
 	property array<array<double>^>^ AdditionalCosts {
+		array<array<double>^>^ get(){
+			return this->m_additionalCosts;
+		}
 		void set(array<array<double>^>^ value) {
 			this->m_additionalCosts = value;
 			this->m_isCalculatedAdditionalCost = (value != nullptr);

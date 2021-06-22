@@ -34,6 +34,8 @@ namespace WinformProject {
 			this->m_basePath = "C:\\sample\\UNIST\\";
 			this->cvsTempFileName = "dummy.csv";
 
+			this->m_dataSet->UnistResultFilePath = this->m_basePath;
+
 		}
 
 		// create new datatable object by columns information
@@ -759,7 +761,7 @@ namespace WinformProject {
 		}
 
 
-		bool WriteOD(String^ filename, int ODindex) {
+		bool WriteOD(String^ filename, String^unistODfileName, int ODindex) {
 			// CSV파일 입출력 준비
 			String^ filePath = m_basePath + filename;
 			CSVFileManager^ csv = gcnew CSVFileManager(filePath);
@@ -769,8 +771,12 @@ namespace WinformProject {
 			DataTable^ newTable = dummyTable->Clone(); 
 			DataRow^ newRow = newTable->NewRow(); // create new row
 
-			newRow[0] = dummyRow[0];
-			newRow[1] = dummyRow[1];
+			//newRow[0] = dummyRow[0];
+			//newRow[1] = dummyRow[1];
+
+			String^ unistODfilePath = m_basePath + unistODfileName;
+			newRow[0] = NodeTransform(unistODfilePath, dummyRow[0]->ToString());
+			newRow[1] = NodeTransform(unistODfilePath, dummyRow[1]->ToString());
 			newTable->Rows->Add(newRow);
 
 			return csv->Write(newTable);
@@ -820,6 +826,242 @@ namespace WinformProject {
 			return dt;
 		}
 		*/
+
+
+
+
+
+		////////////////////////////////////
+		//Shortest Path Finding Algorithm
+		////////////////////////////////////
+
+		//int minDistance(int dist[], bool sptSet[])
+		int minDistance(array<double>^ dist, array<bool>^ sptSet)
+		{
+			int V = dist->Length;
+			int min = INT_MAX, min_index;
+
+			for (int v = 0; v < V; v++)
+				if (sptSet[v] == false && dist[v] <= min)
+					min = dist[v], min_index = v;
+
+			return min_index;
+		}
+
+		//int* dijkstra(int graph[V][V], int src)
+		array<String^>^ dijkstra(int Origin, int Destin)
+		{
+
+
+			int totalNodeCount = this->m_dataSet->ShapeData->m_SHPNodes->Count;
+			int totalLinkCount = this->m_dataSet->ShapeData->m_SHPProperties->Length;
+			array<double, 2>^ graph = gcnew array<double, 2>(totalNodeCount + 1, totalNodeCount + 1);
+
+			for each (ShapeProperty ^ prop in this->m_dataSet->ShapeData->m_SHPProperties)
+			{
+				String^ linkID = prop->GetProperty(ShapeProperty::PropertyType::LINK_ID);
+				String^ length = prop->GetProperty(ShapeProperty::PropertyType::LENGTH);
+
+				ShapeNode^ fromNode = nullptr;
+				ShapeNode^ toNode = nullptr;
+				fromNode = prop->Nodes[0];
+				toNode = prop->Nodes[1];
+				if (toNode == nullptr) { toNode = fromNode; }
+
+				int fromNodeID = int::Parse(fromNode->ID->ToString());
+				int toNodeID = int::Parse(toNode->ID->ToString());
+				double gLength = double::Parse(length);
+
+				graph[fromNodeID, toNodeID] = gLength;
+				graph[toNodeID, fromNodeID] = gLength;
+			}
+
+			int V = totalNodeCount;
+			int src = Origin;
+
+			//int dist[V]; // The output array.  dist[i] will hold the shortest
+			array<double>^ dist = gcnew array<double>(V);
+			array<String^>^ roadLink = gcnew array<String^>(V);
+			array<String^, 2>^ result = gcnew array<String^, 2>(V, 2);
+
+			//bool sptSet[V]; // sptSet[i] will be true if vertex i is included in shortest
+			array<bool>^ sptSet = gcnew array<bool>(V);
+
+			for (int i = 0; i < V; i++)
+				dist[i] = INT_MAX, sptSet[i] = false;
+
+			dist[src] = 0;
+			roadLink[src] = "";
+
+			for (int count = 0; count < V - 1; count++) {
+				int u = minDistance(dist, sptSet);
+
+				sptSet[u] = true;
+
+				for (int v = 0; v < V; v++) {
+					if (!sptSet[v] && graph[u, v] && dist[u] != INT_MAX
+						&& dist[u] + graph[u, v] < dist[v]) {
+						dist[v] = dist[u] + graph[u, v];
+						if (roadLink[u] == "") { roadLink[v] = String::Format("{0}_{1}", u, v); }
+						else { roadLink[v] = roadLink[u] + "," + String::Format("{0}_{1}", u, v); }
+					}
+				}
+			}
+
+			//for (int i = 0; i < V; i++) {
+			//	result[i, 0] = String::Format("{0}", dist[i]);
+			//	result[i, 1] = roadLink[i];
+			//}
+
+
+			// 계산된 노드(i,j)로 부터 노선 번호 찿기
+
+			String^ ODLinkString = roadLink[Destin];
+			array<String^>^ values = CSVFileManager::Parse(ODLinkString, ",");
+			int ODlinkCount = values->Length;
+			array<String^>^ odLink = gcnew array<String^>(ODlinkCount);
+
+			for (int odIndex = 0; odIndex < ODlinkCount; odIndex++) {
+				array<String^>^ Nodes = CSVFileManager::Parse(values[odIndex], "_");
+
+				for each (ShapeProperty ^ prop in this->m_dataSet->ShapeData->m_SHPProperties)
+				{
+					String^ linkID = prop->GetProperty(ShapeProperty::PropertyType::LINK_ID);
+					String^ length = prop->GetProperty(ShapeProperty::PropertyType::LENGTH);
+
+					//String^ fromNode = nullptr;
+					//ShapeNode^ toNode = nullptr;
+					String^ fromNode = prop->Nodes[0]->ID;
+					String^ toNode = prop->Nodes[1]->ID;
+
+					if (fromNode == Nodes[0] && toNode == Nodes[1]) {
+						odLink[odIndex] = linkID;
+						break;
+					}
+					else if (fromNode == Nodes[1] && toNode == Nodes[0]) {
+						odLink[odIndex] = linkID;
+						break;
+					}
+				}
+			}
+
+			return odLink;
+		}
+
+
+		Dictionary<String^, array<String^>^>^ ReadOutputSummaryFile(String^ filePath, int scenarioCount, Dictionary<String^, array<String^>^>^ beforeUnistOutputSummaryDictionary){
+		
+			try {
+				CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+				String^ output = csv->Read();
+				if (!String::IsNullOrEmpty(output)) {
+					array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+					int outputRowCount = dataArray->Length;
+
+					for (int i = 0; i < scenarioCount; i++) {
+						String^ Key = String::Format("{0}", i);
+						String^ outputLineData = dataArray[i];
+						array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
+
+						beforeUnistOutputSummaryDictionary->Add(Key, values);
+
+
+					}
+					return beforeUnistOutputSummaryDictionary;
+				}
+			}
+
+			catch (Exception^ ex) {
+				Debug::WriteLine(ex);
+				throw gcnew Exception(L"The number of Scenarios is not match with written file.");
+			}
+		}
+
+
+		String^ NodeTransform(String^ filePath, String^ sendingNode) {
+
+			int totalNodeCount = this->m_dataSet->ShapeData->m_SHPNodes->Count;
+			int targetNode = int::Parse(sendingNode);
+			String^ matchingNode = nullptr;
+
+			try {
+				// reading Winform Node 
+				array<double, 2>^ winformNode = gcnew array<double, 2>(1, 3);
+				for each (KeyValuePair<String^, ShapeNode^> ^ pair in m_dataSet->ShapeData->m_SHPNodes){
+					int nodeID = int::Parse(pair->Value->ID);
+					if (targetNode == nodeID) {
+						winformNode[0, 0] = nodeID;
+						winformNode[0, 1] = pair->Value->Location.x;
+						winformNode[0, 2] = pair->Value->Location.y;
+						break;
+					}
+				}
+
+				// reading UNIST Node
+				//array<double, 2>^ unistNode = gcnew array<double, 2>(1, 3);
+				CSVFileManager^ csv = gcnew CSVFileManager(filePath);
+				String^ output = csv->Read();
+				if (!String::IsNullOrEmpty(output)) {
+					array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+					int outputRowCount = dataArray->Length;
+
+					// 첫번째(i=0) 행은 칼럼 명칭이므로 두번째(i=1) 행부터 시작됨
+					for (int i = 1; i < outputRowCount; i++) {
+						String^ outputLineData = dataArray[i];
+						array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
+						int unistNodeID = int::Parse(values[0]);
+						double xcoord = double::Parse(values[1]);
+						double ycoord = double::Parse(values[2]);
+
+						//if (0.99*xcoord < winformNode[0, 1] < 1.01*xcoord && 0.99*ycoord < winformNode[0, 2] < 1.01*ycoord) {
+						//if (0.99 * xcoord < winformNode[0, 1] < 1.01 * xcoord && 0.99 * ycoord < winformNode[0, 2] < 1.01 * ycoord) {
+						//		matchingNode = String::Format("{0}",unistNodeID);
+						//	break;
+						//}
+
+						if (0.9999 * xcoord < winformNode[0, 1] && winformNode[0, 1] < 1.0001 * xcoord) {
+							if (0.9999 * ycoord < winformNode[0, 2] && winformNode[0, 2] < 1.0001 * ycoord) {
+								matchingNode = String::Format("{0}",unistNodeID);
+								break;
+							}
+						} 
+					}
+				}
+
+				if (matchingNode == nullptr) {
+					throw "There is no maching node for origination and destination node";
+				}
+				else { return matchingNode; }
+
+			}
+			catch (String^ ex) {
+				Debug::WriteLine(ex);
+				throw gcnew Exception(ex);
+			}
+		}
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		System::Data::DataTable^ ReadOutputFile(String^ filename, String^ scenarioKey) {
 

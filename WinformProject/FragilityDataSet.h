@@ -29,7 +29,7 @@ public:
 
 
 public:
-		
+
 	property Dictionary<double, FragilityFile^>^ FragilityFileDict {
 		Dictionary<double, FragilityFile^>^ get() {
 			return this->m_FragilityFileDict;
@@ -92,6 +92,6 @@ public:
 			}
 		}
 	}
-		
+
 
 };

@@ -391,9 +391,22 @@ namespace WinformProject {
 		///////////////////////////////////
 		// Traffic scenario는 기본 값 즉 하나의 OD만을 고려함
 		// OD zone이 하나 이상 될때는 Traffic Scenario 재구성 필요
-		if (this->m_dataSet->ODZoneParamData->Rows->Count > 1) {
+		//if (this->m_dataSet->ODZoneParamData->Rows->Count > 1) {
+		//	bool result = this->m_trafficModule->GenerateScenarios();
+		//}
+
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		// Traffic scenario 재구성
+		// OD를 포함한 교통시나리오가 생성되었는지 판별하고, 포함되지 않은 경우 OD관련 시나리오 생성  
+		//////////////////////////////////////////////////////////////////////////////////////
+		int totalTrafficScenarioCount = this->m_dataSet->TotalTrafficScenarioCount;
+		int currentTrafficScenarioCount = this->m_dataSet->TrafficScenarios->Length;
+
+		if (currentTrafficScenarioCount < totalTrafficScenarioCount) {
 			bool result = this->m_trafficModule->GenerateScenarios();
 		}
+
 
 
 		///////////////////////////////////

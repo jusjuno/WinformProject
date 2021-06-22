@@ -125,7 +125,7 @@ public:
 	literal int UNIST_RUN_REQ_ROWS = 262;
 
 
-	// define Fragility File grid columns.
+	// define traffic carrying parameter grid columns.
 	literal String^ DT_FRAG_CURV_DATA_COL01 = L"FILE";
 	literal String^ DT_FRAG_CURV_DATA_COL02 = L"PGA";
 	literal String^ DT_FRAG_CURV_DATA_COL03 = L"Slight";
@@ -149,5 +149,6 @@ public:
 	literal String^ DT_BRIDGE_LIST_COL10 = L"보수보강(교각)";
 	literal String^ DT_BRIDGE_LIST_COL11 = L"보수보강(교좌)";
 	literal String^ DT_BRIDGE_LIST_COL12 = L"파일명";
+
 
 };

@@ -410,6 +410,25 @@ namespace WinformProject {
 				dgvInputDemandMeta->ReadOnly = false;
 			}
 		}
+
+		/*
+		void GenerateTrafficScenarios() {
+
+			//this->m_dataSet->ResultData = gcnew ResultDataSet(this->m_dataSet->TotalTrafficScenarioCount);
+
+			int temp = this->m_dataSet->TotalTrafficScenarioCount;
+
+			
+			
+			this->m_trafficModule = gcnew TrafficModule(this->m_dataSet);
+
+
+			this->m_trafficModule->GenerateScenarios();
+		}
+		*/
+
+
+
 	private: System::Void NeXTAInput_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridViewCellStyle = gcnew DataGridViewCellStyle();
 		this->dataGridViewCellStyle->Alignment = DataGridViewContentAlignment::MiddleLeft;
@@ -438,6 +457,7 @@ namespace WinformProject {
 		// 동일 값 여부에 따라 그리드 읽기전용 여부 설정
 		SetReadOnlyODZoneYesNoGrid();
 		SetReadOnlyInputDemandMetaGrid();
+
 	}
 	private: System::Void cboODZoneParam_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
 		SetReadOnlyODZoneYesNoGrid();
@@ -473,6 +493,8 @@ namespace WinformProject {
 	}
 
 	private: System::Void dgvODZone_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		// Traffic scenario 재구성
+		//GenerateTrafficScenarios();
 		OnSaveDataChanged();
 	}
 	private: System::Void dgvInputDemandMeta_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {

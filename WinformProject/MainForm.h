@@ -196,11 +196,13 @@ namespace WinformProject {
 			// menuStrip
 			// 
 			resources->ApplyResources(this->menuStrip, L"menuStrip");
+			this->menuStrip->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->FileMenuItem, this->ProjectMenuItem,
 					this->NeXTAMenuItem, this->UnistMenuItem, this->ResultMenuItem
 			});
+			
 			this->menuStrip->Name = L"menuStrip";
 			// 
 			// FileMenuItem
@@ -211,6 +213,7 @@ namespace WinformProject {
 					this->FileOpenMenuItem, this->FileSaveMenuItem, this->FilePreferencesMenuItem, this->FileExitMenuItem, this->ViewDataMenuItem
 			});
 			this->FileMenuItem->Name = L"FileMenuItem";
+			
 			// 
 			// FileNewMenuItem
 			// 
@@ -227,7 +230,7 @@ namespace WinformProject {
 			// FileSaveMenuItem
 			// 
 			resources->ApplyResources(this->FileSaveMenuItem, L"FileSaveMenuItem");
-			this->FileSaveMenuItem->Name = L"FileSaveMenuItem";
+			this->FileSaveMenuItem->Name = L"FileSaveMenuItem";			
 			this->FileSaveMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileSaveMenuItem_Click);
 			// 
 			// FilePreferencesMenuItem
@@ -239,13 +242,13 @@ namespace WinformProject {
 			// FileExitMenuItem
 			// 
 			resources->ApplyResources(this->FileExitMenuItem, L"FileExitMenuItem");
-			this->FileExitMenuItem->Name = L"FileExitMenuItem";
+			this->FileExitMenuItem->Name = L"FileExitMenuItem";			
 			this->FileExitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileExitMenuItem_Click);
 			// 
 			// ViewDataMenuItem
 			// 
 			resources->ApplyResources(this->ViewDataMenuItem, L"ViewDataMenuItem");
-			this->ViewDataMenuItem->Name = L"ViewDataMenuItem";
+			this->ViewDataMenuItem->Name = L"ViewDataMenuItem";			
 			this->ViewDataMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ViewDataMenuItem_Click);
 			// 
 			// ProjectMenuItem
@@ -255,61 +258,61 @@ namespace WinformProject {
 				this->ProjectStep0MenuItem,
 					this->ProjectStep1MenuItem, this->ProjectStep2MenuItem, this->ProjectStep3MenuItem, this->ProjectStep4MenuItem, this->ProjectStep5MenuItem,
 					this->ProjectStep6MenuItem, this->ProjectStep7MenuItem, this->ProjectStep8MenuItem
-			});
+			});			
 			this->ProjectMenuItem->Name = L"ProjectMenuItem";
 			// 
 			// ProjectStep0MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep0MenuItem, L"ProjectStep0MenuItem");
-			this->ProjectStep0MenuItem->Name = L"ProjectStep0MenuItem";
+			this->ProjectStep0MenuItem->Name = L"ProjectStep0MenuItem";			
 			this->ProjectStep0MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep0MenuItem_Click);
 			// 
 			// ProjectStep1MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep1MenuItem, L"ProjectStep1MenuItem");
-			this->ProjectStep1MenuItem->Name = L"ProjectStep1MenuItem";
+			this->ProjectStep1MenuItem->Name = L"ProjectStep1MenuItem";			
 			this->ProjectStep1MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep1MenuItem_Click);
 			// 
 			// ProjectStep2MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep2MenuItem, L"ProjectStep2MenuItem");
-			this->ProjectStep2MenuItem->Name = L"ProjectStep2MenuItem";
+			this->ProjectStep2MenuItem->Name = L"ProjectStep2MenuItem";			
 			this->ProjectStep2MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep2MenuItem_Click);
 			// 
 			// ProjectStep3MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep3MenuItem, L"ProjectStep3MenuItem");
-			this->ProjectStep3MenuItem->Name = L"ProjectStep3MenuItem";
+			this->ProjectStep3MenuItem->Name = L"ProjectStep3MenuItem";			
 			this->ProjectStep3MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep3MenuItem_Click);
 			// 
 			// ProjectStep4MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep4MenuItem, L"ProjectStep4MenuItem");
-			this->ProjectStep4MenuItem->Name = L"ProjectStep4MenuItem";
+			this->ProjectStep4MenuItem->Name = L"ProjectStep4MenuItem";			
 			this->ProjectStep4MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep4MenuItem_Click);
 			// 
 			// ProjectStep5MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep5MenuItem, L"ProjectStep5MenuItem");
-			this->ProjectStep5MenuItem->Name = L"ProjectStep5MenuItem";
+			this->ProjectStep5MenuItem->Name = L"ProjectStep5MenuItem";			
 			this->ProjectStep5MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep5MenuItem_Click);
 			// 
 			// ProjectStep6MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep6MenuItem, L"ProjectStep6MenuItem");
-			this->ProjectStep6MenuItem->Name = L"ProjectStep6MenuItem";
+			this->ProjectStep6MenuItem->Name = L"ProjectStep6MenuItem";			
 			this->ProjectStep6MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep6MenuItem_Click);
 			// 
 			// ProjectStep7MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep7MenuItem, L"ProjectStep7MenuItem");
-			this->ProjectStep7MenuItem->Name = L"ProjectStep7MenuItem";
+			this->ProjectStep7MenuItem->Name = L"ProjectStep7MenuItem";			
 			this->ProjectStep7MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep7MenuItem_Click);
 			// 
 			// ProjectStep8MenuItem
 			// 
 			resources->ApplyResources(this->ProjectStep8MenuItem, L"ProjectStep8MenuItem");
-			this->ProjectStep8MenuItem->Name = L"ProjectStep8MenuItem";
+			this->ProjectStep8MenuItem->Name = L"ProjectStep8MenuItem";			
 			this->ProjectStep8MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep8MenuItem_Click);
 			// 
 			// NeXTAMenuItem
@@ -319,69 +322,63 @@ namespace WinformProject {
 				this->NeXTAInputMenuItem,
 					this->NeXTARunMenuItem
 			});
-			this->NeXTAMenuItem->Name = L"NeXTAMenuItem";
+			this->NeXTAMenuItem->Name = L"NeXTAMenuItem";			
 			// 
 			// NeXTAInputMenuItem
 			// 
 			resources->ApplyResources(this->NeXTAInputMenuItem, L"NeXTAInputMenuItem");
-			this->NeXTAInputMenuItem->Name = L"NeXTAInputMenuItem";
+			this->NeXTAInputMenuItem->Name = L"NeXTAInputMenuItem";			
 			this->NeXTAInputMenuItem->Click += gcnew System::EventHandler(this, &MainForm::NeXTAInputMenuItem_Click);
 			// 
 			// NeXTARunMenuItem
 			// 
 			resources->ApplyResources(this->NeXTARunMenuItem, L"NeXTARunMenuItem");
-			this->NeXTARunMenuItem->Name = L"NeXTARunMenuItem";
+			this->NeXTARunMenuItem->Name = L"NeXTARunMenuItem";			
 			this->NeXTARunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::NeXTARunMenuItem_Click);
 			// 
 			// UnistMenuItem
 			// 
 			resources->ApplyResources(this->UnistMenuItem, L"UnistMenuItem");
 			this->UnistMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->UnistRunMenuItem });
-			this->UnistMenuItem->Name = L"UnistMenuItem";
+			this->UnistMenuItem->Name = L"UnistMenuItem";			
 			// 
 			// UnistRunMenuItem
 			// 
 			resources->ApplyResources(this->UnistRunMenuItem, L"UnistRunMenuItem");
-			this->UnistRunMenuItem->Name = L"UnistRunMenuItem";
+			this->UnistRunMenuItem->Name = L"UnistRunMenuItem";			
 			this->UnistRunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::UnistRunMenuItem_Click);
 			// 
 			// ResultMenuItem
 			// 
 			resources->ApplyResources(this->ResultMenuItem, L"ResultMenuItem");
-			this->ResultMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->ResultMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->ResultStep10MenuItem,
-					this->ResultStep10bMenuItem, this->ResultStep11MenuItem, this->ResultStep12MenuItem, this->decisionToolStripMenuItem
+					this->ResultStep11MenuItem, this->ResultStep12MenuItem, this->decisionToolStripMenuItem
 			});
-			this->ResultMenuItem->Name = L"ResultMenuItem";
+			this->ResultMenuItem->Name = L"ResultMenuItem";			
 			// 
 			// ResultStep10MenuItem
 			// 
 			resources->ApplyResources(this->ResultStep10MenuItem, L"ResultStep10MenuItem");
-			this->ResultStep10MenuItem->Name = L"ResultStep10MenuItem";
+			this->ResultStep10MenuItem->Name = L"ResultStep10MenuItem";			
 			this->ResultStep10MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep10MenuItem_Click);
-			// 
-			// ResultStep10bMenuItem
-			// 
-			resources->ApplyResources(this->ResultStep10bMenuItem, L"ResultStep10bMenuItem");
-			this->ResultStep10bMenuItem->Name = L"ResultStep10bMenuItem";
-			this->ResultStep10bMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep10bMenuItem_Click);
 			// 
 			// ResultStep11MenuItem
 			// 
 			resources->ApplyResources(this->ResultStep11MenuItem, L"ResultStep11MenuItem");
-			this->ResultStep11MenuItem->Name = L"ResultStep11MenuItem";
+			this->ResultStep11MenuItem->Name = L"ResultStep11MenuItem";			
 			this->ResultStep11MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep11MenuItem_Click);
 			// 
 			// ResultStep12MenuItem
 			// 
 			resources->ApplyResources(this->ResultStep12MenuItem, L"ResultStep12MenuItem");
-			this->ResultStep12MenuItem->Name = L"ResultStep12MenuItem";
+			this->ResultStep12MenuItem->Name = L"ResultStep12MenuItem";			
 			this->ResultStep12MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep12MenuItem_Click);
 			// 
 			// decisionToolStripMenuItem
 			// 
 			resources->ApplyResources(this->decisionToolStripMenuItem, L"decisionToolStripMenuItem");
-			this->decisionToolStripMenuItem->Name = L"decisionToolStripMenuItem";
+			this->decisionToolStripMenuItem->Name = L"decisionToolStripMenuItem";			
 			this->decisionToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::decisionToolStripMenuItem_Click);
 			// 
 			// MainForm
@@ -547,7 +544,15 @@ namespace WinformProject {
 
 
 		//Fragility 딕셔러리 초기화
-		//WinformProject::FragilityCompList::setFragilityCompDict();
+		//WinformProject::FragilityDataSet::setFragilityCurvDict();
+		//Fragility 데이타 초기화
+		//WinformProject::FragilityDataSet::setFragilityCurvData();
+
+		/*
+		Dictionary<String^, String^>^ aaa = WinformProject::FragilityDataSet::FragilityCurvDict;
+		Debug::WriteLine("=================>aaa 1111:" + aaa["1111"]);
+		Debug::WriteLine("=================>aaa 다경간_5m이하_단주_일반_말뚝_C_X_X_X_X:" + aaa["다경간_5m이하_단주_일반_말뚝_C_X_X_X_X"]);
+		*/
 
 		
 
@@ -948,7 +953,7 @@ namespace WinformProject {
 
 		this->ResultMenuItem->Text = rm->GetString("ResultMenuItem.Text");
 		this->ResultStep10MenuItem->Text = rm->GetString("ResultStep10MenuItem.Text");
-		this->ResultStep10bMenuItem->Text = rm->GetString("ResultStep10bMenuItem.Text");
+//		this->ResultStep10bMenuItem->Text = rm->GetString("ResultStep10bMenuItem.Text");
 		this->ResultStep11MenuItem->Text = rm->GetString("ResultStep11MenuItem.Text");
 		this->decisionToolStripMenuItem->Text = rm->GetString("decisionToolStripMenuItem.Text");
 

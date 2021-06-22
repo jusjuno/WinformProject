@@ -306,7 +306,16 @@ namespace WinformProject {
 		Void DrawVulnerabilityMap() {
 			DrawVulnerabilityMap(true);
 		}
+
+
+
 		Void DrawVulnerabilityMap(bool caculate) {
+
+			if (!StructureDamageStatus()) {
+				Alert::Error("Can not create damage status data.");
+				return;
+			}
+
 			if (!CreateVulnerabilityMapChartData()) {
 				Alert::Error("Can not create chart data.");
 				return;				
@@ -316,6 +325,7 @@ namespace WinformProject {
 //				Alert::Error("Can not create damage state file.");
 //				return;
 //			}
+
 
 			System::Data::DataRow^ row = this->m_dataSet->SeismicSourceData->Rows[cboSeismicSource->SelectedIndex];
 			String^ scenarioName = row[CommConst::GRID_SEISMIC_SOURCES_LIST_COL1]->ToString();
@@ -391,7 +401,6 @@ namespace WinformProject {
 							if (cboDamageState->SelectedIndex == 0) {
 								//m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa)) * 100;
 								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, cboDamageState->SelectedIndex + 1, sa)) * 100;
-
 							}
 							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
 								//temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100;
@@ -502,6 +511,85 @@ namespace WinformProject {
 			}
 			return csv->Write(columns, newTable);
 		}
+
+
+
+		bool StructureDamageStatus() {
+			// 지진소스, 재현주기, 샘플, OD
+			int componentCount = m_networkComponent->GetCount();
+			int sampleIndex = 1;
+			int ODindex = 1;
+			int sourceIndex = 0;
+
+			DataTable^ structureDamage = gcnew DataTable();
+			array<String^>^ columns = { "CompoID", "slight", "minor", "severe","collapse" };
+
+			// set data			
+			structureDamage = NewTable(columns);
+			DataRow^ newRow = nullptr;
+
+			// source
+			for each (KeyValuePair<String^, DataTable^> ^ pair in this->m_dataSet->SeismicSourceDictionary)
+			{
+				DataTable^ sourceTable = pair->Value;
+				for (int recurIndex = 0; recurIndex < m_dataSet->RecurrencePeriodData->Length; recurIndex++){
+
+					String^ key = String::Format("{0}{1}{2}{3}",sourceIndex, recurIndex, sampleIndex, ODindex);
+
+					DataTable^ structureDamage = gcnew DataTable();
+					structureDamage = NewTable(columns);
+
+					for (int compIndex = 0; compIndex < componentCount; compIndex++){
+
+						String^ compID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_NETWORK_COMP_ID);
+						String^ classID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_CLASS_ID);
+						String^ xPos = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_X);
+						String^ yPos = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_Y);
+						String^ linkID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_LINK_ID);
+						String^ filter = "[" + CommConst::GRID_SEISMIC_SOURCES_COL1 + "]='" + xPos + "' and [" + CommConst::GRID_SEISMIC_SOURCES_COL2 + "] = '" + yPos + "'";
+						array<DataRow^>^ foundRows = sourceTable->Select(filter);
+
+						DataRow^ sourceRow = foundRows[0];
+						double sa = 0;
+						double damageProbability = 0.0;
+
+
+						// recurrence period로 특정 컴포넌트의 지진 강도를 구함
+						// sourceRow=[xpos, ypos, sa_50, sa_100, sa_475, sa_1000]
+						Double::TryParse(sourceRow[2 + recurIndex]->ToString(), sa); // 2(index=1)번째부터 damage state 1,2,3,4가 존재
+
+						DataRow^ newRow = nullptr;
+						newRow = structureDamage->NewRow();
+
+						newRow[0] = compID;
+
+						for (int damageIndex = 1; damageIndex < m_fragilityCurve->DamageStateCount; damageIndex++) { // damage state 0은 제외
+						
+							damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageIndex, sa);
+							newRow[damageIndex] = damageProbability;
+						
+						}
+
+						structureDamage->Rows->Add(newRow);
+
+					}
+					// Key에 따른 사전 작성
+					this->m_networkComponent->StructureDamageStatus->Add(key, structureDamage);
+				}
+				sourceIndex++;
+			}
+
+			return true;
+		}
+
+
+
+
+
+
+
+
+
 
 	private: System::Void Step6Form_Load(System::Object^  sender, System::EventArgs^  e) {
 		this->cboSeismicSource->DataSource = this->m_dataSet->SeismicSourceData;

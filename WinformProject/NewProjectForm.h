@@ -26,7 +26,7 @@ namespace WinformProject {
 	public ref class NewProjectForm : public System::Windows::Forms::Form
 	{
 	private:
-//		static String^ DEFAULT_PATH = "c:\\sample\\sample3";
+		//		static String^ DEFAULT_PATH = "c:\\sample\\sample3";
 		static String^ DEFAULT_PATH = "c:\\sample";
 	private: System::Windows::Forms::Button^ btnFindClassFile;
 
@@ -64,13 +64,13 @@ namespace WinformProject {
 			}
 		}
 
-//	private: System::Windows::Forms::Label^ label6;
-//	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
-//	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
+		//	private: System::Windows::Forms::Label^ label6;
+		//	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
+		//	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
 
 
-	private: System::Windows::Forms::TextBox^  tbShapeFilePath;
-	private: System::Windows::Forms::Button^  btnFindShapeFile;
+	private: System::Windows::Forms::TextBox^ tbShapeFilePath;
+	private: System::Windows::Forms::Button^ btnFindShapeFile;
 	private: System::Windows::Forms::Button^ btnFindListFile;
 
 	private: System::Windows::Forms::TextBox^ tbListFilePath;
@@ -80,29 +80,29 @@ namespace WinformProject {
 
 
 
-	private: System::Windows::Forms::Button^  btnFindNetworkFile;
-	private: System::Windows::Forms::TextBox^  tbNetworkFilePath;
+	private: System::Windows::Forms::Button^ btnFindNetworkFile;
+	private: System::Windows::Forms::TextBox^ tbNetworkFilePath;
 	private: System::Windows::Forms::Label^ lblNetworkFilePath;
 
-	private: System::Windows::Forms::ProgressBar^  newProgress;
+	private: System::Windows::Forms::ProgressBar^ newProgress;
 	private: System::Windows::Forms::Label^ lblFragCurParamFilePath;
 
-	private: System::Windows::Forms::TextBox^  tbFragCurParamFilePath;
+	private: System::Windows::Forms::TextBox^ tbFragCurParamFilePath;
 	private: System::Windows::Forms::Label^ lblSoilAmpFilePath;
 
 	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
-	private: System::ComponentModel::BackgroundWorker^  backgroundWorker;
-	private: System::Windows::Forms::Button^  btnFindFragParamFile;
+	private: System::ComponentModel::BackgroundWorker^ backgroundWorker;
+	private: System::Windows::Forms::Button^ btnFindFragParamFile;
 	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
-	private: System::Windows::Forms::Button^  btnOK;
-	private: System::Windows::Forms::Button^  btnCancel;
-	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::TextBox^  tbName;
+	private: System::Windows::Forms::Button^ btnOK;
+	private: System::Windows::Forms::Button^ btnCancel;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::TextBox^ tbName;
 	private:
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// 디자이너 지원에 필요한 메서드입니다. 
@@ -430,7 +430,7 @@ namespace WinformProject {
 				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL10));
 				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL11));
 				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL12));
-	
+
 
 				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSetBinder->ListFilePath);
 				String^ output = csv->Read();
@@ -490,7 +490,7 @@ namespace WinformProject {
 					//Fragility 딕셔러리 초기화
 					this->m_dataSetBinder->FragilityCompDict = m_CompDict;
 					/**************************************************/
-	
+
 				}
 
 			}
@@ -535,7 +535,7 @@ namespace WinformProject {
 				);
 				this->m_dataSetBinder->SoilAmpData = st;
 			}
-			catch (Exception ^ ex) {
+			catch (Exception^ ex) {
 				throw gcnew Exception(L"Can not read soil amplification factor file.");
 			}
 		}
@@ -545,7 +545,7 @@ namespace WinformProject {
 			array<String^>^ columns = { "control_type_name", "control_type" };
 			DataTable^ newTable = gcnew DataTable();
 			// define fields
-			for each (String^ col in columns)
+			for each (String ^ col in columns)
 			{
 				newTable->Columns->Add(gcnew DataColumn(col));
 			}
@@ -585,13 +585,13 @@ namespace WinformProject {
 
 			this->m_dataSetBinder->NodeControlTypes = newTable;
 		}
-		
+
 		void SetDefaultLinkTypes() {
 			array<String^>^ columns = { "link_type", "link_type_name", "type_code", "default_lane_capacity", "default_speed_limit"
-				, "default_number_of_lanes" };		
+				, "default_number_of_lanes" };
 			DataTable^ newTable = gcnew DataTable();
 			// define fields
-			for each (String^ col in columns)
+			for each (String ^ col in columns)
 			{
 				newTable->Columns->Add(gcnew DataColumn(col));
 			}
@@ -811,17 +811,17 @@ namespace WinformProject {
 			this->m_dataSetBinder->DamageStateData[5] = "Most probable";
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-			
+
 			// set node control types
 			SetDefaultNodeControlTypes();
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-			
+
 			// set link types
 			SetDefaultLinkTypes();
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-			
+
 			// set same all class params
 			this->m_dataSetBinder->SeismicSourceData->Columns->Add(gcnew DataColumn(CommConst::GRID_SEISMIC_SOURCES_LIST_COL1));
 			this->m_dataSetBinder->SeismicSourceData->Columns->Add(gcnew DataColumn(CommConst::GRID_SEISMIC_SOURCES_LIST_COL2));
@@ -840,12 +840,12 @@ namespace WinformProject {
 			this->m_dataSetBinder->RepairCostRatioParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_REPAIR_COST_RATIO_COL5));
 			this->m_dataSetBinder->IsSameAllRepairCostRatioParam = true;
 
-/*
-			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL1));
-			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL2));
-			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL3));
-			this->m_dataSetBinder->IsDefaultODZoneParam = true;
-*/
+			/*
+						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL1));
+						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL2));
+						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL3));
+						this->m_dataSetBinder->IsDefaultODZoneParam = true;
+			*/
 
 			this->m_dataSetBinder->InputDemandMetaParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_INPUT_DEMAND_META_COL1));
 			this->m_dataSetBinder->InputDemandMetaParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_INPUT_DEMAND_META_COL2));
@@ -853,7 +853,7 @@ namespace WinformProject {
 
 
 		}
-		System::Void backgroundWorkerProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e) {
+		System::Void backgroundWorkerProgressChanged(System::Object^ sender, System::ComponentModel::ProgressChangedEventArgs^ e) {
 			if (newProgress->InvokeRequired) {
 				array<Object^>^ args = { e->ProgressPercentage };
 				newProgress->Invoke(updateProgress, args);
@@ -862,7 +862,7 @@ namespace WinformProject {
 				UpdateProgress(e->ProgressPercentage);
 			}
 		}
-		System::Void backgroundWorkerRunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e) {
+		System::Void backgroundWorkerRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e) {
 			if (e->Cancelled)    //Messages for the events
 			{
 				SetProgressValue(0);
@@ -896,7 +896,7 @@ namespace WinformProject {
 			btnOK->Enabled = enable;
 		}
 
-	private: System::Void NewProjectForm_Load(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void NewProjectForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		// initialize
 		newProgress->Value = 0;
 		this->m_dataSetBinder->IntensityMeasureData = gcnew array<String^>(2);
@@ -913,31 +913,31 @@ namespace WinformProject {
 
 		this->tbName->Focus();
 	}
-			 
-	// 생성
-	private: System::Void btnOK_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		   // 생성
+	private: System::Void btnOK_Click(System::Object^ sender, System::EventArgs^ e) {
 		CreateProject();
 	}
-			 
-	// 취소
-	private: System::Void btnCancel_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		   // 취소
+	private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->DialogResult = ::DialogResult::Cancel;
 		this->Close();
 	}
-			 
-	// shape 파일 찾기
-	private: System::Void btnFindShapeFile_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		   // shape 파일 찾기
+	private: System::Void btnFindShapeFile_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ filename = CFileDlgUtil::GetShapeFile();
-//		String^ filename = CFileDlgUtil::GetExcelFile();
+		//		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbShapeFilePath->Text = filename;
 		}
 	}
-			 
-	// component class 파일 찾기
-	private: System::Void btnFindClassFile_Click(System::Object^  sender, System::EventArgs^  e) {
-//		String^ filename = CFileDlgUtil::GetShapeFile();
+
+		   // component class 파일 찾기
+	private: System::Void btnFindClassFile_Click(System::Object^ sender, System::EventArgs^ e) {
+		//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
@@ -945,7 +945,7 @@ namespace WinformProject {
 		}
 	}
 
-	//Bridge List 파일 찾기
+		   //Bridge List 파일 찾기
 	private: System::Void btnFindListFile_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ filename = CFileDlgUtil::GetCsvFile();
 		if (!String::IsNullOrEmpty(filename))
@@ -955,40 +955,40 @@ namespace WinformProject {
 	}
 
 
-	// network component 파일 찾기
-	private: System::Void btnFindNetworkFile_Click(System::Object^  sender, System::EventArgs^  e) {
-//		String^ filename = CFileDlgUtil::GetShapeFile();
+		   // network component 파일 찾기
+	private: System::Void btnFindNetworkFile_Click(System::Object^ sender, System::EventArgs^ e) {
+		//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbNetworkFilePath->Text = filename;
 		}
 	}
-	
-	// fragility cureve paramter 파일 찾기
-	private: System::Void btnFindFragParamFile_Click(System::Object^  sender, System::EventArgs^  e) {
-//		String^ filename = CFileDlgUtil::GetShapeFile();
+
+		   // fragility cureve paramter 파일 찾기
+	private: System::Void btnFindFragParamFile_Click(System::Object^ sender, System::EventArgs^ e) {
+		//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbFragCurParamFilePath->Text = filename;
 		}
 	}
-			 // 프로젝트 명으로 dialog의 title을 변경
-	private: System::Void tbName_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+		   // 프로젝트 명으로 dialog의 title을 변경
+	private: System::Void tbName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->Text = String::IsNullOrEmpty(tbName->Text) ? "New" : tbName->Text;
 	}
-			 // 프로젝트 명 작성 중 엔터 클릭 시 프로젝트 생성
-	private: System::Void tbName_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		   // 프로젝트 명 작성 중 엔터 클릭 시 프로젝트 생성
+	private: System::Void tbName_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::Enter)
 		{
 			CreateProject();
 		}
 	}
-	private: System::Void NewProjectForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
+	private: System::Void NewProjectForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 		if (backgroundWorker->IsBusy) {
 			Alert::Info("프로젝트 생성 중에는 창을 닫을 수 없습니다.");
-			e->Cancel = true;	
+			e->Cancel = true;
 		}
 	}
 
@@ -1002,5 +1002,5 @@ namespace WinformProject {
 		}
 	}
 
-};
+	};
 }

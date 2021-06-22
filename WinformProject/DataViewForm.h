@@ -150,7 +150,7 @@ namespace WinformProject {
 		strArr[15] = "recurrence periods data";//recurrence periods data - RecurrencePeriodData
 		strArr[16] = "damage state data";//damage state data - DamageStateData
 		strArr[17] = "traffic scenario sample";//traffic scenario sample - TrafficScenarioSamples
-
+	
 		this->cboDataName->Items->AddRange(strArr);
 	}
 
@@ -260,6 +260,7 @@ namespace WinformProject {
 			this->dgvViewData->DataSource = nullptr;
 			this->dgvViewData->DataSource = dt;
 		}
+
 
 	}
 

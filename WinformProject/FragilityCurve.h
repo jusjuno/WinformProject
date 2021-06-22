@@ -108,7 +108,7 @@ namespace WinformProject {
 			return dsArr;
 		}
 
-		
+
 		// damageState = 0, 1, 2, 3, 4
 		double GetFragilityValue(ProjectDataSetBinder^ m_dataSet, String^ componentID, int damageState, double Sa) {
 
@@ -132,16 +132,16 @@ namespace WinformProject {
 				array<double>^ keyArray = gcnew array<double>(dataCount);
 				int index = 0;
 				fragilityDataSet->FragilityFileDict->Keys->CopyTo(keyArray, index);
-				
+
 				// key열의 step 크기 계산
 				double lowerStep = keyArray[1];
 				double upperStep = keyArray[2];
-				double stepSize = int( 1/(upperStep - lowerStep) );
+				double stepSize = int(1 / (upperStep - lowerStep));
 
 
 				// 해당 Sa에 가장 가까운 위/아래 Sa값 확보 
-				int inverseCloserSa = trunc(Sa*stepSize);
-				double residualStep = Sa - inverseCloserSa/stepSize;
+				int inverseCloserSa = trunc(Sa * stepSize);
+				double residualStep = Sa - inverseCloserSa / stepSize;
 				double lowerCloserSa = inverseCloserSa / stepSize;
 				double upperCloserSa = (inverseCloserSa + 1) / stepSize;
 
@@ -210,7 +210,7 @@ namespace WinformProject {
 			else {
 				return 0;
 			}
-			
+
 		}
 
 
@@ -300,7 +300,7 @@ namespace WinformProject {
 			{
 				dsArr[i] = GetFragilityValue(classID, i, Sa);
 			}*/
-			
+
 		}
 
 

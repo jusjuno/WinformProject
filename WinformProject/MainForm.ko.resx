@@ -148,9 +148,6 @@
   <data name="FileExitMenuItem.Text" xml:space="preserve">
     <value>종료</value>
   </data>
-  <data name="ViewDataMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
   <data name="FileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 24</value>
   </data>
@@ -158,55 +155,55 @@
     <value>파일</value>
   </data>
   <data name="ProjectStep0MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep0MenuItem.Text" xml:space="preserve">
     <value>지도</value>
   </data>
   <data name="ProjectStep1MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep1MenuItem.Text" xml:space="preserve">
     <value>도로망</value>
   </data>
   <data name="ProjectStep2MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep2MenuItem.Text" xml:space="preserve">
-    <value>시설물목록</value>
+    <value>시설물분류</value>
   </data>
   <data name="ProjectStep3MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep3MenuItem.Text" xml:space="preserve">
     <value>시설물제원</value>
   </data>
   <data name="ProjectStep4MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep4MenuItem.Text" xml:space="preserve">
     <value>취약도곡선</value>
   </data>
   <data name="ProjectStep5MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep5MenuItem.Text" xml:space="preserve">
     <value>지진동강도</value>
   </data>
   <data name="ProjectStep6MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep6MenuItem.Text" xml:space="preserve">
     <value>시설물 취약도 계산</value>
   </data>
   <data name="ProjectStep7MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep7MenuItem.Text" xml:space="preserve">
     <value>복구기간&amp;복구비용</value>
   </data>
   <data name="ProjectStep8MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="ProjectStep8MenuItem.Text" xml:space="preserve">
     <value>교통시나리오</value>

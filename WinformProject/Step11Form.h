@@ -365,10 +365,10 @@ namespace WinformProject {
 				Alert::Info("Functionality has been not calculated.");
 				return false;
 			}
-			else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
-				Alert::Info("Loss factor has been not calculated.");
-				return false;
-			}
+			//else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
+			//	Alert::Info("Loss factor has been not calculated.");
+			//	return false;
+			//}
 			return true;
 		}
 	private:
@@ -422,7 +422,7 @@ namespace WinformProject {
 			////////////////////////////////////////////////////////////////////////////////////////
 			// 지수값은 ResultDataSet.h에 (1)개별OD에 대한 지수값, (2)통합OD에 대한 지수값 순으로 저장됨  
 			////////////////////////////////////////////////////////////////////////////////////////
-
+			/*
 			int totalOD = this->m_dataSet->ODZoneParamData->Rows->Count;
 			//int unitScenarioStep = this->m_dataSet->JumpScenarioNum;
 			int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
@@ -437,7 +437,7 @@ namespace WinformProject {
 			// environment
 			this->tbEnvironment->Text = StringUtil::DecimalFormat(2, this->m_dataSet->ResultData->GetTotalEnvironmentLossIndices(indicesIndex));
 
-
+			*/
 
 			/*double sumECOindices = 0;
 			double sumCONindices = 0;

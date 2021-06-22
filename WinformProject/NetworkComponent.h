@@ -48,6 +48,9 @@ namespace WinformProject {
 		array<Drawing::Color>^		m_componentColors;
 
 
+		Dictionary<String^, DataTable^>^ m_structureDamageStatus; //시설물 지진시나리오별 피해결과 저장
+
+
 	public:
 		// Data
 		property DataTable^ Data {
@@ -55,7 +58,24 @@ namespace WinformProject {
 				return this->m_dataTable;
 			}
 		}
+
+
+		property Dictionary<String^, DataTable^>^ StructureDamageStatus {
+			Dictionary<String^, DataTable^>^ get() {
+				return this->m_structureDamageStatus;
+			}
+			void set(Dictionary<String^, DataTable^>^ value) {
+				this->m_structureDamageStatus = value;
+			}
+		}
+
 	
+
+
+
+
+
+
 /*
 	public:
 		NetworkComponent() {
@@ -72,6 +92,9 @@ namespace WinformProject {
 		}
 		NetworkComponent(ProjectDataSetBinder^ dataSet) {
 			init(dataSet);
+
+			this->m_structureDamageStatus = gcnew Dictionary<String^, DataTable^>();
+
 		}
 
 

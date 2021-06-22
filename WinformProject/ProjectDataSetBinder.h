@@ -130,6 +130,23 @@ public:
 		}
 	}
 
+
+	// 직접피해산출 및 교통해석 결과파일 경로
+	property String^ UnistResultFilePath {
+		String^ get() {
+			return this->m_dataSet->m_unistResultFilePath;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_unistResultFilePath = value;
+		}
+	}
+
+
+
+
+
+
+
 	// shape data
 	property WinformProject::Shape^ ShapeData {
 		WinformProject::Shape^ get() {
@@ -533,6 +550,19 @@ public:
 		}
 	}
 
+
+	// Unist output data
+	// key: scenarios no + damage state: (key(0)=정상시나리오 데이터)
+	// value: secenarios output data
+	property Dictionary<String^, OutputSummary^>^ UnistOutputSummaryDictionary {
+		Dictionary<String^, OutputSummary^>^ get() {
+			return this->m_dataSet->m_UnistOutputSummaryDictionary;
+		}
+		void set(Dictionary<String^, OutputSummary^>^ value) {
+			this->m_dataSet->m_UnistOutputSummaryDictionary = value;
+		}
+	}
+
 	// Number of monte cario sample
 	property int MonteCarioCount {
 		int get() {
@@ -782,6 +812,7 @@ public:
 		}
 	}
 
+
 	//취약성곡선 dataset 
 	property Dictionary<String^, FragilityDataSet^>^ FragilityDataSetDictionary {
 		Dictionary<String^, FragilityDataSet^>^ get() {
@@ -812,7 +843,6 @@ public:
 			this->m_dataSet->m_FragilityCompDict = value;
 		}
 	}
-	
 
 
 };

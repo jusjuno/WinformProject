@@ -17,6 +17,7 @@ public:
 		return String::Format("{0:#,###}", Double::IsNaN(value) ? 0 : value);
 	}
 
+	//nullToString
 	static String^ nullToString(Object^ value1, String^ value2) {
 		if (value1 == nullptr || value1->ToString()->Equals("")) {
 			return value2;
@@ -25,6 +26,4 @@ public:
 			return value1->ToString();
 		}
 	}
-	
-
 };

@@ -47,7 +47,9 @@ public protected:
 		this->m_nodeControlTypes = gcnew DataTable();
 
 
-		this->m_resultFilePath;
+		this->m_resultFilePath; // NEXTA해석 결과 저장 경로
+		this->m_unistResultFilePath; // UNIST해석 결과 저장 경로
+
 
 		this->m_beforeRehabStructureCost = gcnew Dictionary<String^, DataTable^>(); 
 
@@ -89,8 +91,8 @@ public protected:
 	String^								m_fragParamFilePath; // fragility curve parameter file path
 	String^								m_soilAmpFilePath; // soil amplification factor file path
 
-
-	String^								m_resultFilePath; // 직접피해산출 및 교통해석 결과저장 경로 
+	String^								m_resultFilePath; // NEXTA해석을 통한 직접피해산출 및 교통해석 결과저장 경로 
+	String^								m_unistResultFilePath; // UNIST해석을 통한 직접피해산출 및 교통해석 결과저장 경로 
 
 	WinformProject::Shape^				m_shape; // shape 관련 클래스
 	DataTable^							m_componentClasses; // 
@@ -117,7 +119,9 @@ public protected:
 
 	array<TrafficScenario^>^			m_trafficScenarios;
 	Dictionary<String^, int>^			m_trafficScenarioIndexDictionary;
-	Dictionary<String^, OutputSummary^>^	m_NeXTAOutputSummaryDictionary;
+
+	Dictionary<String^, OutputSummary^>^	m_NeXTAOutputSummaryDictionary; // NEXTA output summary 저장
+	Dictionary<String^, OutputSummary^>^	m_UnistOutputSummaryDictionary; // UNIST output summary 저장
 
 	Dictionary<String^, DataTable^>^	m_beforeRehabStructureCost; // 내진보강전 직접피해 규모
 
@@ -173,8 +177,7 @@ public protected:
 	Dictionary<String^, array<String^>^>^ m_trafficVolumeStatus; //Unist 결과를 읽고 저장
 
 	Dictionary<String^, FragilityDataSet^>^ m_FragilityDataSetDictionary;
-	DataTable^    m_BridgeList;
-	Dictionary<String^, String^>^ m_FragilityCompDict;
-
+	DataTable^                              m_BridgeList;
+	Dictionary<String^, String^>^           m_FragilityCompDict;
 };
 
