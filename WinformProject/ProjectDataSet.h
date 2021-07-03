@@ -4,7 +4,7 @@
 #include "ResultDataSet.h"
 #include "OutputSummary.h"
 #include "Zone.h"
-#include "FragilityDataSet.h"
+
 
 using namespace System;
 using namespace System::Data;
@@ -75,10 +75,6 @@ public protected:
 
 		this->m_trafficVolumeStatus = gcnew Dictionary<String^, array<String^>^>(); // 시나리오별 UNIST 결과 저장
 
-		this->m_FragilityDataSetDictionary = gcnew Dictionary<String^, FragilityDataSet^>();//ComponentID, FragilityDataSet
-		this->m_BridgeList = gcnew DataTable();
-		this->m_FragilityCompDict = gcnew Dictionary<String^, String^>();//Bridge List Dictionary
-
 	}
 
 public protected:	
@@ -86,7 +82,6 @@ public protected:
 	String^								m_saveFilename; // saved file name
 	String^								m_shapeFilePath; // shape file(.shp) file path
 	String^								m_classFilePath; // component classes file path
-	String^                             m_listFilePath; // List file path
 	String^								m_networkFilePath; // networkt of component file path
 	String^								m_fragParamFilePath; // fragility curve parameter file path
 	String^								m_soilAmpFilePath; // soil amplification factor file path
@@ -176,8 +171,5 @@ public protected:
 
 	Dictionary<String^, array<String^>^>^ m_trafficVolumeStatus; //Unist 결과를 읽고 저장
 
-	Dictionary<String^, FragilityDataSet^>^ m_FragilityDataSetDictionary;
-	DataTable^                              m_BridgeList;
-	Dictionary<String^, String^>^           m_FragilityCompDict;
 };
 

@@ -10,7 +10,6 @@
 #include "Step1Form.h"
 #include "Step2Form.h"
 #include "Step3Form.h"
-#include "Step3bForm.h"
 #include "Step4Form.h"
 #include "Step5Form.h"
 #include "Step6Form.h"
@@ -33,7 +32,7 @@
 #include "DataViewForm.h"
 
 
-#include "FragilityCompList.h"
+#include "FragilityDataSet.h"
 
 
 
@@ -91,7 +90,6 @@ namespace WinformProject {
 		Step1Form^					m_step1Form;
 		Step2Form^					m_step2Form;
 		Step3Form^					m_step3Form;
-		Step3bForm^                 m_step3bForm;
 		Step4Form^					m_step4Form;
 		Step5Form^					m_step5Form;
 		Step6Form^					m_step6Form;
@@ -131,7 +129,7 @@ namespace WinformProject {
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep8MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  ResultStep10MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  ResultStep12MenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ResultStep10bMenuItem;
+
 	private: System::Windows::Forms::ToolStripMenuItem^  ResultStep11MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  NeXTAMenuItem;
 ///////////////////////////////////////////////////////////////////////////////
@@ -186,7 +184,6 @@ namespace WinformProject {
 			this->UnistRunMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultStep10MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ResultStep10bMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultStep11MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ResultStep12MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->decisionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -195,42 +192,40 @@ namespace WinformProject {
 			// 
 			// menuStrip
 			// 
-			resources->ApplyResources(this->menuStrip, L"menuStrip");
 			this->menuStrip->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->FileMenuItem, this->ProjectMenuItem,
 					this->NeXTAMenuItem, this->UnistMenuItem, this->ResultMenuItem
 			});
-			
+			resources->ApplyResources(this->menuStrip, L"menuStrip");
 			this->menuStrip->Name = L"menuStrip";
 			// 
 			// FileMenuItem
 			// 
-			resources->ApplyResources(this->FileMenuItem, L"FileMenuItem");
 			this->FileMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->FileNewMenuItem,
 					this->FileOpenMenuItem, this->FileSaveMenuItem, this->FilePreferencesMenuItem, this->FileExitMenuItem, this->ViewDataMenuItem
 			});
 			this->FileMenuItem->Name = L"FileMenuItem";
-			
+			resources->ApplyResources(this->FileMenuItem, L"FileMenuItem");
 			// 
 			// FileNewMenuItem
 			// 
-			resources->ApplyResources(this->FileNewMenuItem, L"FileNewMenuItem");
 			this->FileNewMenuItem->Name = L"FileNewMenuItem";
+			resources->ApplyResources(this->FileNewMenuItem, L"FileNewMenuItem");
 			this->FileNewMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileNewMenuItem_Click);
 			// 
 			// FileOpenMenuItem
 			// 
-			resources->ApplyResources(this->FileOpenMenuItem, L"FileOpenMenuItem");
 			this->FileOpenMenuItem->Name = L"FileOpenMenuItem";
+			resources->ApplyResources(this->FileOpenMenuItem, L"FileOpenMenuItem");
 			this->FileOpenMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileOpenMenuItem_Click);
 			// 
 			// FileSaveMenuItem
 			// 
+			this->FileSaveMenuItem->Name = L"FileSaveMenuItem";
 			resources->ApplyResources(this->FileSaveMenuItem, L"FileSaveMenuItem");
-			this->FileSaveMenuItem->Name = L"FileSaveMenuItem";			
 			this->FileSaveMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileSaveMenuItem_Click);
 			// 
 			// FilePreferencesMenuItem
@@ -241,144 +236,144 @@ namespace WinformProject {
 			// 
 			// FileExitMenuItem
 			// 
+			this->FileExitMenuItem->Name = L"FileExitMenuItem";
 			resources->ApplyResources(this->FileExitMenuItem, L"FileExitMenuItem");
-			this->FileExitMenuItem->Name = L"FileExitMenuItem";			
 			this->FileExitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::FileExitMenuItem_Click);
 			// 
 			// ViewDataMenuItem
 			// 
+			this->ViewDataMenuItem->Name = L"ViewDataMenuItem";
 			resources->ApplyResources(this->ViewDataMenuItem, L"ViewDataMenuItem");
-			this->ViewDataMenuItem->Name = L"ViewDataMenuItem";			
 			this->ViewDataMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ViewDataMenuItem_Click);
 			// 
 			// ProjectMenuItem
 			// 
-			resources->ApplyResources(this->ProjectMenuItem, L"ProjectMenuItem");
 			this->ProjectMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {
 				this->ProjectStep0MenuItem,
 					this->ProjectStep1MenuItem, this->ProjectStep2MenuItem, this->ProjectStep3MenuItem, this->ProjectStep4MenuItem, this->ProjectStep5MenuItem,
 					this->ProjectStep6MenuItem, this->ProjectStep7MenuItem, this->ProjectStep8MenuItem
-			});			
+			});
+			resources->ApplyResources(this->ProjectMenuItem, L"ProjectMenuItem");
 			this->ProjectMenuItem->Name = L"ProjectMenuItem";
 			// 
 			// ProjectStep0MenuItem
 			// 
+			this->ProjectStep0MenuItem->Name = L"ProjectStep0MenuItem";
 			resources->ApplyResources(this->ProjectStep0MenuItem, L"ProjectStep0MenuItem");
-			this->ProjectStep0MenuItem->Name = L"ProjectStep0MenuItem";			
 			this->ProjectStep0MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep0MenuItem_Click);
 			// 
 			// ProjectStep1MenuItem
 			// 
+			this->ProjectStep1MenuItem->Name = L"ProjectStep1MenuItem";
 			resources->ApplyResources(this->ProjectStep1MenuItem, L"ProjectStep1MenuItem");
-			this->ProjectStep1MenuItem->Name = L"ProjectStep1MenuItem";			
 			this->ProjectStep1MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep1MenuItem_Click);
 			// 
 			// ProjectStep2MenuItem
 			// 
+			this->ProjectStep2MenuItem->Name = L"ProjectStep2MenuItem";
 			resources->ApplyResources(this->ProjectStep2MenuItem, L"ProjectStep2MenuItem");
-			this->ProjectStep2MenuItem->Name = L"ProjectStep2MenuItem";			
 			this->ProjectStep2MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep2MenuItem_Click);
 			// 
 			// ProjectStep3MenuItem
 			// 
+			this->ProjectStep3MenuItem->Name = L"ProjectStep3MenuItem";
 			resources->ApplyResources(this->ProjectStep3MenuItem, L"ProjectStep3MenuItem");
-			this->ProjectStep3MenuItem->Name = L"ProjectStep3MenuItem";			
 			this->ProjectStep3MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep3MenuItem_Click);
 			// 
 			// ProjectStep4MenuItem
 			// 
+			this->ProjectStep4MenuItem->Name = L"ProjectStep4MenuItem";
 			resources->ApplyResources(this->ProjectStep4MenuItem, L"ProjectStep4MenuItem");
-			this->ProjectStep4MenuItem->Name = L"ProjectStep4MenuItem";			
 			this->ProjectStep4MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep4MenuItem_Click);
 			// 
 			// ProjectStep5MenuItem
 			// 
+			this->ProjectStep5MenuItem->Name = L"ProjectStep5MenuItem";
 			resources->ApplyResources(this->ProjectStep5MenuItem, L"ProjectStep5MenuItem");
-			this->ProjectStep5MenuItem->Name = L"ProjectStep5MenuItem";			
 			this->ProjectStep5MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep5MenuItem_Click);
 			// 
 			// ProjectStep6MenuItem
 			// 
+			this->ProjectStep6MenuItem->Name = L"ProjectStep6MenuItem";
 			resources->ApplyResources(this->ProjectStep6MenuItem, L"ProjectStep6MenuItem");
-			this->ProjectStep6MenuItem->Name = L"ProjectStep6MenuItem";			
 			this->ProjectStep6MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep6MenuItem_Click);
 			// 
 			// ProjectStep7MenuItem
 			// 
+			this->ProjectStep7MenuItem->Name = L"ProjectStep7MenuItem";
 			resources->ApplyResources(this->ProjectStep7MenuItem, L"ProjectStep7MenuItem");
-			this->ProjectStep7MenuItem->Name = L"ProjectStep7MenuItem";			
 			this->ProjectStep7MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep7MenuItem_Click);
 			// 
 			// ProjectStep8MenuItem
 			// 
+			this->ProjectStep8MenuItem->Name = L"ProjectStep8MenuItem";
 			resources->ApplyResources(this->ProjectStep8MenuItem, L"ProjectStep8MenuItem");
-			this->ProjectStep8MenuItem->Name = L"ProjectStep8MenuItem";			
 			this->ProjectStep8MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep8MenuItem_Click);
 			// 
 			// NeXTAMenuItem
 			// 
-			resources->ApplyResources(this->NeXTAMenuItem, L"NeXTAMenuItem");
 			this->NeXTAMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->NeXTAInputMenuItem,
 					this->NeXTARunMenuItem
 			});
-			this->NeXTAMenuItem->Name = L"NeXTAMenuItem";			
+			this->NeXTAMenuItem->Name = L"NeXTAMenuItem";
+			resources->ApplyResources(this->NeXTAMenuItem, L"NeXTAMenuItem");
 			// 
 			// NeXTAInputMenuItem
 			// 
+			this->NeXTAInputMenuItem->Name = L"NeXTAInputMenuItem";
 			resources->ApplyResources(this->NeXTAInputMenuItem, L"NeXTAInputMenuItem");
-			this->NeXTAInputMenuItem->Name = L"NeXTAInputMenuItem";			
 			this->NeXTAInputMenuItem->Click += gcnew System::EventHandler(this, &MainForm::NeXTAInputMenuItem_Click);
 			// 
 			// NeXTARunMenuItem
 			// 
+			this->NeXTARunMenuItem->Name = L"NeXTARunMenuItem";
 			resources->ApplyResources(this->NeXTARunMenuItem, L"NeXTARunMenuItem");
-			this->NeXTARunMenuItem->Name = L"NeXTARunMenuItem";			
 			this->NeXTARunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::NeXTARunMenuItem_Click);
 			// 
 			// UnistMenuItem
 			// 
-			resources->ApplyResources(this->UnistMenuItem, L"UnistMenuItem");
 			this->UnistMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->UnistRunMenuItem });
-			this->UnistMenuItem->Name = L"UnistMenuItem";			
+			this->UnistMenuItem->Name = L"UnistMenuItem";
+			resources->ApplyResources(this->UnistMenuItem, L"UnistMenuItem");
 			// 
 			// UnistRunMenuItem
 			// 
+			this->UnistRunMenuItem->Name = L"UnistRunMenuItem";
 			resources->ApplyResources(this->UnistRunMenuItem, L"UnistRunMenuItem");
-			this->UnistRunMenuItem->Name = L"UnistRunMenuItem";			
 			this->UnistRunMenuItem->Click += gcnew System::EventHandler(this, &MainForm::UnistRunMenuItem_Click);
 			// 
 			// ResultMenuItem
 			// 
-			resources->ApplyResources(this->ResultMenuItem, L"ResultMenuItem");
 			this->ResultMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->ResultStep10MenuItem,
 					this->ResultStep11MenuItem, this->ResultStep12MenuItem, this->decisionToolStripMenuItem
 			});
-			this->ResultMenuItem->Name = L"ResultMenuItem";			
+			this->ResultMenuItem->Name = L"ResultMenuItem";
+			resources->ApplyResources(this->ResultMenuItem, L"ResultMenuItem");
 			// 
 			// ResultStep10MenuItem
 			// 
+			this->ResultStep10MenuItem->Name = L"ResultStep10MenuItem";
 			resources->ApplyResources(this->ResultStep10MenuItem, L"ResultStep10MenuItem");
-			this->ResultStep10MenuItem->Name = L"ResultStep10MenuItem";			
 			this->ResultStep10MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep10MenuItem_Click);
 			// 
 			// ResultStep11MenuItem
 			// 
+			this->ResultStep11MenuItem->Name = L"ResultStep11MenuItem";
 			resources->ApplyResources(this->ResultStep11MenuItem, L"ResultStep11MenuItem");
-			this->ResultStep11MenuItem->Name = L"ResultStep11MenuItem";			
 			this->ResultStep11MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep11MenuItem_Click);
 			// 
 			// ResultStep12MenuItem
 			// 
+			this->ResultStep12MenuItem->Name = L"ResultStep12MenuItem";
 			resources->ApplyResources(this->ResultStep12MenuItem, L"ResultStep12MenuItem");
-			this->ResultStep12MenuItem->Name = L"ResultStep12MenuItem";			
 			this->ResultStep12MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ResultStep12MenuItem_Click);
 			// 
 			// decisionToolStripMenuItem
 			// 
+			this->decisionToolStripMenuItem->Name = L"decisionToolStripMenuItem";
 			resources->ApplyResources(this->decisionToolStripMenuItem, L"decisionToolStripMenuItem");
-			this->decisionToolStripMenuItem->Name = L"decisionToolStripMenuItem";			
 			this->decisionToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::decisionToolStripMenuItem_Click);
 			// 
 			// MainForm
@@ -544,9 +539,9 @@ namespace WinformProject {
 
 
 		//Fragility 딕셔러리 초기화
-		//WinformProject::FragilityDataSet::setFragilityCurvDict();
+		WinformProject::FragilityDataSet::setFragilityCurvDict();
 		//Fragility 데이타 초기화
-		//WinformProject::FragilityDataSet::setFragilityCurvData();
+		WinformProject::FragilityDataSet::setFragilityCurvData();
 
 		/*
 		Dictionary<String^, String^>^ aaa = WinformProject::FragilityDataSet::FragilityCurvDict;
@@ -719,7 +714,6 @@ namespace WinformProject {
 			}
 		}
 		System::Void ProjectStep3MenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			/*
 			if (!IsCreatedFormInstance(m_step3Form)) {
 				Step3Form^ _form = gcnew Step3Form(m_projectDataSetBinder);
 				if (!_form->IsValidToOpenForm()) {
@@ -731,23 +725,6 @@ namespace WinformProject {
 				m_step3Form = _form;
 				m_step3Form->Show();
 			}
-			*/
-
-			if (!IsCreatedFormInstance(m_step3bForm)) {
-				Step3bForm^ _form = gcnew Step3bForm(m_projectDataSetBinder);
-				/*
-				if (!_form->IsValidToOpenForm()) {
-					return;
-				}
-				*/
-				_form->Text = ((ToolStripMenuItem^)sender)->Text;
-				_form->MdiParent = this;
-				//_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
-				m_step3bForm = _form;
-				m_step3bForm->Show();
-			}
-
-
 		}
 		System::Void ProjectStep4MenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if (!IsCreatedFormInstance(m_step4Form)) {

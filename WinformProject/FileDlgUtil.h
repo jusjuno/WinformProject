@@ -37,14 +37,6 @@ public:
 		return GetFile(L"Excel Files (*.xls,*,xlsx)|*.xls;*.xlsx");
 	}
 
-	// Excel 파일만 가져오기
-	static String^ GetCsvFile()
-	{
-		return GetFile(L"CSV Files (*.csv)|*.csv");
-	}
-
-
-
 	// Project 저장 파일만 가져오기
 	static String^ GetProjectDataFile()
 	{

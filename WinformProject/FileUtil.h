@@ -35,8 +35,7 @@ public:
 		StreamReader^ sr = nullptr;
 		String^ result = "";
 		try {
-			//sr = gcnew StreamReader(filePath);
-			sr = gcnew StreamReader(filePath, System::Text::Encoding::GetEncoding("euc-kr"));
+			sr = gcnew StreamReader(filePath);
 
 			while (!sr->EndOfStream) {
 				result += sr->ReadLine() + Environment::NewLine;

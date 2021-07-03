@@ -78,18 +78,6 @@ public:
 		}
 	}
 
-
-	// List 파일 경로
-	property String^ ListFilePath {
-		String^ get() {
-			return this->m_dataSet->m_listFilePath;
-		}
-		void set(String^ value) {
-			this->m_dataSet->m_listFilePath = value;
-		}
-	}
-
-
 	// network component 파일 경로
 	property String^ NetworkFilePath {
 		String^ get() {
@@ -811,38 +799,5 @@ public:
 			this->m_dataSet->m_trafficVolumeStatus = value;
 		}
 	}
-
-
-	//취약성곡선 dataset 
-	property Dictionary<String^, FragilityDataSet^>^ FragilityDataSetDictionary {
-		Dictionary<String^, FragilityDataSet^>^ get() {
-			return this->m_dataSet->m_FragilityDataSetDictionary;
-		}
-		void set(Dictionary<String^, FragilityDataSet^>^ value) {
-			this->m_dataSet->m_FragilityDataSetDictionary = value;
-		}
-	}
-
-
-	// Bridge List define data
-	property DataTable^ BridgeList {
-		DataTable^ get() {
-			return this->m_dataSet->m_BridgeList;
-		}
-		void set(DataTable^ value) {
-			this->m_dataSet->m_BridgeList = value;
-		}
-	}
-
-	//Bridge List CompDict 
-	property Dictionary<String^, String^>^ FragilityCompDict {
-		Dictionary<String^, String^>^ get() {
-			return this->m_dataSet->m_FragilityCompDict;
-		}
-		void set(Dictionary<String^, String^>^ value) {
-			this->m_dataSet->m_FragilityCompDict = value;
-		}
-	}
-
 
 };

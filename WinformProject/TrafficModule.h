@@ -213,8 +213,7 @@ namespace WinformProject {
 							{
 								//								recurrencePeriodIndex = recurIndex;
 								recurrencePeriodName = m_dataSet->RecurrencePeriodData[recurIndex]->ToString();
-								//damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa);
-								damageProbability = m_fragilityCurve->GetFragilityValue(this->m_dataSet, compID, damageState, sa);
+								damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa);
 
 								probabilityDamageState[damageState] = damageProbability;
 
@@ -329,8 +328,7 @@ namespace WinformProject {
 								double dsRandom = static_cast<double>(rand->Next(1, 101)) / 100.0;
 								//for (int ds = 1; ds < m_fragilityCurve->DamageStateCount; ds++) {
 								for (int ds = 0; ds < m_fragilityCurve->DamageStateCount; ds++) {
-									//dsProbability = m_fragilityCurve->GetFragilityValue(classID, ds, sa);
-									dsProbability = m_fragilityCurve->GetFragilityValue(this->m_dataSet, compID, ds, sa);
+									dsProbability = m_fragilityCurve->GetFragilityValue(classID, ds, sa);
 									if (dsRandom > dsProbability) {
 										maxDamageState = ds;
 										break;

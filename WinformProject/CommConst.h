@@ -134,21 +134,5 @@ public:
 	literal String^ DT_FRAG_CURV_DATA_COL06 = L"Collapse";
 
 
-	//define Bridge List File grid columns.
-	//구분	연속성	교고	하부구조	교좌	기초	내진설계여부	노후도(교각)	노후도(교좌)	보수보강(교각)	보수보강(교좌)	파일명
-
-	literal String^ DT_BRIDGE_LIST_COL01 = L"구분";
-	literal String^ DT_BRIDGE_LIST_COL02 = L"연속성";
-	literal String^ DT_BRIDGE_LIST_COL03 = L"교고";
-	literal String^ DT_BRIDGE_LIST_COL04 = L"하부구조";
-	literal String^ DT_BRIDGE_LIST_COL05 = L"교좌";
-	literal String^ DT_BRIDGE_LIST_COL06 = L"기초";
-	literal String^ DT_BRIDGE_LIST_COL07 = L"내진설계여부";
-	literal String^ DT_BRIDGE_LIST_COL08 = L"노후도(교각)";
-	literal String^ DT_BRIDGE_LIST_COL09 = L"노후도(교좌)";
-	literal String^ DT_BRIDGE_LIST_COL10 = L"보수보강(교각)";
-	literal String^ DT_BRIDGE_LIST_COL11 = L"보수보강(교좌)";
-	literal String^ DT_BRIDGE_LIST_COL12 = L"파일명";
-
 
 };

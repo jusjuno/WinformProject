@@ -3,11 +3,6 @@
 #include "ProjectDataSetBinder.h"
 #include "FragilityCurve.h"
 #include "NetworkComponent.h"
-#include "FragilityCompList.h"
-#include "FragilityDataSet.h"
-#include "FileUtil.h"
-#include "CSVFileManager.h"
-#include "FragilityFile.h"
 
 namespace WinformProject {
 	using namespace ChartDirector;
@@ -194,97 +189,31 @@ namespace WinformProject {
 			DataRowView^ r = (DataRowView^)cboComponentCurves->SelectedItem;
 			String^ classID = r[m_networkComponent->GetColumnName(NetworkComponent::COL_CLASS_ID)]->ToString();
 
-			String^ componentID = StringUtil::nullToString(r[NetworkComponent::COL_NETWORK_COMP_ID], "-");
-			String^ upperType = StringUtil::nullToString(r[NetworkComponent::COL_UPPER_TYPE], "-");
-			String^ continuity = StringUtil::nullToString(r[NetworkComponent::COL_CONTINUITY], "-");
-			String^ bridgeHeight = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_HEIGHT], "-");
-			String^ bottomType = StringUtil::nullToString(r[NetworkComponent::COL_BOTTOM_TYPE], "-");
-			String^ elastomericShoe = StringUtil::nullToString(r[NetworkComponent::COL_ELASTOMERIC_SHOE], "-");
-			String^ briddgeFoundation = StringUtil::nullToString(r[NetworkComponent::COL_BRIDGE_FOUNDATION], "-");
-			String^ seismicDesignYn = StringUtil::nullToString(r[NetworkComponent::COL_SEISMIC_DESIGN_YN], "-");
-			String^ oldBridge = StringUtil::nullToString(r[NetworkComponent::COL_OLD_BRIDGE], "-");
-			String^ oldShoe = StringUtil::nullToString(r[NetworkComponent::COL_OLD_SHOE], "-");
-			String^ repairBridge = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_BRIDGE], "-");
-			String^ repairShoe = StringUtil::nullToString(r[NetworkComponent::COL_REPAIR_SHOE], "-");
-
-			String^ selectComponentKey = upperType + "_" + continuity + "_" + bridgeHeight + "_" + bottomType + "_"
-				+ elastomericShoe + "_" + briddgeFoundation + "_" + seismicDesignYn + "_"
-				+ oldBridge + "_" + oldShoe + "_" + repairBridge + "_" + repairShoe;
-
-			//Dictionary<String^, String^>^ fragilityCompDict = WinformProject::FragilityCompList::CompDict;
-			Dictionary<String^, String^>^ fragilityCompDict = this->m_dataSet->FragilityCompDict;
-
-			//m_FragilityCurvDict->Add("PSC Beam_다경간_5m이하_단주_일반_말뚝_C_X_X_X_O","PB301203_00000_0001");
-			//연속성	교고	하부구조	교좌	기초	내진설계여부	노후도(교각)	노후도(교좌)	보수보강(교각)	보수보강(교좌)
-
-
-
-
-			//=======================================================================================================//
-			/* 이전 소스 test */
-			//double dTest = m_fragilityCurve->GetFragilityValue(classID, 1, 0.02);
-			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, 0.02);
-
-			//double dTest = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, 1, 0.02);
-			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(this->m_dataSet, componentID, 0.02);
-
-			//=======================================================================================================//
-
-
-
-
-			Debug::WriteLine("=================>classID:" + classID);
-			Debug::WriteLine("=================>componentID:" + componentID);
-
-			if (this->m_dataSet->FragilityDataSetDictionary == nullptr) {
-				Alert::Info("이전 prd 파일입니다. 처음부터 다시 시작해야 합니다!");
-				return;
-			}
-
-			FragilityDataSet^ fragilityDataSet = nullptr;
-			if (this->m_dataSet->FragilityDataSetDictionary->ContainsKey(componentID)) {
-				fragilityDataSet = this->m_dataSet->FragilityDataSetDictionary[componentID];
-			}
-			else {
-				if (fragilityCompDict->ContainsKey(selectComponentKey)) {
-					String^ sFragilityCurvFileName = fragilityCompDict[selectComponentKey];
-					fragilityDataSet = gcnew FragilityDataSet(sFragilityCurvFileName);
-
-					this->m_dataSet->FragilityDataSetDictionary->Add(componentID, fragilityDataSet);
-
-					Debug::WriteLine("=================>count:" + fragilityDataSet->m_FragilityFileDict->Count);
-				}
-				else {
-					Alert::Error("No matching data file!");
+			int samplingSize = SAMPLING_SIZE;
+			//double xTick = 1.0 / samplingSize;
+			double xTick = 2.0 / samplingSize;
+			if (m_dataX == nullptr) {
+				m_dataX = gcnew array<double>(samplingSize);
+				for (int i = 0; i < samplingSize; i++) {
+					m_dataX[i] = (i + 1) * xTick;
 				}
 			}
-
-			int samplingSize = fragilityDataSet->m_FragilityFileDict->Count;
-			array<double>^ m_dataX = gcnew array<double>(samplingSize);
-
 			// damage stats 1
-			array<double>^ dataY0 = gcnew array<double>(samplingSize);
+			array<double>^ dataY0 = gcnew array<double>(m_dataX->Length);
 			// damage stats 2
-			array<double>^ dataY1 = gcnew array<double>(samplingSize);
+			array<double>^ dataY1 = gcnew array<double>(m_dataX->Length);
 			// damage stats 3
-			array<double>^ dataY2 = gcnew array<double>(samplingSize);
+			array<double>^ dataY2 = gcnew array<double>(m_dataX->Length);
 			// damage stats 4
-			array<double>^ dataY3 = gcnew array<double>(samplingSize);
+			array<double>^ dataY3 = gcnew array<double>(m_dataX->Length);
 
 			// damage stats 1, damage stats 2, damage stats 3, damage stats 4
-			int i = 0;
-			for each (KeyValuePair<double, FragilityFile^> ^ pair in fragilityDataSet->m_FragilityFileDict)
+			for (int i = 0; i < m_dataX->Length; i++)
 			{
-				double dPGA = pair->Key;
-				FragilityFile^ fragilityFile = pair->Value;
-
-				m_dataX[i] = fragilityFile->PGA;
-				dataY0[i] = fragilityFile->Slight;
-				dataY1[i] = fragilityFile->Moderate;
-				dataY2[i] = fragilityFile->Severe;
-				dataY3[i] = fragilityFile->Collapse;
-
-				i++;
+				dataY0[i] = m_fragilityCurve->GetFragilityValue(classID, 1, m_dataX[i]);
+				dataY1[i] = m_fragilityCurve->GetFragilityValue(classID, 2, m_dataX[i]);
+				dataY2[i] = m_fragilityCurve->GetFragilityValue(classID, 3, m_dataX[i]);
+				dataY3[i] = m_fragilityCurve->GetFragilityValue(classID, 4, m_dataX[i]);
 			}
 
 			// Create a XYChart object

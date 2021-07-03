@@ -25,7 +25,12 @@ namespace WinformProject {
 		literal int COL_LINK_ID = 4;
 		literal int COL_RECONSTRUCTION_COST = 5;
 
+
+		literal int COL_SOIL_TYPE = 6;//토질형식
+		literal int COL_FUNDAMENTAL_PERIOD = 7;//고유주기
+
 		//엑셀변경으로 추가
+		/*
 		literal int COL_UPPER_TYPE = 6;//상부형식
 		literal int COL_CONTINUITY = 7;//연속성
 		literal int COL_BRIDGE_HEIGHT = 8;//교고
@@ -37,10 +42,9 @@ namespace WinformProject {
 		literal int COL_OLD_SHOE = 14;//노후도(교좌)
 		literal int COL_REPAIR_BRIDGE = 15;//보수보강(교각)
 		literal int COL_REPAIR_SHOE = 16;//보수보강(교좌)
+		*/
 
 
-		literal int COL_SOIL_TYPE = 17;//토질형식
-		literal int COL_FUNDAMENTAL_PERIOD = 18;//고유주기
 
 	private:
 		DataTable^					m_dataTable;
@@ -127,6 +131,7 @@ namespace WinformProject {
 			this->m_dataTable = ExcelUtil::ExcelToDataTableUseColumnIndex(filepath, 1);
 
 			/** 시설물 구분 세팅 **/
+			/*
 			// 상부형식이 PSC Beam, PSC Box 이면 교량
 			DataTable^ dtNetComp = this->m_dataTable;
 			for (int i = 0; i < dtNetComp->Rows->Count; i++) {
@@ -136,6 +141,8 @@ namespace WinformProject {
 					dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID] = "1";
 				}
 			}
+			*/
+
 
 		}
 

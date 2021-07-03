@@ -368,7 +368,6 @@ namespace WinformProject {
 							// component info
 							System::Data::DataRow^ r = m_dataSet->NetworkCompnentData->Rows[i];
 							String^ classID = m_networkComponent->GetValue(i, NetworkComponent::COL_CLASS_ID);
-							String^ componentID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
 							String^ xPos = m_networkComponent->GetValue(i, NetworkComponent::COL_X);
 							String^ yPos = m_networkComponent->GetValue(i, NetworkComponent::COL_Y);
 
@@ -388,10 +387,10 @@ namespace WinformProject {
 							//sa = Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString());
 							sa = (Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString())) * soilAmpFactor;
 
-							//double tempX = 1.0;
-							//double tempStandardDev = 0.57;
-							//double tempMean= -0.5767;
-							//double tempValue = CustomMath::LOGNORMSDIST(tempX, tempMean, tempStandardDev);
+							double tempX = 1.0;
+							double tempStandardDev = 0.57;
+							double tempMean= -0.5767;
+							double tempValue = CustomMath::LOGNORMSDIST(tempX, tempMean, tempStandardDev);
 
 													   							 						  						  
 							m_chartDataX[i] = Double::Parse(xPos); // X
@@ -399,19 +398,15 @@ namespace WinformProject {
 							// find fragility curve parameter
 //							m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100; // %
 							if (cboDamageState->SelectedIndex == 0) {
-								//m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa)) * 100;
-								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, cboDamageState->SelectedIndex + 1, sa)) * 100;
+								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa)) * 100;
 							}
 							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
-								//temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100;
-								//temp2 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa) * 100;
-								temp1 = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, cboDamageState->SelectedIndex, sa) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, cboDamageState->SelectedIndex + 1, sa) * 100;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100;
+								temp2 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa) * 100;
 								m_chartDataZ[i] = temp1 - temp2;
 							}
 							else {
-								//m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100; // %
-								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, cboDamageState->SelectedIndex, sa) * 100; // %
+								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100; // %
 							}
 
 						}
@@ -462,7 +457,6 @@ namespace WinformProject {
 					// component info
 					System::Data::DataRow^ r = m_dataSet->NetworkCompnentData->Rows[compIndex];
 					String^ classID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_CLASS_ID);
-					String^ componentID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_NETWORK_COMP_ID);
 					String^ xPos = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_X);
 					String^ yPos = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_Y);
 
@@ -487,19 +481,15 @@ namespace WinformProject {
 							double temp2;
 						
 							if (dsIndex == 0) {
-								//dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
-								dsState = (1 - m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, dsIndex + 1, sa)) * 100;
+								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
 							}
 							else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
-								//temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100;
-								//temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa) * 100;
-								temp1 = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, dsIndex, sa) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, dsIndex + 1, sa) * 100;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100;
+								temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa) * 100;
 								dsState = temp1 - temp2;
 							}
 							else {
-								//dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100; // %
-								dsState = m_fragilityCurve->GetFragilityValue(this->m_dataSet, componentID, dsIndex, sa) * 100; // %
+								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100; // %
 							}
 
 							// [입력] 각 재현주기별 damage state 입력

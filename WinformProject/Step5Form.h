@@ -136,12 +136,13 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->cboIntensityMeasure, 5, 1);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 3;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 30)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 70)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1084, 761);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1239, 951);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// dgvSeismicSources
@@ -151,12 +152,14 @@ namespace WinformProject {
 			this->dgvSeismicSources->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvSeismicSources, 2);
 			this->dgvSeismicSources->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvSeismicSources->Location = System::Drawing::Point(3, 3);
+			this->dgvSeismicSources->Location = System::Drawing::Point(3, 4);
+			this->dgvSeismicSources->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->dgvSeismicSources->Name = L"dgvSeismicSources";
 			this->dgvSeismicSources->ReadOnly = true;
+			this->dgvSeismicSources->RowHeadersWidth = 51;
 			this->dgvSeismicSources->RowTemplate->Height = 23;
 			this->dgvSeismicSources->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dgvSeismicSources->Size = System::Drawing::Size(238, 213);
+			this->dgvSeismicSources->Size = System::Drawing::Size(274, 266);
 			this->dgvSeismicSources->TabIndex = 1;
 			this->dgvSeismicSources->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Step5Form::dgvSeismicSources_CellClick);
 			this->dgvSeismicSources->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step5Form::dgvSeismicSources_DataBindingComplete);
@@ -165,9 +168,10 @@ namespace WinformProject {
 			// 
 			this->tableLayoutPanel1->SetColumnSpan(this->chartViewer, 7);
 			this->chartViewer->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewer->Location = System::Drawing::Point(3, 251);
+			this->chartViewer->Location = System::Drawing::Point(3, 315);
+			this->chartViewer->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->chartViewer->Name = L"chartViewer";
-			this->chartViewer->Size = System::Drawing::Size(1078, 507);
+			this->chartViewer->Size = System::Drawing::Size(1233, 632);
 			this->chartViewer->TabIndex = 0;
 			this->chartViewer->TabStop = false;
 			this->chartViewer->SizeChanged += gcnew System::EventHandler(this, &Step5Form::chartViewer_SizeChanged);
@@ -175,9 +179,10 @@ namespace WinformProject {
 			// btnAddSource
 			// 
 			this->btnAddSource->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->btnAddSource->Location = System::Drawing::Point(3, 222);
+			this->btnAddSource->Location = System::Drawing::Point(3, 278);
+			this->btnAddSource->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnAddSource->Name = L"btnAddSource";
-			this->btnAddSource->Size = System::Drawing::Size(116, 23);
+			this->btnAddSource->Size = System::Drawing::Size(134, 29);
 			this->btnAddSource->TabIndex = 2;
 			this->btnAddSource->Text = L"Add";
 			this->btnAddSource->UseVisualStyleBackColor = true;
@@ -186,9 +191,10 @@ namespace WinformProject {
 			// btnDelSource
 			// 
 			this->btnDelSource->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->btnDelSource->Location = System::Drawing::Point(125, 222);
+			this->btnDelSource->Location = System::Drawing::Point(143, 278);
+			this->btnDelSource->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnDelSource->Name = L"btnDelSource";
-			this->btnDelSource->Size = System::Drawing::Size(116, 23);
+			this->btnDelSource->Size = System::Drawing::Size(134, 29);
 			this->btnDelSource->TabIndex = 3;
 			this->btnDelSource->Text = L"Delete";
 			this->btnDelSource->UseVisualStyleBackColor = true;
@@ -200,10 +206,12 @@ namespace WinformProject {
 			this->dgvSeismicSourceContent->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvSeismicSourceContent, 4);
 			this->dgvSeismicSourceContent->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvSeismicSourceContent->Location = System::Drawing::Point(247, 3);
+			this->dgvSeismicSourceContent->Location = System::Drawing::Point(283, 4);
+			this->dgvSeismicSourceContent->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->dgvSeismicSourceContent->Name = L"dgvSeismicSourceContent";
+			this->dgvSeismicSourceContent->RowHeadersWidth = 51;
 			this->dgvSeismicSourceContent->RowTemplate->Height = 23;
-			this->dgvSeismicSourceContent->Size = System::Drawing::Size(834, 213);
+			this->dgvSeismicSourceContent->Size = System::Drawing::Size(953, 266);
 			this->dgvSeismicSourceContent->TabIndex = 4;
 			this->dgvSeismicSourceContent->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step5Form::dgvSeismicSourceContent_DataBindingComplete);
 			// 
@@ -213,9 +221,9 @@ namespace WinformProject {
 			this->label1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label1->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(247, 219);
+			this->label1->Location = System::Drawing::Point(283, 274);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(134, 29);
+			this->label1->Size = System::Drawing::Size(152, 37);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"Recurrence periods";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -226,9 +234,9 @@ namespace WinformProject {
 			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label2->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label2->Location = System::Drawing::Point(672, 219);
+			this->label2->Location = System::Drawing::Point(768, 274);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(123, 29);
+			this->label2->Size = System::Drawing::Size(139, 37);
 			this->label2->TabIndex = 6;
 			this->label2->Text = L"Intensity Measure";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -238,9 +246,10 @@ namespace WinformProject {
 			this->cboRecurrPeriods->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboRecurrPeriods->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboRecurrPeriods->FormattingEnabled = true;
-			this->cboRecurrPeriods->Location = System::Drawing::Point(387, 222);
+			this->cboRecurrPeriods->Location = System::Drawing::Point(441, 278);
+			this->cboRecurrPeriods->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->cboRecurrPeriods->Name = L"cboRecurrPeriods";
-			this->cboRecurrPeriods->Size = System::Drawing::Size(279, 20);
+			this->cboRecurrPeriods->Size = System::Drawing::Size(321, 23);
 			this->cboRecurrPeriods->TabIndex = 7;
 			this->cboRecurrPeriods->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step5Form::cboRecurrPeriods_SelectionChangeCommitted);
 			// 
@@ -249,18 +258,20 @@ namespace WinformProject {
 			this->cboIntensityMeasure->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboIntensityMeasure->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboIntensityMeasure->FormattingEnabled = true;
-			this->cboIntensityMeasure->Location = System::Drawing::Point(801, 222);
+			this->cboIntensityMeasure->Location = System::Drawing::Point(913, 278);
+			this->cboIntensityMeasure->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->cboIntensityMeasure->Name = L"cboIntensityMeasure";
-			this->cboIntensityMeasure->Size = System::Drawing::Size(280, 20);
+			this->cboIntensityMeasure->Size = System::Drawing::Size(323, 23);
 			this->cboIntensityMeasure->TabIndex = 8;
 			this->cboIntensityMeasure->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step5Form::cboIntensityMeasure_SelectionChangeCommitted);
 			// 
 			// Step5Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(7, 12);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1084, 761);
+			this->ClientSize = System::Drawing::Size(1239, 951);
 			this->Controls->Add(this->tableLayoutPanel1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"Step5Form";
 			this->Text = L"Step5Form";
 			this->Load += gcnew System::EventHandler(this, &Step5Form::Step5Form_Load);
@@ -282,12 +293,33 @@ namespace WinformProject {
 		}
 	private:
 		System::Void DrawSeismicHazardChart(bool calculate) {
+
+			if (calculate) {
+				if (CreateSeismicHazardChartData()) {
+					int selectedIndex = dgvSeismicSources->CurrentCell->RowIndex;
+					System::Data::DataRow^ row = this->m_dataSet->SeismicSourceData->Rows[selectedIndex];
+					String^ scenarioName = row[CommConst::GRID_SEISMIC_SOURCES_LIST_COL1]->ToString();
+
+					int recurrencePeriodIndex = cboRecurrPeriods->SelectedIndex;
+					String^ period = cboRecurrPeriods->Items[recurrencePeriodIndex]->ToString();
+					String^ title = String::Format("Intensity Measure Distribution\nSeismic source: {0} - Scenario: {1}", scenarioName, period);
+					//다국어
+					String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+					if (sUiLang->Equals("ko-KR")) {
+						title = String::Format(L"진도분포\n 진원지: {0} - Scenario: {1}", scenarioName, period);
+					}
+					m_chart->DrawSeismicDistribution(chartViewer, title, m_dataX, m_dataY, m_dataZ);
+				}
+			}
+
+			/*
 			if (calculate) {
 				if (!CreateSeismicHazardChartData()) {
 					Alert::Error("Can not create chart data.");
 					return;
 				}
 			}
+			
 			int selectedIndex = dgvSeismicSources->CurrentCell->RowIndex;
 			System::Data::DataRow^ row = this->m_dataSet->SeismicSourceData->Rows[selectedIndex];
 			String^ scenarioName = row[CommConst::GRID_SEISMIC_SOURCES_LIST_COL1]->ToString();
@@ -301,6 +333,7 @@ namespace WinformProject {
 				title = String::Format(L"진도분포\n 진원지: {0} - Scenario: {1}", scenarioName, period);
 			}
 			m_chart->DrawSeismicDistribution(chartViewer, title, m_dataX, m_dataY, m_dataZ);
+			*/
 		}
 
 

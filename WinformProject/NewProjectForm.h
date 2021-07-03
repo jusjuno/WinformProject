@@ -6,7 +6,6 @@
 #include "ExcelUtil.h"
 #include "ProjectDataSetBinder.h"
 #include "NetworkComponent.h"
-#include "FragilityCompList.h"
 
 namespace WinformProject {
 	using namespace Microsoft::Office::Interop;
@@ -26,14 +25,8 @@ namespace WinformProject {
 	public ref class NewProjectForm : public System::Windows::Forms::Form
 	{
 	private:
-		//		static String^ DEFAULT_PATH = "c:\\sample\\sample3";
+//		static String^ DEFAULT_PATH = "c:\\sample\\sample3";   
 		static String^ DEFAULT_PATH = "c:\\sample";
-	private: System::Windows::Forms::Button^ btnFindClassFile;
-
-	private: System::Windows::Forms::TextBox^ tbClassFilePath;
-	private: System::Windows::Forms::Label^ lblClassFilePath;
-
-
 		   ProjectDataSetBinder^ m_dataSetBinder;
 	public:
 		NewProjectForm()
@@ -55,8 +48,6 @@ namespace WinformProject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ lblShapeFilePath;
-	protected:
 	public:
 		property ProjectDataSet^ ReturnDataSet {
 			ProjectDataSet^ get() {
@@ -64,45 +55,36 @@ namespace WinformProject {
 			}
 		}
 
-		//	private: System::Windows::Forms::Label^ label6;
-		//	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
-		//	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
+//	private: System::Windows::Forms::Label^ label6;
+//	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
+//	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
 
-
-	private: System::Windows::Forms::TextBox^ tbShapeFilePath;
-	private: System::Windows::Forms::Button^ btnFindShapeFile;
-	private: System::Windows::Forms::Button^ btnFindListFile;
-
-	private: System::Windows::Forms::TextBox^ tbListFilePath;
-	private: System::Windows::Forms::Label^ lblListFilePath;
-
-
-
-
-
-	private: System::Windows::Forms::Button^ btnFindNetworkFile;
-	private: System::Windows::Forms::TextBox^ tbNetworkFilePath;
-	private: System::Windows::Forms::Label^ lblNetworkFilePath;
-
-	private: System::Windows::Forms::ProgressBar^ newProgress;
-	private: System::Windows::Forms::Label^ lblFragCurParamFilePath;
-
-	private: System::Windows::Forms::TextBox^ tbFragCurParamFilePath;
-	private: System::Windows::Forms::Label^ lblSoilAmpFilePath;
-
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::TextBox^  tbShapeFilePath;
+	private: System::Windows::Forms::Button^  btnFindShapeFile;
+	private: System::Windows::Forms::Button^  btnFindClassFile;
+	private: System::Windows::Forms::TextBox^  tbClassFilePath;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Button^  btnFindNetworkFile;
+	private: System::Windows::Forms::TextBox^  tbNetworkFilePath;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::ProgressBar^  newProgress;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::TextBox^  tbFragCurParamFilePath;
+	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ tbSoilAmpFilePath;
-	private: System::ComponentModel::BackgroundWorker^ backgroundWorker;
-	private: System::Windows::Forms::Button^ btnFindFragParamFile;
+	private: System::ComponentModel::BackgroundWorker^  backgroundWorker;
+	private: System::Windows::Forms::Button^  btnFindFragParamFile;
 	private: System::Windows::Forms::Button^ btnFindSoilAmpFile;
-	private: System::Windows::Forms::Button^ btnOK;
-	private: System::Windows::Forms::Button^ btnCancel;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ tbName;
+	private: System::Windows::Forms::Button^  btnOK;
+	private: System::Windows::Forms::Button^  btnCancel;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::TextBox^  tbName;
 	private:
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+		System::ComponentModel::Container ^components;
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// 디자이너 지원에 필요한 메서드입니다. 
@@ -114,33 +96,31 @@ namespace WinformProject {
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tbName = (gcnew System::Windows::Forms::TextBox());
-			this->lblShapeFilePath = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tbShapeFilePath = (gcnew System::Windows::Forms::TextBox());
 			this->btnFindShapeFile = (gcnew System::Windows::Forms::Button());
-			this->btnFindListFile = (gcnew System::Windows::Forms::Button());
-			this->tbListFilePath = (gcnew System::Windows::Forms::TextBox());
-			this->lblListFilePath = (gcnew System::Windows::Forms::Label());
+			this->btnFindClassFile = (gcnew System::Windows::Forms::Button());
+			this->tbClassFilePath = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->btnFindNetworkFile = (gcnew System::Windows::Forms::Button());
 			this->tbNetworkFilePath = (gcnew System::Windows::Forms::TextBox());
-			this->lblNetworkFilePath = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->newProgress = (gcnew System::Windows::Forms::ProgressBar());
 			this->btnFindFragParamFile = (gcnew System::Windows::Forms::Button());
 			this->tbFragCurParamFilePath = (gcnew System::Windows::Forms::TextBox());
-			this->lblFragCurParamFilePath = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->backgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
-			this->lblSoilAmpFilePath = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->tbSoilAmpFilePath = (gcnew System::Windows::Forms::TextBox());
 			this->btnFindSoilAmpFile = (gcnew System::Windows::Forms::Button());
-			this->btnFindClassFile = (gcnew System::Windows::Forms::Button());
-			this->tbClassFilePath = (gcnew System::Windows::Forms::TextBox());
-			this->lblClassFilePath = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// btnOK
 			// 
-			this->btnOK->Location = System::Drawing::Point(534, 392);
+			this->btnOK->Location = System::Drawing::Point(667, 471);
+			this->btnOK->Margin = System::Windows::Forms::Padding(4);
 			this->btnOK->Name = L"btnOK";
-			this->btnOK->Size = System::Drawing::Size(120, 43);
+			this->btnOK->Size = System::Drawing::Size(150, 52);
 			this->btnOK->TabIndex = 0;
 			this->btnOK->Text = L"OK";
 			this->btnOK->UseVisualStyleBackColor = true;
@@ -148,9 +128,10 @@ namespace WinformProject {
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(407, 392);
+			this->btnCancel->Location = System::Drawing::Point(509, 471);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(4);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(120, 43);
+			this->btnCancel->Size = System::Drawing::Size(150, 52);
 			this->btnCancel->TabIndex = 1;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
@@ -159,79 +140,88 @@ namespace WinformProject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(14, 35);
+			this->label1->Location = System::Drawing::Point(17, 42);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(43, 15);
+			this->label1->Size = System::Drawing::Size(55, 18);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Name";
 			// 
 			// tbName
 			// 
-			this->tbName->Location = System::Drawing::Point(129, 32);
+			this->tbName->Location = System::Drawing::Point(161, 38);
+			this->tbName->Margin = System::Windows::Forms::Padding(4);
 			this->tbName->Name = L"tbName";
-			this->tbName->Size = System::Drawing::Size(524, 25);
+			this->tbName->Size = System::Drawing::Size(654, 28);
 			this->tbName->TabIndex = 3;
 			this->tbName->Text = L"New Project";
 			this->tbName->TextChanged += gcnew System::EventHandler(this, &NewProjectForm::tbName_TextChanged);
 			this->tbName->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &NewProjectForm::tbName_KeyDown);
 			// 
-			// lblShapeFilePath
+			// label2
 			// 
-			this->lblShapeFilePath->AutoSize = true;
-			this->lblShapeFilePath->Location = System::Drawing::Point(14, 85);
-			this->lblShapeFilePath->Name = L"lblShapeFilePath";
-			this->lblShapeFilePath->Size = System::Drawing::Size(76, 15);
-			this->lblShapeFilePath->TabIndex = 4;
-			this->lblShapeFilePath->Text = L"Shape File";
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(17, 102);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(90, 18);
+			this->label2->TabIndex = 4;
+			this->label2->Text = L"Shape File";
 			// 
 			// tbShapeFilePath
 			// 
-			this->tbShapeFilePath->Location = System::Drawing::Point(199, 80);
+			this->tbShapeFilePath->Location = System::Drawing::Point(249, 96);
+			this->tbShapeFilePath->Margin = System::Windows::Forms::Padding(4);
 			this->tbShapeFilePath->Name = L"tbShapeFilePath";
-			this->tbShapeFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbShapeFilePath->TabIndex = 1;
+			this->tbShapeFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbShapeFilePath->TabIndex = 5;
 			// 
 			// btnFindShapeFile
 			// 
-			this->btnFindShapeFile->Location = System::Drawing::Point(566, 78);
+			this->btnFindShapeFile->Location = System::Drawing::Point(707, 94);
+			this->btnFindShapeFile->Margin = System::Windows::Forms::Padding(4);
 			this->btnFindShapeFile->Name = L"btnFindShapeFile";
-			this->btnFindShapeFile->Size = System::Drawing::Size(88, 28);
+			this->btnFindShapeFile->Size = System::Drawing::Size(110, 34);
 			this->btnFindShapeFile->TabIndex = 6;
 			this->btnFindShapeFile->Text = L"Find";
 			this->btnFindShapeFile->UseVisualStyleBackColor = true;
 			this->btnFindShapeFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindShapeFile_Click);
 			// 
-			// btnFindListFile
+			// btnFindClassFile
 			// 
-			this->btnFindListFile->Location = System::Drawing::Point(566, 122);
-			this->btnFindListFile->Name = L"btnFindListFile";
-			this->btnFindListFile->Size = System::Drawing::Size(88, 28);
-			this->btnFindListFile->TabIndex = 9;
-			this->btnFindListFile->Text = L"Find";
-			this->btnFindListFile->UseVisualStyleBackColor = true;
-			this->btnFindListFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindListFile_Click);
+			this->btnFindClassFile->Location = System::Drawing::Point(707, 146);
+			this->btnFindClassFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindClassFile->Name = L"btnFindClassFile";
+			this->btnFindClassFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindClassFile->TabIndex = 9;
+			this->btnFindClassFile->Text = L"Find";
+			this->btnFindClassFile->UseVisualStyleBackColor = true;
+			this->btnFindClassFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindClassFile_Click);
 			// 
-			// tbListFilePath
+			// tbClassFilePath
 			// 
-			this->tbListFilePath->Location = System::Drawing::Point(199, 122);
-			this->tbListFilePath->Name = L"tbListFilePath";
-			this->tbListFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbListFilePath->TabIndex = 2;
+			this->tbClassFilePath->Location = System::Drawing::Point(249, 147);
+			this->tbClassFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbClassFilePath->Name = L"tbClassFilePath";
+			this->tbClassFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbClassFilePath->TabIndex = 8;
 			// 
-			// lblListFilePath
+			// label3
 			// 
-			this->lblListFilePath->AutoSize = true;
-			this->lblListFilePath->Location = System::Drawing::Point(14, 127);
-			this->lblListFilePath->Name = L"lblListFilePath";
-			this->lblListFilePath->Size = System::Drawing::Size(103, 15);
-			this->lblListFilePath->TabIndex = 7;
-			this->lblListFilePath->Text = L"Bridge List File";
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(17, 153);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(182, 18);
+			this->label3->TabIndex = 7;
+			this->label3->Text = L"Component class File";
 			// 
 			// btnFindNetworkFile
 			// 
-			this->btnFindNetworkFile->Location = System::Drawing::Point(566, 162);
+			this->btnFindNetworkFile->Location = System::Drawing::Point(707, 195);
+			this->btnFindNetworkFile->Margin = System::Windows::Forms::Padding(4);
 			this->btnFindNetworkFile->Name = L"btnFindNetworkFile";
-			this->btnFindNetworkFile->Size = System::Drawing::Size(88, 28);
+			this->btnFindNetworkFile->Size = System::Drawing::Size(110, 34);
 			this->btnFindNetworkFile->TabIndex = 12;
 			this->btnFindNetworkFile->Text = L"Find";
 			this->btnFindNetworkFile->UseVisualStyleBackColor = true;
@@ -239,32 +229,36 @@ namespace WinformProject {
 			// 
 			// tbNetworkFilePath
 			// 
-			this->tbNetworkFilePath->Location = System::Drawing::Point(199, 163);
+			this->tbNetworkFilePath->Location = System::Drawing::Point(249, 196);
+			this->tbNetworkFilePath->Margin = System::Windows::Forms::Padding(4);
 			this->tbNetworkFilePath->Name = L"tbNetworkFilePath";
-			this->tbNetworkFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbNetworkFilePath->TabIndex = 3;
+			this->tbNetworkFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbNetworkFilePath->TabIndex = 11;
 			// 
-			// lblNetworkFilePath
+			// label4
 			// 
-			this->lblNetworkFilePath->AutoSize = true;
-			this->lblNetworkFilePath->Location = System::Drawing::Point(14, 168);
-			this->lblNetworkFilePath->Name = L"lblNetworkFilePath";
-			this->lblNetworkFilePath->Size = System::Drawing::Size(163, 15);
-			this->lblNetworkFilePath->TabIndex = 10;
-			this->lblNetworkFilePath->Text = L"Network component File";
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(17, 202);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(204, 18);
+			this->label4->TabIndex = 10;
+			this->label4->Text = L"Network component File";
 			// 
 			// newProgress
 			// 
-			this->newProgress->Location = System::Drawing::Point(14, 367);
+			this->newProgress->Location = System::Drawing::Point(17, 441);
+			this->newProgress->Margin = System::Windows::Forms::Padding(4);
 			this->newProgress->Name = L"newProgress";
-			this->newProgress->Size = System::Drawing::Size(639, 17);
+			this->newProgress->Size = System::Drawing::Size(799, 21);
 			this->newProgress->TabIndex = 13;
 			// 
 			// btnFindFragParamFile
 			// 
-			this->btnFindFragParamFile->Location = System::Drawing::Point(566, 203);
+			this->btnFindFragParamFile->Location = System::Drawing::Point(707, 244);
+			this->btnFindFragParamFile->Margin = System::Windows::Forms::Padding(4);
 			this->btnFindFragParamFile->Name = L"btnFindFragParamFile";
-			this->btnFindFragParamFile->Size = System::Drawing::Size(88, 28);
+			this->btnFindFragParamFile->Size = System::Drawing::Size(110, 34);
 			this->btnFindFragParamFile->TabIndex = 16;
 			this->btnFindFragParamFile->Text = L"Find";
 			this->btnFindFragParamFile->UseVisualStyleBackColor = true;
@@ -272,105 +266,79 @@ namespace WinformProject {
 			// 
 			// tbFragCurParamFilePath
 			// 
-			this->tbFragCurParamFilePath->Location = System::Drawing::Point(199, 205);
+			this->tbFragCurParamFilePath->Location = System::Drawing::Point(249, 246);
+			this->tbFragCurParamFilePath->Margin = System::Windows::Forms::Padding(4);
 			this->tbFragCurParamFilePath->Name = L"tbFragCurParamFilePath";
-			this->tbFragCurParamFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbFragCurParamFilePath->TabIndex = 4;
+			this->tbFragCurParamFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbFragCurParamFilePath->TabIndex = 15;
 			// 
-			// lblFragCurParamFilePath
+			// label5
 			// 
-			this->lblFragCurParamFilePath->AutoSize = true;
-			this->lblFragCurParamFilePath->Location = System::Drawing::Point(14, 210);
-			this->lblFragCurParamFilePath->Name = L"lblFragCurParamFilePath";
-			this->lblFragCurParamFilePath->Size = System::Drawing::Size(180, 15);
-			this->lblFragCurParamFilePath->TabIndex = 14;
-			this->lblFragCurParamFilePath->Text = L"Fragility curve paramer File";
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(17, 252);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(223, 18);
+			this->label5->TabIndex = 14;
+			this->label5->Text = L"Fragility curve paramer File";
 			// 
-			// lblSoilAmpFilePath
+			// label6
 			// 
-			this->lblSoilAmpFilePath->AutoSize = true;
-			this->lblSoilAmpFilePath->Location = System::Drawing::Point(14, 248);
-			this->lblSoilAmpFilePath->Name = L"lblSoilAmpFilePath";
-			this->lblSoilAmpFilePath->Size = System::Drawing::Size(144, 15);
-			this->lblSoilAmpFilePath->TabIndex = 17;
-			this->lblSoilAmpFilePath->Text = L"Soil amplification File";
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(17, 298);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(171, 18);
+			this->label6->TabIndex = 17;
+			this->label6->Text = L"Soil amplification File";
 			// 
 			// tbSoilAmpFilePath
 			// 
-			this->tbSoilAmpFilePath->Location = System::Drawing::Point(199, 246);
+			this->tbSoilAmpFilePath->Location = System::Drawing::Point(249, 295);
+			this->tbSoilAmpFilePath->Margin = System::Windows::Forms::Padding(4);
 			this->tbSoilAmpFilePath->Name = L"tbSoilAmpFilePath";
-			this->tbSoilAmpFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbSoilAmpFilePath->TabIndex = 5;
+			this->tbSoilAmpFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbSoilAmpFilePath->TabIndex = 18;
 			// 
 			// btnFindSoilAmpFile
 			// 
-			this->btnFindSoilAmpFile->Location = System::Drawing::Point(566, 246);
+			this->btnFindSoilAmpFile->Location = System::Drawing::Point(707, 295);
+			this->btnFindSoilAmpFile->Margin = System::Windows::Forms::Padding(4);
 			this->btnFindSoilAmpFile->Name = L"btnFindSoilAmpFile";
-			this->btnFindSoilAmpFile->Size = System::Drawing::Size(88, 28);
+			this->btnFindSoilAmpFile->Size = System::Drawing::Size(110, 34);
 			this->btnFindSoilAmpFile->TabIndex = 19;
 			this->btnFindSoilAmpFile->Text = L"Find";
 			this->btnFindSoilAmpFile->UseVisualStyleBackColor = true;
 			this->btnFindSoilAmpFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindSoilAmpFile_Click);
 			// 
-			// btnFindClassFile
-			// 
-			this->btnFindClassFile->Location = System::Drawing::Point(564, 324);
-			this->btnFindClassFile->Name = L"btnFindClassFile";
-			this->btnFindClassFile->Size = System::Drawing::Size(88, 28);
-			this->btnFindClassFile->TabIndex = 22;
-			this->btnFindClassFile->Text = L"Find";
-			this->btnFindClassFile->UseVisualStyleBackColor = true;
-			this->btnFindClassFile->Visible = false;
-			this->btnFindClassFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindClassFile_Click);
-			// 
-			// tbClassFilePath
-			// 
-			this->tbClassFilePath->Location = System::Drawing::Point(197, 324);
-			this->tbClassFilePath->Name = L"tbClassFilePath";
-			this->tbClassFilePath->Size = System::Drawing::Size(361, 25);
-			this->tbClassFilePath->TabIndex = 21;
-			this->tbClassFilePath->Visible = false;
-			// 
-			// lblClassFilePath
-			// 
-			this->lblClassFilePath->AutoSize = true;
-			this->lblClassFilePath->Location = System::Drawing::Point(12, 329);
-			this->lblClassFilePath->Name = L"lblClassFilePath";
-			this->lblClassFilePath->Size = System::Drawing::Size(149, 15);
-			this->lblClassFilePath->TabIndex = 20;
-			this->lblClassFilePath->Text = L"Component class File";
-			this->lblClassFilePath->Visible = false;
-			// 
 			// NewProjectForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
+			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(664, 437);
-			this->Controls->Add(this->btnFindClassFile);
-			this->Controls->Add(this->tbClassFilePath);
-			this->Controls->Add(this->lblClassFilePath);
+			this->ClientSize = System::Drawing::Size(826, 516);
 			this->Controls->Add(this->btnFindSoilAmpFile);
 			this->Controls->Add(this->tbSoilAmpFilePath);
-			this->Controls->Add(this->lblSoilAmpFilePath);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->btnFindFragParamFile);
 			this->Controls->Add(this->tbFragCurParamFilePath);
-			this->Controls->Add(this->lblFragCurParamFilePath);
+			this->Controls->Add(this->label5);
 			this->Controls->Add(this->newProgress);
 			this->Controls->Add(this->btnFindNetworkFile);
 			this->Controls->Add(this->tbNetworkFilePath);
-			this->Controls->Add(this->lblNetworkFilePath);
-			this->Controls->Add(this->btnFindListFile);
-			this->Controls->Add(this->tbListFilePath);
-			this->Controls->Add(this->lblListFilePath);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->btnFindClassFile);
+			this->Controls->Add(this->tbClassFilePath);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->btnFindShapeFile);
 			this->Controls->Add(this->tbShapeFilePath);
-			this->Controls->Add(this->lblShapeFilePath);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->tbName);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->btnOK);
-			this->MaximumSize = System::Drawing::Size(682, 484);
-			this->MinimumSize = System::Drawing::Size(682, 484);
+			this->Margin = System::Windows::Forms::Padding(4);
+			this->MaximumSize = System::Drawing::Size(848, 572);
+			this->MinimumSize = System::Drawing::Size(848, 572);
 			this->Name = L"NewProjectForm";
 			this->Text = L"New";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &NewProjectForm::NewProjectForm_FormClosing);
@@ -397,7 +365,6 @@ namespace WinformProject {
 				throw gcnew Exception(L"Can not read shape file.");
 			}
 		}
-
 		// read components class file.
 		System::Void ReadComponentsClassFile() {
 			try {
@@ -410,96 +377,6 @@ namespace WinformProject {
 				throw gcnew Exception(L"Can not read component class file.");
 			}
 		}
-
-		// read list file.
-		System::Void ReadListFile() {
-			try {
-				Dictionary<String^, String^>^ m_CompDict = gcnew Dictionary<String^, String^>();
-				//m_CompDict->Add("PSC Beam_단경간_-_-_일반_-_-_-_X_-_X", "PB301201_00000_0000");
-
-				DataTable^ tmpDt = gcnew DataTable();
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL01));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL02));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL03));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL04));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL05));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL06));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL07));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL08));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL09));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL10));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL11));
-				tmpDt->Columns->Add(gcnew DataColumn(CommConst::DT_BRIDGE_LIST_COL12));
-
-
-				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSetBinder->ListFilePath);
-				String^ output = csv->Read();
-
-				if (!String::IsNullOrEmpty(output)) {
-					array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
-					int outputRowCount = dataArray->Length;
-					Debug::WriteLine(String::Format("Number of output summary lines:{0}", outputRowCount));
-
-					DataRow^ row = nullptr;
-					for (int i = 0; i < outputRowCount; i++)
-					{
-						String^ outputLineData = dataArray[i];
-						Debug::WriteLine("=================>outputLineData:" + outputLineData);
-
-						if (i > 0) {//첫번째 행은 컬럼명이라 무시
-							array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
-
-							row = tmpDt->NewRow();
-							row[CommConst::DT_BRIDGE_LIST_COL01] = StringUtil::nullToString(values[0], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL02] = StringUtil::nullToString(values[1], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL03] = StringUtil::nullToString(values[2], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL04] = StringUtil::nullToString(values[3], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL05] = StringUtil::nullToString(values[4], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL06] = StringUtil::nullToString(values[5], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL07] = StringUtil::nullToString(values[6], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL08] = StringUtil::nullToString(values[7], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL09] = StringUtil::nullToString(values[8], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL10] = StringUtil::nullToString(values[9], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL11] = StringUtil::nullToString(values[10], "-");
-							row[CommConst::DT_BRIDGE_LIST_COL12] = StringUtil::nullToString(values[11], "-");
-
-							String^ sKey = StringUtil::nullToString(values[0], "-")
-								+ "_" + StringUtil::nullToString(values[1], "-")
-								+ "_" + StringUtil::nullToString(values[2], "-")
-								+ "_" + StringUtil::nullToString(values[3], "-")
-								+ "_" + StringUtil::nullToString(values[4], "-")
-								+ "_" + StringUtil::nullToString(values[5], "-")
-								+ "_" + StringUtil::nullToString(values[6], "-")
-								+ "_" + StringUtil::nullToString(values[7], "-")
-								+ "_" + StringUtil::nullToString(values[8], "-")
-								+ "_" + StringUtil::nullToString(values[9], "-")
-								+ "_" + StringUtil::nullToString(values[10], "-");
-
-							String^ sValue = StringUtil::nullToString(values[11], "")->Replace(".xlsx", "")->Replace(".csv", "")->Replace(".xls", "");
-							m_CompDict->Add(sKey, sValue);
-
-							tmpDt->Rows->Add(row);
-						}
-					}//for end ... row
-
-					/**************************************************/
-					this->m_dataSetBinder->BridgeList = tmpDt;
-					/**************************************************/
-
-					/**************************************************/
-					//Fragility 딕셔러리 초기화
-					this->m_dataSetBinder->FragilityCompDict = m_CompDict;
-					/**************************************************/
-
-				}
-
-			}
-			catch (Exception^ ex) {
-				throw gcnew Exception(L"Can not read component class file.");
-			}
-		}
-
-
 		// read network components file.
 		System::Void ReadNetworkComponentsFile() {
 			try {
@@ -535,7 +412,7 @@ namespace WinformProject {
 				);
 				this->m_dataSetBinder->SoilAmpData = st;
 			}
-			catch (Exception^ ex) {
+			catch (Exception ^ ex) {
 				throw gcnew Exception(L"Can not read soil amplification factor file.");
 			}
 		}
@@ -545,7 +422,7 @@ namespace WinformProject {
 			array<String^>^ columns = { "control_type_name", "control_type" };
 			DataTable^ newTable = gcnew DataTable();
 			// define fields
-			for each (String ^ col in columns)
+			for each (String^ col in columns)
 			{
 				newTable->Columns->Add(gcnew DataColumn(col));
 			}
@@ -585,13 +462,13 @@ namespace WinformProject {
 
 			this->m_dataSetBinder->NodeControlTypes = newTable;
 		}
-
+		
 		void SetDefaultLinkTypes() {
 			array<String^>^ columns = { "link_type", "link_type_name", "type_code", "default_lane_capacity", "default_speed_limit"
-				, "default_number_of_lanes" };
+				, "default_number_of_lanes" };		
 			DataTable^ newTable = gcnew DataTable();
 			// define fields
-			for each (String ^ col in columns)
+			for each (String^ col in columns)
 			{
 				newTable->Columns->Add(gcnew DataColumn(col));
 			}
@@ -748,7 +625,6 @@ namespace WinformProject {
 			this->m_dataSetBinder->ProjectName = tbName->Text;
 			this->m_dataSetBinder->ShapeFilePath = tbShapeFilePath->Text;
 			this->m_dataSetBinder->ClassFilePath = tbClassFilePath->Text;
-			this->m_dataSetBinder->ListFilePath = tbListFilePath->Text;
 			this->m_dataSetBinder->NetworkFilePath = tbNetworkFilePath->Text;
 			this->m_dataSetBinder->FragParamFilePath = tbFragCurParamFilePath->Text;
 			this->m_dataSetBinder->SoilAmpFilePath = tbSoilAmpFilePath->Text;
@@ -761,17 +637,9 @@ namespace WinformProject {
 			backgroundWorker->ReportProgress(progressValue);
 
 			/* Read components class file */
-			/*
 			this->ReadComponentsClassFile();
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-			*/
-
-			/* Read List file */
-			this->ReadListFile();
-			progressValue += 10;
-			backgroundWorker->ReportProgress(progressValue);
-
 
 			//* Read network components file */
 			this->ReadNetworkComponentsFile();
@@ -811,17 +679,17 @@ namespace WinformProject {
 			this->m_dataSetBinder->DamageStateData[5] = "Most probable";
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-
+			
 			// set node control types
 			SetDefaultNodeControlTypes();
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-
+			
 			// set link types
 			SetDefaultLinkTypes();
 			progressValue += 10;
 			backgroundWorker->ReportProgress(progressValue);
-
+			
 			// set same all class params
 			this->m_dataSetBinder->SeismicSourceData->Columns->Add(gcnew DataColumn(CommConst::GRID_SEISMIC_SOURCES_LIST_COL1));
 			this->m_dataSetBinder->SeismicSourceData->Columns->Add(gcnew DataColumn(CommConst::GRID_SEISMIC_SOURCES_LIST_COL2));
@@ -840,12 +708,12 @@ namespace WinformProject {
 			this->m_dataSetBinder->RepairCostRatioParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_REPAIR_COST_RATIO_COL5));
 			this->m_dataSetBinder->IsSameAllRepairCostRatioParam = true;
 
-			/*
-						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL1));
-						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL2));
-						this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL3));
-						this->m_dataSetBinder->IsDefaultODZoneParam = true;
-			*/
+/*
+			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL1));
+			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL2));
+			this->m_dataSetBinder->ODZoneParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_OD_ZONE_COL3));
+			this->m_dataSetBinder->IsDefaultODZoneParam = true;
+*/
 
 			this->m_dataSetBinder->InputDemandMetaParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_INPUT_DEMAND_META_COL1));
 			this->m_dataSetBinder->InputDemandMetaParamData->Columns->Add(gcnew DataColumn(CommConst::GRID_INPUT_DEMAND_META_COL2));
@@ -853,7 +721,7 @@ namespace WinformProject {
 
 
 		}
-		System::Void backgroundWorkerProgressChanged(System::Object^ sender, System::ComponentModel::ProgressChangedEventArgs^ e) {
+		System::Void backgroundWorkerProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e) {
 			if (newProgress->InvokeRequired) {
 				array<Object^>^ args = { e->ProgressPercentage };
 				newProgress->Invoke(updateProgress, args);
@@ -862,7 +730,7 @@ namespace WinformProject {
 				UpdateProgress(e->ProgressPercentage);
 			}
 		}
-		System::Void backgroundWorkerRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e) {
+		System::Void backgroundWorkerRunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e) {
 			if (e->Cancelled)    //Messages for the events
 			{
 				SetProgressValue(0);
@@ -883,7 +751,6 @@ namespace WinformProject {
 			tbName->ReadOnly = !enable;
 			tbShapeFilePath->ReadOnly = !enable;
 			tbClassFilePath->ReadOnly = !enable;
-			tbListFilePath->ReadOnly = !enable;
 			tbNetworkFilePath->ReadOnly = !enable;
 			tbFragCurParamFilePath->ReadOnly = !enable;
 			tbSoilAmpFilePath->ReadOnly = !enable;
@@ -895,8 +762,7 @@ namespace WinformProject {
 			btnCancel->Enabled = enable;
 			btnOK->Enabled = enable;
 		}
-
-	private: System::Void NewProjectForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void NewProjectForm_Load(System::Object^  sender, System::EventArgs^  e) {
 		// initialize
 		newProgress->Value = 0;
 		this->m_dataSetBinder->IntensityMeasureData = gcnew array<String^>(2);
@@ -913,82 +779,66 @@ namespace WinformProject {
 
 		this->tbName->Focus();
 	}
-
-		   // 생성
-	private: System::Void btnOK_Click(System::Object^ sender, System::EventArgs^ e) {
+			 // 생성
+	private: System::Void btnOK_Click(System::Object^  sender, System::EventArgs^  e) {
 		CreateProject();
 	}
-
-		   // 취소
-	private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+			 // 취소
+	private: System::Void btnCancel_Click(System::Object^  sender, System::EventArgs^  e) {
 		this->DialogResult = ::DialogResult::Cancel;
 		this->Close();
 	}
-
-		   // shape 파일 찾기
-	private: System::Void btnFindShapeFile_Click(System::Object^ sender, System::EventArgs^ e) {
+			 // shape 파일 찾기
+	private: System::Void btnFindShapeFile_Click(System::Object^  sender, System::EventArgs^  e) {
 		String^ filename = CFileDlgUtil::GetShapeFile();
-		//		String^ filename = CFileDlgUtil::GetExcelFile();
+//		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbShapeFilePath->Text = filename;
 		}
 	}
-
-		   // component class 파일 찾기
-	private: System::Void btnFindClassFile_Click(System::Object^ sender, System::EventArgs^ e) {
-		//		String^ filename = CFileDlgUtil::GetShapeFile();
+			 // component class 파일 찾기
+	private: System::Void btnFindClassFile_Click(System::Object^  sender, System::EventArgs^  e) {
+//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbClassFilePath->Text = filename;
 		}
 	}
-
-		   //Bridge List 파일 찾기
-	private: System::Void btnFindListFile_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ filename = CFileDlgUtil::GetCsvFile();
-		if (!String::IsNullOrEmpty(filename))
-		{
-			tbListFilePath->Text = filename;
-		}
-	}
-
-
-		   // network component 파일 찾기
-	private: System::Void btnFindNetworkFile_Click(System::Object^ sender, System::EventArgs^ e) {
-		//		String^ filename = CFileDlgUtil::GetShapeFile();
+			 // network component 파일 찾기
+	private: System::Void btnFindNetworkFile_Click(System::Object^  sender, System::EventArgs^  e) {
+//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbNetworkFilePath->Text = filename;
 		}
 	}
-
-		   // fragility cureve paramter 파일 찾기
-	private: System::Void btnFindFragParamFile_Click(System::Object^ sender, System::EventArgs^ e) {
-		//		String^ filename = CFileDlgUtil::GetShapeFile();
+			 // fragility cureve paramter 파일 찾기
+	private: System::Void btnFindFragParamFile_Click(System::Object^  sender, System::EventArgs^  e) {
+//		String^ filename = CFileDlgUtil::GetShapeFile();
 		String^ filename = CFileDlgUtil::GetExcelFile();
 		if (!String::IsNullOrEmpty(filename))
 		{
 			tbFragCurParamFilePath->Text = filename;
 		}
 	}
-		   // 프로젝트 명으로 dialog의 title을 변경
-	private: System::Void tbName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+			 // 프로젝트 명으로 dialog의 title을 변경
+	private: System::Void tbName_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 		this->Text = String::IsNullOrEmpty(tbName->Text) ? "New" : tbName->Text;
 	}
-		   // 프로젝트 명 작성 중 엔터 클릭 시 프로젝트 생성
-	private: System::Void tbName_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+			 // 프로젝트 명 작성 중 엔터 클릭 시 프로젝트 생성
+	private: System::Void tbName_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
 		if (e->KeyCode == Keys::Enter)
 		{
 			CreateProject();
 		}
 	}
-	private: System::Void NewProjectForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	private: System::Void NewProjectForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
 		if (backgroundWorker->IsBusy) {
 			Alert::Info("프로젝트 생성 중에는 창을 닫을 수 없습니다.");
-			e->Cancel = true;
+			e->Cancel = true;	
 		}
 	}
 
@@ -1001,6 +851,5 @@ namespace WinformProject {
 			tbSoilAmpFilePath->Text = filename;
 		}
 	}
-
-	};
+};
 }

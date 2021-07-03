@@ -21,7 +21,7 @@ namespace WinformProject {
 	public ref class Step2Form : public WinformProject::BaseForm, IFormValidator
 	{
 	private:
-		ProjectDataSetBinder^ m_dataSet;
+		ProjectDataSetBinder^		m_dataSet;
 	public:
 		Step2Form(ProjectDataSetBinder^ dataSet)
 		{
@@ -43,13 +43,13 @@ namespace WinformProject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::DataGridView^ dgvCompClass;
+	private: System::Windows::Forms::DataGridView^  dgvCompClass;
 	private: System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle;
 	private:
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -58,7 +58,7 @@ namespace WinformProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dgvCompClass = (gcnew System::Windows::Forms::DataGridView());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCompClass))->BeginInit();
 			this->SuspendLayout();
@@ -79,34 +79,30 @@ namespace WinformProject {
 			this->dgvCompClass->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvCompClass->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dgvCompClass->Location = System::Drawing::Point(0, 0);
-			this->dgvCompClass->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->dgvCompClass->MultiSelect = false;
 			this->dgvCompClass->Name = L"dgvCompClass";
-			this->dgvCompClass->RowHeadersWidth = 51;
 			this->dgvCompClass->RowTemplate->Height = 23;
-			this->dgvCompClass->Size = System::Drawing::Size(1239, 951);
+			this->dgvCompClass->Size = System::Drawing::Size(784, 561);
 			this->dgvCompClass->TabIndex = 0;
 			this->dgvCompClass->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &Step2Form::dgvCompClass_DataBindingComplete);
 			// 
 			// Step2Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
+			this->AutoScaleDimensions = System::Drawing::SizeF(7, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1239, 951);
+			this->ClientSize = System::Drawing::Size(1084, 761);
 			this->Controls->Add(this->dgvCompClass);
-			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"Step2Form";
-			this->Text = L"Bridge List";
+			this->Text = L"Definition network component classes";
 			this->Load += gcnew System::EventHandler(this, &Step2Form::Step2Form_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCompClass))->EndInit();
 			this->ResumeLayout(false);
-
 		}
 #pragma endregion
 	public: virtual bool IsValidToOpenForm() = IFormValidator::IsValidToOpenForm{
 		return true;
 	}
-	private: System::Void Step2Form_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Step2Form_Load(System::Object^  sender, System::EventArgs^  e) {
 		this->dataGridViewCellStyle = (gcnew DataGridViewCellStyle());
 		this->dataGridViewCellStyle->Alignment = DataGridViewContentAlignment::MiddleLeft;
 		this->dataGridViewCellStyle->BackColor = Color::LightGray;
@@ -116,12 +112,12 @@ namespace WinformProject {
 		this->dataGridViewCellStyle->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 		this->dataGridViewCellStyle->WrapMode = DataGridViewTriState::True;
 
-		dgvCompClass->DataSource = m_dataSet->BridgeList;
+		dgvCompClass->DataSource = m_dataSet->ComponentClassData;
 	}
-	private: System::Void dgvCompClass_DataBindingComplete(System::Object^ sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^ e) {
+	private: System::Void dgvCompClass_DataBindingComplete(System::Object^  sender, System::Windows::Forms::DataGridViewBindingCompleteEventArgs^  e) {
 		// Set grid row number and style
 		int i = 1;
-		for each (DataGridViewRow ^ row in dgvCompClass->Rows) {
+		for each(DataGridViewRow^ row in dgvCompClass->Rows) {
 			if (row->IsNewRow) continue;
 			row->HeaderCell->Value = String::Format("{0}", i++);
 		}
@@ -132,7 +128,7 @@ namespace WinformProject {
 
 
 		//다국어
-		/*
+		//System::Windows::Forms::DataGridViewColumnCollection^ aaa			= this->dgvCompClass->Columns;
 		String^ sUiLang = CultureInfo::CurrentUICulture->Name;
 		String^ sClassId = "Class ID";//분류번호
 		String^ sDescription = "Description";//설명
@@ -142,7 +138,6 @@ namespace WinformProject {
 		}
 		this->dgvCompClass->Columns[0]->HeaderText = sClassId;
 		this->dgvCompClass->Columns[1]->HeaderText = sDescription;
-		*/
 
 	}
 	};
