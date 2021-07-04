@@ -853,10 +853,32 @@ namespace WinformProject {
 		{
 
 
-			int totalNodeCount = this->m_dataSet->ShapeData->m_SHPNodes->Count;
-			int totalLinkCount = this->m_dataSet->ShapeData->m_SHPProperties->Length;
-			array<double, 2>^ graph = gcnew array<double, 2>(totalNodeCount + 1, totalNodeCount + 1);
+			//int totalNodeCount = this->m_dataSet->ShapeData->m_SHPNodes->Count;
 
+			int maxNodeID = 0;
+			for each (ShapeProperty ^ prop in this->m_dataSet->ShapeData->m_SHPProperties)
+			{
+				String^ linkID = prop->GetProperty(ShapeProperty::PropertyType::LINK_ID);
+				String^ length = prop->GetProperty(ShapeProperty::PropertyType::LENGTH);
+
+				ShapeNode^ fromNode = prop->Nodes[0];
+				ShapeNode^ toNode = prop->Nodes[1];
+				if (toNode == nullptr) { toNode = fromNode; }
+				int fromNodeID = int::Parse(fromNode->ID->ToString());
+				int toNodeID = int::Parse(toNode->ID->ToString());
+
+				if (fromNodeID > toNodeID) {
+					if (fromNodeID > maxNodeID) { maxNodeID = fromNodeID; }
+				}
+				else {
+					if (toNodeID > maxNodeID) { maxNodeID = toNodeID; }
+				}
+			}
+
+
+			int V = maxNodeID + 1;
+
+			array<double, 2>^ graph = gcnew array<double, 2>(V, V);
 			for each (ShapeProperty ^ prop in this->m_dataSet->ShapeData->m_SHPProperties)
 			{
 				String^ linkID = prop->GetProperty(ShapeProperty::PropertyType::LINK_ID);
@@ -874,9 +896,9 @@ namespace WinformProject {
 
 				graph[fromNodeID, toNodeID] = gLength;
 				graph[toNodeID, fromNodeID] = gLength;
+
 			}
 
-			int V = totalNodeCount;
 			int src = Origin;
 
 			//int dist[V]; // The output array.  dist[i] will hold the shortest
@@ -947,6 +969,7 @@ namespace WinformProject {
 
 			return odLink;
 		}
+
 
 
 		Dictionary<String^, array<String^>^>^ ReadOutputSummaryFile(String^ filePath, int scenarioCount, Dictionary<String^, array<String^>^>^ beforeUnistOutputSummaryDictionary){
