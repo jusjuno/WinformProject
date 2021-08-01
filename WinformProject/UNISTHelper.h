@@ -973,23 +973,41 @@ namespace WinformProject {
 
 
 		Dictionary<String^, array<String^>^>^ ReadOutputSummaryFile(String^ filePath, int scenarioCount, Dictionary<String^, array<String^>^>^ beforeUnistOutputSummaryDictionary){
-		
+		// TrafficScenario(scenarioIndex, sourceName, sourceIndex, recurrencePeriodName, recurIndex, sample, components, ODIndex + 1);
+
 			try {
 				CSVFileManager^ csv = gcnew CSVFileManager(filePath);
 				String^ output = csv->Read();
 				if (!String::IsNullOrEmpty(output)) {
 					array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
 					int outputRowCount = dataArray->Length;
+					
+					int unistResultIndex = 0;
 
+					for (int i = 0; i < this->m_dataSet->ODZoneParamData->Rows->Count; i++) {
+						for (int j = 0; j < this->m_dataSet->SeismicSourceData->Rows->Count; j++) {
+							for (int k = 0; k < this->m_dataSet->RecurrencePeriodData->Length; k++) {
+								for (int l = 0; l < this->m_dataSet->TrafficScenarioSamples->Length; l++) {
+									int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(j, k, l + 1, i + 1);
+									String^ Key = String::Format("{0}", localTrafficScenarioNo);
+									String^ outputLineData = dataArray[unistResultIndex];
+									array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
+									beforeUnistOutputSummaryDictionary->Add(Key, values);
+									unistResultIndex++;
+								}
+							}
+						}
+					}
+
+					/*
 					for (int i = 0; i < scenarioCount; i++) {
 						String^ Key = String::Format("{0}", i);
 						String^ outputLineData = dataArray[i];
 						array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
-
 						beforeUnistOutputSummaryDictionary->Add(Key, values);
-
-
 					}
+					*/
+
 					return beforeUnistOutputSummaryDictionary;
 				}
 			}
@@ -1042,7 +1060,7 @@ namespace WinformProject {
 						//	break;
 						//}
 
-						if (0.9999 * xcoord < winformNode[0, 1] && winformNode[0, 1] < 1.0001 * xcoord) {
+						if (0.99999 * xcoord < winformNode[0, 1] && winformNode[0, 1] < 1.00001 * xcoord) {
 							if (0.9999 * ycoord < winformNode[0, 2] && winformNode[0, 2] < 1.0001 * ycoord) {
 								matchingNode = String::Format("{0}",unistNodeID);
 								break;

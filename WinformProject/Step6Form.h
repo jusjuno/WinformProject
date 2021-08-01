@@ -505,6 +505,10 @@ namespace WinformProject {
 
 
 		bool StructureDamageStatus() {
+
+			//if (this->m_networkComponent->StructureDamageStatus->Count == 0) {
+			//}
+
 			// 지진소스, 재현주기, 샘플, OD
 			int componentCount = m_networkComponent->GetCount();
 			int sampleIndex = 1;
@@ -522,14 +526,14 @@ namespace WinformProject {
 			for each (KeyValuePair<String^, DataTable^> ^ pair in this->m_dataSet->SeismicSourceDictionary)
 			{
 				DataTable^ sourceTable = pair->Value;
-				for (int recurIndex = 0; recurIndex < m_dataSet->RecurrencePeriodData->Length; recurIndex++){
+				for (int recurIndex = 0; recurIndex < m_dataSet->RecurrencePeriodData->Length; recurIndex++) {
 
-					String^ key = String::Format("{0}{1}{2}{3}",sourceIndex, recurIndex, sampleIndex, ODindex);
+					String^ key = String::Format("{0}{1}{2}{3}", sourceIndex, recurIndex, sampleIndex, ODindex);
 
 					DataTable^ structureDamage = gcnew DataTable();
 					structureDamage = NewTable(columns);
 
-					for (int compIndex = 0; compIndex < componentCount; compIndex++){
+					for (int compIndex = 0; compIndex < componentCount; compIndex++) {
 
 						String^ compID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_NETWORK_COMP_ID);
 						String^ classID = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_CLASS_ID);
@@ -554,22 +558,31 @@ namespace WinformProject {
 						newRow[0] = compID;
 
 						for (int damageIndex = 1; damageIndex < m_fragilityCurve->DamageStateCount; damageIndex++) { // damage state 0은 제외
-						
+
 							damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageIndex, sa);
 							newRow[damageIndex] = damageProbability;
-						
+
 						}
 
 						structureDamage->Rows->Add(newRow);
 
 					}
 					// Key에 따른 사전 작성
-					this->m_networkComponent->StructureDamageStatus->Add(key, structureDamage);
+					if (!this->m_networkComponent->StructureDamageStatus->ContainsKey(key)) {
+						this->m_networkComponent->StructureDamageStatus->Add(key, structureDamage);
+					}
+					else {
+						this->m_networkComponent->StructureDamageStatus->Remove(key);
+						this->m_networkComponent->StructureDamageStatus->Add(key, structureDamage);
+					}
 				}
 				sourceIndex++;
 			}
 
 			return true;
+
+
+
 		}
 
 

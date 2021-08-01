@@ -1488,18 +1488,20 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		// (총)간접피해규모 계산
 		double CalculateIndirectCost(int stageIndex, int odIndex) {
 			// 총 복구단계 (수)
-			int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
+			//int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
 
 			int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex + 1);
-			array<double>^ currentAdditionalCostData = gcnew array<double>(recoveryStepCount);
+			//array<double>^ currentAdditionalCostData = gcnew array<double>(recoveryStepCount);
+			array<double>^ currentAdditionalCostData;
 			//DataRow^ newRow = SRoadDamage->NewRow();
 
 			// 0 = 내진보강전, 1= 현재상태
 			currentAdditionalCostData = CalculateAdditionalCost(stageIndex, localTrafficScenarioNo);
 
 			double totalIndirectCost = 0;
-			for (int j = 0; j < recoveryStepCount; j++)
-			{
+			//for (int j = 0; j < recoveryStepCount; j++)
+			for (int j = 0; j < currentAdditionalCostData->Length; j++)
+				{
 				totalIndirectCost += currentAdditionalCostData[j];
 			}
 			return totalIndirectCost;
@@ -2152,15 +2154,17 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						directCompoBeforDict->Add(componentID, arrDataY);
 					}
 
+					array<double>^ tmpY = (array<double>^)arrDataY->Clone();
 					if (directLinkBeforDict->ContainsKey(link)) {
 						array<double>^ arr = directLinkBeforDict[link];
-						for (int n = 0; n < arrDataY->Length; n++) {
-							arrDataY[n] += arr[n];
+						for (int n = 0; n < tmpY->Length; n++) {
+							//arrDataY[n] += arr[n];
+							arr[n] += tmpY[n];
 						}
-						directLinkBeforDict[link] = arrDataY;
+						directLinkBeforDict[link] = arr;
 					}
 					else {
-						directLinkBeforDict->Add(link, arrDataY);
+						directLinkBeforDict->Add(link, tmpY);
 					}
 
 
@@ -2169,15 +2173,17 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						inDirectCompoBeforDict->Add(componentID, arrDataY2);
 					}
 	
+					array<double>^ tmpY2 = (array<double>^)arrDataY2->Clone();
 					if (inDirectLinkBeforDict->ContainsKey(link)) {
 						array<double>^ arr = inDirectLinkBeforDict[link];
-						for (int n = 0; n < arrDataY2->Length; n++) {
-							arrDataY2[n] += arr[n];
+						for (int n = 0; n < tmpY2->Length; n++) {
+							//arrDataY2[n] += arr[n];
+							arr[n] += tmpY2[n];
 						}
-						inDirectLinkBeforDict[link] = arrDataY2;
+						inDirectLinkBeforDict[link] = arr;
 					}
 					else {
-						inDirectLinkBeforDict->Add(link, arrDataY2);
+						inDirectLinkBeforDict->Add(link, tmpY2);
 					}
 
 
@@ -2259,15 +2265,17 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						directCompoAfterDict->Add(componentID, arrDataY);
 					}
 
+					array<double>^ tmpY = (array<double>^)arrDataY->Clone();
 					if (directLinkAfterDict->ContainsKey(link)) {
 						array<double>^ arr = directLinkAfterDict[link];
-						for (int n = 0; n < arrDataY->Length; n++) {
-							arrDataY[n] += arr[n];
+						for (int n = 0; n < tmpY->Length; n++) {
+							//arrDataY[n] += arr[n];
+							arr[n] += tmpY[n];
 						}
-						directLinkAfterDict[link] = arrDataY;
+						directLinkAfterDict[link] = arr;
 					}
 					else {
-						directLinkAfterDict->Add(link, arrDataY);
+						directLinkAfterDict->Add(link, tmpY);
 					}
 					
 
@@ -2276,15 +2284,17 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						inDirectCompoAfterDict->Add(componentID, arrDataY2);
 					}
 
+					array<double>^ tmpY2 = (array<double>^)arrDataY2->Clone();
 					if (inDirectLinkAfterDict->ContainsKey(link)) {
 						array<double>^ arr = inDirectLinkAfterDict[link];
-						for (int n = 0; n < arrDataY2->Length; n++) {
-							arrDataY2[n] += arr[n];
+						for (int n = 0; n < tmpY2->Length; n++) {
+							//arrDataY2[n] += arr[n];
+							arr[n] += tmpY2[n];
 						}
-						inDirectLinkAfterDict[link] = arrDataY2;
+						inDirectLinkAfterDict[link] = arr;
 					}
 					else {
-						inDirectLinkAfterDict->Add(link, arrDataY2);
+						inDirectLinkAfterDict->Add(link, tmpY2);
 					}
 
 
@@ -4140,6 +4150,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			}
 			XYChart^ chart = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
 
+
 			int plotAreaWidth = chartViewer->Size.Width - 100;
 			int plotAreaHeight = chartViewer->Size.Height - 120;
 			chart->setPlotArea(60, 60, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
@@ -4492,6 +4503,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		// Classify the numbers into slots. In this example, the slot width is 5 units.
 		//
 		ArrayMath^ m = gcnew ArrayMath(samples);
+
 		int slotSize;
 		if (samples->Length < 20) {
 			slotSize = (floor(m->max()) - floor(m->min())) / (samples->Length - 1);
@@ -4521,7 +4533,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		//
 		// Compute Normal Distribution Curve
 		//
-
+		
 		// The mean and standard deviation of the data
 		double mean = m->avg();
 		double stdDev = m->stdDev();
@@ -4546,7 +4558,6 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		//
 		// At this stage, we have obtained all data and can plot the chart.
 		//
-
 
 		// Create a XYChart object of size 600 x 360 pixels
 		//XYChart* c = new XYChart(600, 360);
