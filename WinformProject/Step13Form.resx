@@ -122,37 +122,6 @@
     <value>12</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cboIndirectDamage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="cboIndirectDamage.Items" xml:space="preserve">
-    <value>내진보강(전)</value>
-  </data>
-  <data name="cboIndirectDamage.Items1" xml:space="preserve">
-    <value>내진보강(후)</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="cboIndirectDamage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 321</value>
-  </data>
-  <data name="cboIndirectDamage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 23</value>
-  </data>
-  <data name="cboIndirectDamage.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;cboIndirectDamage.Name" xml:space="preserve">
-    <value>cboIndirectDamage</value>
-  </data>
-  <data name="&gt;&gt;cboIndirectDamage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cboIndirectDamage.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;cboIndirectDamage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cboDirectDamage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -162,11 +131,12 @@
   <data name="cboDirectDamage.Items1" xml:space="preserve">
     <value>내진보강(후)</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cboDirectDamage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 321</value>
+    <value>367, 321</value>
   </data>
   <data name="cboDirectDamage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>174, 23</value>
   </data>
   <data name="cboDirectDamage.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -181,16 +151,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboDirectDamage.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="cboSeismicPeriod.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="cboSeismicPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 3</value>
+    <value>547, 3</value>
   </data>
   <data name="cboSeismicPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>174, 23</value>
   </data>
   <data name="cboSeismicPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -205,7 +175,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboSeismicPeriod.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,10 +187,10 @@
     <value>굴림, 9pt, style=Bold</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 0</value>
+    <value>367, 0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 37</value>
+    <value>174, 37</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -241,7 +211,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="cboSRoad.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -259,10 +229,10 @@
     <value>노선별 보강 효과기준</value>
   </data>
   <data name="cboSRoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 48</value>
+    <value>907, 48</value>
   </data>
   <data name="cboSRoad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 23</value>
+    <value>185, 23</value>
   </data>
   <data name="cboSRoad.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -277,7 +247,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboSRoad.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,10 +259,10 @@
     <value>굴림, 9pt, style=Bold</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 37</value>
+    <value>817, 37</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 37</value>
+    <value>84, 37</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -313,7 +283,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="cboEffect.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -337,10 +307,10 @@
     <value>도로망 환경지수</value>
   </data>
   <data name="cboEffect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>483, 48</value>
+    <value>637, 48</value>
   </data>
   <data name="cboEffect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>174, 23</value>
   </data>
   <data name="cboEffect.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -355,7 +325,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboEffect.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,10 +337,10 @@
     <value>굴림, 9pt, style=Bold</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 37</value>
+    <value>547, 37</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 37</value>
+    <value>84, 37</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -391,7 +361,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="cboBudget.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -409,10 +379,10 @@
     <value>노선별 종합 피해기준</value>
   </data>
   <data name="cboBudget.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 48</value>
+    <value>367, 48</value>
   </data>
   <data name="cboBudget.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>174, 23</value>
   </data>
   <data name="cboBudget.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -427,7 +397,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboBudget.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -439,10 +409,10 @@
     <value>굴림, 9pt, style=Bold</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 37</value>
+    <value>276, 37</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 37</value>
+    <value>85, 37</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -463,43 +433,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>굴림, 9pt, style=Bold</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 310</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 37</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Indirect Damage(Traffic Cost)</value>
-  </data>
-  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomCenter</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -514,7 +448,7 @@
     <value>3, 310</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 37</value>
+    <value>358, 37</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -535,7 +469,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -550,7 +484,7 @@
     <value>3, 37</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 37</value>
+    <value>85, 37</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -571,7 +505,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="cboPriority.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -589,10 +523,10 @@
     <value>노선별 종합 피해기준</value>
   </data>
   <data name="cboPriority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="cboPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 23</value>
+    <value>176, 23</value>
   </data>
   <data name="cboPriority.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -607,19 +541,19 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboPriority.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="dgvSRoad.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="dgvSRoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 77</value>
+    <value>817, 77</value>
   </data>
   <data name="dgvSRoad.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
   <data name="dgvSRoad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 230</value>
+    <value>275, 230</value>
   </data>
   <data name="dgvSRoad.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -634,19 +568,19 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dgvSRoad.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="dgvEffect.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="dgvEffect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 77</value>
+    <value>547, 77</value>
   </data>
   <data name="dgvEffect.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
   <data name="dgvEffect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 230</value>
+    <value>264, 230</value>
   </data>
   <data name="dgvEffect.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -661,19 +595,19 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dgvEffect.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="dgvBudget.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="dgvBudget.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 77</value>
+    <value>276, 77</value>
   </data>
   <data name="dgvBudget.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
   <data name="dgvBudget.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 230</value>
+    <value>265, 230</value>
   </data>
   <data name="dgvBudget.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -688,7 +622,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dgvBudget.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="dgvPriority.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -700,7 +634,7 @@
     <value>62</value>
   </data>
   <data name="dgvPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 230</value>
+    <value>267, 230</value>
   </data>
   <data name="dgvPriority.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -715,7 +649,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dgvPriority.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="dgvDirectDamage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -724,7 +658,7 @@
     <value>3, 350</value>
   </data>
   <data name="dgvDirectDamage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 230</value>
+    <value>538, 230</value>
   </data>
   <data name="dgvDirectDamage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -739,16 +673,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dgvDirectDamage.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="chartViewer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="chartViewer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 350</value>
+    <value>547, 350</value>
   </data>
   <data name="chartViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 230</value>
+    <value>545, 230</value>
   </data>
   <data name="chartViewer.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -763,7 +697,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;chartViewer.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>17</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -775,10 +709,10 @@
     <value>굴림, 9pt, style=Bold</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 0</value>
+    <value>727, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 37</value>
+    <value>174, 37</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -799,7 +733,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>18</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -814,7 +748,7 @@
     <value>3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 37</value>
+    <value>176, 37</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -835,16 +769,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>19</value>
   </data>
   <data name="cboSample.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="cboSample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 3</value>
+    <value>907, 3</value>
   </data>
   <data name="cboSample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 23</value>
+    <value>185, 23</value>
   </data>
   <data name="cboSample.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -859,16 +793,16 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboSample.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>20</value>
   </data>
   <data name="cboSeismicSource.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="cboSeismicSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 3</value>
+    <value>185, 3</value>
   </data>
   <data name="cboSeismicSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 23</value>
+    <value>176, 23</value>
   </data>
   <data name="cboSeismicSource.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -883,6 +817,81 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboSeismicSource.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="cboGrpCondi01.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="cboGrpCondi01.Items" xml:space="preserve">
+    <value>--선택--</value>
+  </data>
+  <data name="cboGrpCondi01.Items1" xml:space="preserve">
+    <value>내진보강(전)(후) 전체도로망-직/간접 총피해</value>
+  </data>
+  <data name="cboGrpCondi01.Items2" xml:space="preserve">
+    <value>내진보강(전) 개별시설물별 직접피해</value>
+  </data>
+  <data name="cboGrpCondi01.Items3" xml:space="preserve">
+    <value>내진보강(후) 개별시설물별 직접피해</value>
+  </data>
+  <data name="cboGrpCondi01.Items4" xml:space="preserve">
+    <value>내진보강(전)(후) 노선별 직접피해</value>
+  </data>
+  <data name="cboGrpCondi01.Items5" xml:space="preserve">
+    <value>내진보강(전)(후) 노선별 간접피해</value>
+  </data>
+  <data name="cboGrpCondi01.Items6" xml:space="preserve">
+    <value>내진보강(전)(후) 노선별 종합피해</value>
+  </data>
+  <data name="cboGrpCondi01.Location" type="System.Drawing.Point, System.Drawing">
+    <value>564, 321</value>
+  </data>
+  <data name="cboGrpCondi01.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 3, 3, 3</value>
+  </data>
+  <data name="cboGrpCondi01.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 23</value>
+  </data>
+  <data name="cboGrpCondi01.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi01.Name" xml:space="preserve">
+    <value>cboGrpCondi01</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi01.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi01.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi01.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="cboGrpCondi02.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="cboGrpCondi02.Location" type="System.Drawing.Point, System.Drawing">
+    <value>817, 321</value>
+  </data>
+  <data name="cboGrpCondi02.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 20, 3</value>
+  </data>
+  <data name="cboGrpCondi02.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 23</value>
+  </data>
+  <data name="cboGrpCondi02.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi02.Name" xml:space="preserve">
+    <value>cboGrpCondi02</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi02.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi02.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;cboGrpCondi02.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -898,7 +907,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>825, 583</value>
+    <value>1095, 583</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -916,7 +925,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cboIndirectDamage" Row="3" RowSpan="1" Column="10" ColumnSpan="2" /&gt;&lt;Control Name="cboDirectDamage" Row="3" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="cboSeismicPeriod" Row="0" RowSpan="1" Column="6" ColumnSpan="2" /&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="cboSRoad" Row="1" RowSpan="1" Column="10" ColumnSpan="2" /&gt;&lt;Control Name="label8" Row="1" RowSpan="1" Column="9" ColumnSpan="1" /&gt;&lt;Control Name="cboEffect" Row="1" RowSpan="1" Column="7" ColumnSpan="2" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="cboBudget" Row="1" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="3" RowSpan="1" Column="6" ColumnSpan="4" /&gt;&lt;Control Name="label4" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboPriority" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="dgvSRoad" Row="2" RowSpan="1" Column="9" ColumnSpan="3" /&gt;&lt;Control Name="dgvEffect" Row="2" RowSpan="1" Column="6" ColumnSpan="3" /&gt;&lt;Control Name="dgvBudget" Row="2" RowSpan="1" Column="3" ColumnSpan="3" /&gt;&lt;Control Name="dgvPriority" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="dgvDirectDamage" Row="4" RowSpan="1" Column="0" ColumnSpan="6" /&gt;&lt;Control Name="chartViewer" Row="4" RowSpan="1" Column="6" ColumnSpan="6" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="8" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="cboSample" Row="0" RowSpan="1" Column="10" ColumnSpan="2" /&gt;&lt;Control Name="cboSeismicSource" Row="0" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,8.399999,Percent,8.399999,Percent,8.399999,Percent,8.399999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999" /&gt;&lt;Rows Styles="Absolute,37,Absolute,37,Percent,50,Absolute,37,Percent,50,Absolute,17" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cboDirectDamage" Row="3" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="cboSeismicPeriod" Row="0" RowSpan="1" Column="6" ColumnSpan="2" /&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="cboSRoad" Row="1" RowSpan="1" Column="10" ColumnSpan="2" /&gt;&lt;Control Name="label8" Row="1" RowSpan="1" Column="9" ColumnSpan="1" /&gt;&lt;Control Name="cboEffect" Row="1" RowSpan="1" Column="7" ColumnSpan="2" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="cboBudget" Row="1" RowSpan="1" Column="4" ColumnSpan="2" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboPriority" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="dgvSRoad" Row="2" RowSpan="1" Column="9" ColumnSpan="3" /&gt;&lt;Control Name="dgvEffect" Row="2" RowSpan="1" Column="6" ColumnSpan="3" /&gt;&lt;Control Name="dgvBudget" Row="2" RowSpan="1" Column="3" ColumnSpan="3" /&gt;&lt;Control Name="dgvPriority" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="dgvDirectDamage" Row="4" RowSpan="1" Column="0" ColumnSpan="6" /&gt;&lt;Control Name="chartViewer" Row="4" RowSpan="1" Column="6" ColumnSpan="6" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="8" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="cboSample" Row="0" RowSpan="1" Column="10" ColumnSpan="2" /&gt;&lt;Control Name="cboSeismicSource" Row="0" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="cboGrpCondi01" Row="3" RowSpan="1" Column="6" ColumnSpan="3" /&gt;&lt;Control Name="cboGrpCondi02" Row="3" RowSpan="1" Column="9" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,8.399999,Percent,8.399999,Percent,8.399999,Percent,8.399999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999,Percent,8.299999" /&gt;&lt;Rows Styles="Absolute,37,Absolute,37,Percent,50,Absolute,37,Percent,50,Absolute,17" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -925,7 +934,7 @@
     <value>8, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>825, 583</value>
+    <value>1095, 583</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>

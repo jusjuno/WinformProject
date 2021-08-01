@@ -44,6 +44,11 @@ namespace WinformProject {
 		array<String^>^ m_chartDataX1;
 		array<double>^ m_chartDataY1;
 		array<double>^ m_chartDataY2;
+		array<double>^ m_chartDataY3;
+		array<double>^ m_chartDataY4;
+
+
+
 		array<String^>^ m_subChartDataX;
 
 		NeXTAHelper^ m_nextaHelper;
@@ -64,10 +69,27 @@ namespace WinformProject {
 		Dictionary<String^, array<String^>^ >^ beforeUnistOutputSummaryDictionary;
 
 
+		//직접
+		Dictionary<String^, array<double>^ >^ directCompoBeforDict;
+		Dictionary<String^, array<double>^ >^ directCompoAfterDict;
+		Dictionary<String^, array<double>^ >^ directLinkBeforDict;
+		Dictionary<String^, array<double>^ >^ directLinkAfterDict;
+		Dictionary<String^, array<double>^ >^ directLinkAllDict;
+
+		//간접
+		Dictionary<String^, array<double>^ >^ inDirectCompoBeforDict;
+		Dictionary<String^, array<double>^ >^ inDirectCompoAfterDict;
+		Dictionary<String^, array<double>^ >^ inDirectLinkBeforDict;
+		Dictionary<String^, array<double>^ >^ inDirectLinkAfterDict;
+		Dictionary<String^, array<double>^ >^ inDirectLinkAllDict;
+
+
+
+		String^ m_chartType;
 
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-//	private: System::Windows::Forms::DataGridView^ dgvNetworkComponent;
+		   //	private: System::Windows::Forms::DataGridView^ dgvNetworkComponent;
 		   array<array<double>^>^ m_subChartDataY;
 
 	private:	   array<ComponentClassInfo>^ m_chartDatas;
@@ -81,7 +103,7 @@ namespace WinformProject {
 	private: System::Windows::Forms::ComboBox^ cboBudget;
 
 	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::Label^ label5;
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::ComboBox^ cboPriority;
@@ -102,7 +124,11 @@ namespace WinformProject {
 
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::ComboBox^ cboDirectDamage;
-	private: System::Windows::Forms::ComboBox^ cboIndirectDamage;
+
+	private: System::Windows::Forms::ComboBox^ cboGrpCondi01;
+	private: System::Windows::Forms::ComboBox^ cboGrpCondi02;
+
+
 
 
 	private:	   NetworkComponent^ m_networkComponent;
@@ -125,6 +151,20 @@ namespace WinformProject {
 
 			this->beforeNeXTAOutputSummaryDictionary = gcnew Dictionary<String^, OutputSummary^>();
 			this->beforeUnistOutputSummaryDictionary = gcnew Dictionary<String^, array<String^>^>();
+
+			this->directCompoBeforDict = gcnew Dictionary<String^, array<double>^>();
+			this->directCompoAfterDict = gcnew Dictionary<String^, array<double>^>();
+			this->directLinkBeforDict = gcnew Dictionary<String^, array<double>^>();
+			this->directLinkAfterDict = gcnew Dictionary<String^, array<double>^>();
+			this->directLinkAllDict = gcnew Dictionary<String^, array<double>^>();
+
+			this->inDirectCompoBeforDict = gcnew Dictionary<String^, array<double>^>();
+			this->inDirectCompoAfterDict = gcnew Dictionary<String^, array<double>^>();
+			this->inDirectLinkBeforDict = gcnew Dictionary<String^, array<double>^>();
+			this->inDirectLinkAfterDict = gcnew Dictionary<String^, array<double>^>();
+			this->inDirectLinkAllDict = gcnew Dictionary<String^, array<double>^>();
+
+
 
 			this->valueOfTime = this->m_dataSet->ValueOfTime;
 			this->penaltyCost = this->m_dataSet->PenaltyCost;
@@ -153,11 +193,11 @@ namespace WinformProject {
 			}
 		}
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
-	//protected:
+		   //protected:
 	private: System::Windows::Forms::ComboBox^ cboSample;
 	private: System::Windows::Forms::ComboBox^ cboSeismicSource;
 
-	//protected:
+		   //protected:
 
 
 	private: System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle;
@@ -169,7 +209,7 @@ namespace WinformProject {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -180,7 +220,6 @@ namespace WinformProject {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Step13Form::typeid));
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->cboIndirectDamage = (gcnew System::Windows::Forms::ComboBox());
 			this->cboDirectDamage = (gcnew System::Windows::Forms::ComboBox());
 			this->cboSeismicPeriod = (gcnew System::Windows::Forms::ComboBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
@@ -190,7 +229,6 @@ namespace WinformProject {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->cboBudget = (gcnew System::Windows::Forms::ComboBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->cboPriority = (gcnew System::Windows::Forms::ComboBox());
@@ -204,6 +242,8 @@ namespace WinformProject {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->cboSample = (gcnew System::Windows::Forms::ComboBox());
 			this->cboSeismicSource = (gcnew System::Windows::Forms::ComboBox());
+			this->cboGrpCondi01 = (gcnew System::Windows::Forms::ComboBox());
+			this->cboGrpCondi02 = (gcnew System::Windows::Forms::ComboBox());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvSRoad))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvEffect))->BeginInit();
@@ -216,7 +256,6 @@ namespace WinformProject {
 			// tableLayoutPanel1
 			// 
 			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
-			this->tableLayoutPanel1->Controls->Add(this->cboIndirectDamage, 10, 3);
 			this->tableLayoutPanel1->Controls->Add(this->cboDirectDamage, 4, 3);
 			this->tableLayoutPanel1->Controls->Add(this->cboSeismicPeriod, 6, 0);
 			this->tableLayoutPanel1->Controls->Add(this->label9, 4, 0);
@@ -226,7 +265,6 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->label7, 6, 1);
 			this->tableLayoutPanel1->Controls->Add(this->cboBudget, 4, 1);
 			this->tableLayoutPanel1->Controls->Add(this->label6, 3, 1);
-			this->tableLayoutPanel1->Controls->Add(this->label5, 6, 3);
 			this->tableLayoutPanel1->Controls->Add(this->label4, 0, 3);
 			this->tableLayoutPanel1->Controls->Add(this->label3, 0, 1);
 			this->tableLayoutPanel1->Controls->Add(this->cboPriority, 1, 1);
@@ -240,20 +278,9 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->label1, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSample, 10, 0);
 			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 2, 0);
+			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi01, 6, 3);
+			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi02, 9, 3);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			// 
-			// cboIndirectDamage
-			// 
-			this->tableLayoutPanel1->SetColumnSpan(this->cboIndirectDamage, 2);
-			resources->ApplyResources(this->cboIndirectDamage, L"cboIndirectDamage");
-			this->cboIndirectDamage->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->cboIndirectDamage->FormattingEnabled = true;
-			this->cboIndirectDamage->Items->AddRange(gcnew cli::array< System::Object^  >(2) {
-				resources->GetString(L"cboIndirectDamage.Items"),
-					resources->GetString(L"cboIndirectDamage.Items1")
-			});
-			this->cboIndirectDamage->Name = L"cboIndirectDamage";
-			this->cboIndirectDamage->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboIndirectDamage_SelectionChangeCommitted);
 			// 
 			// cboDirectDamage
 			// 
@@ -337,12 +364,6 @@ namespace WinformProject {
 			// 
 			resources->ApplyResources(this->label6, L"label6");
 			this->label6->Name = L"label6";
-			// 
-			// label5
-			// 
-			resources->ApplyResources(this->label5, L"label5");
-			this->tableLayoutPanel1->SetColumnSpan(this->label5, 4);
-			this->label5->Name = L"label5";
 			// 
 			// label4
 			// 
@@ -458,6 +479,28 @@ namespace WinformProject {
 			this->cboSeismicSource->Name = L"cboSeismicSource";
 			this->cboSeismicSource->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboSeismicSource_SelectionChangeCommitted);
 			// 
+			// cboGrpCondi01
+			// 
+			this->tableLayoutPanel1->SetColumnSpan(this->cboGrpCondi01, 3);
+			resources->ApplyResources(this->cboGrpCondi01, L"cboGrpCondi01");
+			this->cboGrpCondi01->DropDownWidth = 160;
+			this->cboGrpCondi01->FormattingEnabled = true;
+			this->cboGrpCondi01->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
+				resources->GetString(L"cboGrpCondi01.Items"),
+					resources->GetString(L"cboGrpCondi01.Items1"), resources->GetString(L"cboGrpCondi01.Items2"), resources->GetString(L"cboGrpCondi01.Items3"),
+					resources->GetString(L"cboGrpCondi01.Items4"), resources->GetString(L"cboGrpCondi01.Items5"), resources->GetString(L"cboGrpCondi01.Items6")
+			});
+			this->cboGrpCondi01->Name = L"cboGrpCondi01";
+			this->cboGrpCondi01->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboGrpCondi01_SelectionChangeCommitted);
+			// 
+			// cboGrpCondi02
+			// 
+			this->tableLayoutPanel1->SetColumnSpan(this->cboGrpCondi02, 2);
+			resources->ApplyResources(this->cboGrpCondi02, L"cboGrpCondi02");
+			this->cboGrpCondi02->FormattingEnabled = true;
+			this->cboGrpCondi02->Name = L"cboGrpCondi02";
+			this->cboGrpCondi02->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboGrpCondi02_SelectionChangeCommitted);
+			// 
 			// Step13Form
 			// 
 			resources->ApplyResources(this, L"$this");
@@ -478,10 +521,10 @@ namespace WinformProject {
 		}
 #pragma endregion
 
-/*
-	private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
-*/
+		/*
+			private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+			}
+		*/
 
 
 
@@ -495,15 +538,15 @@ namespace WinformProject {
 				Alert::Info("Functionality has been not calculated.");
 				return false;
 			}
-			//else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
-			//	Alert::Info("Loss factor has been not calculated.");
-			//	return false;
-			//}
-			else if (!this->m_dataSet->ResultData->IsNetworkStructuralCost) {
-				Alert::Info("Network structural cost has been not calculated.");
-				return false;
-			}
-			return true;
+		//else if (!this->m_dataSet->ResultData->IsCalculatedLossfactor) {
+		//	Alert::Info("Loss factor has been not calculated.");
+		//	return false;
+		//}
+		else if (!this->m_dataSet->ResultData->IsNetworkStructuralCost) {
+			Alert::Info("Network structural cost has been not calculated.");
+			return false;
+		}
+		return true;
 		}
 
 	private:
@@ -902,7 +945,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 		*/
 
-//그래프 타입6: 병렬 + 직렬 그래프
+		//그래프 타입6: 병렬 + 직렬 그래프
 
 		void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ dataY2) {
 			String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
@@ -914,20 +957,20 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			c->setPlotArea(100, 50, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
 			c->addTitle("", "Times New Roman Bold", 17);
 
-			LegendBox^ b = c->addLegend(120, 10, false, "Arial", 12);
+			LegendBox^ b = c->addLegend(120, 10, false, "Arial", 11);
 			b->setBackground(Chart::Transparent, Chart::Transparent);
 			b->setKeyBorder(Chart::SameAsMainColor);
 
 			// Set the x and y axis stems to transparent and the label font to 12pt Arial
 			c->xAxis()->setColors(Chart::Transparent);
 			c->xAxis()->setLabels(dataX);
-			c->xAxis()->setTitle("Recurrence Period (years)", "Arial Bold", 12);
+			c->xAxis()->setTitle("Recurrence Period (years)", "Arial Bold", 11);
 
 			c->yAxis()->setColors(Chart::Transparent);
-			c->xAxis()->setLabelStyle("Arial Bold", 12);
-			c->yAxis()->setLabelStyle("Arial Bold", 12);
+			c->xAxis()->setLabelStyle("Arial Bold", 11);
+			c->yAxis()->setLabelStyle("Arial Bold", 11);
 			//			c->yAxis()->setTitle("Cost (￦) 10^7", "Arial Bold", 12);
-			c->yAxis()->setTitle("백억원(￦)", "Arial Bold", 12);
+			c->yAxis()->setTitle("백억원(￦)", "Arial Bold", 11);
 			c->yAxis()->setLabelFormat("{={value}/10000000}");
 
 			// Add a stacked bar layer
@@ -948,7 +991,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 
-
+		/*
 		void DrawCharts() {
 			//if (cboSample->SelectedIndex < 0) {
 			//	return;
@@ -965,7 +1008,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				{
 					m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i];
 					///////////////////////////////////////////////////////////////////////////////
-					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
+					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다.
 					///////////////////////////////////////////////////////////////////////////////
 					int odLocalIndex = 1;
 					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
@@ -980,7 +1023,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					m_chartDataY1[i] = sumCost;
 
 					///////////////////////////////////////////////////////////////////////////////
-					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다
 					///////////////////////////////////////////////////////////////////////////////
 					double sumTrafficCost = 0;
 					array<double>^ beforeAdditionalCostData;
@@ -1018,7 +1061,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					// The data for main chart
 					// generate estimated total network structural cost
 					///////////////////////////////////////////////////////////////////////////////
-					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
+					// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다.
 					///////////////////////////////////////////////////////////////////////////////
 					//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1);
 					int odLocalIndex = 1;
@@ -1027,7 +1070,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 					// generate estimated total traffic cost
 					///////////////////////////////////////////////////////////////////////////////
-					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+					// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다
 					///////////////////////////////////////////////////////////////////////////////
 
 					int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
@@ -1048,10 +1091,12 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 		}
 
-		//Direct Damage of Component in road-network
+		*/
 
-		System::Data::DataTable^ NewTable(array<String^>^ columns) { 
-			DataTable^ table = gcnew DataTable(); 
+
+		//Direct Damage of Component in road-network
+		System::Data::DataTable^ NewTable(array<String^>^ columns) {
+			DataTable^ table = gcnew DataTable();
 			for each (String ^ col in columns) {
 				table->Columns->Add(gcnew DataColumn(col));
 			}
@@ -1059,7 +1104,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 
 		// 정수배열에 대한 내림차순 정리
-		array<int>^ DescenderOrder(array<int>^ value){
+		array<int>^ DescenderOrder(array<int>^ value) {
 			//int temp;
 			array<int>^ tempArray = gcnew array<int>(value->Length);
 			for (int i = 0; i < value->Length; i++) {
@@ -1072,7 +1117,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			for (int i = 0; i < tempArray->Length; i++)
 			{
-					for (int j = i + 1; j < tempArray->Length; j++)
+				for (int j = i + 1; j < tempArray->Length; j++)
 				{
 					if (tempArray[i] < tempArray[j])
 					{
@@ -1082,7 +1127,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						tempArray[j] = tempi;
 
 						int orderi = order[i];
-						int orderj = order[j];					
+						int orderj = order[j];
 						order[i] = orderj;
 						order[j] = orderi;
 
@@ -1110,7 +1155,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				{
 					//if (tempArray[i] < tempArray[j])
 					if (tempArray[i] <= tempArray[j])
-						{
+					{
 						double tempi = tempArray[i];
 						double tempj = tempArray[j];
 						tempArray[i] = tempj;
@@ -1342,7 +1387,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			}
 
 		}
-		
+
 
 		// (총)직접피해규모 계산
 		double CalculateDirectCost(int stageIndex, int odIndex) {
@@ -1389,55 +1434,55 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			return totalDirectCost;
 
-				/*
-				double totalDirectCost = 0; //총직접피해 규모
-				// OD별 정상도로기능 상태시의 교통해석 결과 "normalOutputSummary"
-				int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
+			/*
+			double totalDirectCost = 0; //총직접피해 규모
+			// OD별 정상도로기능 상태시의 교통해석 결과 "normalOutputSummary"
+			int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
 
-				// OD노선에 속하는 시설물을 파악하기 위해 사용되는 교통시나리오 번호이며, normalOutputSummary 계산시 사용됨
-				int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex+1);
-				// 전체시설물의 직접피해는 OD와 관계없이 일정, 따라서 직접피해계산함수 "GetComponentStructuralCost()","beforeDirectCostTable()"에 사용되는 "odIndex+1"값은 기본값인 "1"을 사용
-				int trafficScenarioNoForStructureCost = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
+			// OD노선에 속하는 시설물을 파악하기 위해 사용되는 교통시나리오 번호이며, normalOutputSummary 계산시 사용됨
+			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, odIndex+1);
+			// 전체시설물의 직접피해는 OD와 관계없이 일정, 따라서 직접피해계산함수 "GetComponentStructuralCost()","beforeDirectCostTable()"에 사용되는 "odIndex+1"값은 기본값인 "1"을 사용
+			int trafficScenarioNoForStructureCost = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
 
-				String^ normScenarioIndex = String::Format("{0}", int((trafficScenarioNo) / (unitScenarioStep) * (unitScenarioStep * 10)));
-				OutputSummary^ normalOutputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[normScenarioIndex];
+			String^ normScenarioIndex = String::Format("{0}", int((trafficScenarioNo) / (unitScenarioStep) * (unitScenarioStep * 10)));
+			OutputSummary^ normalOutputSummary = this->m_dataSet->NeXTAOutputSummaryDictionary[normScenarioIndex];
 
-				if(stageIndex == 0) {
-					// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
-					String^ localKey = String::Format("{0}", trafficScenarioNoForStructureCost);
-					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+			if(stageIndex == 0) {
+				// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
+				String^ localKey = String::Format("{0}", trafficScenarioNoForStructureCost);
+				DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
 
-					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
-					for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
-					{
-						String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
-						String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
+				// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
+				for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
+				{
+					String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
+					String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
 
-						// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
-						if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
-							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
-						}
-					}// 전체 시설물 개수에 대한 for()
-				}
+					// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
+					if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
+						totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+					}
+				}// 전체 시설물 개수에 대한 for()
+			}
 
 
-				if(stageIndex == 1){
-					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
-					for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
-					{
-						String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
-						String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
+			if(stageIndex == 1){
+				// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
+				for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
+				{
+					String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
+					String^ linkID = m_networkComponent->GetValue(i, NetworkComponent::COL_LINK_ID);
 
-						// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
-						if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
-							totalDirectCost += this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNoForStructureCost, compID); // 내진보강후 직접피해규모
-						}
-					}// 전체 시설물 개수에 대한 for()
-				}
+					// for 문을 통해 전체시설물과 OD노선에 속하는 시설물을 비교하여, 포함된 시설물의 직접피해 비용을 저장
+					if (normalOutputSummary->Volumes->ContainsKey(linkID)) {
+						totalDirectCost += this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNoForStructureCost, compID); // 내진보강후 직접피해규모
+					}
+				}// 전체 시설물 개수에 대한 for()
+			}
 
-				*/
+			*/
 
-			
+
 		}
 
 		// (총)간접피해규모 계산
@@ -1460,7 +1505,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			return totalIndirectCost;
 		}
 
-			   		 	  	  	   	
+
 		// 경제지수(ECO) 계산
 		double CalculateIndiceECO(int trafficScenarioNo, Dictionary<String^, OutputSummary^>^ outputSummaryDictionary) {
 
@@ -1523,7 +1568,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 
 		// 연결지수(CON) 계산
-		double CalculateIndiceCON(int stageIndex, int trafficScenarioNo, Dictionary<String^, OutputSummary^> ^ outputSummaryDictionary) {
+		double CalculateIndiceCON(int stageIndex, int trafficScenarioNo, Dictionary<String^, OutputSummary^>^ outputSummaryDictionary) {
 
 			// 계산순서
 			// 1. 특정 시나리오에 대해 도로망노선 중 폐쇄노선 및 해당노선의 폐쇄정도(데미지단계)확인
@@ -1534,7 +1579,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			if (stageIndex == 0) {
 
 
-				if(this->m_dataSet->BeforeComponentScenarios == nullptr){
+				if (this->m_dataSet->BeforeComponentScenarios == nullptr) {
 					String^ key = nullptr;
 					//Dictionary<String^, DataTable^>^ beforeRehabStructureCost = gcnew Dictionary<String^, DataTable^>();
 					this->m_dataSet->BeforeComponentScenarios = gcnew Dictionary<String^, DataTable^>();
@@ -1633,7 +1678,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				}
 			}
 
-			if (stageIndex==1) {
+			if (stageIndex == 1) {
 				// 해당 시나리오에서 각 link 중 어느 damage state까지 link가 closed 되어있는지 확인(중복제거)
 				TrafficScenario^ scenario = this->m_dataSet->TrafficScenarios[trafficScenarioNo];
 				for each (ComponentInfo component in scenario->Components)
@@ -1650,7 +1695,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					}
 				}
 			}
-			
+
 			//int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
 			//String^ normScenarioIndex = String::Format("{0}", int((trafficScenarioNo) / (unitScenarioStep) * (unitScenarioStep * 10)));
 			//OutputSummary^ normalOutputSummary = outputSummaryDictionary[normScenarioIndex];
@@ -1667,7 +1712,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			for (int j = 0; j < recoveryStepCount; j++)
 			{
 				//시나리오별 연결지수 계산위한 기본 값(칼럼) 정의
-				array<String^>^ columnCON = {"Lz0", "Lzp" };
+				array<String^>^ columnCON = { "Lz0", "Lzp" };
 				DataTable^ newTableCON = NewTable(columnCON);
 
 				// zoneGroupData는 내진보강(전)과(후) 동일함
@@ -1743,7 +1788,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					totalEnvLength += envParameter->Length;
 					envParamLength += envParameter->Length * m_trafficModule->CalEnvironmentLossIndices(outputSummaryDictionary, envParameter, scenario, j + 1, unitScenarioStep);// damage state0은 제외하므로 +1 해줌
 				}
-				ENV[j] = totalEnvLength/ envParamLength ;
+				ENV[j] = totalEnvLength / envParamLength;
 			}
 			result = this->m_dataSet->ResultData->GetTotalEconomicLossIndices(ENV);
 			return result;
@@ -1836,14 +1881,14 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				String^ filePath = this->m_dataSet->UnistResultFilePath + "before_TrafficSimulationResult_summary.csv";
 				// 사전에 수록되는 정보는 교통시나리오 수 만큼 임
 				this->beforeUnistOutputSummaryDictionary = m_unistHelper->ReadOutputSummaryFile(filePath, scenarioCount, this->beforeUnistOutputSummaryDictionary);
-				
+
 			}
 
 
 			/*
 			// step9에서 OD수만큼 교통해석프로그램을 수행하고 결과값인 outputsummary.csv를 읽어들이는 것과 같이
-			// OD수만큼 OD(i)outputsummary.csv저장된 결과를 읽어 들이고, 내진보강전의 교통해석 결과를 
-			// 사전 NeXTAOutputSummaryDictionary에 저장하기 위한 for문임 
+			// OD수만큼 OD(i)outputsummary.csv저장된 결과를 읽어 들이고, 내진보강전의 교통해석 결과를
+			// 사전 NeXTAOutputSummaryDictionary에 저장하기 위한 for문임
 			if (this->beforeNeXTAOutputSummaryDictionary->Count == 0) {
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					// 직접피해산출 및 교통해석 결과저장 경로
@@ -2033,6 +2078,15 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		// 시설물별 직접피해규모 계산
 		void UpdateComponentDirectDamage() {
 
+			Debug::WriteLine("========= UpdateComponentDirectDamage ========>cboDirectDamage:" + cboDirectDamage->SelectedIndex);
+			m_chartDataX1 = gcnew array<String^>(this->m_dataSet->NetworkCompnentData->Rows->Count);
+			m_chartDataY1 = gcnew array<double>(this->m_dataSet->NetworkCompnentData->Rows->Count);
+			m_chartDataY2 = gcnew array<double>(this->m_dataSet->NetworkCompnentData->Rows->Count);
+			m_chartDataY3 = gcnew array<double>(this->m_dataSet->NetworkCompnentData->Rows->Count);
+			m_chartDataY4 = gcnew array<double>(this->m_dataSet->NetworkCompnentData->Rows->Count);
+
+
+			/*** 내진보강(전) ***/
 			if (cboDirectDamage->SelectedIndex == 0) {
 
 				array<String^>^ columns = { "시설물", "노선", "50년", "100년", "475년", "1000년" };
@@ -2046,6 +2100,10 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 					newRow[0] = componentID;
 					newRow[1] = link;
+
+					//그래프 X축
+					array<double>^ arrDataY = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);//직접
+					array<double>^ arrDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);//간접
 
 					for (int k = 0; k < this->m_dataSet->RecurrencePeriodData->Length; k++) {
 						///////////////////////////////////////////////////////////////////////////////
@@ -2064,7 +2122,68 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 						// 재현주기는 2번칼럼 부터 재현주기1(예50년), 재현주기2(예,100년), 재현주기3(예,475년), 재현주기4(예,1000년) 순으로 입력됨											   						 					  
 						newRow[k + 2] = value;
+
+						arrDataY[k] = value;
+
+
+						/////////////////////////////////////////////////////////
+						//간접피해 계산
+						/////////////////////////////////////////////////////////
+						double sumTrafficCost = 0;
+						array<double>^ beforeAdditionalCostData;
+						for (int a = 0; a < this->m_dataSet->ODZoneParamData->Rows->Count; a++) {
+							int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, k, 1, a + 1);
+							// 0 = 내진보강전, 1= 내진보강후
+							beforeAdditionalCostData = CalculateAdditionalCost(0, localTrafficScenarioNo);
+							int recoveryDayCount = beforeAdditionalCostData->Length;
+							for (int b = 0; b < recoveryDayCount; b++) {
+								sumTrafficCost += beforeAdditionalCostData[b];
+							}
+						}
+						arrDataY2[k] = sumTrafficCost;
+
+
+						
 					}
+
+					/**** Dict에 저장 ****/
+					//직접
+					if (!directCompoBeforDict->ContainsKey(componentID)) {
+						directCompoBeforDict->Add(componentID, arrDataY);
+					}
+
+					if (directLinkBeforDict->ContainsKey(link)) {
+						array<double>^ arr = directLinkBeforDict[link];
+						for (int n = 0; n < arrDataY->Length; n++) {
+							arrDataY[n] += arr[n];
+						}
+						directLinkBeforDict[link] = arrDataY;
+					}
+					else {
+						directLinkBeforDict->Add(link, arrDataY);
+					}
+
+
+					//간접
+					if (!inDirectCompoBeforDict->ContainsKey(componentID)) {
+						inDirectCompoBeforDict->Add(componentID, arrDataY2);
+					}
+	
+					if (inDirectLinkBeforDict->ContainsKey(link)) {
+						array<double>^ arr = inDirectLinkBeforDict[link];
+						for (int n = 0; n < arrDataY2->Length; n++) {
+							arrDataY2[n] += arr[n];
+						}
+						inDirectLinkBeforDict[link] = arrDataY2;
+					}
+					else {
+						inDirectLinkBeforDict->Add(link, arrDataY2);
+					}
+
+
+
+
+
 					newTable->Rows->Add(newRow);
 				}
 
@@ -2079,6 +2198,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				//dgvPriority->DataSource = directDamages;
 			}
 
+
+			/*** 내진보강(후) ***/
 			if (cboDirectDamage->SelectedIndex == 1) {
 				array<String^>^ columns = { "시설물", "노선", "50년", "100년", "475년", "1000년" };
 				DataTable^ newTable = NewTable(columns);
@@ -2095,6 +2216,10 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					newRow[0] = componentID;
 					newRow[1] = link;
 
+					//그래프 X축
+					array<double>^ arrDataY = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+					array<double>^ arrDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
 					for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++) {
 						///////////////////////////////////////////////////////////////////////////////
 						// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
@@ -2106,7 +2231,64 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						double value = this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNo, componentID);
 						// 재현주기는 2번칼럼 부터 재현주기1(예50년), 재현주기2(예,100년), 재현주기3(예,475년), 재현주기4(예,1000년) 순으로 입력됨
 						newRow[i + 2] = value;
+
+
+						arrDataY[i] = value;
+
+						/////////////////////////////////////////////////////////
+						//간접피해 계산
+						/////////////////////////////////////////////////////////
+						double sumTrafficCost = 0;
+						array<double>^ beforeAdditionalCostData;
+						for (int a = 0; a < this->m_dataSet->ODZoneParamData->Rows->Count; a++) {
+							int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, 1, a + 1);
+							// 0 = 내진보강전, 1= 내진보강후
+							beforeAdditionalCostData = CalculateAdditionalCost(1, localTrafficScenarioNo);
+							int recoveryDayCount = beforeAdditionalCostData->Length;
+							for (int b = 0; b < recoveryDayCount; b++) {
+								sumTrafficCost += beforeAdditionalCostData[b];
+							}
+						}
+						arrDataY2[i] = sumTrafficCost;
+
 					}
+
+					/**** Dict에 저장 ****/
+					//직접
+					if (!directCompoAfterDict->ContainsKey(componentID)) {
+						directCompoAfterDict->Add(componentID, arrDataY);
+					}
+
+					if (directLinkAfterDict->ContainsKey(link)) {
+						array<double>^ arr = directLinkAfterDict[link];
+						for (int n = 0; n < arrDataY->Length; n++) {
+							arrDataY[n] += arr[n];
+						}
+						directLinkAfterDict[link] = arrDataY;
+					}
+					else {
+						directLinkAfterDict->Add(link, arrDataY);
+					}
+					
+
+					//간접
+					if (!inDirectCompoAfterDict->ContainsKey(componentID)) {
+						inDirectCompoAfterDict->Add(componentID, arrDataY2);
+					}
+
+					if (inDirectLinkAfterDict->ContainsKey(link)) {
+						array<double>^ arr = inDirectLinkAfterDict[link];
+						for (int n = 0; n < arrDataY2->Length; n++) {
+							arrDataY2[n] += arr[n];
+						}
+						inDirectLinkAfterDict[link] = arrDataY2;
+					}
+					else {
+						inDirectLinkAfterDict->Add(link, arrDataY2);
+					}
+
+
+
 					newTable->Rows->Add(newRow);
 				}
 
@@ -2200,7 +2382,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				}
 
 				//콤보박스로 부터 선택된 재현주기를 칼럼의 명칭으로 지정
-				array<String^>^ damageColumns = {"0%~100%", "0%~50%", "0%~25%", "0%~10%", "0%~5%"};
+				array<String^>^ damageColumns = { "0%~100%", "0%~50%", "0%~25%", "0%~10%", "0%~5%" };
 				DataTable^ componentPriorityTable = NewTable(damageColumns);
 				// 전체피해대비 피해율
 				array<double>^ damageRatio = gcnew array<double>(5);
@@ -2239,8 +2421,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					else if (damageRatio[3] < costSum) {
 						newRow[0] = sortTable->Rows[i]->ItemArray[0];
 					}
-					if (i != this->m_dataSet->NetworkCompnentData->Rows->Count-1) {
-						costSum = costSum + sortDirectDamages[i+1];
+					if (i != this->m_dataSet->NetworkCompnentData->Rows->Count - 1) {
+						costSum = costSum + sortDirectDamages[i + 1];
 					}
 					componentPriorityTable->Rows->Add(newRow);
 				}
@@ -2250,13 +2432,13 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				dgvPriority->DataSource = componentPriorityTable;
 
 			}
-			
+
 			// 노선 직접피해 기준으로 내진성능관리 우선순위를 결정하는 경우
 			if (this->cboPriority->SelectedIndex == 1) {
 
 				// 시뮬레이션 단계 (0= 내진보강전 단계, 1= 내진보강후 단계)
 				int stageIndex = 0;
-				array<int, 2>^ odComponentFull = CalculateODComponent(stageIndex);		
+				array<int, 2>^ odComponentFull = CalculateODComponent(stageIndex);
 
 				// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
 				int maxIndex = odComponentFull->Length / (this->m_dataSet->ODZoneParamData->Rows->Count * 2);
@@ -2266,7 +2448,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					for (int j = 0; j < maxIndex; j++) {
 						directCostOrder[i] += odComponentFull[j, i * 2 + 1];
 					}
-				}	
+				}
 				directCostOrder = DescenderOrder(directCostOrder);
 
 				//array<String^>^ damageColumns = { "OD(i) Component", "OD(i) Damage", "OD(i++) Component", "OD(i++) Damage"};
@@ -2288,7 +2470,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				dgvPriority->DataSource = nullptr;//이전설정이 남아서 초기화함
 				dgvPriority->DataSource = odPriorityTable;
 			}// end of selection 1 : 노선의 직접피해별 우선순위 선정 
-			
+
 
 			// 노선의 간접피해 기준으로 내진성능관리 우선순위 결정
 			if (this->cboPriority->SelectedIndex == 2) {
@@ -2377,7 +2559,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			// 노선의 통합피해 기준으로 내진성능관리 우선순위 결정
 			if (this->cboPriority->SelectedIndex == 3) {
-		
+
 				int stageIndex = 0; //보강전(0), 현재상태(1)
 				array<double>^ totalCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
@@ -2534,7 +2716,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 				//콤보박스로 부터 선택된 재현주기를 칼럼의 명칭으로 지정
 				//array<String^>^ damageColumns = { "0%~5%", "0%~10%", "0%~25%", "0%~50%", "0%~100%" };
-				array<String^>^ damageColumns = {"0%~100%", "0%~50%", "0%~25%", "0%~10%", "0%~5%"};
+				array<String^>^ damageColumns = { "0%~100%", "0%~50%", "0%~25%", "0%~10%", "0%~5%" };
 				DataTable^ budgetTable = NewTable(damageColumns);
 				// 전체피해대비 피해율
 				array<double>^ damageRatio = gcnew array<double>(5);
@@ -2578,8 +2760,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						//newRow[0] = sortTable->Rows[i]->ItemArray[0];
 						newRow[0] = sortTable->Rows[i]->ItemArray[2];
 					}
-					if (i != this->m_dataSet->NetworkCompnentData->Rows->Count-1) {
-						costSum = costSum + sortDirectDamages[i+1];
+					if (i != this->m_dataSet->NetworkCompnentData->Rows->Count - 1) {
+						costSum = costSum + sortDirectDamages[i + 1];
 					}
 
 					budgetTable->Rows->Add(newRow);
@@ -2608,14 +2790,14 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						maxIndex = normalOutputSummary->Volumes->Count;
 					}
 				}
-				
+
 				// 시뮬레이션 단계 (0= 내진보강전 단계, 1= 내진보강후 단계)
 				int stageIndex = 0;
 				array<int, 2>^ odComponentFull = CalculateODComponent(stageIndex);
 				// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
 				int maxIndex = odComponentFull->Length / (this->m_dataSet->ODZoneParamData->Rows->Count * 2);
 
-				array<int, 2>^ odComponentFull = gcnew array<int, 2>(maxIndex, this->m_dataSet->ODZoneParamData->Rows->Count * 2);			
+				array<int, 2>^ odComponentFull = gcnew array<int, 2>(maxIndex, this->m_dataSet->ODZoneParamData->Rows->Count * 2);
 
 				directCostOrder = DescenderOrder(directCostOrder);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
@@ -2644,7 +2826,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 				*/
 
-				
+
 				// 시뮬레이션 단계 (0= 내진보강전 단계, 1= 내진보강후 단계)
 				int stageIndex = 0;
 				array<int, 2>^ odComponentFull = CalculateODComponent(stageIndex);
@@ -2711,7 +2893,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					newRow[1] = int(totalIndirectCost[indirectCostOrder[i]]);
 
 					odPriorityTable->Rows->Add(newRow);
-				
+
 				}
 
 				/*
@@ -2748,9 +2930,9 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			if (this->cboBudget->SelectedIndex == 3) {
 
 				//stageIndex: 보강전(=0), 현재상태(=1)
-				int stageIndex = 0; 
+				int stageIndex = 0;
 				int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
-							   				 			  			  			 		   			
+
 				array<String^>^ damageColumns = gcnew array<String^>(2);
 				damageColumns[0] = "OD번호";
 				damageColumns[1] = "필요예산";
@@ -2769,12 +2951,12 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 				for (int i = 0; i < this->m_dataSet->ODZoneParamData->Rows->Count; i++) {
 					DataRow^ newRow = odPriorityTable->NewRow();
-					newRow[0] = totalCostOrder[i]+1;
+					newRow[0] = totalCostOrder[i] + 1;
 					newRow[1] = int(totalCost[totalCostOrder[i]]);
 					odPriorityTable->Rows->Add(newRow);
 				}
 
-				   				 			  			  			 		   						   		 	  
+
 				/*
 				for (int i = 0; i < this->m_dataSet->ODZoneParamData->Rows->Count; i++) {
 					//노선별 간접피해 계산
@@ -2786,8 +2968,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					array<double>^ currentAdditionalCostData = gcnew array<double>(recoveryStepCount);
 
 					// stageIndex: 내진보강전(=0), 내진보강후(=1)
-					currentAdditionalCostData = CalculateAdditionalCost(stageIndex, localTrafficScenarioNo);	
-					for (int j = 0; j < recoveryStepCount; j++){					
+					currentAdditionalCostData = CalculateAdditionalCost(stageIndex, localTrafficScenarioNo);
+					for (int j = 0; j < recoveryStepCount; j++){
 						currentSumTrafficCost += currentAdditionalCostData[j];
 					}
 
@@ -2833,7 +3015,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				dgvBudget->DataSource = odPriorityTable;
 
 			}
-		
+
 		}
 
 
@@ -2888,7 +3070,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			// 노선별 직접피해 기준으로 내진보강 효과계산
 			if (this->cboEffect->SelectedIndex == 1) {
-		
+
 				// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
 				int maxIndex = 0;
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
@@ -2928,7 +3110,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					int compoIndex = 0; //시설물명(번호)에 대한 순서를 매김하기 위한 Index 
 					// 도로망의 전체 직접피해(Direct Cost or Structure Cost) 계산은 OD와 관계없으므로,
 					int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, 1);
-					String^ key = String::Format("{0}", trafficScenarioNo);				
+					String^ key = String::Format("{0}", trafficScenarioNo);
 					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[key];
 
 					DataRow^ newRow = this->m_dataSet->ODZoneParamData->Rows[odIndex];
@@ -2983,8 +3165,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 				/*
-				int maxIndex = 0;   // OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index 
-				// OD별 노선직접피해비용 
+				int maxIndex = 0;   // OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
+				// OD별 노선직접피해비용
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					//int unitScenarioStep = this->m_dataSet->JumpScenarioNum;
 					int unitScenarioStep = this->m_dataSet->UnitScenarioNum;
@@ -3000,14 +3182,14 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				array<int, 2>^ odComponentFull = gcnew array<int, 2>(maxIndex, this->m_dataSet->ODZoneParamData->Rows->Count * 4);
 				// 여기서 int, 2 의 의미는 2개의 자연수 i와j가 있다는 것을 의미하며, [i,j]에서 i갯수=maxIndex, j갯수= OD수*3
 				//                     OD1                                                                  :                                OD2                                               .....
-				// [0,0]=1(시설번호) [0,1]=100(보강전 피해) [0,2]=100(보강후 피해) [0,3]=0  (보강효과) :  [0,4]= 5(시설번호)  [0,5]=1000(보강전 피해) [0,6]=100(보강후 피해)   [0,7]=100(보강효과)   
-				// [1,0]=3(시설번호) [1,1]=50 (보강전 피해) [1,2]=50 (보강후 피해) [1,3]=0  (보강효과) :  [1,4]=14(시설번호)  [1,5]=200 (보강전 피해)  [1,6]=50 (보강후 피해)  [1,7]=100(보강효과) 
+				// [0,0]=1(시설번호) [0,1]=100(보강전 피해) [0,2]=100(보강후 피해) [0,3]=0  (보강효과) :  [0,4]= 5(시설번호)  [0,5]=1000(보강전 피해) [0,6]=100(보강후 피해)   [0,7]=100(보강효과)
+				// [1,0]=3(시설번호) [1,1]=50 (보강전 피해) [1,2]=50 (보강후 피해) [1,3]=0  (보강효과) :  [1,4]=14(시설번호)  [1,5]=200 (보강전 피해)  [1,6]=50 (보강후 피해)  [1,7]=100(보강효과)
 				//                  .                                                                  :                                .
 				//                  .                                                                  :                                .
 
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 
-					int compoIndex = 0; //시설물명(번호)에 대한 순서를 매김하기 위한 Index 
+					int compoIndex = 0; //시설물명(번호)에 대한 순서를 매김하기 위한 Index
 
 					// OD별 정상도로기능 상태시의 교통해석 결과 "normalOutputSummary"
 					//int unitScenarioStep = this->m_dataSet->JumpScenarioNum;
@@ -3025,7 +3207,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
 
 
-					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산 
+					// 노선에 속해 있는 시설물 리스트들에 대한 (총)직접피해비용 계산
 					for (int i = 0; i < this->m_dataSet->NetworkCompnentData->Rows->Count; i++)
 					{
 						String^ compID = m_networkComponent->GetValue(i, NetworkComponent::COL_NETWORK_COMP_ID);
@@ -3040,7 +3222,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						}
 					}// 전체 시설물 개수에 대한 for()
 
-				}// 전체 OD 개수에 대한 for()	
+				}// 전체 OD 개수에 대한 for()
 
 
 				//array<String^>^ damageColumns = { "OD(i) Component", "OD(i) Damage", "OD(i++) Component", "OD(i++) Damage"};
@@ -3071,7 +3253,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				dgvEffect->DataSource = odEffectTable;
 				*/
 
-			
+
 			}// end of selection 1 : 노선별 직접피해 기준으로 예산선정 
 
 
@@ -3110,10 +3292,10 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						currentSumTrafficCost += currentAdditionalCostData[j];
 					}
 
-					newRow[0] = i+1;
+					newRow[0] = i + 1;
 					newRow[1] = int(beforeSumTrafficCost);
 					newRow[2] = int(currentSumTrafficCost);
-					newRow[3] = int(beforeSumTrafficCost- currentSumTrafficCost);
+					newRow[3] = int(beforeSumTrafficCost - currentSumTrafficCost);
 
 					odEffectTable->Rows->Add(newRow);
 				}
@@ -3126,7 +3308,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 			// 경제(ECO)지수 기준으로 내진보강 효과 계산
 			if (this->cboEffect->SelectedIndex == 3) {
-			
+
 				array<String^>^ indiceColumns = gcnew array<String^>(4);
 				indiceColumns[0] = "OD번호";
 				indiceColumns[1] = "보강(전)경제지수";
@@ -3144,16 +3326,16 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, cboSeismicPeriod->SelectedIndex, cboSample->SelectedIndex + 1, i + 1);
 
 					newRow[0] = i + 1;
-					newRow[1] = beforeEconomicIndiceData= CalculateIndiceECO(localTrafficScenarioNo, beforeNeXTAOutputSummaryDictionary);
+					newRow[1] = beforeEconomicIndiceData = CalculateIndiceECO(localTrafficScenarioNo, beforeNeXTAOutputSummaryDictionary);
 					newRow[2] = currentEconomicIndiceData = CalculateIndiceECO(localTrafficScenarioNo, this->m_dataSet->NeXTAOutputSummaryDictionary);
-					newRow[3] = (double::Parse(newRow[2]->ToString()) - double::Parse(newRow[1]->ToString()))*100;
+					newRow[3] = (double::Parse(newRow[2]->ToString()) - double::Parse(newRow[1]->ToString())) * 100;
 
 					odEffectTable->Rows->Add(newRow);
 				}
 
 				dgvEffect->DataSource = odEffectTable;
-			
-				
+
+
 			}
 
 
@@ -3228,7 +3410,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 
 		void UpdateSRoad() {
-		
+
 			// 시설별 직접피해 기준으로 방재도로 선정 
 			if (this->cboSRoad->SelectedIndex == 0) {
 
@@ -3248,7 +3430,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					DataRow^ newRow = SRoadDamage->NewRow();
 					newRow[0] = costOrder[i] + 1;
 					newRow[1] = int(totalDirectCost[costOrder[i]]);
-					SRoadDamage->Rows->Add(newRow);			
+					SRoadDamage->Rows->Add(newRow);
 				}
 
 				dgvSRoad->DataSource = SRoadDamage;
@@ -3287,7 +3469,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				int stageIndex = 1; //보강전(0), 현재상태(1)
 				array<double>^ totalCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
-					totalCost[odIndex] = CalculateDirectCost(stageIndex, odIndex)+ CalculateIndirectCost(stageIndex, odIndex) ;
+					totalCost[odIndex] = CalculateDirectCost(stageIndex, odIndex) + CalculateIndirectCost(stageIndex, odIndex);
 				}// 전체 OD 개수에 대한 for()	
 				array<int>^ costOrder = gcnew array<int>(totalCost->Length);
 				costOrder = AscenderOrder(totalCost);
@@ -3312,7 +3494,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				//int stageIndex = 1; //보강전(0), 현재상태(1)
 				array<double>^ DirectCostEffect = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
-					DirectCostEffect[odIndex] = CalculateDirectCost(0, odIndex)- CalculateDirectCost(1, odIndex);
+					DirectCostEffect[odIndex] = CalculateDirectCost(0, odIndex) - CalculateDirectCost(1, odIndex);
 				}
 				array<int>^ costOrder = gcnew array<int>(DirectCostEffect->Length);
 				costOrder = DescenderOrder(DirectCostEffect);
@@ -3334,7 +3516,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		}
 
 
-		
+
 
 	private: System::Void Step13Form_Load(System::Object^ sender, System::EventArgs^ e) {
 
@@ -3374,7 +3556,26 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		// set combobox cboDirectDamage
 		this->cboDirectDamage->SelectedIndex = 0;
 		// set combobox cboIndirectDamage
-		this->cboIndirectDamage->SelectedIndex = 0;
+		//this->cboIndirectDamage->SelectedIndex = 0;
+
+
+
+
+		// 그래프 조건 01 
+		this->cboGrpCondi01->SelectedIndex = 1;
+		this->m_chartType = "A1";//맨처음 chart type
+
+		// 그래프 조건 02
+		array<String^>^ damageColumns = gcnew array<String^>(this->m_dataSet->ODZoneParamData->Rows->Count + 1);
+		damageColumns[0] = "--OD시설물 선택--";
+		for (int i = 1; i < this->m_dataSet->ODZoneParamData->Rows->Count + 1; i++) {
+			damageColumns[i] = "OD" + String::Format("{0}", i) + " 시설물";
+		};
+		this->cboGrpCondi02->Items->AddRange(damageColumns);
+		this->cboGrpCondi02->SelectedIndex = 0;
+
+
+
 
 		beforeRehabSimulationResult();
 		DrawCharts();
@@ -3415,16 +3616,16 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 	}
 
 	private: System::Void chartViewer_SizeChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (m_chartDataX1 != nullptr && m_chartDataY1 != nullptr && m_chartDataY2 != nullptr) {
-		DrawCharts();
+		if (m_chartDataX1 != nullptr && m_chartDataY1 != nullptr && m_chartDataY2 != nullptr) {
+			DrawCharts();
+		}
 	}
-}
 
 
 
 	private: System::Void cboPriority_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
-	UpdatePriority();
-}
+		UpdatePriority();
+	}
 
 	private: System::Void cboBudget_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
 		UpdateBudget();
@@ -3520,10 +3721,917 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 	private: System::Void cboDirectDamage_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
 		UpdateComponentDirectDamage();
 	}
-
+	/*
 	private: System::Void cboIndirectDamage_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
 		DrawCharts();
 	}
-};
+	*/
+
+	private: System::Void cboGrpCondi01_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
+		/*
+		--선택--
+		내진보강(전)(후) 전체도로망-직/간접 총피해
+		내진보강(전) 개별시설물별 직접피해
+		내진보강(후) 개별시설물별 직접피해
+		내진보강(전)(후) 노선별 직접피해
+		내진보강(전)(후) 노선별 간접피해
+		내진보강(전)(후) 노선별 종합피해
+		*/
+		this->m_chartType = "A" + this->cboGrpCondi01->SelectedIndex;
+		Debug::WriteLine("========= before ========>m_chartType:" + m_chartType);
+
+		DrawCharts();
+		this->cboGrpCondi02->SelectedIndex = 0;
+	}
+
+	private: System::Void cboGrpCondi02_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
+		this->m_chartType = "B" + this->cboGrpCondi01->SelectedIndex;
+		Debug::WriteLine("========= before ========>m_chartType:" + m_chartType);
+
+		DrawCharts();		
+		this->cboGrpCondi01->SelectedIndex = 0;
+	}
+
+
+
+
+
+	private: void DrawCharts() {
+
+		/*
+		--선택--
+		내진보강(전)(후) 전체도로망-직/간접 총피해
+		내진보강(전) 개별시설물별 직접피해
+		내진보강(후) 개별시설물별 직접피해
+		내진보강(전)(후) 노선별 직접피해
+		내진보강(전)(후) 노선별 간접피해
+		내진보강(전)(후) 노선별 종합피해
+		*/
+		if (this->m_chartType->Equals("A1")) {//내진보강(전)(후) 전체도로망-직/간접 총피해
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A1");
+			DrawChart_A1();
+		}
+		else if (this->m_chartType->Equals("A2")) {//내진보강(전) 개별시설물별 직접피해
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A2");
+
+			if (directCompoBeforDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 0;
+				UpdateComponentDirectDamage();
+			}
+				
+
+			array<String^>^ arrDataX = gcnew array<String^>(directCompoBeforDict->Count);
+			array<double>^ arrDataY = gcnew array<double>(directCompoBeforDict->Count);
+			int i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in directCompoBeforDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX[i] = skey;
+				arrDataY[i] = dVal;
+				i++;
+			}
+			DrawBellChart(arrDataX, arrDataY);
+
+		}
+		else if (this->m_chartType->Equals("A3")) {//내진보강(후) 개별시설물별 직접피해
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A3");
+
+			if (directCompoAfterDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 1;
+				UpdateComponentDirectDamage();
+			}
+				
+
+			array<String^>^ arrDataX = gcnew array<String^>(directCompoAfterDict->Count);
+			array<double>^ arrDataY = gcnew array<double>(directCompoAfterDict->Count);
+			int i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in directCompoAfterDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX[i] = skey;
+				arrDataY[i] = dVal;
+				i++;
+			}
+			DrawBellChart(arrDataX, arrDataY);
+
+		}
+
+		//내진보강(전)(후) 노선별 직접피해
+		else if (this->m_chartType->Equals("A4")) {
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A4");
+
+			if (directLinkBeforDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 0;
+				UpdateComponentDirectDamage();
+			}
+
+			if (directLinkAfterDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 1;
+				UpdateComponentDirectDamage();
+			}
+
+			array<String^>^ arrDataX = gcnew array<String^>(directLinkBeforDict->Count);
+			array<double>^ arrDataY = gcnew array<double>(directLinkBeforDict->Count);
+			int i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in directLinkBeforDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX[i] = skey;
+				arrDataY[i] = dVal;
+				i++;
+			}
+
+			array<String^>^ arrDataX2 = gcnew array<String^>(directLinkAfterDict->Count);
+			array<double>^ arrDataY2 = gcnew array<double>(directLinkAfterDict->Count);
+			i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in directLinkAfterDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX2[i] = skey;
+				arrDataY2[i] = dVal;
+				i++;
+			}
+
+
+			DrawChart_A4(arrDataX, arrDataY, arrDataY2);
+
+		}
+		//내진보강(전)(후) 노선별 간접피해
+		else if (this->m_chartType->Equals("A5")) {
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A4");
+
+			if (inDirectLinkBeforDict->Count < 1) {
+				UpdateComponentDirectDamage();
+			}
+
+			if (inDirectLinkAfterDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 1;
+				UpdateComponentDirectDamage();
+			}
+
+			array<String^>^ arrDataX = gcnew array<String^>(inDirectLinkBeforDict->Count);
+			array<double>^ arrDataY = gcnew array<double>(inDirectLinkBeforDict->Count);
+			int i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in inDirectLinkBeforDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX[i] = skey;
+				arrDataY[i] = dVal;
+				i++;
+			}
+
+			array<String^>^ arrDataX2 = gcnew array<String^>(inDirectLinkAfterDict->Count);
+			array<double>^ arrDataY2 = gcnew array<double>(inDirectLinkAfterDict->Count);
+			i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in inDirectLinkAfterDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX2[i] = skey;
+				arrDataY2[i] = dVal;
+				i++;
+			}
+
+
+			DrawChart_A4(arrDataX, arrDataY, arrDataY2);
+		}
+		//내진보강(전)(후) 노선별 종합피해
+		else if (this->m_chartType->Equals("A6")) {
+			Debug::WriteLine("=================> DrawCharts : DrawChart_A6");
+
+
+			if (inDirectLinkBeforDict->Count < 1) {
+				UpdateComponentDirectDamage();
+			}
+
+			if (inDirectLinkAfterDict->Count < 1) {
+				this->cboDirectDamage->SelectedIndex = 1;
+				UpdateComponentDirectDamage();
+			}
+
+
+			//직접
+			if (directLinkAllDict->Count < 1) {
+
+				for each (KeyValuePair<String^, array<double>^> ^ pair in directLinkBeforDict)
+				{
+					String^ skey = pair->Key;
+					array<double>^ aVal = pair->Value;
+
+					directLinkAllDict->Add(skey, aVal);
+				}
+
+				for each (KeyValuePair<String^, array<double>^> ^ pair in directLinkAfterDict)
+				{
+					String^ skey = pair->Key;
+					array<double>^ aVal = pair->Value;
+
+					if (directLinkAllDict->ContainsKey(skey)) {
+						array<double>^ arr = directLinkAllDict[skey];
+						for (int n = 0; n < aVal->Length; n++) {
+							aVal[n] += arr[n];
+						}
+						directLinkAllDict[skey] = aVal;
+					}
+					else {
+						directLinkAllDict->Add(skey, aVal);
+					}
+
+				}
+			}
+
+
+
+			//간접
+			if (inDirectLinkAllDict->Count < 1) {
+
+				for each (KeyValuePair<String^, array<double>^> ^ pair in inDirectLinkBeforDict)
+				{
+					String^ skey = pair->Key;
+					array<double>^ aVal = pair->Value;
+
+					inDirectLinkAllDict->Add(skey, aVal);
+				}
+
+				for each (KeyValuePair<String^, array<double>^> ^ pair in inDirectLinkAfterDict)
+				{
+					String^ skey = pair->Key;
+					array<double>^ aVal = pair->Value;
+
+					if (inDirectLinkAllDict->ContainsKey(skey)) {
+						array<double>^ arr = inDirectLinkAllDict[skey];
+						for (int n = 0; n < aVal->Length; n++) {
+							aVal[n] += arr[n];
+						}
+						inDirectLinkAllDict[skey] = aVal;
+					}
+					else {
+						inDirectLinkAllDict->Add(skey, aVal);
+					}
+
+				}
+			}
+
+
+			array<String^>^ arrDataX = gcnew array<String^>(directLinkAllDict->Count);
+			array<double>^ arrDataY = gcnew array<double>(directLinkAllDict->Count);
+			int i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in directLinkAllDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX[i] = skey;
+				arrDataY[i] = dVal;
+				i++;
+			}
+
+			array<String^>^ arrDataX2 = gcnew array<String^>(inDirectLinkAllDict->Count);
+			array<double>^ arrDataY2 = gcnew array<double>(inDirectLinkAllDict->Count);
+			i = 0;
+			for each (KeyValuePair<String^, array<double>^> ^ pair in inDirectLinkAllDict)
+			{
+				String^ skey = pair->Key;
+				array<double>^ aVal = pair->Value;
+				double dVal;
+				if (cboSeismicPeriod->SelectedIndex == 0) {
+					dVal = aVal[0];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 1) {
+					dVal = aVal[1];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 2) {
+					dVal = aVal[2];
+				}
+				else if (cboSeismicPeriod->SelectedIndex == 3) {
+					dVal = aVal[3];
+				}
+				arrDataX2[i] = skey;
+				arrDataY2[i] = dVal;
+				i++;
+			}
+
+
+
+			DrawChart_A4(arrDataX, arrDataY, arrDataY2);
+		}
+
+
+		else if (this->m_chartType->StartsWith("B")) {
+			Debug::WriteLine("=================> DrawCharts : StartsWith B.......");
+			int iIdx = this->cboGrpCondi02->SelectedIndex;
+			Debug::WriteLine("=================> iIdx : " + iIdx);
+
+			
+			DataTable^ dt = this->m_dataSet->ODZoneParamData;
+
+			//선택이 있어서 -1 함
+			int indexOrigin = Convert::ToInt32(dt->Rows[iIdx - 1][CommConst::GRID_OD_ZONE_COL1]);
+			int indexDestin = Convert::ToInt32(dt->Rows[iIdx - 1][CommConst::GRID_OD_ZONE_COL2]);
+			int indexVolume = Convert::ToInt32(dt->Rows[iIdx - 1][CommConst::GRID_OD_ZONE_COL3]);
+
+			//Link 가져옴
+			array<String^>^ roadLink = this->m_unistHelper->dijkstra(indexOrigin, indexDestin);
+			
+
+			//다국어
+			String^ sUiLang = CultureInfo::CurrentUICulture->Name;
+			Debug::WriteLine("========CreateShapeChartProperty===>sUiLang:" + sUiLang);
+			String^ sLongitude = "Longitude";//경도
+			String^ sLatitude = "Latitude";//위도
+			if (sUiLang->Equals("ko-KR")) {
+				sLongitude = "경도";//경도
+				sLatitude = "위도";//위도
+			}
+			XYChart^ chart = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
+
+			int plotAreaWidth = chartViewer->Size.Width - 100;
+			int plotAreaHeight = chartViewer->Size.Height - 120;
+			chart->setPlotArea(60, 60, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
+			//chart->addTitle("타이틀", "Times New Roman Bold", 18);
+
+			chart->xAxis()->setTitle(sLongitude, "Arial Bold", 9);
+			chart->xAxis()->setWidth(3);
+			chart->xAxis()->setTickLength(10, 0);
+
+			chart->yAxis()->setTitle(sLatitude, "Arial Bold", 9);
+			chart->yAxis()->setWidth(3);
+			chart->xAxis()->setTickLength(10, 0);
+
+			Shape^ shape = this->m_dataSet->ShapeData->Clone();
+			for (int i = 0; i < shape->m_nRecords; i++)
+			{
+				ShapeProperty^ prop = shape->m_SHPProperties[i];
+				String^ linkID = prop->GetProperty(ShapeProperty::PropertyType::LINK_ID);
+				//Debug::WriteLine(String::Format("========>linkID[{0}]", linkID));
+
+				// The (x, y) data for the first line
+				array<double>^ dataX = gcnew array<double>(shape->m_pSHPPolyObjects[i].nNumPoints);
+				array<double>^ dataY = gcnew array<double>(shape->m_pSHPPolyObjects[i].nNumPoints);
+
+				// 화면에 그릴 포인트를 할당하고..
+				array<System::Drawing::Point>^ arrSrcPoint = gcnew array<System::Drawing::Point>(shape->m_pSHPPolyObjects[i].nNumPoints);
+				for (int j = 0; j < shape->m_pSHPPolyObjects[i].nNumPoints; ++j)
+				{
+					dataX[j] = shape->m_pSHPPolyObjects[i].arrPoints[j].x;
+					dataY[j] = shape->m_pSHPPolyObjects[i].arrPoints[j].y;
+				}
+
+				int colorInt = ColorToInt(Color::Black);
+				//노드링크 색깔 변경
+				for (int k = 0; k < roadLink->Length; k++) {
+					if (linkID == roadLink[k]) 
+						colorInt = ColorToInt(Color::Red);
+				}
+				
+				LineLayer^ layer = chart->addLineLayer(dataY, colorInt, "" + i);
+				layer->setXData(dataX);
+				//layer->setLineWidth(m_shapeLineWidth);
+
+			}
+
+			chartViewer->Chart = chart;
+			chartViewer->ImageMap = chart->getHTMLImageMap("clickable", "", "title='[{dataSetName}]: {x}/{value}'");
+
+		}
+
+	}
+
+	private: int ColorToInt(Color color) {
+		int c = color.ToArgb();
+		c = c & 0x00FFFFFF; // AARRGGBB 구조에서 AA제거
+		return c;
+	}
+
+
+	private: void DrawChart_A1() {
+
+
+		array<String^>^ m_chartX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length * 2);
+		array<double>^ m_chartY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length * 2);
+		array<double>^ m_chartY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length * 2);
+
+
+		// 내진보강(전)
+		//if (cboIndirectDamage->SelectedIndex == 0) {
+		m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
+		//교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+		for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
+		{
+			m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i] + "(전)";
+			///////////////////////////////////////////////////////////////////////////////
+			// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
+			///////////////////////////////////////////////////////////////////////////////
+			int odLocalIndex = 1;
+			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
+
+			double sumCost = 0;
+			for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+				// 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
+				String^ localKey = String::Format("{0}", trafficScenarioNo);
+				DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+				sumCost += double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());
+			}
+			m_chartDataY1[i] = sumCost;
+
+			///////////////////////////////////////////////////////////////////////////////
+			// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+			///////////////////////////////////////////////////////////////////////////////
+			double sumTrafficCost = 0;
+			array<double>^ beforeAdditionalCostData;
+
+			for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+				int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
+				// 0 = 내진보강전, 1= 내진보강후
+				beforeAdditionalCostData = CalculateAdditionalCost(0, localTrafficScenarioNo);
+				int recoveryDayCount = beforeAdditionalCostData->Length;
+				for (int i = 0; i < recoveryDayCount; i++) {
+					sumTrafficCost += beforeAdditionalCostData[i];
+				}
+			}
+			m_chartDataY2[i] = sumTrafficCost;
+
+		}
+
+		//DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
+	//}
+
+	//0,2,4,6
+		for (int i = 0; i < m_chartDataX1->Length; i++) {
+			m_chartX1[i * 2] = m_chartDataX1[i];
+			m_chartY1[i * 2] = m_chartDataY1[i];
+			m_chartY2[i * 2] = m_chartDataY2[i];
+		}
+
+		// 내진보강(후)
+		//if (cboIndirectDamage->SelectedIndex == 1) {
+
+		m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
+		//교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+		for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
+		{
+			m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i] + "(후)";
+
+			// The data for main chart
+			// generate estimated total network structural cost
+			///////////////////////////////////////////////////////////////////////////////
+			// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
+			///////////////////////////////////////////////////////////////////////////////
+			//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1);
+			int odLocalIndex = 1;
+			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
+			m_chartDataY1[i] = this->m_dataSet->ResultData->GetTotalNetworkStructuralCost(trafficScenarioNo);
+
+			// generate estimated total traffic cost
+			///////////////////////////////////////////////////////////////////////////////
+			// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+			///////////////////////////////////////////////////////////////////////////////
+
+			int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
+
+			double sumTrafficCost = 0;
+			for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+				int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
+				sumTrafficCost += this->m_dataSet->ResultData->GetTotalTrafficCost(localTrafficScenarioNo);
+			}
+			m_chartDataY2[i] = sumTrafficCost;
+
+		}
+
+		//DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
+
+	//}
+
+
+	//1,3,5,7
+		for (int i = 0; i < m_chartDataX1->Length; i++) {
+			m_chartX1[i * 2 + 1] = m_chartDataX1[i];
+			m_chartY1[i * 2 + 1] = m_chartDataY1[i];
+			m_chartY2[i * 2 + 1] = m_chartDataY2[i];
+		}
+
+
+		DrawMainChart(m_chartX1, m_chartY1, m_chartY2);
+
+	}
+
+
+		   /*
+		   private: void DrawChart_A1() {
+
+			   // 내진보강(전)
+			   //if (cboIndirectDamage->SelectedIndex == 0) {
+				   m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+				   m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+				   m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
+				   //교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+				   for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
+				   {
+					   m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i];
+					   ///////////////////////////////////////////////////////////////////////////////
+					   // 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다.
+					   ///////////////////////////////////////////////////////////////////////////////
+					   int odLocalIndex = 1;
+					   int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
+
+					   double sumCost = 0;
+					   for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+						   // 글로벌변수로 저장된 내진보강전 직접피해규모 저장 테이터 테이블 호출
+						   String^ localKey = String::Format("{0}", trafficScenarioNo);
+						   DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+						   sumCost += double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());
+					   }
+					   m_chartDataY1[i] = sumCost;
+
+					   ///////////////////////////////////////////////////////////////////////////////
+					   // 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다
+					   ///////////////////////////////////////////////////////////////////////////////
+					   double sumTrafficCost = 0;
+					   array<double>^ beforeAdditionalCostData;
+
+					   for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+						   int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
+						   // 0 = 내진보강전, 1= 내진보강후
+						   beforeAdditionalCostData = CalculateAdditionalCost(0, localTrafficScenarioNo);
+						   int recoveryDayCount = beforeAdditionalCostData->Length;
+						   for (int i = 0; i < recoveryDayCount; i++) {
+							   sumTrafficCost += beforeAdditionalCostData[i];
+						   }
+					   }
+					   m_chartDataY2[i] = sumTrafficCost;
+
+				   }
+
+				   DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
+			   //}
+
+
+
+		   }
+		   */
+
+	private: void DrawChart_A2() {
+
+
+		// 내진보강(후)
+		//if (cboIndirectDamage->SelectedIndex == 1) {
+
+		m_chartDataX1 = gcnew array<String^>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY1 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+		m_chartDataY2 = gcnew array<double>(this->m_dataSet->RecurrencePeriodData->Length);
+
+		//교통시나리오개수 = 지진시나리오(개수) x 샘플링(개수) 에 대한 루프로 구성을 변경
+		for (int i = 0; i < this->m_dataSet->RecurrencePeriodData->Length; i++)
+		{
+			m_chartDataX1[i] = this->m_dataSet->RecurrencePeriodData[i];
+
+			// The data for main chart
+			// generate estimated total network structural cost
+			///////////////////////////////////////////////////////////////////////////////
+			// 직접피해 계산: 직접피해는 od zone과 관계없어므로, 대표 odIndex값 "1"을 사용한다. 
+			///////////////////////////////////////////////////////////////////////////////
+			//int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1);
+			int odLocalIndex = 1;
+			int trafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, odLocalIndex);
+			m_chartDataY1[i] = this->m_dataSet->ResultData->GetTotalNetworkStructuralCost(trafficScenarioNo);
+
+			// generate estimated total traffic cost
+			///////////////////////////////////////////////////////////////////////////////
+			// 간접피해 계산: 간접피해는 od zone에 따른 간접피해(추가교통량) 합산으로 구한다  
+			///////////////////////////////////////////////////////////////////////////////
+
+			int recoveryStepCount = CommConst::DAMAGE_STATE_COUNT;
+
+			double sumTrafficCost = 0;
+			for (int j = 0; j < this->m_dataSet->ODZoneParamData->Rows->Count; j++) {
+				int localTrafficScenarioNo = this->m_dataSet->GetTrafficScenarioNo(cboSeismicSource->SelectedIndex, i, cboSample->SelectedIndex + 1, j + 1);
+				sumTrafficCost += this->m_dataSet->ResultData->GetTotalTrafficCost(localTrafficScenarioNo);
+			}
+			m_chartDataY2[i] = sumTrafficCost;
+
+		}
+
+		DrawMainChart(m_chartDataX1, m_chartDataY1, m_chartDataY2);
+
+		//}
+
+
+	}
+
+
+
+
+		   void DrawChart_A4(array<String^>^ dataX, array<double>^ dataY1, array<double>^ dataY2) {
+			   String^ scenarioName = cboSeismicSource->SelectedValue->ToString();
+			   String^ sample = cboSample->SelectedItem->ToString();
+			   XYChart^ c = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
+
+			   int plotAreaWidth = chartViewer->Size.Width - 150;
+			   int plotAreaHeight = chartViewer->Size.Height - 120;
+			   c->setPlotArea(100, 50, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
+			   c->addTitle("", "Times New Roman Bold", 17);
+
+			   LegendBox^ b = c->addLegend(120, 10, false, "Arial", 11);
+			   b->setBackground(Chart::Transparent, Chart::Transparent);
+			   b->setKeyBorder(Chart::SameAsMainColor);
+
+			   // Set the x and y axis stems to transparent and the label font to 12pt Arial
+			   c->xAxis()->setColors(Chart::Transparent);
+			   c->xAxis()->setLabels(dataX);
+			   //c->xAxis()->setTitle("Recurrence Period (years)", "Arial Bold", 11);
+
+			   c->yAxis()->setColors(Chart::Transparent);
+			   c->xAxis()->setLabelStyle("Arial Bold", 11);
+			   c->yAxis()->setLabelStyle("Arial Bold", 11);
+			   //			c->yAxis()->setTitle("Cost (￦) 10^7", "Arial Bold", 12);
+			   c->yAxis()->setTitle("백억원(￦)", "Arial Bold", 11);
+			   c->yAxis()->setLabelFormat("{={value}/10000000}");
+
+			   // Add a stacked bar layer
+			   BarLayer^ layer = c->addBarLayer2(Chart::Stack);
+
+			   // Add the three data sets to the bar layer
+			   layer->addDataSet(dataY1, 0x0000FF, "내진보강(전)");
+			   layer->addDataSet(dataY2, 0xFFF000, "내진보강(후)");
+
+			   // Set the bar border to transparent
+			   layer->setBorderColor(Chart::Transparent);
+			   layer->setLegendOrder(Chart::ReverseLegend);
+
+			   // Output the chart
+			   chartViewer->Chart = c;
+			   chartViewer->ImageMap = c->getHTMLImageMap("clickable", "", "title='[{dataSetName}]: {xLabel}={value}'");
+		   }
+
+
+
+	private: void DrawBellChart(array<String^>^, array<double>^ dataY) {
+
+		char buffer[256];
+		//String^ buffer;
+		//
+		// This example demonstrates creating a histogram with a bell curve from raw data. About half of
+		// the code is to sort the raw data into slots and to generate the points on the bell curve. The
+		// remaining half of the code is the actual charting code.
+		//
+
+		// Generate a random guassian distributed data series as the input data for this example.
+		//RanSeries* r = new RanSeries(66);
+		//RanSeries^ r = gcnew RanSeries(66);
+
+		//DoubleArray samples = r->getGaussianSeries(200, 100, 10);
+		//array<double>^ samples = r->getGaussianSeries(200, 100, 10);
+		array<double>^ samples = gcnew array<double>(dataY->Length);
+		for (int i = 0; i < dataY->Length; i++) {
+			samples[i] = dataY[i] / (1000000);
+		}
+
+		//
+		// Classify the numbers into slots. In this example, the slot width is 5 units.
+		//
+		ArrayMath^ m = gcnew ArrayMath(samples);
+		int slotSize;
+		if (samples->Length < 20) {
+			slotSize = (floor(m->max()) - floor(m->min())) / (samples->Length - 1);
+		}
+		else {
+			slotSize = (floor(m->max()) - floor(m->min())) / 19;
+		}
+		if (slotSize <= 0) { slotSize = 10; }
+		//int slotSize = 20;
+		//int slotSize = 10000000;
+
+		// Compute the min and max values, and extend them to the slot boundary.
+		double minX = floor(m->min() / slotSize) * slotSize;
+		double maxX = floor(m->max() / slotSize) * slotSize + slotSize;
+
+		// We can now determine the number of slots
+		int slotCount = (int)((maxX - minX + 0.5) / slotSize);
+		//double* frequency = new double[slotCount];
+		array<double>^ frequency = gcnew array<double>(slotCount);
+		//			memset(frequency, 0, sizeof(*frequency) * slotCount);
+					// Count the data points contained in each slot
+		for (int i = 0; i < samples->Length; ++i) {
+			int slotIndex = (int)((samples[i] - minX) / slotSize);
+			frequency[slotIndex] = frequency[slotIndex] + 1;
+		}
+
+		//
+		// Compute Normal Distribution Curve
+		//
+
+		// The mean and standard deviation of the data
+		double mean = m->avg();
+		double stdDev = m->stdDev();
+
+		// The normal distribution curve (bell curve) is a standard statistics curve. We need to
+		// vertically scale it to make it proportion to the frequency count.
+		double scaleFactor = slotSize * (samples->Length) / stdDev / sqrt(6.2832);
+
+		// In this example, we plot the bell curve up to 3 standard deviations.
+		double stdDevWidth = 3.0;
+
+		// We generate 4 points per standard deviation to be joined with a spline curve.
+		int bellCurveResolution = (int)(stdDevWidth * 4 + 1);
+		//double* bellCurve = new double[bellCurveResolution];
+		array<double>^ bellCurve = gcnew array<double>(bellCurveResolution);
+
+		for (int i = 0; i < bellCurveResolution; ++i) {
+			double z = 2 * i * stdDevWidth / (bellCurveResolution - 1) - stdDevWidth;
+			bellCurve[i] = exp(-z * z / 2) * scaleFactor;
+		}
+
+		//
+		// At this stage, we have obtained all data and can plot the chart.
+		//
+
+
+		// Create a XYChart object of size 600 x 360 pixels
+		//XYChart* c = new XYChart(600, 360);
+		XYChart^ c = gcnew XYChart(chartViewer->Size.Width, chartViewer->Size.Height);
+		int plotAreaWidth = chartViewer->Size.Width - 150;
+		int plotAreaHeight = chartViewer->Size.Height - 120;
+		c->setPlotArea(100, 50, plotAreaWidth, plotAreaHeight, Chart::Transparent, -1, Chart::Transparent, 0xcccccc);
+		//c->setPlotArea(100, 50, plotAreaWidth, plotAreaHeight, 0xffffff, -1, 0xeeeeee, 0xeeeeee, -1);
+
+
+		// Set the plotarea at (50, 30) and of size 500 x 300 pixels, with transparent background and
+		// border and light grey (0xcccccc) horizontal grid lines
+		//c->setPlotArea(50, 30, 500, 300, Chart::Transparent, -1, Chart::Transparent, 0xcccccc);
+
+		// Display the mean and standard deviation on the chart
+		float temp1 = round(mean * 10) / 10;
+		float temp2 = round(stdDev * 10) / 10;
+
+		String^ meanDev = String::Format("Mean ={0} Standard Deviation ={1}", temp1, temp2);
+
+		c->addTitle(meanDev, "arial.ttf");
+
+
+		// Set the x and y axis label font to 12pt Arial
+		c->xAxis()->setLabelStyle("arial.ttf", 12);
+		c->yAxis()->setLabelStyle("arial.ttf", 12);
+
+		// Set the x and y axis stems to transparent, and the x-axis tick color to grey (0x888888)
+		c->xAxis()->setColors(Chart::Transparent, Chart::TextColor, Chart::TextColor, 0x888888);
+		c->yAxis()->setColors(Chart::Transparent);
+
+		// Draw the bell curve as a spline layer in red (0xdd0000) with 2-pixel line width
+		//SplineLayer* bellLayer = c->addSplineLayer(DoubleArray(bellCurve, bellCurveResolution), 0xdd0000);
+		SplineLayer^ bellLayer = c->addSplineLayer(bellCurve, 0xdd0000);
+
+		bellLayer->setXData(mean - stdDevWidth * stdDev, mean + stdDevWidth * stdDev);
+		bellLayer->setLineWidth(2);
+
+		// Draw the histogram as bars in blue (0x6699bb) with dark blue (0x336688) border
+		//BarLayer* histogramLayer = c->addBarLayer(DoubleArray(frequency, slotCount), 0x6699bb);
+		//BarLayer^ histogramLayer = c->addBarLayer(DoubleArray(frequency, slotCount), 0x6699bb);
+		BarLayer^ histogramLayer = c->addBarLayer(frequency, 0x6699bb);
+		histogramLayer->setBorderColor(0x336688);
+		// The center of the bars span from minX + half_bar_width to maxX - half_bar_width
+		histogramLayer->setXData(minX + slotSize / 2.0, maxX - slotSize / 2.0);
+		// Configure the bars to touch each other with no gap in between
+		histogramLayer->setBarGap(Chart::TouchBar);
+		// Use rounded corners for decoration
+		histogramLayer->setRoundedCorners();
+
+		// ChartDirector by default will extend the x-axis scale by 0.5 unit to cater for the bar width.
+		// It is because a bar plotted at x actually occupies (x +/- half_bar_width), and the bar width
+		// is normally 1 for label based x-axis. However, this chart is using a linear x-axis instead of
+		// label based. So we disable the automatic extension and add a dummy layer to extend the x-axis
+		// scale to cover minX to maxX.
+		c->xAxis()->setIndent(false);
+		c->addLineLayer()->setXData(minX, maxX);
+
+		// For the automatic y-axis labels, set the minimum spacing to 40 pixels.
+		c->yAxis()->setTickDensity(40);
+
+
+		c->yAxis()->setColors(Chart::Transparent);
+		c->xAxis()->setLabelStyle("Arial Bold", 12);
+		c->yAxis()->setLabelStyle("Arial Bold", 12);
+		c->yAxis()->setTitle("샘플개수", "Arial Bold", 12);
+
+		c->xAxis()->setColors(Chart::Transparent);
+		c->xAxis()->setTitle("피해규모(십억원)", "Arial Bold", 12);
+
+
+		// Output the chart
+		//c->makeChart("histogram.png");
+		chartViewer->Chart = c;
+
+		//free up resources
+//			delete r;
+		delete[] frequency;
+		delete[] bellCurve;
+		delete c;
+
+
+	}
+
+
+	};
 
 }
