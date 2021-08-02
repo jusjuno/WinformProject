@@ -3283,6 +3283,12 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				//double beforeSumTrafficCost = 0;
 				//double currentSumTrafficCost = 0;
 
+				int stageIndex = 0; //보강전(0), 현재상태(1)
+				array<double>^ totalIndirectCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
+				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
+					totalIndirectCost[odIndex] = CalculateIndirectCost(stageIndex, odIndex);
+				}// 전체 OD 개수에 대한 for()	
+
 				for (int i = 0; i < this->m_dataSet->ODZoneParamData->Rows->Count; i++) {
 					double beforeSumTrafficCost = 0;
 					double currentSumTrafficCost = 0;
@@ -3296,6 +3302,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					beforeAdditionalCostData = CalculateAdditionalCost(0, localTrafficScenarioNo);
 					currentAdditionalCostData = CalculateAdditionalCost(1, localTrafficScenarioNo);
 
+
 					for (int j = 0; j < recoveryStepCount; j++)
 					{
 						beforeSumTrafficCost += beforeAdditionalCostData[j];
@@ -3303,7 +3310,9 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 					}
 
 					newRow[0] = i + 1;
-					newRow[1] = int(beforeSumTrafficCost);
+					//newRow[1] = int(beforeSumTrafficCost);
+					//2021.08.02 아래와 같이 수정함
+					newRow[1] = int(totalIndirectCost[i]);
 					newRow[2] = int(currentSumTrafficCost);
 					newRow[3] = int(beforeSumTrafficCost - currentSumTrafficCost);
 
@@ -3450,7 +3459,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			 // 노선별 간접피해 기준으로 방재도로 선정
 			if (this->cboSRoad->SelectedIndex == 1) {
 
-				int stageIndex = 1; //보강전(0), 현재상태(1)
+				int stageIndex = 0; //보강전(0), 현재상태(1)
 				array<double>^ totalIndirectCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					totalIndirectCost[odIndex] = CalculateIndirectCost(stageIndex, odIndex);
