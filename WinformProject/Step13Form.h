@@ -3311,7 +3311,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 					newRow[0] = i + 1;
 					//newRow[1] = int(beforeSumTrafficCost);
-					//2021.08.02 아래와 같이 수정함
+					//2021.08.02 아래와 같이 수정함.
 					newRow[1] = int(totalIndirectCost[i]);
 					newRow[2] = int(currentSumTrafficCost);
 					newRow[3] = int(beforeSumTrafficCost - currentSumTrafficCost);
