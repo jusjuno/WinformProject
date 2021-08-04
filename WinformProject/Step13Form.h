@@ -1412,7 +1412,8 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
 						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
 						if (linkID == roadLink[i]) {
-							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+//							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[i]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
+							totalDirectCost += double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());            // 내진보강전 직접피해규모                                                                                   //내진보강전 직접피해규모
 						}
 					}
 				}
@@ -2057,15 +2058,34 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 				array<String^>^ roadLink = this->m_unistHelper->dijkstra(originNode, destinNode);
 				int ODlinkCount = roadLink->Length;
 
-				// OD별 노선수 -> 노선별 시설물개수 계산과정을 통해, OD에 포함된 (총)시설물 개수를 계산
-				for (int i = 0; i < ODlinkCount; i++) {
-					for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
-						String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
-						String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
-						if (linkID == roadLink[i]) {
-							odComponentFull[compoIndex, odIndex * 2] = int::Parse(compID); // 시설물 번호
-							odComponentFull[compoIndex, odIndex * 2 + 1] = this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNo, compID);
-							compoIndex++;
+				if (stageIndex == 0) {
+					String^ localKey = String::Format("{0}", trafficScenarioNo);
+					DataTable^ beforeDirectCostTable = this->m_dataSet->BeforeRehabStructureCost[localKey];
+
+					for (int i = 0; i < ODlinkCount; i++) {
+						for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+							String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+							String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+							if (linkID == roadLink[i]) {
+								odComponentFull[compoIndex, odIndex * 2] = int::Parse(compID); // 시설물 번호
+								odComponentFull[compoIndex, odIndex * 2 + 1] = double::Parse(beforeDirectCostTable->Rows[j]->ItemArray[1]->ToString());
+								compoIndex++;
+							}
+						}
+					}
+				}
+
+
+				if (stageIndex == 1) {
+					for (int i = 0; i < ODlinkCount; i++) {
+						for (int j = 0; j < this->m_dataSet->NetworkCompnentData->Rows->Count; j++) {
+							String^ compID = m_networkComponent->GetValue(j, NetworkComponent::COL_NETWORK_COMP_ID);
+							String^ linkID = m_networkComponent->GetValue(j, NetworkComponent::COL_LINK_ID);
+							if (linkID == roadLink[i]) {
+								odComponentFull[compoIndex, odIndex * 2] = int::Parse(compID); // 시설물 번호
+								odComponentFull[compoIndex, odIndex * 2 + 1] = this->m_dataSet->ResultData->GetComponentStructuralCost(trafficScenarioNo, compID);
+								compoIndex++;
+							}
 						}
 					}
 				}
@@ -2839,6 +2859,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 				// 시뮬레이션 단계 (0= 내진보강전 단계, 1= 내진보강후 단계)
 				int stageIndex = 0;
+				//int stageIndex = 1;
 				array<int, 2>^ odComponentFull = CalculateODComponent(stageIndex);
 
 				// OD별 경로에 속해있는 시설물 갯수 중 큰 값으로 결과테이블의 row(수)를 정의하기 위한 Index
@@ -3311,7 +3332,6 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 
 					newRow[0] = i + 1;
 					//newRow[1] = int(beforeSumTrafficCost);
-					//2021.08.02 아래와 같이 수정함.
 					newRow[1] = int(totalIndirectCost[i]);
 					newRow[2] = int(currentSumTrafficCost);
 					newRow[3] = int(beforeSumTrafficCost - currentSumTrafficCost);
@@ -3433,7 +3453,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			// 시설별 직접피해 기준으로 방재도로 선정 
 			if (this->cboSRoad->SelectedIndex == 0) {
 
-				int stageIndex = 1; //보강전(0), 현재상태(1)
+				int stageIndex = 0; //보강전(0), 현재상태(1)
 				array<double>^ totalDirectCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					totalDirectCost[odIndex] = CalculateDirectCost(stageIndex, odIndex);
@@ -3485,7 +3505,7 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 			// 노선별 총합피해 기준으로 방재도로 선정
 			if (this->cboSRoad->SelectedIndex == 2) {
 
-				int stageIndex = 1; //보강전(0), 현재상태(1)
+				int stageIndex = 0; //보강전(0), 현재상태(1)
 				array<double>^ totalCost = gcnew array<double>(this->m_dataSet->ODZoneParamData->Rows->Count);
 				for (int odIndex = 0; odIndex < this->m_dataSet->ODZoneParamData->Rows->Count; odIndex++) {
 					totalCost[odIndex] = CalculateDirectCost(stageIndex, odIndex) + CalculateIndirectCost(stageIndex, odIndex);
