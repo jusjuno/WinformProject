@@ -81,6 +81,7 @@ namespace WinformProject {
 			}
 			return 0;
 		}
+
 		double GetBc(String^ classID, int damageState) {
 			int classIndex = GetClassIndex(classID);
 			if (classIndex >= 0) {
@@ -90,12 +91,78 @@ namespace WinformProject {
 			}
 			return 0;
 		}	
+
+		double GetBc(String^ classID, int damageState, Dictionary<String^, StructureFile^>^ structureFileDictionary) {
+			if (structureFileDictionary->ContainsKey(classID)) {
+				if (damageState > 0) {
+					StructureFile^ structureFile = structureFileDictionary[classID];
+					double Ai = 0.0;
+					
+					if (damageState == 1) {
+						Ai = structureFile->Median1;
+					}
+					else if (damageState == 2) {
+						Ai = structureFile->Median2;
+					}
+					else if (damageState == 3) {
+						Ai = structureFile->Median3;
+					}
+					else if (damageState == 4) {
+						Ai = structureFile->Median4;
+					}
+					return Ai;
+				}
+				else {
+					return 0.0;
+				}
+			}
+			else {
+				return 0.0;
+			}
+		}
+
+
 		// damageState = 0, 1, 2, 3, 4
 		double GetFragilityValue(String^ classID, int damageState, double Sa) {
 			double Ai = GetAi(classID, damageState);
 			double Bc = GetBc(classID, damageState);
 			return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
 		}
+
+		double GetFragilityValue(String^ classID, int damageState, double Sa, Dictionary<String^, StructureFile^>^ structureFileDictionary) {
+
+			if (structureFileDictionary->ContainsKey(classID)) {
+				if (damageState > 0) {
+					StructureFile^ structureFile = structureFileDictionary[classID];
+					double Ai = 0.0;
+					double Bc = 0.0;
+					if (damageState == 1) {
+						Ai = structureFile->Median1;
+					}
+					else if (damageState == 2) {
+						Ai = structureFile->Median2;
+					}
+					else if (damageState == 3) {
+						Ai = structureFile->Median3;
+					}
+					else if (damageState == 4) {
+						Ai = structureFile->Median4;
+					}
+					Bc = structureFile->Dispersion;
+
+					return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+				}
+				else {
+					return 0.0;
+				}
+			}
+			else {
+				return 0.0;
+			}
+
+		}
+
+
 		// damageState 별 fragility value를 모두 리턴
 		array<double>^ GetFragilityValues(String^ classID, double Sa) {
 			array<double>^ dsArr = gcnew array<double>(DamageStateCount);
@@ -105,5 +172,23 @@ namespace WinformProject {
 			}
 			return dsArr;
 		}
+
+		array<double>^ GetFragilityValues(String^ classID, double Sa, Dictionary<String^, StructureFile^>^ structureFileDictionary) {
+
+			array<double>^ dsArr = gcnew array<double>(DamageStateCount);
+
+			for (int i = 0; i < DamageStateCount; i++) {
+				dsArr[i] = GetFragilityValue(classID, i, Sa, structureFileDictionary);
+			}
+			return dsArr;
+
+
+		}
+
+
+
+
+
+
 	};
 }

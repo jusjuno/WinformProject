@@ -800,4 +800,16 @@ public:
 		}
 	}
 
+
+	//Structure File dataset 
+	property Dictionary<String^, StructureFile^>^ StructureFileDictionary {
+		Dictionary<String^, StructureFile^>^ get() {
+			return this->m_dataSet->m_structureFileDictionary;
+		}
+		void set(Dictionary<String^, StructureFile^>^ value) {
+			this->m_dataSet->m_structureFileDictionary = value;
+		}
+	}
+
+
 };

@@ -223,6 +223,7 @@
     <ClCompile Include="Step1Form.cpp" />
     <ClCompile Include="Step2Form.cpp" />
     <ClCompile Include="Step3Form.cpp" />
+    <ClCompile Include="Step4bForm.cpp" />
     <ClCompile Include="Step4Form.cpp" />
     <ClCompile Include="Step5Form.cpp" />
     <ClCompile Include="Step6Form.cpp" />
@@ -316,6 +317,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Step3Form.h">
+      <FileType>CppHeader</FileType>
+    </ClInclude>
+    <ClInclude Include="Step4bForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Step4Form.h">
@@ -340,6 +344,8 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="StructureFile.h" />
+    <ClInclude Include="StructureFileList.h" />
     <ClInclude Include="TrafficModule.h" />
     <ClInclude Include="TrafficScenario.h" />
     <ClInclude Include="InputLinkType.h" />
@@ -410,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Step3Form.resx">
       <DependentUpon>Step3Form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Step4bForm.resx">
+      <DependentUpon>Step4bForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Step4Form.resx">
       <DependentUpon>Step4Form.h</DependentUpon>

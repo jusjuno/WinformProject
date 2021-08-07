@@ -11,6 +11,7 @@
 #include "Step2Form.h"
 #include "Step3Form.h"
 #include "Step4Form.h"
+#include "Step4bForm.h"
 #include "Step5Form.h"
 #include "Step6Form.h"
 #include "Step7Form.h"
@@ -32,8 +33,8 @@
 #include "DataViewForm.h"
 
 
-#include "FragilityDataSet.h"
-
+//#include "FragilityDataSet.h"
+#include "StructureFileList.h"
 
 
 namespace WinformProject {
@@ -91,6 +92,7 @@ namespace WinformProject {
 		Step2Form^					m_step2Form;
 		Step3Form^					m_step3Form;
 		Step4Form^					m_step4Form;
+		Step4bForm^                 m_step4bForm;
 		Step5Form^					m_step5Form;
 		Step6Form^					m_step6Form;
 		Step7Form^					m_step7Form;
@@ -539,9 +541,9 @@ namespace WinformProject {
 
 
 		//Fragility 딕셔러리 초기화
-		WinformProject::FragilityDataSet::setFragilityCurvDict();
+		//WinformProject::FragilityDataSet::setFragilityCurvDict();
 		//Fragility 데이타 초기화
-		WinformProject::FragilityDataSet::setFragilityCurvData();
+		//WinformProject::FragilityDataSet::setFragilityCurvData();
 
 		/*
 		Dictionary<String^, String^>^ aaa = WinformProject::FragilityDataSet::FragilityCurvDict;
@@ -549,7 +551,6 @@ namespace WinformProject {
 		Debug::WriteLine("=================>aaa 다경간_5m이하_단주_일반_말뚝_C_X_X_X_X:" + aaa["다경간_5m이하_단주_일반_말뚝_C_X_X_X_X"]);
 		*/
 
-		
 
 
 	}
@@ -727,6 +728,8 @@ namespace WinformProject {
 			}
 		}
 		System::Void ProjectStep4MenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			/*
 			if (!IsCreatedFormInstance(m_step4Form)) {
 				Step4Form^ _form = gcnew Step4Form(m_projectDataSetBinder);
 				if (!_form->IsValidToOpenForm()) {
@@ -738,6 +741,21 @@ namespace WinformProject {
 				m_step4Form = _form;
 				m_step4Form->Show();
 			}
+			*/
+			if (!IsCreatedFormInstance(m_step4bForm)) {
+				Step4bForm^ _form = gcnew Step4bForm(m_projectDataSetBinder);
+				/*
+				if (!_form->IsValidToOpenForm()) {
+					return;
+				}
+				*/
+				_form->Text = ((ToolStripMenuItem^)sender)->Text;
+				_form->MdiParent = this;
+				//_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+				m_step4bForm = _form;
+				m_step4bForm->Show();
+			}
+
 		}
 		System::Void ProjectStep5MenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if (!IsCreatedFormInstance(m_step5Form)) {
