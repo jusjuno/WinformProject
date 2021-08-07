@@ -307,7 +307,9 @@ namespace WinformProject {
 
 					/*지진취약도 표준형식1   */
 					Debug::WriteLine("=================>STR_28[" + i + "]:" + STR_28);
-					STR_CLASS_ID += STR_28;
+					if (STR_28->StartsWith("PGA")) {
+						STR_CLASS_ID += "0";
+					}
 
 					/*중간 언더바 추가*/
 					STR_CLASS_ID += "_";
