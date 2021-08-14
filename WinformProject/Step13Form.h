@@ -166,6 +166,7 @@ namespace WinformProject {
 
 
 
+
 			this->valueOfTime = this->m_dataSet->ValueOfTime;
 			this->penaltyCost = this->m_dataSet->PenaltyCost;
 			this->trafficFactor1 = this->m_dataSet->TrafficFactor1;

@@ -210,10 +210,17 @@ namespace WinformProject {
 			// damage stats 1, damage stats 2, damage stats 3, damage stats 4
 			for (int i = 0; i < m_dataX->Length; i++)
 			{
+				/*
 				dataY0[i] = m_fragilityCurve->GetFragilityValue(classID, 1, m_dataX[i]);
 				dataY1[i] = m_fragilityCurve->GetFragilityValue(classID, 2, m_dataX[i]);
 				dataY2[i] = m_fragilityCurve->GetFragilityValue(classID, 3, m_dataX[i]);
 				dataY3[i] = m_fragilityCurve->GetFragilityValue(classID, 4, m_dataX[i]);
+				*/
+
+				dataY0[i] = m_fragilityCurve->GetFragilityValue(classID, 1, m_dataX[i], this->m_dataSet->StructureFileDictionary);
+				dataY1[i] = m_fragilityCurve->GetFragilityValue(classID, 2, m_dataX[i], this->m_dataSet->StructureFileDictionary);
+				dataY2[i] = m_fragilityCurve->GetFragilityValue(classID, 3, m_dataX[i], this->m_dataSet->StructureFileDictionary);
+				dataY3[i] = m_fragilityCurve->GetFragilityValue(classID, 4, m_dataX[i], this->m_dataSet->StructureFileDictionary);
 			}
 
 			// Create a XYChart object

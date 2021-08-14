@@ -302,6 +302,8 @@ namespace WinformProject {
 			OnSaveDataChanged();
 			return result;
 		}
+
+
 		// update phase combobox data
 		System::Void UpdatePhaseData(int count) {
 			array<String^>^ trafficScenarioPhases = gcnew array<String^>(count);
@@ -313,6 +315,17 @@ namespace WinformProject {
 			this->cboPhase->Items->AddRange(trafficScenarioPhases);
 			this->cboPhase->SelectedIndex = 0;
 		}
+
+
+
+
+
+
+
+
+
+
+
 		// draw number of closed link chart(left side)
 		System::Void DrawChart1() {
 			int selectedIndex = cboRecurrencePeriod->SelectedIndex;
@@ -385,6 +398,41 @@ namespace WinformProject {
 
 			dataY[tmpClosedLinkCount->Length] = 0;
 
+
+			// 최대 지진피해가 경미(0.6일) 또는 보통(2.5일)인 경우 복구일수가 짧아
+			// 붕괴기준으로 x축을 설정하는 경우, 피해복구일수가 잘 나타나지 않는다
+			// 따라서 최재지진피해가 보통 이하인 경우 x,y data를 5일로 제한한다.
+			// dataY[2]= 보통일때의 폐쇄노선(수)
+			array<double>^ ReDataX;
+			array<double>^ ReDataY;
+
+
+			if (dataY[2] == 0) {
+				ReDataX = gcnew array<double>(3);
+				ReDataY = gcnew array<double>(3);
+
+				for (int i = 0; i < 2; i++) {
+					ReDataX[i] = dataX[i];
+					ReDataY[i] = dataY[i];
+				}
+
+				// 완전복구후 폐쇄노선수 ReDataY=0
+				ReDataX[2] = dataX[2]*2;
+				ReDataY[2] = 0;
+			}
+
+			else {
+				ReDataX = gcnew array<double>(5);
+				ReDataY = gcnew array<double>(5);
+				for (int i = 0; i < 5; i++) {
+					ReDataX[i] = dataX[i];
+					ReDataY[i] = dataY[i];
+				}
+			}
+
+
+
+
 			XYChart^ c = gcnew XYChart(chartViewer1->Size.Width, chartViewer1->Size.Height);
 
 			int plotAreaWidth = chartViewer1->Size.Width - 130;
@@ -405,8 +453,8 @@ namespace WinformProject {
 			c->yAxis()->setTitle(sYAxis, "Arial Bold", 12);
 
 		
-			StepLineLayer^ layer0 = c->addStepLineLayer(dataY, 0x0000FF, "");
-			layer0->setXData(dataX);
+			StepLineLayer^ layer0 = c->addStepLineLayer(ReDataY, 0x0000FF, "");
+			layer0->setXData(ReDataX);
 			layer0->setLineWidth(2);
 
 			// Output the chart
@@ -416,6 +464,15 @@ namespace WinformProject {
 			UpdatePhaseData(phaseCount);
 			DrawChart2();
 		}
+
+
+
+
+
+
+
+
+
 		// draw traffic phase chart(right side)
 		System::Void DrawChart2() {
 			int selectedIndex = cboPhase->SelectedIndex;

@@ -226,7 +226,7 @@ namespace WinformProject {
 
 		int samplingSize = SAMPLING_SIZE;
 		//double xTick = 1.0 / samplingSize;
-		double xTick = 2.0 / samplingSize;
+		double xTick = 3.0 / samplingSize;
 		if (m_dataX == nullptr) {
 			m_dataX = gcnew array<double>(samplingSize);
 			for (int i = 0; i < samplingSize; i++) {

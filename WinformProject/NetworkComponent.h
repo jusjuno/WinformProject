@@ -182,6 +182,7 @@ namespace WinformProject {
 				/*CLASS ID*/
 				String^ STR_CLASS_ID = "";
 				
+				
 				String^ STR_23 = dtNetComp->Rows[i][NetworkComponent::COL_23]->ToString();//터널분류
 				String^ STR_24 = dtNetComp->Rows[i][NetworkComponent::COL_24]->ToString();//지진취약도 표준형식
 				String^ STR_25 = dtNetComp->Rows[i][NetworkComponent::COL_25]->ToString();//토층 vs 범위	
@@ -210,7 +211,39 @@ namespace WinformProject {
 				String^ STR_48 = dtNetComp->Rows[i][NetworkComponent::COL_48]->ToString();//(사면)구성재료	          
 				String^ STR_49 = dtNetComp->Rows[i][NetworkComponent::COL_49]->ToString();//(옹벽)최대높이	          
 				String^ STR_50 = dtNetComp->Rows[i][NetworkComponent::COL_50]->ToString();//(옹벽)재료                
+				
 
+
+				/*
+				String^ STR_23 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_23]->ToString();//터널분류
+				String^ STR_24 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_24]->ToString();//지진취약도 표준형식
+				String^ STR_25 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_25]->ToString();//토층 vs 범위
+				String^ STR_26 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_26]->ToString();//노후도
+				String^ STR_27 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_27]->ToString();//구조물 분류
+				String^ STR_28 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_28]->ToString();//지진취약도 표준형식1
+				String^ STR_29 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_29]->ToString();//지진취약도 표준형식2
+				String^ STR_30 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_30]->ToString();//구조물 지진피해
+				String^ STR_31 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_31]->ToString();//입력지진파 산정
+				String^ STR_32 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_32]->ToString();//사면 경사도
+				String^ STR_33 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_33]->ToString();//사면 점착력
+				String^ STR_34 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_34]->ToString();//교량명
+				String^ STR_35 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_35]->ToString();//시공자명
+				String^ STR_36 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_36]->ToString();//준공일자
+				String^ STR_37 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_37]->ToString();//설계활하중
+				String^ STR_38 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_38]->ToString();//내진설계적용여부
+				String^ STR_39 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_39]->ToString();//총길이/경간구성
+				String^ STR_40 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_40]->ToString();//폭_계
+				String^ STR_41 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_41]->ToString();//(교량)대표경간형식
+				String^ STR_42 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_42]->ToString();//(교량)대표받침종류
+				String^ STR_43 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_43]->ToString();//(교량)대표교각형식
+				String^ STR_44 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_44]->ToString();//(교량)대표교각기초
+				String^ STR_45 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_45]->ToString();//(터널)공법대표
+				String^ STR_46 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_46]->ToString();//(사면)높이
+				String^ STR_47 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_47]->ToString();//(사면)경사
+				String^ STR_48 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_48]->ToString();//(사면)구성재료
+				String^ STR_49 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_49]->ToString();//(옹벽)최대높이
+				String^ STR_50 = dtNetComp->Rows[i]->ItemArray[NetworkComponent::COL_50]->ToString();//(옹벽)재료
+				*/
 
 
 				/******** 터널 *******/

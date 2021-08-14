@@ -175,10 +175,10 @@ namespace WinformProject {
 					// 피해 기준
 					array <double>^ damageCriteria = gcnew array<double>(m_fragilityCurve->DamageStateCount);
 					// repair ratio 저장
-					damageCriteria[1] = 0.5 * (repairRatio[0] + repairRatio[1]);
-					damageCriteria[2] = 0.5 * (repairRatio[1] + repairRatio[2]);
-					damageCriteria[3] = 0.5 * (repairRatio[2] + repairRatio[3]);
-					damageCriteria[4] = 0.5 * (repairRatio[3] + repairRatio[4]);
+					//damageCriteria[1] = 0.5 * (repairRatio[0] + repairRatio[1]);
+					//damageCriteria[2] = 0.5 * (repairRatio[1] + repairRatio[2]);
+					//damageCriteria[3] = 0.5 * (repairRatio[2] + repairRatio[3]);
+					//damageCriteria[4] = 0.5 * (repairRatio[3] + repairRatio[4]);
 
 
 					// 특정 컴포넌트의 max damage probability and max damage state를 구한다.
@@ -213,14 +213,15 @@ namespace WinformProject {
 							{
 								//								recurrencePeriodIndex = recurIndex;
 								recurrencePeriodName = m_dataSet->RecurrencePeriodData[recurIndex]->ToString();
-								damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa);
+								//damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa);
+								damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa, this->m_dataSet->StructureFileDictionary);
 
 								probabilityDamageState[damageState] = damageProbability;
 
-								if (maxDamageProbability < damageProbability) {
-									// 피해 확률이 높은 경우에는 업데이트
-									maxDamageProbability = damageProbability;
-								}
+								//if (maxDamageProbability < damageProbability) {
+								//	// 피해 확률이 높은 경우에는 업데이트
+								//	maxDamageProbability = damageProbability;
+								//}
 
 /*
 								// 최대 피해단계 계산
@@ -239,6 +240,7 @@ namespace WinformProject {
 ///*
 							// 기존: 시설물별 최대 피해단계는 취약도곡선으로 부터 계산된 피해단계별 확률이 50%를 넘는 피해단계 중에, 최고단계를 최대피해단계로 정의
 							// 변경: 각단계별 확도 중 최대값을 시설물 최대피해로 계산  
+							/*
 							double sumDamage = 0.0;
 							for (int i = 0; i <= CommConst::DAMAGE_STATE_COUNT; i++) {
 								if(i==0){
@@ -251,13 +253,51 @@ namespace WinformProject {
 									damageCriteria[i] = (probabilityDamageState[i]);
 								}
 							}
+							*/
+
+							double sumDamage = 0.0;
+							int damageStateIndex;
+							for (int i = 0; i <= CommConst::DAMAGE_STATE_COUNT; i++) {
+
+								if (i == 0) {
+									damageCriteria[i] = (1 - probabilityDamageState[i + 1]);
+								}
+
+								else if (i < CommConst::DAMAGE_STATE_COUNT) {
+									damageStateIndex = i;
+									while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+
+										if (probabilityDamageState[i] == 0) {
+											damageCriteria[i] = 0.0;
+											break;
+										}
+										else if (probabilityDamageState[damageStateIndex+1] != 0) {
+											damageCriteria[i] = (probabilityDamageState[i] - probabilityDamageState[damageStateIndex+1]);
+											break;
+										}
+										if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+											damageCriteria[i] = 0.0;
+										}
+										damageStateIndex++;
+									}
+								}
+
+								if (i == CommConst::DAMAGE_STATE_COUNT) {
+									damageCriteria[i] = (probabilityDamageState[i]);
+								}
+
+							}
+
+
+
 
 							// 변경: 각단계별 확도 중 최대값을 시설물 최대피해로 계산  
-							double temp=0;
+							//double temp=0;
 							for (int stateIndex = 0; stateIndex <= CommConst::DAMAGE_STATE_COUNT; stateIndex++) {
-								if (damageCriteria[stateIndex] > temp) {
-									temp = damageCriteria[stateIndex];
+								if (damageCriteria[stateIndex] > maxDamageProbability) {
+									//temp = damageCriteria[stateIndex];
 									maxDamageState = stateIndex;
+									maxDamageProbability = damageCriteria[stateIndex];
 								}
 							}
 
@@ -325,12 +365,15 @@ namespace WinformProject {
 								// 랜덤값이 범위내에 있는 피해단계를 해당 구조물의 피해단계로 설정한다. 
 								double dsProbability;
 								maxDamageState = 0;
+								double maxDamageProbabilitySample = 0;
 								double dsRandom = static_cast<double>(rand->Next(1, 101)) / 100.0;
 								//for (int ds = 1; ds < m_fragilityCurve->DamageStateCount; ds++) {
 								for (int ds = 0; ds < m_fragilityCurve->DamageStateCount; ds++) {
-									dsProbability = m_fragilityCurve->GetFragilityValue(classID, ds, sa);
+									//dsProbability = m_fragilityCurve->GetFragilityValue(classID, ds, sa);
+									dsProbability = m_fragilityCurve->GetFragilityValue(classID, ds, sa, this->m_dataSet->StructureFileDictionary);
 									if (dsRandom > dsProbability) {
 										maxDamageState = ds;
+										maxDamageProbabilitySample = dsRandom;
 										break;
 									}
 									//else if (ds == m_fragilityCurve->DamageStateCount - 1) {
@@ -361,8 +404,8 @@ namespace WinformProject {
 								Double::TryParse(xPos, ci.ComponentX);
 								Double::TryParse(yPos, ci.ComponentY);
 								ci.LinkID = linkID;
-								//maxDamageProbability는 이미 sample1에서 구해졌으므로, 여기서 다시 구할 필요는 없다.
-								//ci.MaxDamageProbability = maxDamageProbability;
+								//maxDamageProbability는 이미 sample1에서 구해졌으므로, 여기서 다시 구할 필요는 없다(????).
+								ci.MaxDamageProbability = maxDamageProbabilitySample;
 								ci.MaxDamageState = maxDamageState;
 								components[compIndex] = ci;
 							}

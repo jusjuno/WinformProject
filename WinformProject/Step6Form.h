@@ -321,10 +321,10 @@ namespace WinformProject {
 				return;				
 			}
 
-//			if (!WriteFileDamageState()) {
-//				Alert::Error("Can not create damage state file.");
-//				return;
-//			}
+			if (!WriteFileDamageState()) {
+				Alert::Error("Can not create damage state file.");
+				return;
+			}
 
 
 			System::Data::DataRow^ row = this->m_dataSet->SeismicSourceData->Rows[cboSeismicSource->SelectedIndex];
@@ -384,31 +384,58 @@ namespace WinformProject {
 							naturalPeriod = double::Parse(m_networkComponent->GetValue(i, NetworkComponent::COL_FUNDAMENTAL_PERIOD));
 							double soilAmpFactor = m_soilAmp->CalcSoilAmpFactor(soilType, naturalPeriod);
 
-							//sa = Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString());
 							sa = (Double::Parse(foundRows[0][cboRecurrencePeriod->SelectedIndex + 2]->ToString())) * soilAmpFactor;
-
-							double tempX = 1.0;
-							double tempStandardDev = 0.57;
-							double tempMean= -0.5767;
-							double tempValue = CustomMath::LOGNORMSDIST(tempX, tempMean, tempStandardDev);
-
-													   							 						  						  
 							m_chartDataX[i] = Double::Parse(xPos); // X
 							m_chartDataY[i] = Double::Parse(yPos); // Y
 							// find fragility curve parameter
-//							m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100; // %
+
+							/*
 							if (cboDamageState->SelectedIndex == 0) {
-								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa)) * 100;
+								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
 							}
 							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
-								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa) * 100;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
+								temp2 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary) * 100;
 								m_chartDataZ[i] = temp1 - temp2;
 							}
 							else {
-								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa) * 100; // %
+								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
+							}
+							*/
+						
+							// 취약도 곡선이 4개가 아니라 1개 또는 2개인경우에도 해석이 가능하게 하기위한 알고리즘
+							int damageStateIndex;
+							//double dsState;
+							if (cboDamageState->SelectedIndex == 0) {
+								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
 							}
 
+							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
+								damageStateIndex = cboDamageState->SelectedIndex;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
+
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+									temp2 = m_fragilityCurve->GetFragilityValue(classID, damageStateIndex + 1, sa, this->m_dataSet->StructureFileDictionary) * 100;
+
+									if (temp1 == 0) {
+										m_chartDataZ[i] = 0.0;
+										break;
+									}
+									else if (temp2 != 0) {
+										m_chartDataZ[i] = (temp1 - temp2);
+										break;
+									}
+									if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && temp2 == 0) {
+										m_chartDataZ[i] = 0.0;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							if (cboDamageState->SelectedIndex == CommConst::DAMAGE_STATE_COUNT) {
+								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
+							}
+				
 						}
 						return true;
 					}
@@ -473,6 +500,9 @@ namespace WinformProject {
 
 					for(int returnIndex = 0; returnIndex < m_dataSet->RecurrencePeriodData->Length; returnIndex++) {
 						double sa = Double::Parse(foundRows[0][returnIndex + 2]->ToString());
+						
+
+						int damageStateIndex;
 
 						for (int dsIndex = 0; dsIndex <= CommConst::DAMAGE_STATE_COUNT; dsIndex++){
 														
@@ -480,17 +510,57 @@ namespace WinformProject {
 							double temp1;
 							double temp2;
 						
+							/*
 							if (dsIndex == 0) {
-								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
+								//dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
+								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
 							}
 							else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
-								temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa) * 100;
+								//temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100;
+								//temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa) * 100;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
+								temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary) * 100;
 								dsState = temp1 - temp2;
-							}
+							}				
 							else {
-								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100; // %
+								//dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100; // %
+								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
 							}
+							*/
+
+
+							if (dsIndex == 0) {
+								//dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
+								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
+							}
+
+							else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
+								damageStateIndex = dsIndex;
+								temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
+
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+									temp2 = m_fragilityCurve->GetFragilityValue(classID, damageStateIndex +1, sa, this->m_dataSet->StructureFileDictionary) * 100;
+
+									if(temp1 ==0){ 
+										dsState = 0.0; 
+										break;
+									}
+									else if (temp2 != 0) {
+										dsState = (temp1 - temp2);
+										break;
+									}
+									if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && temp2 == 0) {
+										dsState = 0.0;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							if (dsIndex == CommConst::DAMAGE_STATE_COUNT) {
+								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
+							}
+
+
 
 							// [입력] 각 재현주기별 damage state 입력
 							newRow[columns[tmpIndex++]] = String::Format("{0}",dsState);
@@ -548,6 +618,7 @@ namespace WinformProject {
 						double damageProbability = 0.0;
 
 
+
 						// recurrence period로 특정 컴포넌트의 지진 강도를 구함
 						// sourceRow=[xpos, ypos, sa_50, sa_100, sa_475, sa_1000]
 						Double::TryParse(sourceRow[2 + recurIndex]->ToString(), sa); // 2(index=1)번째부터 damage state 1,2,3,4가 존재
@@ -557,14 +628,15 @@ namespace WinformProject {
 
 						newRow[0] = compID;
 
+						
 						for (int damageIndex = 1; damageIndex < m_fragilityCurve->DamageStateCount; damageIndex++) { // damage state 0은 제외
 
-							damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageIndex, sa);
+							//damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageIndex, sa);
+							damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageIndex, sa, this->m_dataSet->StructureFileDictionary);
 							newRow[damageIndex] = damageProbability;
-
 						}
-
 						structureDamage->Rows->Add(newRow);
+										
 
 					}
 					// Key에 따른 사전 작성

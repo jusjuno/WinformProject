@@ -44,7 +44,8 @@ namespace WinformProject {
 		// 모든 damage state의 피해 확률 합
 		double GetTotalDirectDamageRate(String^ classID, double Sa) {
 			double totalDamageRate = 0.0;
-			array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, Sa);
+			//array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, Sa);
+			array<double>^ dsArr = m_fragilityCurve->GetFragilityValues(classID, Sa, this->m_dataSet->StructureFileDictionary);
 
 			for (int i = 0; i < dsArr->Length; i++)
 			{

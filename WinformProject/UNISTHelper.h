@@ -202,12 +202,21 @@ namespace WinformProject {
 				String^ sClassId = dtNetComp->Rows[i][NetworkComponent::COL_CLASS_ID]->ToString();
 
 				// Class 정보(평균값 확인 및 시설물에 할당)
+				/*
 				array<DataRow^>^ foundRows = this->m_dataSet->FragParameterData->Select(String::Format("[{0}]='{1}'", CommConst::GRID_FRAG_CURVE_PARAM_COL1, sClassId));
 				newRow[0] = foundRows[0][1]->ToString();
 				newRow[1] = foundRows[0][3]->ToString();
 				newRow[2] = foundRows[0][5]->ToString();
 				newRow[3] = foundRows[0][7]->ToString();
+				*/
 
+				if (this->m_dataSet->StructureFileDictionary->ContainsKey(sClassId)) {
+					StructureFile^ structureFile = this->m_dataSet->StructureFileDictionary[sClassId];
+					newRow[0] = structureFile->Median1;
+					newRow[1] = structureFile->Median2;
+					newRow[2] = structureFile->Median3;
+					newRow[3] = structureFile->Median4;
+				}
 				newTable->Rows->Add(newRow);
 			}
 
