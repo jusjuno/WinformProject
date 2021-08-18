@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /WinformProject/ComponentScenarios_summary.csv
+*.h

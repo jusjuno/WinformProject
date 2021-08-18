@@ -390,26 +390,12 @@ namespace WinformProject {
 							// find fragility curve parameter
 
 							/*
-							if (cboDamageState->SelectedIndex == 0) {
-								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
-							}
-							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
-								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary) * 100;
-								m_chartDataZ[i] = temp1 - temp2;
-							}
-							else {
-								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
-							}
-							*/
-						
 							// 취약도 곡선이 4개가 아니라 1개 또는 2개인경우에도 해석이 가능하게 하기위한 알고리즘
 							int damageStateIndex;
 							//double dsState;
 							if (cboDamageState->SelectedIndex == 0) {
 								m_chartDataZ[i] = (1 - m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
 							}
-
 							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
 								damageStateIndex = cboDamageState->SelectedIndex;
 								temp1 = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
@@ -434,6 +420,55 @@ namespace WinformProject {
 
 							if (cboDamageState->SelectedIndex == CommConst::DAMAGE_STATE_COUNT) {
 								m_chartDataZ[i] = m_fragilityCurve->GetFragilityValue(classID, cboDamageState->SelectedIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
+							}
+							*/
+
+							array <double>^ probabilityDamageState = gcnew array<double>(m_fragilityCurve->DamageStateCount);
+							double damageProbability;
+
+							for (int damageState = 1; damageState < m_fragilityCurve->DamageStateCount; damageState++) {
+								damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa, this->m_dataSet->StructureFileDictionary);
+								probabilityDamageState[damageState] = damageProbability;
+							}
+
+							// 취약도 곡선이 4개가 아니라 1개 또는 2개인경우에도 해석이 가능하게 하기위한 알고리즘
+							int damageStateIndex;
+
+							if (cboDamageState->SelectedIndex == 0) {
+								damageStateIndex = cboDamageState->SelectedIndex;
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+									if (probabilityDamageState[damageStateIndex + 1] != 0) {
+										m_chartDataZ[i] = (1 - probabilityDamageState[damageStateIndex + 1]) * 100;
+										break;
+									}
+									else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+										m_chartDataZ[i] = 1.0 * 100;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							else if (cboDamageState->SelectedIndex < CommConst::DAMAGE_STATE_COUNT) {
+								damageStateIndex = cboDamageState->SelectedIndex;
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+
+									if (probabilityDamageState[cboDamageState->SelectedIndex] == 0) {
+										m_chartDataZ[i] = 0.0;
+										break;
+									}
+									else if (probabilityDamageState[damageStateIndex + 1] != 0) {
+										m_chartDataZ[i] = (probabilityDamageState[cboDamageState->SelectedIndex] - probabilityDamageState[damageStateIndex + 1]) * 100;
+										break;
+									}
+									else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+										m_chartDataZ[i] = probabilityDamageState[cboDamageState->SelectedIndex] * 100;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							else if (cboDamageState->SelectedIndex == CommConst::DAMAGE_STATE_COUNT) {
+								m_chartDataZ[i] = (probabilityDamageState[cboDamageState->SelectedIndex]) * 100;
 							}
 				
 						}
@@ -498,6 +533,8 @@ namespace WinformProject {
 					// [입력] 시설물 건설비용:
 					newRow[columns[tmpIndex++]] = m_networkComponent->GetValue(compIndex, NetworkComponent::COL_RECONSTRUCTION_COST);
 
+
+					/*
 					for(int returnIndex = 0; returnIndex < m_dataSet->RecurrencePeriodData->Length; returnIndex++) {
 						double sa = Double::Parse(foundRows[0][returnIndex + 2]->ToString());
 						
@@ -509,26 +546,8 @@ namespace WinformProject {
 							double dsState;
 							double temp1;
 							double temp2;
-						
-							/*
-							if (dsIndex == 0) {
-								//dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
-								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
-							}
-							else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
-								//temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100;
-								//temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa) * 100;
-								temp1 = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100;
-								temp2 = m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary) * 100;
-								dsState = temp1 - temp2;
-							}				
-							else {
-								//dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa) * 100; // %
-								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
-							}
-							*/
 
-
+							
 							if (dsIndex == 0) {
 								//dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex+1, sa)) * 100;
 								dsState = (1 - m_fragilityCurve->GetFragilityValue(classID, dsIndex + 1, sa, this->m_dataSet->StructureFileDictionary)) * 100;
@@ -559,13 +578,78 @@ namespace WinformProject {
 							if (dsIndex == CommConst::DAMAGE_STATE_COUNT) {
 								dsState = m_fragilityCurve->GetFragilityValue(classID, dsIndex, sa, this->m_dataSet->StructureFileDictionary) * 100; // %
 							}
-
-
-
+							
 							// [입력] 각 재현주기별 damage state 입력
 							newRow[columns[tmpIndex++]] = String::Format("{0}",dsState);
+
 						}
 					}
+					*/
+
+					
+					for (int returnIndex = 0; returnIndex < m_dataSet->RecurrencePeriodData->Length; returnIndex++) {
+						double sa = Double::Parse(foundRows[0][returnIndex + 2]->ToString());
+
+						array <double>^ probabilityDamageState = gcnew array<double>(m_fragilityCurve->DamageStateCount);
+						double damageProbability;
+
+						for (int damageState = 1; damageState < m_fragilityCurve->DamageStateCount; damageState++) {
+							damageProbability = m_fragilityCurve->GetFragilityValue(classID, damageState, sa, this->m_dataSet->StructureFileDictionary);
+							probabilityDamageState[damageState] = damageProbability;
+						}
+
+						int damageStateIndex;
+						double dsState;
+
+						for (int dsIndex = 0; dsIndex <= CommConst::DAMAGE_STATE_COUNT; dsIndex++) {
+							
+							if (dsIndex == 0) {
+								damageStateIndex = dsIndex;
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+									if (probabilityDamageState[damageStateIndex + 1] != 0) {
+										dsState = (1 - probabilityDamageState[damageStateIndex + 1])*100;
+										break;
+									}
+									else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT-1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+										dsState = 1.0*100;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
+								damageStateIndex = dsIndex;
+								while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+
+									if (probabilityDamageState[dsIndex] == 0) {
+										dsState = 0.0;
+										break;
+									}
+									else if (probabilityDamageState[damageStateIndex + 1] != 0) {
+										dsState = (probabilityDamageState[dsIndex] - probabilityDamageState[damageStateIndex + 1])*100;
+										break;
+									}
+									else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT-1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+										dsState = probabilityDamageState[dsIndex]*100;
+									}
+									damageStateIndex++;
+								}
+							}
+
+							else if (dsIndex == CommConst::DAMAGE_STATE_COUNT) {
+								dsState = (probabilityDamageState[dsIndex])*100;
+							}
+
+							
+							newRow[columns[tmpIndex++]] = String::Format("{0}", dsState);
+
+						}
+					}
+					
+
+
+
+
 				
 				newTable->Rows->Add(newRow);
 			}

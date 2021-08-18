@@ -218,44 +218,14 @@ namespace WinformProject {
 
 								probabilityDamageState[damageState] = damageProbability;
 
-								//if (maxDamageProbability < damageProbability) {
-								//	// 피해 확률이 높은 경우에는 업데이트
-								//	maxDamageProbability = damageProbability;
-								//}
-
-/*
-								// 최대 피해단계 계산
-								if (damageProbability < DAMAGE_PROBABILITY_THRESHOLD) {
-									// threshold를 넘으면 그만(그냥 damage state 0)
-									break;
-								}
-								else {
-									// threshold를 넘으면 damage가 있다고 판단하여 현재 damage state를 설정
-									maxDamageState = damageState;
-								}
-*/
-
 							}
 
 ///*
 							// 기존: 시설물별 최대 피해단계는 취약도곡선으로 부터 계산된 피해단계별 확률이 50%를 넘는 피해단계 중에, 최고단계를 최대피해단계로 정의
 							// 변경: 각단계별 확도 중 최대값을 시설물 최대피해로 계산  
-							/*
-							double sumDamage = 0.0;
-							for (int i = 0; i <= CommConst::DAMAGE_STATE_COUNT; i++) {
-								if(i==0){
-									damageCriteria[i] = (1-probabilityDamageState[i+1]);
-								}
-								if (i > 0 && i < CommConst::DAMAGE_STATE_COUNT) {
-									damageCriteria[i] = (probabilityDamageState[i] - probabilityDamageState[i+1]);
-								}
-								if (i == CommConst::DAMAGE_STATE_COUNT) {
-									damageCriteria[i] = (probabilityDamageState[i]);
-								}
-							}
-							*/
 
-							double sumDamage = 0.0;
+							/*
+							//double sumDamage = 0.0;
 							int damageStateIndex;
 							for (int i = 0; i <= CommConst::DAMAGE_STATE_COUNT; i++) {
 
@@ -287,8 +257,48 @@ namespace WinformProject {
 								}
 
 							}
+							*/
 
+							int damageStateIndex;
+							for (int dsIndex = 0; dsIndex <= CommConst::DAMAGE_STATE_COUNT; dsIndex++) {
 
+								if (dsIndex == 0) {
+									damageStateIndex = dsIndex;
+									while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+										if (probabilityDamageState[damageStateIndex + 1] != 0) {
+											damageCriteria[dsIndex] = (1 - probabilityDamageState[damageStateIndex + 1]) * 100;
+											break;
+										}
+										else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+											damageCriteria[dsIndex] = 1.0 * 100;
+										}
+										damageStateIndex++;
+									}
+								}
+
+								else if (dsIndex < CommConst::DAMAGE_STATE_COUNT) {
+									damageStateIndex = dsIndex;
+									while (damageStateIndex < CommConst::DAMAGE_STATE_COUNT) {
+
+										if (probabilityDamageState[dsIndex] == 0) {
+											damageCriteria[dsIndex] = 0.0;
+											break;
+										}
+										else if (probabilityDamageState[damageStateIndex + 1] != 0) {
+											damageCriteria[dsIndex] = (probabilityDamageState[dsIndex] - probabilityDamageState[damageStateIndex + 1]) * 100;
+											break;
+										}
+										else if (damageStateIndex == CommConst::DAMAGE_STATE_COUNT - 1 && probabilityDamageState[damageStateIndex + 1] == 0) {
+											damageCriteria[dsIndex] = probabilityDamageState[dsIndex] * 100;
+										}
+										damageStateIndex++;
+									}
+								}
+
+								else if (dsIndex == CommConst::DAMAGE_STATE_COUNT) {
+									damageCriteria[dsIndex] = (probabilityDamageState[dsIndex]) * 100;
+								}
+							}
 
 
 							// 변경: 각단계별 확도 중 최대값을 시설물 최대피해로 계산  

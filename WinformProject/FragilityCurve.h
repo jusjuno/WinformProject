@@ -131,6 +131,7 @@ namespace WinformProject {
 		}
 		*/
 
+		/*
 		double GetFragilityValue(String^ classID, int damageState, double Sa, Dictionary<String^, StructureFile^>^ structureFileDictionary) {
 
 			if (structureFileDictionary->ContainsKey(classID)) {
@@ -185,6 +186,70 @@ namespace WinformProject {
 			}
 
 		}
+		*/
+
+
+
+		double GetFragilityValue(String^ classID, int damageState, double Sa, Dictionary<String^, StructureFile^>^ structureFileDictionary) {
+
+			if (structureFileDictionary->ContainsKey(classID)) {
+				StructureFile^ structureFile = structureFileDictionary[classID];
+				double Ai = 0.0;
+				double Bc = 0.0;
+				if (structureFile->Median1 == structureFile->Median4) {
+					if (damageState == 4) {
+						Ai = structureFile->Median4;
+						Bc = structureFile->Dispersion;
+						return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+					}
+					else {
+						return 0.0;
+					}
+				}
+				else {
+					if (damageState == 1) {
+						Ai = structureFile->Median1;
+						Bc = structureFile->Dispersion;
+						return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+					}
+					else if (damageState == 2) {
+						if (structureFile->Median2 == structureFile->Median1) {
+							return 0.0;
+						}
+						else {
+							Ai = structureFile->Median2;
+							Bc = structureFile->Dispersion;
+							return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+						}
+					}
+					else if (damageState == 3) {
+						if (structureFile->Median3 == structureFile->Median2) {
+							return 0.0;
+						}
+						else {
+							Ai = structureFile->Median3;
+							Bc = structureFile->Dispersion;
+							return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+						}
+					}
+					else if (damageState == 4) {
+						Ai = structureFile->Median4;
+						Bc = structureFile->Dispersion;
+						return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+					}
+					//Bc = structureFile->Dispersion;
+					//return FragilityCurve::CalculateFragilityValue(Sa, Ai, Bc);
+				}
+
+			}
+			else {
+				return 0.0;
+			}
+
+		}
+
+
+
 
 
 		// damageState 별 fragility value를 모두 리턴

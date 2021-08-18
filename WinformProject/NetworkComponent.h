@@ -183,6 +183,9 @@ namespace WinformProject {
 				String^ STR_CLASS_ID = "";
 				
 				
+				String^ STR_6 = dtNetComp->Rows[i][NetworkComponent::COL_UPPER_TYPE]->ToString();//구조물분류
+
+
 				String^ STR_23 = dtNetComp->Rows[i][NetworkComponent::COL_23]->ToString();//터널분류
 				String^ STR_24 = dtNetComp->Rows[i][NetworkComponent::COL_24]->ToString();//지진취약도 표준형식
 				String^ STR_25 = dtNetComp->Rows[i][NetworkComponent::COL_25]->ToString();//토층 vs 범위	
@@ -247,12 +250,14 @@ namespace WinformProject {
 
 
 				/******** 터널 *******/
-				if (!StringUtil::isNull(STR_23)) {//터널
+				//if (!StringUtil::isNull(STR_23)) {//터널
+				if (STR_6->ToString() ==  "Mined/Bored" || STR_6->ToString() == "Cut-and-cover") {//터널
 
 					/*터널분류*/
 					Debug::WriteLine("=================>STR_23[" + i + "]:" + STR_23);
-					if (STR_23->StartsWith("cut")) {
-						STR_CLASS_ID += "CC1";
+					//if (STR_23->StartsWith("cut")) {
+					if (STR_6->StartsWith("cut")) {
+							STR_CLASS_ID += "CC1";
 					}
 					else {
 						STR_CLASS_ID += "MB0";
@@ -328,12 +333,16 @@ namespace WinformProject {
 
 				}
 				/******** 사면,옹벽 *******/
-				else if (!StringUtil::isNull(STR_27)) {//사면,옹벽
+				//else if (!StringUtil::isNull(STR_27)) {//사면,옹벽
+
+				else if (STR_6->ToString() == "S" || STR_6->ToString() == "R") {//사면, 옹벽
+
 
 					/*구조물 분류*/ 
 					//S: 사면,	R: 옹벽
 					Debug::WriteLine("=================>STR_27[" + i + "]:" + STR_27);
-					STR_CLASS_ID += STR_27;
+					//STR_CLASS_ID += STR_27;
+					STR_CLASS_ID += STR_6;
 
 					/*중간 언더바 추가*/
 					STR_CLASS_ID += "_";
@@ -663,30 +672,44 @@ namespace WinformProject {
 				String^ ColumnName = this->m_dataTable->Columns[column]->ColumnName;
 
 				if (value == "교량") {
-					int temp = int::Parse(newRow[ColumnName]->ToString());
-					if(temp < 101 ){
-						newDataRows[countFacility++] = newRow;
+					//int temp = int::Parse(newRow[ColumnName]->ToString());
+					//if(temp < 101 ){
+					String^ temp = newRow[ColumnName]->ToString();
+					if (temp =="Steel Beam" || temp=="Steel Box" || temp == "PSC Beam" || temp == "PSC Box" || temp == "RC Slab" || temp == "RC 라멘") {
+							newDataRows[countFacility++] = newRow;
 						//countFacility++;
 					}
 				}
 
 				if (value == "터널") {
-					int temp = int::Parse(newRow[ColumnName]->ToString());
-					if (100 < temp && temp < 201) {
+					//int temp = int::Parse(newRow[ColumnName]->ToString());
+					//if (100 < temp && temp < 201) {
+					//	newDataRows[countFacility++] = newRow;
+					//}
+					String^ temp = newRow[ColumnName]->ToString();
+					if (temp == "Mined/Bored" || temp == "Cut-and-cover") {
 						newDataRows[countFacility++] = newRow;
 					}
 				}
 
 				if (value == "사면") {
-					int temp = int::Parse(newRow[ColumnName]->ToString());
-					if (200 < temp && temp < 301) {
+					//int temp = int::Parse(newRow[ColumnName]->ToString());
+					//if (200 < temp && temp < 301) {
+					//	newDataRows[countFacility++] = newRow;
+					//}
+					String^ temp = newRow[ColumnName]->ToString();
+					if (temp == "S") {
 						newDataRows[countFacility++] = newRow;
 					}
 				}
 
 				if (value == "옹벽") {
-					int temp = int::Parse(newRow[ColumnName]->ToString());
-					if (300 < temp) {
+					//int temp = int::Parse(newRow[ColumnName]->ToString());
+					//if (300 < temp) {
+					//	newDataRows[countFacility++] = newRow;
+					//}
+					String^ temp = newRow[ColumnName]->ToString();
+					if (temp == "R") {
 						newDataRows[countFacility++] = newRow;
 					}
 				}
@@ -698,7 +721,6 @@ namespace WinformProject {
 			}			
 			return componentDataRows;
 		}
-
 
 
 		array<ComponentClassInfo>^ GetNetworkComponentChartData() {
@@ -732,8 +754,6 @@ namespace WinformProject {
 				String^ facilityID = chartDatas[index].name2;
 
 
-
-
 				// 기본으로 설정된 컬러값을 초과하면 랜덤으로 색상 지정 
 				if (index < m_componentColors->Length) {
 					chartDatas[index].color = m_componentColors[index];
@@ -746,9 +766,8 @@ namespace WinformProject {
 				// find class's components
 				//array<DataRow^>^ componentDataRows = FindRows(NetworkComponent::COL_CLASS_ID, classId);
 
-
-				array<DataRow^>^ componentDataRows = FindRowsFacility(NetworkComponent::COL_CLASS_ID, facilityID);
-
+				//array<DataRow^>^ componentDataRows = FindRowsFacility(NetworkComponent::COL_CLASS_ID, facilityID);
+				array<DataRow^>^ componentDataRows = FindRowsFacility(NetworkComponent::COL_UPPER_TYPE, facilityID);
 
 
 				int componentDataRowCount = componentDataRows->Length;
