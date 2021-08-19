@@ -260,6 +260,7 @@
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="FragilityCurve.h" />
     <ClInclude Include="FragilityDataSet.h" />
+    <ClInclude Include="FragilityFile.h" />
     <ClInclude Include="GeoPoint.h" />
     <ClInclude Include="IFormValidator.h" />
     <ClInclude Include="LegendItemInfo.h" />
@@ -268,6 +269,7 @@
     </ClInclude>
     <ClInclude Include="MBR.h" />
     <ClInclude Include="MonteCarioModule.h" />
+    <ClInclude Include="NetworkComponent.h" />
     <ClInclude Include="NewProjectForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -353,6 +355,7 @@
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseForm.resx" />
     <EmbeddedResource Include="ChartHotspotAttrDialog.resx">
       <DependentUpon>ChartHotspotAttrDialog.h</DependentUpon>
     </EmbeddedResource>

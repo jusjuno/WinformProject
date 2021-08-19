@@ -179,6 +179,17 @@ namespace WinformProject {
 			this->dgvViewData->DataSource = nullptr;
 			this->dgvViewData->DataSource = m_dataSet->ComponentClassData;
 
+			/*
+			DataTable^ dt = m_dataSet->NetworkCompnentData;
+			DataTable^ dt2 = dt->DefaultView->ToTable(true, "시설물구분");
+			dt2->Columns[0]->ColumnName = CommConst::GRID_COMP_CLASS_COL1;
+			dt2->Columns->Add(gcnew DataColumn(CommConst::GRID_COMP_CLASS_COL2, Type::GetType("System.String")));
+			
+			this->dgvViewData->DataSource = nullptr;
+			this->dgvViewData->DataSource = dt2;
+			*/
+
+			
 		}
 		else if (this->cboDataName->SelectedIndex == 1) {
 			this->dgvViewData->DataSource = nullptr;
