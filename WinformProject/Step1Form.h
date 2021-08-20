@@ -22,6 +22,7 @@ namespace WinformProject {
 	public ref class Step1Form : public WinformProject::BaseForm, IFormValidator
 	{
 	private:
+
 		ProjectDataSetBinder^		m_dataSet;
 		ShapeChart^			m_chart;
 	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
