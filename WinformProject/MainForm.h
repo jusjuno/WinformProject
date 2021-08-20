@@ -122,8 +122,8 @@ namespace WinformProject {
 
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep1MenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep2MenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep3MenuItem;
+
+
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep4MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep5MenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  ProjectStep6MenuItem;
@@ -172,8 +172,6 @@ namespace WinformProject {
 			this->ProjectMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ProjectStep0MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ProjectStep1MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ProjectStep2MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ProjectStep3MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ProjectStep4MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ProjectStep5MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ProjectStep6MenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -194,7 +192,6 @@ namespace WinformProject {
 			// 
 			// menuStrip
 			// 
-			this->menuStrip->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->FileMenuItem, this->ProjectMenuItem,
@@ -250,10 +247,10 @@ namespace WinformProject {
 			// 
 			// ProjectMenuItem
 			// 
-			this->ProjectMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {
+			this->ProjectMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
 				this->ProjectStep0MenuItem,
-					this->ProjectStep1MenuItem, this->ProjectStep2MenuItem, this->ProjectStep3MenuItem, this->ProjectStep4MenuItem, this->ProjectStep5MenuItem,
-					this->ProjectStep6MenuItem, this->ProjectStep7MenuItem, this->ProjectStep8MenuItem
+					this->ProjectStep1MenuItem, this->ProjectStep4MenuItem, this->ProjectStep5MenuItem, this->ProjectStep6MenuItem, this->ProjectStep7MenuItem,
+					this->ProjectStep8MenuItem
 			});
 			resources->ApplyResources(this->ProjectMenuItem, L"ProjectMenuItem");
 			this->ProjectMenuItem->Name = L"ProjectMenuItem";
@@ -269,18 +266,6 @@ namespace WinformProject {
 			this->ProjectStep1MenuItem->Name = L"ProjectStep1MenuItem";
 			resources->ApplyResources(this->ProjectStep1MenuItem, L"ProjectStep1MenuItem");
 			this->ProjectStep1MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep1MenuItem_Click);
-			// 
-			// ProjectStep2MenuItem
-			// 
-			this->ProjectStep2MenuItem->Name = L"ProjectStep2MenuItem";
-			resources->ApplyResources(this->ProjectStep2MenuItem, L"ProjectStep2MenuItem");
-			this->ProjectStep2MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep2MenuItem_Click);
-			// 
-			// ProjectStep3MenuItem
-			// 
-			this->ProjectStep3MenuItem->Name = L"ProjectStep3MenuItem";
-			resources->ApplyResources(this->ProjectStep3MenuItem, L"ProjectStep3MenuItem");
-			this->ProjectStep3MenuItem->Click += gcnew System::EventHandler(this, &MainForm::ProjectStep3MenuItem_Click);
 			// 
 			// ProjectStep4MenuItem
 			// 
@@ -935,8 +920,8 @@ namespace WinformProject {
 		this->ProjectMenuItem->Text = rm->GetString("ProjectMenuItem.Text");
 		this->ProjectStep0MenuItem->Text = rm->GetString("ProjectStep0MenuItem.Text");
 		this->ProjectStep1MenuItem->Text = rm->GetString("ProjectStep1MenuItem.Text");
-		this->ProjectStep2MenuItem->Text = rm->GetString("ProjectStep2MenuItem.Text");
-		this->ProjectStep3MenuItem->Text = rm->GetString("ProjectStep3MenuItem.Text");
+		//this->ProjectStep2MenuItem->Text = rm->GetString("ProjectStep2MenuItem.Text");
+		//this->ProjectStep3MenuItem->Text = rm->GetString("ProjectStep3MenuItem.Text");
 		this->ProjectStep4MenuItem->Text = rm->GetString("ProjectStep4MenuItem.Text");
 		this->ProjectStep5MenuItem->Text = rm->GetString("ProjectStep5MenuItem.Text");
 		this->ProjectStep6MenuItem->Text = rm->GetString("ProjectStep6MenuItem.Text");

@@ -118,21 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tvDisplayOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Definition of Road Network</value>
+  </data>
   <data name="chartViewer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1239, 951</value>
-  </data>
-  <data name="btnPoint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 36</value>
-  </data>
   <data name="chartViewer.Size" type="System.Drawing.Size, System.Drawing">
     <value>1062, 943</value>
   </data>
+  <data name="&gt;&gt;btnPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;chartViewer.Name" xml:space="preserve">
+    <value>chartViewer</value>
   </data>
   <data name="btnZoomOut.Text" xml:space="preserve">
     <value>ZoomOut</value>
@@ -140,14 +146,11 @@
   <data name="viewPortControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="btnZoomIn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;viewPortControl.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="btnZoomOut.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 36</value>
-  </data>
-  <data name="btnPoint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
   </data>
   <data name="&gt;&gt;btnPoint.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -155,7 +158,7 @@
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 192</value>
   </data>
-  <data name="tvDisplayOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
@@ -171,8 +174,8 @@
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 15</value>
+  <data name="&gt;&gt;btnZoomIn.Name" xml:space="preserve">
+    <value>btnZoomIn</value>
   </data>
   <data name="&gt;&gt;viewPortControl.Name" xml:space="preserve">
     <value>viewPortControl</value>
@@ -210,14 +213,14 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 755</value>
-  </data>
   <data name="btnPoint.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 15</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -231,9 +234,6 @@
   <data name="&gt;&gt;chartViewer.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
   <data name="tvDisplayOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -243,14 +243,14 @@
   <data name="&gt;&gt;btnPoint.Name" xml:space="preserve">
     <value>btnPoint</value>
   </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="btnZoomIn.Text" xml:space="preserve">
     <value>ZoomIn</value>
-  </data>
-  <data name="&gt;&gt;btnZoomIn.Name" xml:space="preserve">
-    <value>btnZoomIn</value>
   </data>
   <data name="viewPortControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 180</value>
@@ -273,9 +273,6 @@
   <data name="chartViewer.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 4</value>
   </data>
-  <data name="btnZoomIn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
   <data name="chartViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -287,6 +284,9 @@
   </data>
   <data name="viewPortControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="btnZoomOut.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;btnZoomIn.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -311,9 +311,6 @@
         ZGVJRAD/////CQQAAAD/////CQQAAAAAAAAACw==
 </value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;btnZoomOut.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -335,8 +332,8 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Step1Form</value>
   </data>
-  <data name="btnZoomOut.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="btnZoomIn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -351,7 +348,7 @@
     <value>3, 48</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chartViewer" Row="0" RowSpan="2" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="viewPortControl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,171,Percent,100" /&gt;&lt;Rows Styles="Absolute,188,Percent,100,Absolute,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chartViewer" Row="0" RowSpan="2" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="viewPortControl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,214,Percent,100" /&gt;&lt;Rows Styles="Absolute,226,Percent,100,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tvDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 615</value>
@@ -368,32 +365,35 @@
   <data name="viewPortControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 4</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Definition of Road Network</value>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 755</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="btnZoomOut" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btnZoomIn" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tvDisplayOptions" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btnPoint" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,44,Absolute,44,Absolute,44,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="btnZoomOut" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btnZoomIn" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tvDisplayOptions" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btnPoint" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,53,Absolute,53,Absolute,53,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;btnPoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1239, 951</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnZoomIn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
-  <data name="&gt;&gt;chartViewer.Name" xml:space="preserve">
-    <value>chartViewer</value>
+  <data name="btnPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 36</value>
   </data>
-  <data name="&gt;&gt;viewPortControl.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="btnPoint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="tvDisplayOptions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tvDisplayOptions.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>

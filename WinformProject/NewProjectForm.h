@@ -117,10 +117,9 @@ namespace WinformProject {
 			// 
 			// btnOK
 			// 
-			this->btnOK->Location = System::Drawing::Point(667, 471);
-			this->btnOK->Margin = System::Windows::Forms::Padding(4);
+			this->btnOK->Location = System::Drawing::Point(534, 250);
 			this->btnOK->Name = L"btnOK";
-			this->btnOK->Size = System::Drawing::Size(150, 52);
+			this->btnOK->Size = System::Drawing::Size(120, 43);
 			this->btnOK->TabIndex = 0;
 			this->btnOK->Text = L"OK";
 			this->btnOK->UseVisualStyleBackColor = true;
@@ -128,10 +127,9 @@ namespace WinformProject {
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(509, 471);
-			this->btnCancel->Margin = System::Windows::Forms::Padding(4);
+			this->btnCancel->Location = System::Drawing::Point(407, 250);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(150, 52);
+			this->btnCancel->Size = System::Drawing::Size(120, 43);
 			this->btnCancel->TabIndex = 1;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
@@ -140,19 +138,17 @@ namespace WinformProject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(17, 42);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(14, 35);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 18);
+			this->label1->Size = System::Drawing::Size(43, 15);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Name";
 			// 
 			// tbName
 			// 
-			this->tbName->Location = System::Drawing::Point(161, 38);
-			this->tbName->Margin = System::Windows::Forms::Padding(4);
+			this->tbName->Location = System::Drawing::Point(129, 32);
 			this->tbName->Name = L"tbName";
-			this->tbName->Size = System::Drawing::Size(654, 28);
+			this->tbName->Size = System::Drawing::Size(524, 25);
 			this->tbName->TabIndex = 3;
 			this->tbName->Text = L"New Project";
 			this->tbName->TextChanged += gcnew System::EventHandler(this, &NewProjectForm::tbName_TextChanged);
@@ -161,27 +157,24 @@ namespace WinformProject {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(17, 102);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(14, 101);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(90, 18);
+			this->label2->Size = System::Drawing::Size(76, 15);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Shape File";
 			// 
 			// tbShapeFilePath
 			// 
-			this->tbShapeFilePath->Location = System::Drawing::Point(249, 96);
-			this->tbShapeFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbShapeFilePath->Location = System::Drawing::Point(199, 96);
 			this->tbShapeFilePath->Name = L"tbShapeFilePath";
-			this->tbShapeFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbShapeFilePath->Size = System::Drawing::Size(361, 25);
 			this->tbShapeFilePath->TabIndex = 5;
 			// 
 			// btnFindShapeFile
 			// 
-			this->btnFindShapeFile->Location = System::Drawing::Point(707, 94);
-			this->btnFindShapeFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindShapeFile->Location = System::Drawing::Point(566, 90);
 			this->btnFindShapeFile->Name = L"btnFindShapeFile";
-			this->btnFindShapeFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindShapeFile->Size = System::Drawing::Size(88, 37);
 			this->btnFindShapeFile->TabIndex = 6;
 			this->btnFindShapeFile->Text = L"Find";
 			this->btnFindShapeFile->UseVisualStyleBackColor = true;
@@ -189,39 +182,38 @@ namespace WinformProject {
 			// 
 			// btnFindClassFile
 			// 
-			this->btnFindClassFile->Location = System::Drawing::Point(707, 146);
-			this->btnFindClassFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindClassFile->Location = System::Drawing::Point(566, 165);
 			this->btnFindClassFile->Name = L"btnFindClassFile";
-			this->btnFindClassFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindClassFile->Size = System::Drawing::Size(88, 28);
 			this->btnFindClassFile->TabIndex = 9;
 			this->btnFindClassFile->Text = L"Find";
 			this->btnFindClassFile->UseVisualStyleBackColor = true;
+			this->btnFindClassFile->Visible = false;
 			this->btnFindClassFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindClassFile_Click);
 			// 
 			// tbClassFilePath
 			// 
-			this->tbClassFilePath->Location = System::Drawing::Point(249, 147);
-			this->tbClassFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbClassFilePath->Location = System::Drawing::Point(199, 165);
 			this->tbClassFilePath->Name = L"tbClassFilePath";
-			this->tbClassFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbClassFilePath->Size = System::Drawing::Size(361, 25);
 			this->tbClassFilePath->TabIndex = 8;
+			this->tbClassFilePath->Visible = false;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(17, 153);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(14, 170);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(182, 18);
+			this->label3->Size = System::Drawing::Size(149, 15);
 			this->label3->TabIndex = 7;
 			this->label3->Text = L"Component class File";
+			this->label3->Visible = false;
 			// 
 			// btnFindNetworkFile
 			// 
-			this->btnFindNetworkFile->Location = System::Drawing::Point(707, 195);
-			this->btnFindNetworkFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindNetworkFile->Location = System::Drawing::Point(566, 130);
 			this->btnFindNetworkFile->Name = L"btnFindNetworkFile";
-			this->btnFindNetworkFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindNetworkFile->Size = System::Drawing::Size(88, 37);
 			this->btnFindNetworkFile->TabIndex = 12;
 			this->btnFindNetworkFile->Text = L"Find";
 			this->btnFindNetworkFile->UseVisualStyleBackColor = true;
@@ -229,93 +221,90 @@ namespace WinformProject {
 			// 
 			// tbNetworkFilePath
 			// 
-			this->tbNetworkFilePath->Location = System::Drawing::Point(249, 196);
-			this->tbNetworkFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbNetworkFilePath->Location = System::Drawing::Point(199, 136);
 			this->tbNetworkFilePath->Name = L"tbNetworkFilePath";
-			this->tbNetworkFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbNetworkFilePath->Size = System::Drawing::Size(361, 25);
 			this->tbNetworkFilePath->TabIndex = 11;
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(17, 202);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(14, 141);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(204, 18);
+			this->label4->Size = System::Drawing::Size(163, 15);
 			this->label4->TabIndex = 10;
 			this->label4->Text = L"Network component File";
 			// 
 			// newProgress
 			// 
-			this->newProgress->Location = System::Drawing::Point(17, 441);
-			this->newProgress->Margin = System::Windows::Forms::Padding(4);
+			this->newProgress->Location = System::Drawing::Point(14, 225);
 			this->newProgress->Name = L"newProgress";
-			this->newProgress->Size = System::Drawing::Size(799, 21);
+			this->newProgress->Size = System::Drawing::Size(639, 17);
 			this->newProgress->TabIndex = 13;
 			// 
 			// btnFindFragParamFile
 			// 
-			this->btnFindFragParamFile->Location = System::Drawing::Point(707, 244);
-			this->btnFindFragParamFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindFragParamFile->Location = System::Drawing::Point(566, 178);
 			this->btnFindFragParamFile->Name = L"btnFindFragParamFile";
-			this->btnFindFragParamFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindFragParamFile->Size = System::Drawing::Size(88, 28);
 			this->btnFindFragParamFile->TabIndex = 16;
 			this->btnFindFragParamFile->Text = L"Find";
 			this->btnFindFragParamFile->UseVisualStyleBackColor = true;
+			this->btnFindFragParamFile->Visible = false;
 			this->btnFindFragParamFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindFragParamFile_Click);
 			// 
 			// tbFragCurParamFilePath
 			// 
-			this->tbFragCurParamFilePath->Location = System::Drawing::Point(249, 246);
-			this->tbFragCurParamFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbFragCurParamFilePath->Location = System::Drawing::Point(199, 180);
 			this->tbFragCurParamFilePath->Name = L"tbFragCurParamFilePath";
-			this->tbFragCurParamFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbFragCurParamFilePath->Size = System::Drawing::Size(361, 25);
 			this->tbFragCurParamFilePath->TabIndex = 15;
+			this->tbFragCurParamFilePath->Visible = false;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(17, 252);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(14, 185);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(223, 18);
+			this->label5->Size = System::Drawing::Size(180, 15);
 			this->label5->TabIndex = 14;
 			this->label5->Text = L"Fragility curve paramer File";
+			this->label5->Visible = false;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(17, 298);
-			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Location = System::Drawing::Point(14, 198);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(171, 18);
+			this->label6->Size = System::Drawing::Size(144, 15);
 			this->label6->TabIndex = 17;
 			this->label6->Text = L"Soil amplification File";
+			this->label6->Visible = false;
 			// 
 			// tbSoilAmpFilePath
 			// 
-			this->tbSoilAmpFilePath->Location = System::Drawing::Point(249, 295);
-			this->tbSoilAmpFilePath->Margin = System::Windows::Forms::Padding(4);
+			this->tbSoilAmpFilePath->Location = System::Drawing::Point(199, 196);
 			this->tbSoilAmpFilePath->Name = L"tbSoilAmpFilePath";
-			this->tbSoilAmpFilePath->Size = System::Drawing::Size(450, 28);
+			this->tbSoilAmpFilePath->Size = System::Drawing::Size(361, 25);
 			this->tbSoilAmpFilePath->TabIndex = 18;
+			this->tbSoilAmpFilePath->Visible = false;
 			// 
 			// btnFindSoilAmpFile
 			// 
-			this->btnFindSoilAmpFile->Location = System::Drawing::Point(707, 295);
-			this->btnFindSoilAmpFile->Margin = System::Windows::Forms::Padding(4);
+			this->btnFindSoilAmpFile->Location = System::Drawing::Point(566, 196);
 			this->btnFindSoilAmpFile->Name = L"btnFindSoilAmpFile";
-			this->btnFindSoilAmpFile->Size = System::Drawing::Size(110, 34);
+			this->btnFindSoilAmpFile->Size = System::Drawing::Size(88, 28);
 			this->btnFindSoilAmpFile->TabIndex = 19;
 			this->btnFindSoilAmpFile->Text = L"Find";
 			this->btnFindSoilAmpFile->UseVisualStyleBackColor = true;
+			this->btnFindSoilAmpFile->Visible = false;
 			this->btnFindSoilAmpFile->Click += gcnew System::EventHandler(this, &NewProjectForm::btnFindSoilAmpFile_Click);
 			// 
 			// NewProjectForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(826, 516);
+			this->ClientSize = System::Drawing::Size(664, 313);
 			this->Controls->Add(this->btnFindSoilAmpFile);
 			this->Controls->Add(this->tbSoilAmpFilePath);
 			this->Controls->Add(this->label6);
@@ -336,9 +325,8 @@ namespace WinformProject {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->btnOK);
-			this->Margin = System::Windows::Forms::Padding(4);
-			this->MaximumSize = System::Drawing::Size(848, 572);
-			this->MinimumSize = System::Drawing::Size(848, 572);
+			this->MaximumSize = System::Drawing::Size(682, 360);
+			this->MinimumSize = System::Drawing::Size(682, 360);
 			this->Name = L"NewProjectForm";
 			this->Text = L"New";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &NewProjectForm::NewProjectForm_FormClosing);
@@ -383,6 +371,17 @@ namespace WinformProject {
 				NetworkComponent^ nc = gcnew NetworkComponent();
 				nc->ReadFile(this->m_dataSetBinder->NetworkFilePath);
 				this->m_dataSetBinder->NetworkCompnentData = nc->Data;
+
+
+
+				//Class 정보 생성
+				DataTable^ dt = this->m_dataSetBinder->NetworkCompnentData;
+				DataTable^ dt2 = dt->DefaultView->ToTable(true, "시설물구분");
+				dt2->Columns[0]->ColumnName = CommConst::GRID_COMP_CLASS_COL1;
+				dt2->Columns->Add(gcnew DataColumn(CommConst::GRID_COMP_CLASS_COL2, Type::GetType("System.String")));
+
+				this->m_dataSetBinder->ComponentClassData = dt2;
+
 			}
 			catch (Exception^ ex) {
 				throw gcnew Exception(L"Can not read network component file.");
@@ -637,9 +636,9 @@ namespace WinformProject {
 			backgroundWorker->ReportProgress(progressValue);
 
 			/* Read components class file */
-			this->ReadComponentsClassFile();
-			progressValue += 10;
-			backgroundWorker->ReportProgress(progressValue);
+			//this->ReadComponentsClassFile();
+			//progressValue += 10;
+			//backgroundWorker->ReportProgress(progressValue);
 
 			//* Read network components file */
 			this->ReadNetworkComponentsFile();
@@ -647,14 +646,14 @@ namespace WinformProject {
 			backgroundWorker->ReportProgress(progressValue);
 
 			/* Read fragility curve parameter file */
-			this->ReadFragilityCurveParamFile();
-			progressValue += 10;
-			backgroundWorker->ReportProgress(progressValue);
+			//this->ReadFragilityCurveParamFile();
+			//progressValue += 10;
+			//backgroundWorker->ReportProgress(progressValue);
 
 			/* Read soil amplification factor file */
-			this->ReadSoilAmpFile();
-			progressValue += 10;
-			backgroundWorker->ReportProgress(progressValue);
+			//this->ReadSoilAmpFile();
+			//progressValue += 10;
+			//backgroundWorker->ReportProgress(progressValue);
 
 			// set intensity measure data datasource
 			this->m_dataSetBinder->IntensityMeasureData[0] = "PGA";

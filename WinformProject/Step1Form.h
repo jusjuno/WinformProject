@@ -18,8 +18,8 @@ namespace WinformProject {
 	/// BaseForm을 상속하여 사용하면 디자인 화면이 에러가 발생하기 때문에 
 	/// 폼을 수정하고 싶을땐 Form 으로 상속을 변경하여 수정 후 다시 BaseForm으로 변경해야 함
 	/// </summary>
-	public ref class Step1Form : public System::Windows::Forms::Form, IFormValidator
-		//public ref class Step1Form : public WinformProject::BaseForm, IFormValidator
+	//public ref class Step1Form : public System::Windows::Forms::Form, IFormValidator
+	public ref class Step1Form : public WinformProject::BaseForm, IFormValidator
 	{
 	private:
 		ProjectDataSetBinder^		m_dataSet;
