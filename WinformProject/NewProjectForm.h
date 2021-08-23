@@ -369,7 +369,13 @@ namespace WinformProject {
 		System::Void ReadNetworkComponentsFile() {
 			try {
 				NetworkComponent^ nc = gcnew NetworkComponent();
-				nc->ReadFile(this->m_dataSetBinder->NetworkFilePath);
+				//nc->ReadFile(this->m_dataSetBinder->NetworkFilePath);
+
+				nc->ReadCSVFile(this->m_dataSetBinder->NetworkFilePath);
+
+
+
+
 				this->m_dataSetBinder->NetworkCompnentData = nc->Data;
 
 

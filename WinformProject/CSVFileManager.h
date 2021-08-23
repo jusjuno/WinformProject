@@ -53,6 +53,11 @@ public:
 	static array<String^>^ Parse(String^ value, String^ delimiter) {
 		return value->Split(delimiter->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
 	}
+
+	static array<String^>^ CSVParse(String^ value, String^ delimiter) {
+		return value->Split(delimiter->ToCharArray());
+	}
+
 public:
 	CSVFileManager(String^ filePath) {
 		this->m_filePath = filePath;

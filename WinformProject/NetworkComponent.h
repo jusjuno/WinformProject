@@ -4,6 +4,8 @@
 #include "ComponentClassInfo.h"
 #include "ProjectDataSetBinder.h"
 #include "ExcelUtil.h"
+#include "CSVFileManager.h"
+
 
 
 using namespace System;
@@ -168,6 +170,69 @@ namespace WinformProject {
 
 		void ReadFile(String^ filepath) {
 			this->m_dataTable = ExcelUtil::ExcelToDataTableUseColumnIndex(filepath, 1);
+
+			//시설물 구분 세팅
+			SetClassId();
+		}
+
+
+		DataTable^ NewTable(array<String^>^ columns) {
+			DataTable^ table = gcnew DataTable();
+			// define fields
+			int index = 0;
+			for each (String ^ col in columns)
+			{
+				//table->Columns->Add(gcnew DataColumn(col));
+				table->Columns->Add(col);
+				index++;
+			}
+			return table;
+		}
+
+
+
+		void ReadCSVFile(String^ filepath) {
+			//this->m_dataTable = ExcelUtil::ExcelToDataTableUseColumnIndex(filepath, 1);
+
+			CSVFileManager^ csv = gcnew CSVFileManager(filepath);
+			//String^ output = csv->Read();
+			String^ output = csv->Read() ;
+
+			//array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray(), StringSplitOptions::RemoveEmptyEntries);
+			array<String^>^ dataArray = output->Split(Environment::NewLine->ToCharArray());
+			int outputRowCount = dataArray->Length;
+			int columnCount;
+
+			DataTable^ newTable;
+			DataRow^ newRow = nullptr;
+
+
+			for (int i = 0; i < outputRowCount; i++)
+			{
+				String^ outputLineData = dataArray[i];
+				if (outputLineData != "") {
+					//array<String^>^ values = CSVFileManager::Parse(outputLineData, ",");
+					array<String^>^ values = CSVFileManager::CSVParse(outputLineData, ",");
+					if (values[0] != "") {
+						if (i == 0) {
+							array<String^>^ columns = values;
+							newTable = NewTable(columns);
+							columnCount = columns->Length;
+						}
+						else {
+							newRow = newTable->NewRow(); // create new row
+							for (int j = 0; j < columnCount; j++) {
+								newRow[j] = values[j];
+							}
+							newTable->Rows->Add(newRow);
+						}
+					}
+				}
+			
+			}
+
+			this->m_dataTable = newTable;
+
 
 			//시설물 구분 세팅
 			SetClassId();

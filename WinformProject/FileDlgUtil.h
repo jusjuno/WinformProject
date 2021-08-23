@@ -32,9 +32,15 @@ public:
 	}
 
 	// Excel 파일만 가져오기
+	//static String^ GetExcelFile()
+	//{
+	//	return GetFile(L"Excel Files (*.xls,*,xlsx)|*.xls;*.xlsx");
+	//}
+
+	// Excel, CSV 파일만 가져오기
 	static String^ GetExcelFile()
 	{
-		return GetFile(L"Excel Files (*.xls,*,xlsx)|*.xls;*.xlsx");
+		return GetFile(L"Excel Files (*.xls,*.xlsx,*.csv)|*.xls;*.xlsx;*.csv");
 	}
 
 	// Project 저장 파일만 가져오기

@@ -3,6 +3,15 @@ using namespace System;
 using namespace System::IO;
 using namespace System::Windows::Forms;
 
+
+//using namespace System::Net;
+using namespace System::Text;
+
+
+
+
+
+
 /// <summary>
 /// File util class
 /// </summary>
@@ -33,9 +42,11 @@ public:
 	// read file
 	String^ Read(String^ filePath) {
 		StreamReader^ sr = nullptr;
+		
 		String^ result = "";
 		try {
-			sr = gcnew StreamReader(filePath);
+			//sr = gcnew StreamReader(filePath);
+			sr = gcnew StreamReader(filePath, Encoding::Default,true);
 
 			while (!sr->EndOfStream) {
 				result += sr->ReadLine() + Environment::NewLine;
