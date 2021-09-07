@@ -1069,12 +1069,38 @@ namespace WinformProject {
 						//	break;
 						//}
 
+						/**
 						if (0.99999 * xcoord < winformNode[0, 1] && winformNode[0, 1] < 1.00001 * xcoord) {
 							if (0.9999 * ycoord < winformNode[0, 2] && winformNode[0, 2] < 1.0001 * ycoord) {
 								matchingNode = String::Format("{0}",unistNodeID);
 								break;
 							}
 						} 
+						**/
+
+						/*
+						Debug::WriteLine("========================================================================");
+						Debug::WriteLine("----------------------------------->winformNode[0, 1]:" + winformNode[0, 1]);
+						Debug::WriteLine("----------------------------------->winformNode[0, 2]:" + winformNode[0, 2]);
+
+						Debug::WriteLine("----------------------------------->xcoord :" + xcoord);
+						Debug::WriteLine("----------------------------------->0.9999 * xcoord :" + 0.9999 * xcoord );
+						Debug::WriteLine("----------------------------------->1.0001 * xcoord :" + 1.0001 * xcoord );
+
+						Debug::WriteLine("----------------------------------->ycoord :" + ycoord);
+						Debug::WriteLine("----------------------------------->0.999 * ycoord :" + 0.999 * ycoord );
+						Debug::WriteLine("----------------------------------->1.001 * ycoord :" + 1.001 * ycoord );
+						Debug::WriteLine("========================================================================");
+						*/
+
+
+						if (0.999 * xcoord < winformNode[0, 1] && winformNode[0, 1] < 1.0001 * xcoord) {
+							if (0.999 * ycoord < winformNode[0, 2] && winformNode[0, 2] < 1.001 * ycoord) {
+								matchingNode = String::Format("{0}", unistNodeID);
+								break;
+							}
+						}
+
 					}
 				}
 

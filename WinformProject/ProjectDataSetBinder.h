@@ -775,6 +775,16 @@ public:
 		}
 	}
 
+	// 화면에서 내진보강여부 설정
+	property String^ SeismicReinforce {
+		String^ get() {
+			return this->m_dataSet->m_seismicReinforce;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_seismicReinforce = value;
+		}
+	}
+
 
 
 	//파일별 진앙지 엑셀 정보

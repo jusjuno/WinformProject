@@ -159,9 +159,6 @@
   <data name="FilePreferencesMenuItem.Text" xml:space="preserve">
     <value>Preferences</value>
   </data>
-  <data name="FilePreferencesMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="FileExitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 26</value>
   </data>
@@ -271,13 +268,16 @@
     <value>245, 26</value>
   </data>
   <data name="ResultStep11MenuItem.Text" xml:space="preserve">
-    <value>Qualitative Indicators3</value>
+    <value>Qualitative Indicators2</value>
   </data>
   <data name="ResultStep12MenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 26</value>
   </data>
   <data name="ResultStep12MenuItem.Text" xml:space="preserve">
     <value>Decision BackData</value>
+  </data>
+  <data name="ResultStep12MenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="decisionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 26</value>

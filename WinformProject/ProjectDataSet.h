@@ -175,6 +175,8 @@ public protected:
 
 	Dictionary<String^, StructureFile^>^ m_structureFileDictionary; //structure File
 
+
+	String^ m_seismicReinforce; // 화면에서 내진보강여부 설정[BEFORE, AFTER]
 	
 
 };

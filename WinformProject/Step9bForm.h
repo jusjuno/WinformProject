@@ -384,8 +384,16 @@ namespace WinformProject {
 
 					}
 
-					//CSVFileManager^ csv = gcnew CSVFileManager(proc->StartInfo->WorkingDirectory+ "\\" + "TrafficSimulationResult_summary.csv");
-					CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "TrafficSimulationResult_summary.csv");
+					//내진보강여부 값
+					String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+					//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
+					String^ sFileName = "TrafficSimulationResult_summary.csv";
+					if (sSeismicReinforce->Equals("BEFORE")) {
+						sFileName = "before_TrafficSimulationResult_summary.csv";
+					}
+					
+					//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "TrafficSimulationResult_summary.csv");
+					CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + sFileName);
 					csv->Write(newTable);
 
 

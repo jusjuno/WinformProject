@@ -65,6 +65,11 @@ namespace WinformProject {
 	protected:
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::RadioButton^ radioEng;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::RadioButton^ rdoSeismicBef;
+	private: System::Windows::Forms::RadioButton^ rdoSeismicAft;
+
+
 
 	private:
 		/// <summary>
@@ -83,7 +88,11 @@ namespace WinformProject {
 			this->radioKor = (gcnew System::Windows::Forms::RadioButton());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->radioEng = (gcnew System::Windows::Forms::RadioButton());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->rdoSeismicBef = (gcnew System::Windows::Forms::RadioButton());
+			this->rdoSeismicAft = (gcnew System::Windows::Forms::RadioButton());
 			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// radioKor
@@ -96,9 +105,9 @@ namespace WinformProject {
 			// 
 			// groupBox1
 			// 
-			resources->ApplyResources(this->groupBox1, L"groupBox1");
 			this->groupBox1->Controls->Add(this->radioEng);
 			this->groupBox1->Controls->Add(this->radioKor);
+			resources->ApplyResources(this->groupBox1, L"groupBox1");
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->TabStop = false;
 			// 
@@ -110,15 +119,42 @@ namespace WinformProject {
 			this->radioEng->UseVisualStyleBackColor = true;
 			this->radioEng->Click += gcnew System::EventHandler(this, &PreferenceForm::radioEng_Click);
 			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->rdoSeismicBef);
+			this->groupBox2->Controls->Add(this->rdoSeismicAft);
+			resources->ApplyResources(this->groupBox2, L"groupBox2");
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->TabStop = false;
+			// 
+			// rdoSeismicBef
+			// 
+			resources->ApplyResources(this->rdoSeismicBef, L"rdoSeismicBef");
+			this->rdoSeismicBef->Name = L"rdoSeismicBef";
+			this->rdoSeismicBef->TabStop = true;
+			this->rdoSeismicBef->UseVisualStyleBackColor = true;
+			this->rdoSeismicBef->Click += gcnew System::EventHandler(this, &PreferenceForm::rdoSeismicBef_Click);
+			// 
+			// rdoSeismicAft
+			// 
+			resources->ApplyResources(this->rdoSeismicAft, L"rdoSeismicAft");
+			this->rdoSeismicAft->Name = L"rdoSeismicAft";
+			this->rdoSeismicAft->TabStop = true;
+			this->rdoSeismicAft->UseVisualStyleBackColor = true;
+			this->rdoSeismicAft->Click += gcnew System::EventHandler(this, &PreferenceForm::rdoSeismicAft_Click);
+			// 
 			// PreferenceForm
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"PreferenceForm";
 			this->Load += gcnew System::EventHandler(this, &PreferenceForm::PreferenceForm_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -130,6 +166,8 @@ namespace WinformProject {
 		CultureInfo::CurrentUICulture = CultureInfo::CreateSpecificCulture("ko-KR");//Localization과 관련
 		this->form2SendEvent("ko-KR");
 	}
+
+
 	private: System::Void radioEng_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		if (this->m_dataSet != nullptr) {
@@ -138,6 +176,20 @@ namespace WinformProject {
 		CultureInfo::CurrentUICulture = CultureInfo::CreateSpecificCulture("en-US");//Localization과 관련
 		this->form2SendEvent("en-US");
 	}
+
+
+	private: System::Void rdoSeismicBef_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->m_dataSet != nullptr) {
+			this->m_dataSet->SeismicReinforce = "BEFORE";
+		}
+	}
+
+	private: System::Void rdoSeismicAft_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->m_dataSet != nullptr) {
+			this->m_dataSet->SeismicReinforce = "AFTER";
+		}
+	}
+
 	private: System::Void PreferenceForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
 		if (this->m_dataSet != nullptr) {
@@ -166,7 +218,28 @@ namespace WinformProject {
 		}
 
 
+
+		if (this->m_dataSet != nullptr) {
+			String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+			if (String::IsNullOrEmpty(sSeismicReinforce)) {
+				this->rdoSeismicBef->Checked = true;
+			}
+			else {
+				if (sSeismicReinforce->Equals("BEFORE")) {
+					this->rdoSeismicBef->Checked = true;
+				}
+				else {
+					this->rdoSeismicAft->Checked = true;
+				}
+			}
+		}
+		else {
+			this->rdoSeismicBef->Checked = true;
+		}
+
+
 		OnSaveDataChanged();
 	}
+
 };
 }

@@ -148,6 +148,9 @@
   <data name="FileExitMenuItem.Text" xml:space="preserve">
     <value>종료</value>
   </data>
+  <data name="ViewDataMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 26</value>
+  </data>
   <data name="FileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 24</value>
   </data>
@@ -165,18 +168,6 @@
   </data>
   <data name="ProjectStep1MenuItem.Text" xml:space="preserve">
     <value>도로망</value>
-  </data>
-  <data name="ProjectStep2MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="ProjectStep2MenuItem.Text" xml:space="preserve">
-    <value>시설물분류</value>
-  </data>
-  <data name="ProjectStep3MenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="ProjectStep3MenuItem.Text" xml:space="preserve">
-    <value>시설물제원</value>
   </data>
   <data name="ProjectStep4MenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 26</value>
@@ -232,17 +223,11 @@
   <data name="ResultStep10MenuItem.Text" xml:space="preserve">
     <value>의사결정지원 지표1</value>
   </data>
-  <data name="ResultStep10bMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
-  </data>
-  <data name="ResultStep10bMenuItem.Text" xml:space="preserve">
-    <value>의사결정지원 지표2</value>
-  </data>
   <data name="ResultStep11MenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 26</value>
   </data>
   <data name="ResultStep11MenuItem.Text" xml:space="preserve">
-    <value>의사결정지원 지표3</value>
+    <value>의사결정지원 지표2</value>
   </data>
   <data name="ResultStep12MenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 26</value>

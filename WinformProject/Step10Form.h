@@ -935,10 +935,21 @@ namespace WinformProject {
 		}
 
 		bool CalculateNetworkStructuralCost() {
+
+
+			//내진보강여부 값
+			String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+			//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
+			String^ sFileName = "structureCost_summary.csv";
+			if (sSeismicReinforce->Equals("BEFORE")) {
+				sFileName = "before_structureCost_summary.csv";
+			}
+
 			try {
 				array<Dictionary<String^, long>^>^ result = gcnew array<Dictionary<String^, long>^>(this->m_dataSet->TrafficScenarios->Length);
 
-				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "structureCost_summary.csv");
+				//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "structureCost_summary.csv");
+				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + sFileName);
 				array<String^>^ columns = {"scenarioNo", "compID", "directDamage"};
 				DataTable^ newTable = NewTable(columns);
 
@@ -982,8 +993,19 @@ namespace WinformProject {
 
 		
 		void SaveComponentScenarios() {
+
+
+			//내진보강여부 값
+			String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+			//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
+			String^ sFileName = "ComponentScenarios_summary.csv";
+			if (sSeismicReinforce->Equals("BEFORE")) {
+				sFileName = "before_ComponentScenarios_summary.csv";
+			}
+
 			try {
-				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "ComponentScenarios_summary.csv");
+				//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->ResultFilePath + "ComponentScenarios_summary.csv");
+				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + sFileName);
 				array<String^>^ columns = { "scenarioNo", "compID", "linkID", "MaxDamage" };
 				DataTable^ newTable = NewTable(columns);
 
@@ -1009,8 +1031,18 @@ namespace WinformProject {
 		
 
 		void SaveComponentScenarios_Unist() {
+
+			//내진보강여부 값
+			String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+			//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
+			String^ sFileName = "ComponentScenarios_summary.csv";
+			if (sSeismicReinforce->Equals("BEFORE")) {
+				sFileName = "before_ComponentScenarios_summary.csv";
+			}
+
 			try {
-				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "ComponentScenarios_summary.csv");
+				//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "ComponentScenarios_summary.csv");
+				CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + sFileName);
 				array<String^>^ columns = { "scenarioNo", "compID", "linkID", "MaxDamage" };
 				DataTable^ newTable = NewTable(columns);
 
@@ -1382,9 +1414,19 @@ namespace WinformProject {
 
 
 	private: bool CalculateNetworkStructuralCost_UNIST() {
+
+		//내진보강여부 값
+		String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+		//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
+		String^ sFileName = "structureCost_summary.csv";
+		if (sSeismicReinforce->Equals("BEFORE")) {
+			sFileName = "before_structureCost_summary.csv";
+		}
+
 		try {
 			array<Dictionary<String^, long>^>^ result = gcnew array<Dictionary<String^, long>^>(this->m_dataSet->TrafficScenarios->Length);
-			CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "structureCost_summary.csv");
+			//CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + "structureCost_summary.csv");
+			CSVFileManager^ csv = gcnew CSVFileManager(this->m_dataSet->UnistResultFilePath + sFileName);
 			array<String^>^ columns = { "scenarioNo", "compID", "directDamage" };
 			DataTable^ newTable = NewTable(columns);
 
