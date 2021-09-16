@@ -27,7 +27,10 @@ namespace WinformProject {
 
 	public:
 		delegate void FormSendDataHandler(String^ log);
-		event FormSendDataHandler^ form2SendEvent;
+		event FormSendDataHandler^ form2SendEvent;	
+		event FormSendDataHandler^ SeismicChanged;
+
+		
 
 
 	
@@ -147,6 +150,7 @@ namespace WinformProject {
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			//this->decisionToolStripMenuItem = System::Windows::Forms::Main
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"PreferenceForm";
@@ -165,6 +169,7 @@ namespace WinformProject {
 		}
 		CultureInfo::CurrentUICulture = CultureInfo::CreateSpecificCulture("ko-KR");//Localization과 관련
 		this->form2SendEvent("ko-KR");
+		OnSaveDataChanged();
 	}
 
 
@@ -175,18 +180,21 @@ namespace WinformProject {
 		}
 		CultureInfo::CurrentUICulture = CultureInfo::CreateSpecificCulture("en-US");//Localization과 관련
 		this->form2SendEvent("en-US");
+		
 	}
 
 
 	private: System::Void rdoSeismicBef_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->m_dataSet != nullptr) {
 			this->m_dataSet->SeismicReinforce = "BEFORE";
+			this->SeismicChanged("BEFORE");
 		}
 	}
 
 	private: System::Void rdoSeismicAft_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->m_dataSet != nullptr) {
-			this->m_dataSet->SeismicReinforce = "AFTER";
+			this->m_dataSet->SeismicReinforce = "AFTER";			
+			this->SeismicChanged("AFTER");
 		}
 	}
 

@@ -27,6 +27,9 @@ namespace WinformProject {
 	public:
 		// 저장할 데이터가 변경되었을 때 호출
 		event System::EventHandler^ SaveDataChanged;
+		// 내진 성능관리 옵션 선택했을 때 호출
+		event System::EventHandler^ SeismicChanged;
+
 
 	protected:
 		/// <summary>
@@ -43,6 +46,10 @@ namespace WinformProject {
 		void OnSaveDataChanged() {
 			SaveDataChanged(this, EventArgs::Empty);
 		}
+
+		//void UpdateResultMenu() {
+		//	SeismicChanged(this, EventArgs::Empty);
+		//}
 
 	private:
 		/// <summary>

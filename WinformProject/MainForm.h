@@ -35,7 +35,7 @@
 
 //#include "FragilityDataSet.h"
 #include "StructureFileList.h"
-
+#include "ProjectDataSetBinder.h"
 
 namespace WinformProject {
 	using namespace System;
@@ -111,6 +111,7 @@ namespace WinformProject {
 		PreferenceForm^             m_preferenceForm;
 		DataViewForm^				m_dataViewForm;
 
+
 	private: System::ComponentModel::IContainer^  components;
 	private: System::Windows::Forms::MenuStrip^  menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  FileMenuItem;
@@ -145,7 +146,7 @@ namespace WinformProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ UnistRunMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ ViewDataMenuItem;
 
-
+	
 
 
 
@@ -456,6 +457,8 @@ namespace WinformProject {
 				FilePreferencesMenuItem->Enabled = false;
 			}
 		}
+
+
 		// save file
 		bool SaveFile(String^ filename) {
 			FileStream^ fs = nullptr;
@@ -518,6 +521,9 @@ namespace WinformProject {
 			_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
 			//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
 			_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
+			_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
+			//_form->SeismicChanged += gcnew EventHandler(this, &MainForm::UpdateResultMenu);
+
 
 			m_preferenceForm = _form;
 			m_preferenceForm->Show();
@@ -598,13 +604,28 @@ namespace WinformProject {
 
 				_form->MdiParent = this;
 				_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+				_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
+				_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
 				m_preferenceForm = _form;
-				m_preferenceForm->Show();
+				m_preferenceForm->Show(); 
 
 			}
 
 
+		//환경설정 뛰우기
+	/*	if (!IsCreatedFormInstance(m_preferenceForm)) {
+			//PreferenceForm^ _form = gcnew PreferenceForm();
+			PreferenceForm^ _form = gcnew PreferenceForm(m_projectDataSetBinder);
 
+			_form->MdiParent = this;
+			_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+			//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
+			_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
+			_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
+
+			m_preferenceForm = _form;
+			m_preferenceForm->Show();
+		} */
 
 
 
@@ -955,6 +976,20 @@ namespace WinformProject {
 		this->decisionToolStripMenuItem->Text = rm->GetString("decisionToolStripMenuItem.Text");
 
 
+
+	}
+
+		// Set enable/disable result menu by rdoSeismicBef/rdoSeismicAft
+	public:	void UpdateResultMenu(String^ str) {
+			if (IsCreatedProject()) {
+				String^ sSeismicReinforce = m_projectDataSetBinder->SeismicReinforce;
+				if ((sSeismicReinforce)->Equals("BEFORE")) {
+					decisionToolStripMenuItem->Enabled = false;
+				}
+				else {
+					decisionToolStripMenuItem->Enabled = true;
+				}
+			}
 	}
 
 	private: System::Void UnistRunMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -146,6 +146,21 @@
   <data name="&gt;&gt;radioKor.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="radioEng.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioEng.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 29</value>
+  </data>
+  <data name="radioEng.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 19</value>
+  </data>
+  <data name="radioEng.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="radioEng.Text" xml:space="preserve">
+    <value>영어(Eng)</value>
+  </data>
   <data name="&gt;&gt;radioEng.Name" xml:space="preserve">
     <value>radioEng</value>
   </data>
@@ -181,33 +196,6 @@
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="radioEng.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioEng.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 29</value>
-  </data>
-  <data name="radioEng.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 19</value>
-  </data>
-  <data name="radioEng.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="radioEng.Text" xml:space="preserve">
-    <value>영어(Eng)</value>
-  </data>
-  <data name="&gt;&gt;radioEng.Name" xml:space="preserve">
-    <value>radioEng</value>
-  </data>
-  <data name="&gt;&gt;radioEng.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioEng.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;radioEng.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="rdoSeismicBef.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
