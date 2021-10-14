@@ -9,6 +9,7 @@
 #include <algorithm> 
 #include "TrafficModule.h"
 #include "UNISTHelper.h"
+#include <string>
 
 
 
@@ -31,6 +32,7 @@ namespace WinformProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Drawing::Printing;
 
 	/// <summary>
 	/// Summary for Step13Form
@@ -38,6 +40,9 @@ namespace WinformProject {
 	//public ref class Step13Form : public System::Windows::Forms::Form, IFormValidator
 	public ref class Step13Form : public WinformProject::BaseForm, IFormValidator
 	{
+	// Declare the PrintDocument object.
+
+
 	private:
 		ProjectDataSetBinder^ m_dataSet;
 		RecoveryCost^ m_recoveryCost;
@@ -48,6 +53,9 @@ namespace WinformProject {
 		array<double>^ m_chartDataY4;
 
 
+
+	//	System.Drawing.Printing.PrintDocument docToPrint =
+		
 
 		array<String^>^ m_subChartDataX;
 
@@ -86,6 +94,13 @@ namespace WinformProject {
 
 
 		String^ m_chartType;
+		int gv_ingRow;
+		String^ gv_cboTitle;
+
+
+
+		//print table
+		DataTable^ m_printTable;
 
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
@@ -127,12 +142,22 @@ namespace WinformProject {
 
 	private: System::Windows::Forms::ComboBox^ cboGrpCondi01;
 	private: System::Windows::Forms::ComboBox^ cboGrpCondi02;
-
+	private: System::Windows::Forms::PageSetupDialog^ pageSetupDialog1;
+	private: System::Windows::Forms::PrintDialog^ printDialog1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Drawing::Printing::PrintDocument^ printDocument1;
+	private: System::Windows::Forms::PrintPreviewDialog^ printPreviewDialog1;
+private: System::Windows::Forms::ComboBox^ cboPrtList;
 
 
 
 	private:	   NetworkComponent^ m_networkComponent;
+// Declare a string to hold the entire document contents.
+private: String^ documentContents;
 
+// Declare a variable to hold the portion of the document that
+// is not printed.
+private: String^ stringToPrint;
 
 	public:
 		Step13Form(ProjectDataSetBinder^ dataSet)
@@ -245,6 +270,12 @@ namespace WinformProject {
 			this->cboSeismicSource = (gcnew System::Windows::Forms::ComboBox());
 			this->cboGrpCondi01 = (gcnew System::Windows::Forms::ComboBox());
 			this->cboGrpCondi02 = (gcnew System::Windows::Forms::ComboBox());
+			this->pageSetupDialog1 = (gcnew System::Windows::Forms::PageSetupDialog());
+			this->printDialog1 = (gcnew System::Windows::Forms::PrintDialog());
+			this->printDocument1 = (gcnew System::Drawing::Printing::PrintDocument());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->printPreviewDialog1 = (gcnew System::Windows::Forms::PrintPreviewDialog());
+			this->cboPrtList = (gcnew System::Windows::Forms::ComboBox());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvSRoad))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvEffect))->BeginInit();
@@ -257,30 +288,30 @@ namespace WinformProject {
 			// tableLayoutPanel1
 			// 
 			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
-			this->tableLayoutPanel1->Controls->Add(this->cboDirectDamage, 4, 3);
-			this->tableLayoutPanel1->Controls->Add(this->cboSeismicPeriod, 6, 0);
-			this->tableLayoutPanel1->Controls->Add(this->label9, 4, 0);
-			this->tableLayoutPanel1->Controls->Add(this->cboSRoad, 10, 1);
-			this->tableLayoutPanel1->Controls->Add(this->label8, 9, 1);
-			this->tableLayoutPanel1->Controls->Add(this->cboEffect, 7, 1);
-			this->tableLayoutPanel1->Controls->Add(this->label7, 6, 1);
-			this->tableLayoutPanel1->Controls->Add(this->cboBudget, 4, 1);
-			this->tableLayoutPanel1->Controls->Add(this->label6, 3, 1);
-			this->tableLayoutPanel1->Controls->Add(this->label4, 0, 3);
-			this->tableLayoutPanel1->Controls->Add(this->label3, 0, 1);
-			this->tableLayoutPanel1->Controls->Add(this->cboPriority, 1, 1);
-			this->tableLayoutPanel1->Controls->Add(this->dgvSRoad, 9, 2);
-			this->tableLayoutPanel1->Controls->Add(this->dgvEffect, 6, 2);
-			this->tableLayoutPanel1->Controls->Add(this->dgvBudget, 3, 2);
-			this->tableLayoutPanel1->Controls->Add(this->dgvPriority, 0, 2);
-			this->tableLayoutPanel1->Controls->Add(this->dgvDirectDamage, 0, 4);
-			this->tableLayoutPanel1->Controls->Add(this->chartViewer, 6, 4);
-			this->tableLayoutPanel1->Controls->Add(this->label2, 8, 0);
-			this->tableLayoutPanel1->Controls->Add(this->label1, 0, 0);
-			this->tableLayoutPanel1->Controls->Add(this->cboSample, 10, 0);
-			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 2, 0);
-			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi01, 6, 3);
-			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi02, 9, 3);
+			this->tableLayoutPanel1->Controls->Add(this->cboDirectDamage, 4, 4);
+			this->tableLayoutPanel1->Controls->Add(this->cboSeismicPeriod, 6, 1);
+			this->tableLayoutPanel1->Controls->Add(this->label9, 4, 1);
+			this->tableLayoutPanel1->Controls->Add(this->cboSRoad, 10, 2);
+			this->tableLayoutPanel1->Controls->Add(this->label8, 9, 2);
+			this->tableLayoutPanel1->Controls->Add(this->cboEffect, 7, 2);
+			this->tableLayoutPanel1->Controls->Add(this->label7, 6, 2);
+			this->tableLayoutPanel1->Controls->Add(this->cboBudget, 4, 2);
+			this->tableLayoutPanel1->Controls->Add(this->label6, 3, 2);
+			this->tableLayoutPanel1->Controls->Add(this->label4, 0, 4);
+			this->tableLayoutPanel1->Controls->Add(this->label3, 0, 2);
+			this->tableLayoutPanel1->Controls->Add(this->cboPriority, 1, 2);
+			this->tableLayoutPanel1->Controls->Add(this->dgvSRoad, 9, 3);
+			this->tableLayoutPanel1->Controls->Add(this->dgvEffect, 6, 3);
+			this->tableLayoutPanel1->Controls->Add(this->dgvBudget, 3, 3);
+			this->tableLayoutPanel1->Controls->Add(this->dgvPriority, 0, 3);
+			this->tableLayoutPanel1->Controls->Add(this->dgvDirectDamage, 0, 5);
+			this->tableLayoutPanel1->Controls->Add(this->chartViewer, 6, 5);
+			this->tableLayoutPanel1->Controls->Add(this->label2, 8, 1);
+			this->tableLayoutPanel1->Controls->Add(this->label1, 0, 1);
+			this->tableLayoutPanel1->Controls->Add(this->cboSample, 10, 1);
+			this->tableLayoutPanel1->Controls->Add(this->cboSeismicSource, 2, 1);
+			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi01, 6, 4);
+			this->tableLayoutPanel1->Controls->Add(this->cboGrpCondi02, 9, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			// 
 			// cboDirectDamage
@@ -502,10 +533,47 @@ namespace WinformProject {
 			this->cboGrpCondi02->Name = L"cboGrpCondi02";
 			this->cboGrpCondi02->SelectionChangeCommitted += gcnew System::EventHandler(this, &Step13Form::cboGrpCondi02_SelectionChangeCommitted);
 			// 
+			// printDialog1
+			// 
+			this->printDialog1->AllowCurrentPage = true;
+			this->printDialog1->UseEXDialog = true;
+			// 
+			// printDocument1
+			// 
+			this->printDocument1->PrintPage += gcnew System::Drawing::Printing::PrintPageEventHandler(this, &Step13Form::printDocument1_PrintPage);
+			// 
+			// button1
+			// 
+			resources->ApplyResources(this->button1, L"button1");
+			this->button1->Name = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Step13Form::button1_Click);
+			// 
+			// printPreviewDialog1
+			// 
+			resources->ApplyResources(this->printPreviewDialog1, L"printPreviewDialog1");
+			this->printPreviewDialog1->Name = L"printPreviewDialog1";
+			this->printPreviewDialog1->UseAntiAlias = true;
+			// 
+			// cboPrtList
+			// 
+			this->cboPrtList->Cursor = System::Windows::Forms::Cursors::Default;
+			this->cboPrtList->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cboPrtList->FormattingEnabled = true;
+			this->cboPrtList->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
+				resources->GetString(L"cboPrtList.Items"), resources->GetString(L"cboPrtList.Items1"),
+					resources->GetString(L"cboPrtList.Items2"), resources->GetString(L"cboPrtList.Items3"), resources->GetString(L"cboPrtList.Items4"),
+					resources->GetString(L"cboPrtList.Items5")
+			});
+			resources->ApplyResources(this->cboPrtList, L"cboPrtList");
+			this->cboPrtList->Name = L"cboPrtList";
+			// 
 			// Step13Form
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->cboPrtList);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Name = L"Step13Form";
 			this->Load += gcnew System::EventHandler(this, &Step13Form::Step13Form_Load);
@@ -3598,6 +3666,9 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 		// set combobox cboIndirectDamage
 		//this->cboIndirectDamage->SelectedIndex = 0;
 
+		//set combobox cboPrtList
+		this->cboPrtList->SelectedIndex = 0;
+
 
 
 
@@ -4673,6 +4744,162 @@ void DrawMainChart(array<String^>^ dataX, array<double>^ dataY1, array<double>^ 
 	}
 
 
-	};
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		// like to print.
+
+
+
+		gv_ingRow = 0;
+		if (this->cboPrtList->SelectedIndex == 0) {
+
+			gv_cboTitle = this->cboPriority->SelectedItem->ToString();
+			documentContents = DGVtoString(this->dgvPriority);
+		}
+		else if (this->cboPrtList->SelectedIndex == 1) {
+			gv_cboTitle = this->cboBudget->SelectedItem->ToString();
+			documentContents = DGVtoString(this->dgvBudget);
+		}
+		else if (this->cboPrtList->SelectedIndex == 2) {
+			gv_cboTitle = this->cboEffect->SelectedItem->ToString();
+			documentContents = DGVtoString(this->dgvEffect);
+
+		}
+		else if (this->cboPrtList->SelectedIndex == 3) {
+			gv_cboTitle = this->cboSRoad->SelectedItem->ToString();
+			documentContents = DGVtoString(this->dgvSRoad);
+
+		}
+		else if (this->cboPrtList->SelectedIndex == 4) {
+			gv_cboTitle = this->cboDirectDamage->SelectedItem->ToString();
+			documentContents = DGVtoString(this->dgvDirectDamage);
+
+		}
+		else if (this->cboPrtList->SelectedIndex == 5) {
+			gv_cboTitle = this->cboDirectDamage->SelectedItem->ToString();
+			documentContents = "";
+
+		}
+
+	
+		
+	
+		stringToPrint = documentContents;
+
+		printPreviewDialog1->Document = printDocument1;
+		printPreviewDialog1->ShowDialog();
+
+
+		
+	}
+
+
+
+
+  private: System::Void printDocument1_PrintPage(System::Object^ sender, System::Drawing::Printing::PrintPageEventArgs^ e)
+  {
+
+	  int charactersOnPage = 0;
+	  int linesPerPage = 0;
+	  // Set maximum width of string.
+	  int stringWidth = 1200;
+
+	  if (this->cboPrtList->SelectedIndex != 5) {
+		  // Set string format.
+		  StringFormat^ newStringFormat = gcnew StringFormat;
+		  newStringFormat->FormatFlags = StringFormatFlags::DirectionVertical;
+
+
+		  // Measure string.
+		  SizeF stringSize = e->Graphics->MeasureString(stringToPrint, this->Font, stringWidth, newStringFormat);
+
+		  if (stringToPrint->Length > 0) {
+			  e->Graphics->MeasureString(stringToPrint, this->Font, stringSize, newStringFormat, charactersOnPage, linesPerPage);
+			  // Draws the string within the bounds of the page.
+			  e->Graphics->DrawString(stringToPrint, this->Font, Brushes::Black, e->MarginBounds, StringFormat::GenericTypographic);
+
+			  // Remove the portion of the string that has been printed.
+			  stringToPrint = stringToPrint->Substring(charactersOnPage);
+
+			  e->HasMorePages = (stringToPrint->Length > 0);
+
+			  // If there are no more pages, reset the string to be printed.
+			  if (!e->HasMorePages)
+				  stringToPrint = documentContents;
+
+		  }
+	  }
+	  else {
+		  // e->Graphics->DrawImage()
+		  Bitmap^ printscreen = gcnew Bitmap(this->chartViewer->Width, this->chartViewer->Height);
+		  this->chartViewer->DrawToBitmap(printscreen, this->chartViewer->ClientRectangle);
+		  //printscreen->Save(@"ScreenDump.jpg", Imagefo)
+		  e->Graphics->DrawImage(printscreen, 40, 40, this->chartViewer->Width, this->chartViewer->Height);
+	  }
+
+  }
+
+
+
+
+	public: String^ DGVtoString(DataGridView^ dgv)
+	{
+		StringBuilder sb ;
+		int ingRow = 0;
+		int ColLengSize = 15;
+		int DiffLeng = 0;
+		int ColLeng = 0;
+		
+
+		for each(DataGridViewRow^ row in dgv->Rows)
+		{
+			String^ text;
+			//= String::Format("{0}", i++);
+			if (ingRow == 0) {
+				text = this->cboPrtList->SelectedItem->ToString() + "      " + gv_cboTitle;
+				sb.Append(text);
+				sb.AppendLine();
+				sb.AppendLine();
+				for each (DataGridViewCell ^ cell in row->Cells)
+				{
+					if (cell->ColumnIndex == 0) {
+						sb.Append("               ");
+					}
+						text = cell->OwningColumn->HeaderText;
+						ColLeng = text->Length;
+						text = text->PadRight(ColLengSize - ColLeng);
+						//sb.Append(cell->OwningColumn->HeaderText);
+						sb.Append(text);
+				}
+				sb.AppendLine();
+			}
+			for each(DataGridViewCell^ cell in row->Cells)
+			{
+				if (cell->ColumnIndex == 0) {
+					text = row->HeaderCell->Value->ToString();
+					ColLeng = text->Length;
+					text = text->PadLeft(5 - ColLeng);
+					sb.Append(text);
+					sb.Append("                 ");
+				}
+				text = cell->Value->ToString();
+				ColLeng = text->Length;
+				if (cell->ColumnIndex == 0) {
+					text = text->PadRight(ColLengSize) + " ";
+				}
+				else {
+					text = text->PadRight(ColLengSize - ColLeng)+" ";
+				}
+				sb.Append(text);
+
+			}
+			//sb->Remove(sb->Length - 1, 1); // Removes the last delimiter 
+			sb.AppendLine();
+			//sb->Append("\n");
+			ingRow++;
+		}
+		return sb.ToString();
+	}
+
+};
 
 }

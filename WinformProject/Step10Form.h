@@ -185,13 +185,12 @@ namespace WinformProject {
 			this->tableLayoutPanel1->Controls->Add(this->btnCalculate, 1, 1);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 3;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1549, 1142);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1239, 952);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// groupBox1
@@ -199,12 +198,10 @@ namespace WinformProject {
 			this->groupBox1->Controls->Add(this->tableLayoutPanel2);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold));
-			this->groupBox1->Location = System::Drawing::Point(4, 4);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Location = System::Drawing::Point(3, 3);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel1->SetRowSpan(this->groupBox1, 2);
-			this->groupBox1->Size = System::Drawing::Size(1071, 219);
+			this->groupBox1->Size = System::Drawing::Size(857, 182);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Value of Time definition (VOT)";
@@ -215,7 +212,7 @@ namespace WinformProject {
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				196)));
+				157)));
 			this->tableLayoutPanel2->Controls->Add(this->label2, 0, 0);
 			this->tableLayoutPanel2->Controls->Add(this->label3, 0, 1);
 			this->tableLayoutPanel2->Controls->Add(this->label4, 0, 2);
@@ -225,15 +222,14 @@ namespace WinformProject {
 			this->tableLayoutPanel2->Controls->Add(this->tbTrafficFactor2, 1, 3);
 			this->tableLayoutPanel2->Controls->Add(this->panel1, 1, 0);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(4, 32);
-			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 26);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 4;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 25)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(1063, 183);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(851, 153);
 			this->tableLayoutPanel2->TabIndex = 0;
 			// 
 			// label2
@@ -241,10 +237,9 @@ namespace WinformProject {
 			this->label2->AutoSize = true;
 			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->label2->Location = System::Drawing::Point(4, 0);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(3, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(859, 45);
+			this->label2->Size = System::Drawing::Size(688, 38);
 			this->label2->TabIndex = 0;
 			this->label2->Text = L"Traffic simulation of typical day";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -254,10 +249,9 @@ namespace WinformProject {
 			this->label3->AutoSize = true;
 			this->label3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->label3->Location = System::Drawing::Point(4, 45);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(3, 38);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(859, 45);
+			this->label3->Size = System::Drawing::Size(688, 38);
 			this->label3->TabIndex = 0;
 			this->label3->Text = L"Value of Time (£Ü1000)";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -267,10 +261,9 @@ namespace WinformProject {
 			this->label4->AutoSize = true;
 			this->label4->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->label4->Location = System::Drawing::Point(4, 90);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(3, 76);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(859, 45);
+			this->label4->Size = System::Drawing::Size(688, 38);
 			this->label4->TabIndex = 0;
 			this->label4->Text = L"Traffic factor 1 (from simulated hour to typical day)";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -280,10 +273,9 @@ namespace WinformProject {
 			this->label5->AutoSize = true;
 			this->label5->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->label5->Location = System::Drawing::Point(4, 135);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(3, 114);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(859, 48);
+			this->label5->Size = System::Drawing::Size(688, 39);
 			this->label5->TabIndex = 0;
 			this->label5->Text = L"Traffic factor 2 (from a day of simulated month to a day of a typical month)";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -292,10 +284,9 @@ namespace WinformProject {
 			// 
 			this->tbValueOfTime->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tbValueOfTime->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->tbValueOfTime->Location = System::Drawing::Point(871, 49);
-			this->tbValueOfTime->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tbValueOfTime->Location = System::Drawing::Point(697, 41);
 			this->tbValueOfTime->Name = L"tbValueOfTime";
-			this->tbValueOfTime->Size = System::Drawing::Size(188, 30);
+			this->tbValueOfTime->Size = System::Drawing::Size(151, 27);
 			this->tbValueOfTime->TabIndex = 2;
 			this->tbValueOfTime->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->tbValueOfTime->TextChanged += gcnew System::EventHandler(this, &Step10Form::tbValueOfTime_TextChanged);
@@ -305,11 +296,10 @@ namespace WinformProject {
 			// 
 			this->tbTrafficFactor1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tbTrafficFactor1->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->tbTrafficFactor1->Location = System::Drawing::Point(871, 94);
-			this->tbTrafficFactor1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tbTrafficFactor1->Location = System::Drawing::Point(697, 79);
 			this->tbTrafficFactor1->Name = L"tbTrafficFactor1";
 			this->tbTrafficFactor1->ReadOnly = true;
-			this->tbTrafficFactor1->Size = System::Drawing::Size(188, 30);
+			this->tbTrafficFactor1->Size = System::Drawing::Size(151, 27);
 			this->tbTrafficFactor1->TabIndex = 2;
 			this->tbTrafficFactor1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->tbTrafficFactor1->TextChanged += gcnew System::EventHandler(this, &Step10Form::tbTrafficFactor1_TextChanged);
@@ -319,11 +309,10 @@ namespace WinformProject {
 			// 
 			this->tbTrafficFactor2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tbTrafficFactor2->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->tbTrafficFactor2->Location = System::Drawing::Point(871, 139);
-			this->tbTrafficFactor2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tbTrafficFactor2->Location = System::Drawing::Point(697, 117);
 			this->tbTrafficFactor2->Name = L"tbTrafficFactor2";
 			this->tbTrafficFactor2->ReadOnly = true;
-			this->tbTrafficFactor2->Size = System::Drawing::Size(188, 30);
+			this->tbTrafficFactor2->Size = System::Drawing::Size(151, 27);
 			this->tbTrafficFactor2->TabIndex = 2;
 			this->tbTrafficFactor2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->tbTrafficFactor2->TextChanged += gcnew System::EventHandler(this, &Step10Form::tbTrafficFactor2_TextChanged);
@@ -334,10 +323,9 @@ namespace WinformProject {
 			this->panel1->Controls->Add(this->radTypicalDayNo);
 			this->panel1->Controls->Add(this->radTypicalDayYes);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel1->Location = System::Drawing::Point(871, 4);
-			this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel1->Location = System::Drawing::Point(697, 3);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(188, 37);
+			this->panel1->Size = System::Drawing::Size(151, 32);
 			this->panel1->TabIndex = 3;
 			// 
 			// radTypicalDayNo
@@ -345,10 +333,9 @@ namespace WinformProject {
 			this->radTypicalDayNo->AutoSize = true;
 			this->radTypicalDayNo->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->radTypicalDayNo->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->radTypicalDayNo->Location = System::Drawing::Point(68, 0);
-			this->radTypicalDayNo->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->radTypicalDayNo->Location = System::Drawing::Point(56, 0);
 			this->radTypicalDayNo->Name = L"radTypicalDayNo";
-			this->radTypicalDayNo->Size = System::Drawing::Size(120, 37);
+			this->radTypicalDayNo->Size = System::Drawing::Size(95, 32);
 			this->radTypicalDayNo->TabIndex = 0;
 			this->radTypicalDayNo->TabStop = true;
 			this->radTypicalDayNo->Text = L"No";
@@ -361,9 +348,8 @@ namespace WinformProject {
 			this->radTypicalDayYes->Dock = System::Windows::Forms::DockStyle::Left;
 			this->radTypicalDayYes->Font = (gcnew System::Drawing::Font(L"Arial", 10));
 			this->radTypicalDayYes->Location = System::Drawing::Point(0, 0);
-			this->radTypicalDayYes->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->radTypicalDayYes->Name = L"radTypicalDayYes";
-			this->radTypicalDayYes->Size = System::Drawing::Size(68, 37);
+			this->radTypicalDayYes->Size = System::Drawing::Size(56, 32);
 			this->radTypicalDayYes->TabIndex = 0;
 			this->radTypicalDayYes->TabStop = true;
 			this->radTypicalDayYes->Text = L"Yes";
@@ -376,11 +362,9 @@ namespace WinformProject {
 			this->groupBox2->Controls->Add(this->label1);
 			this->groupBox2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold));
-			this->groupBox2->Location = System::Drawing::Point(1083, 4);
-			this->groupBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox2->Location = System::Drawing::Point(866, 3);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->groupBox2->Size = System::Drawing::Size(462, 150);
+			this->groupBox2->Size = System::Drawing::Size(370, 125);
 			this->groupBox2->TabIndex = 1;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Non feasable trips";
@@ -388,10 +372,9 @@ namespace WinformProject {
 			// tbPenaltyCost
 			// 
 			this->tbPenaltyCost->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->tbPenaltyCost->Location = System::Drawing::Point(241, 72);
-			this->tbPenaltyCost->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tbPenaltyCost->Location = System::Drawing::Point(193, 60);
 			this->tbPenaltyCost->Name = L"tbPenaltyCost";
-			this->tbPenaltyCost->Size = System::Drawing::Size(141, 30);
+			this->tbPenaltyCost->Size = System::Drawing::Size(114, 27);
 			this->tbPenaltyCost->TabIndex = 1;
 			this->tbPenaltyCost->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->tbPenaltyCost->TextChanged += gcnew System::EventHandler(this, &Step10Form::tbPenaltyCost_TextChanged);
@@ -401,10 +384,9 @@ namespace WinformProject {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Arial", 10));
-			this->label1->Location = System::Drawing::Point(41, 80);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(33, 67);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(194, 23);
+			this->label1->Size = System::Drawing::Size(160, 19);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"PenaltyCost(£Ü1000)";
 			// 
@@ -414,11 +396,9 @@ namespace WinformProject {
 			this->groupBox3->Controls->Add(this->tableLayoutPanel3);
 			this->groupBox3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox3->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Bold));
-			this->groupBox3->Location = System::Drawing::Point(4, 231);
-			this->groupBox3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox3->Location = System::Drawing::Point(3, 191);
 			this->groupBox3->Name = L"groupBox3";
-			this->groupBox3->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->groupBox3->Size = System::Drawing::Size(1541, 907);
+			this->groupBox3->Size = System::Drawing::Size(1233, 758);
 			this->groupBox3->TabIndex = 2;
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Output";
@@ -431,7 +411,7 @@ namespace WinformProject {
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				214)));
+				172)));
 			this->tableLayoutPanel3->Controls->Add(this->chartViewer1, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->chartViewer2, 1, 0);
 			this->tableLayoutPanel3->Controls->Add(this->cboSeismicSource, 2, 1);
@@ -441,8 +421,7 @@ namespace WinformProject {
 			this->tableLayoutPanel3->Controls->Add(this->label7, 2, 2);
 			this->tableLayoutPanel3->Controls->Add(this->label8, 2, 4);
 			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel3->Location = System::Drawing::Point(4, 32);
-			this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel3->Location = System::Drawing::Point(3, 26);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 			this->tableLayoutPanel3->RowCount = 7;
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
@@ -452,17 +431,16 @@ namespace WinformProject {
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel3->Size = System::Drawing::Size(1533, 871);
+			this->tableLayoutPanel3->Size = System::Drawing::Size(1227, 729);
 			this->tableLayoutPanel3->TabIndex = 0;
 			// 
 			// chartViewer1
 			// 
 			this->chartViewer1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewer1->Location = System::Drawing::Point(4, 4);
-			this->chartViewer1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->chartViewer1->Location = System::Drawing::Point(3, 3);
 			this->chartViewer1->Name = L"chartViewer1";
 			this->tableLayoutPanel3->SetRowSpan(this->chartViewer1, 7);
-			this->chartViewer1->Size = System::Drawing::Size(651, 863);
+			this->chartViewer1->Size = System::Drawing::Size(521, 723);
 			this->chartViewer1->TabIndex = 0;
 			this->chartViewer1->TabStop = false;
 			this->chartViewer1->SizeChanged += gcnew System::EventHandler(this, &Step10Form::chartViewer1_SizeChanged);
@@ -470,11 +448,10 @@ namespace WinformProject {
 			// chartViewer2
 			// 
 			this->chartViewer2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->chartViewer2->Location = System::Drawing::Point(663, 4);
-			this->chartViewer2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->chartViewer2->Location = System::Drawing::Point(530, 3);
 			this->chartViewer2->Name = L"chartViewer2";
 			this->tableLayoutPanel3->SetRowSpan(this->chartViewer2, 7);
-			this->chartViewer2->Size = System::Drawing::Size(651, 863);
+			this->chartViewer2->Size = System::Drawing::Size(521, 723);
 			this->chartViewer2->TabIndex = 0;
 			this->chartViewer2->TabStop = false;
 			this->chartViewer2->SizeChanged += gcnew System::EventHandler(this, &Step10Form::chartViewer2_SizeChanged);
@@ -485,10 +462,9 @@ namespace WinformProject {
 			this->cboSeismicSource->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSeismicSource->Font = (gcnew System::Drawing::Font(L"Arial", 10));
 			this->cboSeismicSource->FormattingEnabled = true;
-			this->cboSeismicSource->Location = System::Drawing::Point(1322, 28);
-			this->cboSeismicSource->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->cboSeismicSource->Location = System::Drawing::Point(1057, 22);
 			this->cboSeismicSource->Name = L"cboSeismicSource";
-			this->cboSeismicSource->Size = System::Drawing::Size(207, 31);
+			this->cboSeismicSource->Size = System::Drawing::Size(167, 27);
 			this->cboSeismicSource->TabIndex = 1;
 			this->cboSeismicSource->SelectedIndexChanged += gcnew System::EventHandler(this, &Step10Form::cboSeismicSource_SelectedIndexChanged);
 			// 
@@ -498,10 +474,9 @@ namespace WinformProject {
 			this->cboRecurrencePeriod->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboRecurrencePeriod->Font = (gcnew System::Drawing::Font(L"Arial", 10));
 			this->cboRecurrencePeriod->FormattingEnabled = true;
-			this->cboRecurrencePeriod->Location = System::Drawing::Point(1322, 91);
-			this->cboRecurrencePeriod->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->cboRecurrencePeriod->Location = System::Drawing::Point(1057, 74);
 			this->cboRecurrencePeriod->Name = L"cboRecurrencePeriod";
-			this->cboRecurrencePeriod->Size = System::Drawing::Size(207, 31);
+			this->cboRecurrencePeriod->Size = System::Drawing::Size(167, 27);
 			this->cboRecurrencePeriod->TabIndex = 1;
 			this->cboRecurrencePeriod->SelectedIndexChanged += gcnew System::EventHandler(this, &Step10Form::cboRecurrencePeriod_SelectedIndexChanged);
 			// 
@@ -511,10 +486,9 @@ namespace WinformProject {
 			this->cboSample->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboSample->Font = (gcnew System::Drawing::Font(L"Arial", 10));
 			this->cboSample->FormattingEnabled = true;
-			this->cboSample->Location = System::Drawing::Point(1322, 154);
-			this->cboSample->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->cboSample->Location = System::Drawing::Point(1057, 126);
 			this->cboSample->Name = L"cboSample";
-			this->cboSample->Size = System::Drawing::Size(207, 31);
+			this->cboSample->Size = System::Drawing::Size(167, 27);
 			this->cboSample->TabIndex = 1;
 			this->cboSample->SelectedIndexChanged += gcnew System::EventHandler(this, &Step10Form::cboSample_SelectedIndexChanged);
 			// 
@@ -523,10 +497,9 @@ namespace WinformProject {
 			this->label6->AutoSize = true;
 			this->label6->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Bold));
-			this->label6->Location = System::Drawing::Point(1322, 0);
-			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Location = System::Drawing::Point(1057, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(207, 24);
+			this->label6->Size = System::Drawing::Size(167, 19);
 			this->label6->TabIndex = 2;
 			this->label6->Text = L"Seismic source";
 			// 
@@ -535,10 +508,9 @@ namespace WinformProject {
 			this->label7->AutoSize = true;
 			this->label7->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Bold));
-			this->label7->Location = System::Drawing::Point(1322, 63);
-			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label7->Location = System::Drawing::Point(1057, 52);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(207, 24);
+			this->label7->Size = System::Drawing::Size(167, 19);
 			this->label7->TabIndex = 2;
 			this->label7->Text = L"Recurrence period";
 			// 
@@ -547,22 +519,20 @@ namespace WinformProject {
 			this->label8->AutoSize = true;
 			this->label8->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Bold));
-			this->label8->Location = System::Drawing::Point(1322, 126);
-			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label8->Location = System::Drawing::Point(1057, 104);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(207, 24);
+			this->label8->Size = System::Drawing::Size(167, 19);
 			this->label8->TabIndex = 2;
 			this->label8->Text = L"Sample";
 			// 
 			// btnCalculate
 			// 
 			this->btnCalculate->Dock = System::Windows::Forms::DockStyle::Right;
-			this->btnCalculate->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnCalculate->Font = (gcnew System::Drawing::Font(L"±¼¸²", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->btnCalculate->Location = System::Drawing::Point(1325, 162);
-			this->btnCalculate->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnCalculate->Location = System::Drawing::Point(1060, 134);
 			this->btnCalculate->Name = L"btnCalculate";
-			this->btnCalculate->Size = System::Drawing::Size(220, 61);
+			this->btnCalculate->Size = System::Drawing::Size(176, 51);
 			this->btnCalculate->TabIndex = 3;
 			this->btnCalculate->Text = L"Calculate";
 			this->btnCalculate->UseVisualStyleBackColor = true;
@@ -570,11 +540,10 @@ namespace WinformProject {
 			// 
 			// Step10Form
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1549, 1142);
+			this->ClientSize = System::Drawing::Size(1239, 952);
 			this->Controls->Add(this->tableLayoutPanel1);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"Step10Form";
 			this->Text = L"Step10Form";
 			this->Load += gcnew System::EventHandler(this, &Step10Form::Step10Form_Load);

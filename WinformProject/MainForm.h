@@ -31,6 +31,7 @@
 
 #include "PreferenceForm.h"
 #include "DataViewForm.h"
+//#include "UserDefineForm.h"
 
 
 //#include "FragilityDataSet.h"
@@ -468,6 +469,7 @@ namespace WinformProject {
 				this->m_projectDataSetBinder->SaveFilename = filename;
 				fs = gcnew FileStream(filename, FileMode::Create);
 				bf = gcnew BinaryFormatter();
+				//updateConstDefault();
 				bf->Serialize(fs, this->m_projectDataSetBinder->DataSet);
 				return true;
 			}
@@ -489,6 +491,7 @@ namespace WinformProject {
 			BinaryFormatter^ bf = nullptr;
 			try
 			{
+				initDefalutSet();
 				fs = gcnew FileStream(filename, FileMode::Open, FileAccess::Read);
 				bf = gcnew BinaryFormatter();
 				ProjectDataSet^ ds = (ProjectDataSet^)bf->Deserialize(fs);
@@ -612,22 +615,6 @@ namespace WinformProject {
 			}
 
 
-		//환경설정 뛰우기
-	/*	if (!IsCreatedFormInstance(m_preferenceForm)) {
-			//PreferenceForm^ _form = gcnew PreferenceForm();
-			PreferenceForm^ _form = gcnew PreferenceForm(m_projectDataSetBinder);
-
-			_form->MdiParent = this;
-			_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
-			//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
-			_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
-			_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
-
-			m_preferenceForm = _form;
-			m_preferenceForm->Show();
-		} */
-
-
 
 		}
 		System::Void FileSaveMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -664,6 +651,7 @@ namespace WinformProject {
 			dlg->DefaultExt = "prd";
 
 			if (::DialogResult::OK == dlg->ShowDialog()) {
+				//updateConstDefault();// 기본상수 저장
 				result = SaveFile(dlg->FileName);
 			}
 			//IsModified = !result;
@@ -1018,8 +1006,25 @@ namespace WinformProject {
 
 	}
 
+	public:	void initDefalutSet() {
+		CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE1 = CommConst::CONST_DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE1;
+		CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE2 = CommConst::CONST_DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE2;
+		CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE3 = CommConst::CONST_DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE3;
+		CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4 = CommConst::CONST_DEFAULT_TRAFFIC_CARRYING_DAMAGE_STATE4;
+		CommConst::DEFAULT_TRAFFIC_CARRYING_DAMAGE_REF = CommConst::CONST_DEFAULT_TRAFFIC_CARRYING_DAMAGE_REF;
 
 
+		CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE1 = CommConst::CONST_DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE1;
+		CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE2 = CommConst::CONST_DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE2;
+		CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE3 = CommConst::CONST_DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE3;
+		CommConst::DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE4 = CommConst::CONST_DEFAULT_REPAIR_COST_RATIO_DAMAGE_STATE4;
+
+
+		CommConst::DEFAULT_TRAFFIC_FACTOR1 = CommConst::CONST_DEFAULT_TRAFFIC_FACTOR1;
+		CommConst::DEFAULT_TRAFFIC_FACTOR2 = CommConst::CONST_DEFAULT_TRAFFIC_FACTOR2;
+		CommConst::DEFAULT_VALUE_OF_TIME = CommConst::CONST_DEFAULT_VALUE_OF_TIME;
+		CommConst::DEFAULT_PENALTY_COST = CommConst::CONST_DEFAULT_PENALTY_COST;
+	}
 
 };
 }

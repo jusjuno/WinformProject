@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonHeader.h"
 #include "ProjectDataSetBinder.h"
+#include "UserDefineForm.h"
 
 
 namespace WinformProject {
@@ -24,11 +25,13 @@ namespace WinformProject {
 
 	private:
 		ProjectDataSetBinder^ m_dataSet;
+		UserDefineForm^ m_UserDefineForm;
 
 	public:
 		delegate void FormSendDataHandler(String^ log);
 		event FormSendDataHandler^ form2SendEvent;	
 		event FormSendDataHandler^ SeismicChanged;
+		//event FormSendDataHandler^ ConstChanged;
 
 		
 
@@ -53,6 +56,7 @@ namespace WinformProject {
 
 		}
 
+
 	protected:
 		/// <summary>
 		/// 사용 중인 모든 리소스를 정리합니다.
@@ -71,7 +75,12 @@ namespace WinformProject {
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::RadioButton^ rdoSeismicBef;
 	private: System::Windows::Forms::RadioButton^ rdoSeismicAft;
+	private: System::Windows::Forms::GroupBox^ groupBox3;
+	private: System::Windows::Forms::RadioButton^ rdoDefault;
+	private: System::Windows::Forms::RadioButton^ rdoUserSet;
 
+
+    
 
 
 	private:
@@ -94,8 +103,12 @@ namespace WinformProject {
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->rdoSeismicBef = (gcnew System::Windows::Forms::RadioButton());
 			this->rdoSeismicAft = (gcnew System::Windows::Forms::RadioButton());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->rdoDefault = (gcnew System::Windows::Forms::RadioButton());
+			this->rdoUserSet = (gcnew System::Windows::Forms::RadioButton());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
+			this->groupBox3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// radioKor
@@ -146,11 +159,35 @@ namespace WinformProject {
 			this->rdoSeismicAft->UseVisualStyleBackColor = true;
 			this->rdoSeismicAft->Click += gcnew System::EventHandler(this, &PreferenceForm::rdoSeismicAft_Click);
 			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->rdoDefault);
+			this->groupBox3->Controls->Add(this->rdoUserSet);
+			resources->ApplyResources(this->groupBox3, L"groupBox3");
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->TabStop = false;
+			// 
+			// rdoDefault
+			// 
+			resources->ApplyResources(this->rdoDefault, L"rdoDefault");
+			this->rdoDefault->Name = L"rdoDefault";
+			this->rdoDefault->TabStop = true;
+			this->rdoDefault->UseVisualStyleBackColor = true;
+			this->rdoDefault->Click += gcnew System::EventHandler(this, &PreferenceForm::rdoDefault_Click);
+			// 
+			// rdoUserSet
+			// 
+			resources->ApplyResources(this->rdoUserSet, L"rdoUserSet");
+			this->rdoUserSet->Name = L"rdoUserSet";
+			this->rdoUserSet->TabStop = true;
+			this->rdoUserSet->UseVisualStyleBackColor = true;
+			this->rdoUserSet->Click += gcnew System::EventHandler(this, &PreferenceForm::rdoUserSet_Click);
+			// 
 			// PreferenceForm
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			//this->decisionToolStripMenuItem = System::Windows::Forms::Main
+			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"PreferenceForm";
@@ -159,6 +196,8 @@ namespace WinformProject {
 			this->groupBox1->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
+			this->groupBox3->ResumeLayout(false);
+			this->groupBox3->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -240,14 +279,71 @@ namespace WinformProject {
 					this->rdoSeismicAft->Checked = true;
 				}
 			}
+
+			String^ sConstDefalut = this->m_dataSet->ConstDefalut;
+			if (String::IsNullOrEmpty(sConstDefalut)) {
+				this->rdoDefault->Checked = true;
+			}
+			else {
+				if (sConstDefalut->Equals("N")) {
+					this->rdoUserSet->Checked = true;
+				}
+				else {
+					this->rdoDefault->Checked = true;
+				}
+			}
 		}
 		else {
 			this->rdoSeismicBef->Checked = true;
+			this->rdoDefault->Checked = true;
 		}
 
 
 		OnSaveDataChanged();
 	}
+
+private: System::Void rdoDefault_Click(System::Object^ sender, System::EventArgs^ e) {
+	//if (!IsCreatedFormInstance(m_UserDefineForm)) {
+	if (this->m_dataSet != nullptr) {
+		UserDefineForm^ _form = gcnew UserDefineForm(m_dataSet);
+		m_UserDefineForm = _form;
+		this->m_dataSet->ConstDefalut = "Y";
+		
+	}
+	else {
+		UserDefineForm^ _form = gcnew UserDefineForm();
+		m_UserDefineForm = _form;
+		m_UserDefineForm->sConstDefalut = "Y";			
+	
+	}
+
+	m_UserDefineForm->Show();
+		
+	//}
+}
+private: System::Void rdoUserSet_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	//if (!IsCreatedFormInstance(m_UserDefineForm)) {
+
+		if (this->m_dataSet != nullptr) {
+			UserDefineForm^ _form = gcnew UserDefineForm(m_dataSet);
+			m_UserDefineForm = _form;
+			this->m_dataSet->ConstDefalut = "N";
+			
+		}
+		else {
+			UserDefineForm^ _form = gcnew UserDefineForm();
+			m_UserDefineForm = _form;
+			m_UserDefineForm->sConstDefalut = "N";
+	
+			//this->ConstChanged("N");
+		}
+		//OnSaveDataChanged();
+		m_UserDefineForm->Show();
+	//}
+	
+}
+
 
 };
 }

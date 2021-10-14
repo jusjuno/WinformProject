@@ -785,7 +785,44 @@ public:
 		}
 	}
 
+	// 화면에서 내진성능관리 기본상수 설정
+	property String^ ConstDefalut {
+		String^ get() {
+			return this->m_dataSet->m_constDefault;
+		}
+		void set(String^ value) {
+			this->m_dataSet->m_constDefault = value;
+		}
+	}
 
+
+	/*
+
+	// Number of monte cario sample
+	property int MonteCarioCount {
+		int get() {
+			return this->m_dataSet->m_monteCarioCount;
+		}
+		void set(int value) {
+			this->m_dataSet->m_monteCarioCount = value;
+			this->m_dataSet->m_trafficScenarioSamples = gcnew array<String^>(value);
+			for (int i = 0; i < value; i++)
+			{
+				this->m_dataSet->m_trafficScenarioSamples[i] = (i + 1).ToString();
+			}
+		}
+	}*/
+
+
+	// 내진성능관리 기본상수 설정 저장 데이터셋 int
+	property array<String^>^ constDefault_DataSet_Str {
+		array<String^>^ get() {
+			return this->m_dataSet->m_constDefault_DataSet_Str;
+		}
+		void set(array<String^>^ value) {
+			this->m_dataSet->m_constDefault_DataSet_Str = value;
+		}
+	}
 
 	//파일별 진앙지 엑셀 정보
 	property Dictionary<String^, DataTable^>^ SeismicSourceContentDictionary {
@@ -820,6 +857,7 @@ public:
 			this->m_dataSet->m_structureFileDictionary = value;
 		}
 	}
+
 
 
 };

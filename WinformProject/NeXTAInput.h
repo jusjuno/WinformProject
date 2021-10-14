@@ -2,6 +2,7 @@
 #include "CommonHeader.h"
 #include "ProjectDataSetBinder.h"
 #include "TrafficModule.h"
+#include "ShapeChart.h"
 
 namespace WinformProject {
 
@@ -21,7 +22,14 @@ namespace WinformProject {
 	public ref class NeXTAInput : public WinformProject::BaseForm, IFormValidator
 	{
 	private:
+
 		ProjectDataSetBinder^ m_dataSet;
+		ShapeChart^ m_chart;
+		NetworkComponent^ m_networkComponent;
+	private: System::Windows::Forms::TreeView^ tvDisplayOptions;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: ChartDirector::WinViewPortControl^ viewPortControl;
+	
 	public:
 		NeXTAInput(ProjectDataSetBinder^ dataSet)
 		{
@@ -30,6 +38,8 @@ namespace WinformProject {
 			//TODO: 생성자 코드를 여기에 추가합니다.
 			//
 			this->m_dataSet = dataSet;
+			m_chart = gcnew ShapeChart(dataSet->ShapeData);
+			m_networkComponent = gcnew NetworkComponent(dataSet);
 		}
 
 
@@ -55,19 +65,26 @@ namespace WinformProject {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::ComboBox^ cboDefaultODZoneParam;
 
-	private: System::Windows::Forms::ComboBox^ cboDefaultInputDemandMetaParam;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::ComboBox^ cboCountOD;
 
 	private: TrafficModule^ m_trafficModule;
+	private: System::Windows::Forms::ComboBox^ cboDefaultInputDemandMetaParam;
+
+
+	private: ChartDirector::WinChartViewer^ chartViewer;
+	private: System::ComponentModel::IContainer^ components;
+
+
 
 
 	private:
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -76,59 +93,79 @@ namespace WinformProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::Windows::Forms::TreeNode^ treeNode1 = (gcnew System::Windows::Forms::TreeNode(L"ID"));
+			System::Windows::Forms::TreeNode^ treeNode2 = (gcnew System::Windows::Forms::TreeNode(L"link", gcnew cli::array< System::Windows::Forms::TreeNode^  >(1) { treeNode1 }));
+			System::Windows::Forms::TreeNode^ treeNode3 = (gcnew System::Windows::Forms::TreeNode(L"ID"));
+			System::Windows::Forms::TreeNode^ treeNode4 = (gcnew System::Windows::Forms::TreeNode(L"node", gcnew cli::array< System::Windows::Forms::TreeNode^  >(1) { treeNode3 }));
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(NeXTAInput::typeid));
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->dgvODZone = (gcnew System::Windows::Forms::DataGridView());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->dgvInputDemandMeta = (gcnew System::Windows::Forms::DataGridView());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->cboDefaultODZoneParam = (gcnew System::Windows::Forms::ComboBox());
-			this->cboDefaultInputDemandMetaParam = (gcnew System::Windows::Forms::ComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->cboDefaultInputDemandMetaParam = (gcnew System::Windows::Forms::ComboBox());
+			this->dgvODZone = (gcnew System::Windows::Forms::DataGridView());
+			this->chartViewer = (gcnew ChartDirector::WinChartViewer());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->cboCountOD = (gcnew System::Windows::Forms::ComboBox());
+			this->tvDisplayOptions = (gcnew System::Windows::Forms::TreeView());
+			this->viewPortControl = (gcnew ChartDirector::WinViewPortControl(this->components));
 			this->tableLayoutPanel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvODZone))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvInputDemandMeta))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvODZone))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartViewer))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->viewPortControl))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tableLayoutPanel1
 			// 
-			this->tableLayoutPanel1->ColumnCount = 2;
+			this->tableLayoutPanel1->ColumnCount = 4;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
-			this->tableLayoutPanel1->Controls->Add(this->dgvODZone, 0, 1);
+				35.71428F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				70)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				64.28572F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				70)));
+			this->tableLayoutPanel1->Controls->Add(this->label3, 2, 0);
 			this->tableLayoutPanel1->Controls->Add(this->dgvInputDemandMeta, 0, 3);
 			this->tableLayoutPanel1->Controls->Add(this->label2, 0, 2);
-			this->tableLayoutPanel1->Controls->Add(this->cboDefaultODZoneParam, 1, 0);
-			this->tableLayoutPanel1->Controls->Add(this->cboDefaultInputDemandMetaParam, 1, 2);
+			this->tableLayoutPanel1->Controls->Add(this->cboDefaultODZoneParam, 3, 0);
 			this->tableLayoutPanel1->Controls->Add(this->label1, 0, 0);
+			this->tableLayoutPanel1->Controls->Add(this->cboDefaultInputDemandMetaParam, 1, 2);
+			this->tableLayoutPanel1->Controls->Add(this->dgvODZone, 0, 1);
+			this->tableLayoutPanel1->Controls->Add(this->chartViewer, 2, 1);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 4;
+			this->tableLayoutPanel1->RowCount = 6;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1231, 1072);
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1368, 714);
 			this->tableLayoutPanel1->TabIndex = 0;
+			this->tableLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &NeXTAInput::tableLayoutPanel1_Paint);
 			// 
-			// dgvODZone
+			// label3
 			// 
-			this->dgvODZone->AllowUserToAddRows = false;
-			this->dgvODZone->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->tableLayoutPanel1->SetColumnSpan(this->dgvODZone, 2);
-			this->dgvODZone->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvODZone->Location = System::Drawing::Point(4, 38);
-			this->dgvODZone->Margin = System::Windows::Forms::Padding(4);
-			this->dgvODZone->Name = L"dgvODZone";
-			this->dgvODZone->RowHeadersWidth = 62;
-			this->dgvODZone->RowTemplate->Height = 23;
-			this->dgvODZone->Size = System::Drawing::Size(1223, 494);
-			this->dgvODZone->TabIndex = 0;
-			this->dgvODZone->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &NeXTAInput::dgvODZone_DataBindingComplete);
+			this->label3->Anchor = System::Windows::Forms::AnchorStyles::Right;
+			this->label3->AutoEllipsis = true;
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(129)));
+			this->label3->Location = System::Drawing::Point(968, 7);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(327, 15);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Is the default \"Origination and Destination\"";
+			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
 			// dgvInputDemandMeta
 			// 
@@ -136,12 +173,11 @@ namespace WinformProject {
 			this->dgvInputDemandMeta->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tableLayoutPanel1->SetColumnSpan(this->dgvInputDemandMeta, 2);
 			this->dgvInputDemandMeta->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dgvInputDemandMeta->Location = System::Drawing::Point(4, 574);
-			this->dgvInputDemandMeta->Margin = System::Windows::Forms::Padding(4);
+			this->dgvInputDemandMeta->Location = System::Drawing::Point(3, 369);
 			this->dgvInputDemandMeta->Name = L"dgvInputDemandMeta";
 			this->dgvInputDemandMeta->RowHeadersWidth = 62;
 			this->dgvInputDemandMeta->RowTemplate->Height = 23;
-			this->dgvInputDemandMeta->Size = System::Drawing::Size(1223, 494);
+			this->dgvInputDemandMeta->Size = System::Drawing::Size(502, 302);
 			this->dgvInputDemandMeta->TabIndex = 1;
 			this->dgvInputDemandMeta->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &NeXTAInput::dgvInputDemandMetaData_DataBindingComplete);
 			// 
@@ -149,93 +185,161 @@ namespace WinformProject {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label2->Location = System::Drawing::Point(4, 536);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(3, 337);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(1044, 34);
+			this->label2->Size = System::Drawing::Size(432, 29);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Is the default \"Input Demand Meta Data\"";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// cboDefaultODZoneParam
 			// 
-			this->cboDefaultODZoneParam->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->cboDefaultODZoneParam->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboDefaultODZoneParam->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboDefaultODZoneParam->FormattingEnabled = true;
-			this->cboDefaultODZoneParam->Location = System::Drawing::Point(1056, 4);
-			this->cboDefaultODZoneParam->Margin = System::Windows::Forms::Padding(4);
+			this->cboDefaultODZoneParam->Location = System::Drawing::Point(1300, 3);
 			this->cboDefaultODZoneParam->Name = L"cboDefaultODZoneParam";
-			this->cboDefaultODZoneParam->Size = System::Drawing::Size(171, 26);
+			this->cboDefaultODZoneParam->Size = System::Drawing::Size(65, 23);
 			this->cboDefaultODZoneParam->TabIndex = 4;
 			this->cboDefaultODZoneParam->SelectionChangeCommitted += gcnew System::EventHandler(this, &NeXTAInput::cboODZoneParam_SelectionChangeCommitted);
-			// 
-			// cboDefaultInputDemandMetaParam
-			// 
-			this->cboDefaultInputDemandMetaParam->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->cboDefaultInputDemandMetaParam->FormattingEnabled = true;
-			this->cboDefaultInputDemandMetaParam->Location = System::Drawing::Point(1056, 540);
-			this->cboDefaultInputDemandMetaParam->Margin = System::Windows::Forms::Padding(4);
-			this->cboDefaultInputDemandMetaParam->Name = L"cboDefaultInputDemandMetaParam";
-			this->cboDefaultInputDemandMetaParam->Size = System::Drawing::Size(171, 26);
-			this->cboDefaultInputDemandMetaParam->TabIndex = 5;
-			this->cboDefaultInputDemandMetaParam->SelectionChangeCommitted += gcnew System::EventHandler(this, &NeXTAInput::cboInputDemandMetaParam_SelectionChangeCommitted);
 			// 
 			// label1
 			// 
 			this->label1->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(3, 8);
+			this->label1->Location = System::Drawing::Point(2, 7);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(276, 18);
+			this->label1->Size = System::Drawing::Size(230, 15);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Number of \"Origin and Destin\"";
 			// 
-			// label3
+			// cboDefaultInputDemandMetaParam
 			// 
-			this->label3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->label3->AutoEllipsis = true;
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Gulim", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(129)));
-			this->label3->Location = System::Drawing::Point(644, 12);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(387, 18);
-			this->label3->TabIndex = 3;
-			this->label3->Text = L"Is the default \"Origination and Destination\"";
-			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->cboDefaultInputDemandMetaParam->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->cboDefaultInputDemandMetaParam->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cboDefaultInputDemandMetaParam->FormattingEnabled = true;
+			this->cboDefaultInputDemandMetaParam->Location = System::Drawing::Point(441, 340);
+			this->cboDefaultInputDemandMetaParam->Name = L"cboDefaultInputDemandMetaParam";
+			this->cboDefaultInputDemandMetaParam->Size = System::Drawing::Size(64, 23);
+			this->cboDefaultInputDemandMetaParam->TabIndex = 5;
+			this->cboDefaultInputDemandMetaParam->SelectionChangeCommitted += gcnew System::EventHandler(this, &NeXTAInput::cboInputDemandMetaParam_SelectionChangeCommitted);
+			// 
+			// dgvODZone
+			// 
+			this->dgvODZone->AllowUserToAddRows = false;
+			this->dgvODZone->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->tableLayoutPanel1->SetColumnSpan(this->dgvODZone, 2);
+			this->dgvODZone->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->dgvODZone->Location = System::Drawing::Point(3, 32);
+			this->dgvODZone->Name = L"dgvODZone";
+			this->dgvODZone->RowHeadersWidth = 62;
+			this->dgvODZone->RowTemplate->Height = 23;
+			this->dgvODZone->Size = System::Drawing::Size(502, 302);
+			this->dgvODZone->TabIndex = 0;
+			this->dgvODZone->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &NeXTAInput::dgvODZone_DataBindingComplete);
+			// 
+			// chartViewer
+			// 
+			this->chartViewer->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->tableLayoutPanel1->SetColumnSpan(this->chartViewer, 2);
+			this->chartViewer->HotSpotCursor = System::Windows::Forms::Cursors::Hand;
+			this->chartViewer->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->chartViewer->Location = System::Drawing::Point(511, 33);
+			this->chartViewer->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->chartViewer->MouseUsage = ChartDirector::WinChartMouseUsage::ScrollOnDrag;
+			this->chartViewer->Name = L"chartViewer";
+			this->tableLayoutPanel1->SetRowSpan(this->chartViewer, 3);
+			this->chartViewer->ScrollDirection = ChartDirector::WinChartDirection::HorizontalVertical;
+			this->chartViewer->Size = System::Drawing::Size(854, 637);
+			this->chartViewer->TabIndex = 7;
+			this->chartViewer->TabStop = false;
+			this->chartViewer->ZoomDirection = ChartDirector::WinChartDirection::HorizontalVertical;
+			this->chartViewer->ZoomInHeightLimit = 0.1;
+			this->chartViewer->ClickHotSpot += gcnew ChartDirector::WinHotSpotEventHandler(this, &NeXTAInput::chartViewer_ClickHotSpot);
+			this->chartViewer->ViewPortChanged += gcnew ChartDirector::WinViewPortEventHandler(this, &NeXTAInput::chartViewer_ViewPortChanged);
+			this->chartViewer->SizeChanged += gcnew System::EventHandler(this, &NeXTAInput::chartViewer_SizeChanged);
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(699, 5);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(55, 19);
+			this->checkBox1->TabIndex = 8;
+			this->checkBox1->Text = L"Link";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &NeXTAInput::checkBox1_CheckedChanged);
 			// 
 			// cboCountOD
 			// 
 			this->cboCountOD->FormattingEnabled = true;
 			this->cboCountOD->Items->AddRange(gcnew cli::array< System::Object^  >(5) { L"1", L"2", L"3", L"4", L"5" });
-			this->cboCountOD->Location = System::Drawing::Point(300, 4);
+			this->cboCountOD->Location = System::Drawing::Point(240, 3);
+			this->cboCountOD->Margin = System::Windows::Forms::Padding(2);
 			this->cboCountOD->Name = L"cboCountOD";
-			this->cboCountOD->Size = System::Drawing::Size(121, 26);
+			this->cboCountOD->Size = System::Drawing::Size(98, 23);
 			this->cboCountOD->TabIndex = 4;
 			this->cboCountOD->SelectionChangeCommitted += gcnew System::EventHandler(this, &NeXTAInput::cboCountOD_SelectionChangeCommitted);
 			// 
+			// tvDisplayOptions
+			// 
+			this->tvDisplayOptions->CheckBoxes = true;
+			this->tvDisplayOptions->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tvDisplayOptions->Location = System::Drawing::Point(0, 0);
+			this->tvDisplayOptions->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->tvDisplayOptions->Name = L"tvDisplayOptions";
+			treeNode1->Name = L"LinkID";
+			treeNode1->Text = L"ID";
+			treeNode2->Checked = true;
+			treeNode2->Name = L"Link";
+			treeNode2->Text = L"link";
+			treeNode3->Checked = true;
+			treeNode3->Name = L"NodeID";
+			treeNode3->Text = L"ID";
+			treeNode4->Checked = true;
+			treeNode4->Name = L"Node";
+			treeNode4->Text = L"node";
+			this->tvDisplayOptions->Nodes->AddRange(gcnew cli::array< System::Windows::Forms::TreeNode^  >(2) { treeNode2, treeNode4 });
+			this->tvDisplayOptions->ShowPlusMinus = false;
+			this->tvDisplayOptions->Size = System::Drawing::Size(1368, 714);
+			this->tvDisplayOptions->TabIndex = 5;
+			// 
+			// viewPortControl
+			// 
+			this->viewPortControl->Location = System::Drawing::Point(0, 0);
+			this->viewPortControl->Name = L"viewPortControl";
+			this->viewPortControl->Size = System::Drawing::Size(300, 200);
+			this->viewPortControl->TabIndex = 0;
+			this->viewPortControl->TabStop = false;
+			this->viewPortControl->Viewer = this->chartViewer;
+			// 
 			// NeXTAInput
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 18);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1231, 1072);
+			this->ClientSize = System::Drawing::Size(1368, 714);
 			this->Controls->Add(this->cboCountOD);
-			this->Controls->Add(this->label3);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->tableLayoutPanel1);
+			this->Controls->Add(this->tvDisplayOptions);
 			this->DoubleBuffered = true;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"NeXTAInput";
 			this->Text = L"NEXTA INPUT";
 			this->Load += gcnew System::EventHandler(this, &NeXTAInput::NeXTAInput_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvODZone))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvInputDemandMeta))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvODZone))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartViewer))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->viewPortControl))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -410,7 +514,85 @@ namespace WinformProject {
 				dgvInputDemandMeta->ReadOnly = false;
 			}
 		}
+		// 하위 노드 체크 상태 변경
+		void CheckChildNode(TreeNode^ selectNode) {
+			for each (TreeNode ^ tn in selectNode->Nodes) {
+				// 하위 노드를 현재 선택된 노드의 상태와 동일하게 변경
+				tn->Checked = selectNode->Checked;
+				CheckChildNode(tn);
+			}
+			return;
+		}
+		// 상위 노드 체크 상태 변경
+		void CheckParentNode(TreeNode^ selectNode) {
+			// 상위 노드를 현재 하위 노드들의 선택된 노드의 상태와 동일하게 변경
+			TreeNode^ t = selectNode->Parent;
+			if (t != nullptr) {
+				// selected node is child node
+				if (selectNode->Checked) {
+					// 하위 노드가 체크이면 상위 노드는 무조건 1개 이상 이므로 체크
+					t->Checked = true;
+				}
+				else {
+					// 체크가 아닐경우 다른 노드들 중 체크가 있는지 확인
+					t->Checked = IsCheckedChildNode(t);
+				}
+			}
+		}
+		// 노드 체크 상태 변경
+		void CheckNode(TreeNode^ selectNode) {
+			// 상위 노드를 현재 하위 노드들의 선택된 노드의 상태와 동일하게 변경
+			TreeNode^ t = selectNode->Parent;
+			if (t != nullptr) {
+				// selected node is child node
+				if (selectNode->Checked) {
+					// 하위 노드가 체크이면 상위 노드는 무조건 1개 이상 이므로 체크
+					t->Checked = true;
+				}
+			}
+			else {
+				// selected node is parent node
+				if (!selectNode->Checked) {
+					// 체크해제 시 하위의 모든 노드를 체크 해제, 체크 시는 상관없음
+					CheckChildNode(selectNode);
+				}
+			}
+		}
+		// 하위 노드들 중 체크 상태인 노드 확인
+		bool IsCheckedChildNode(TreeNode^ node) {
+			for each (TreeNode ^ tn in node->Nodes) {
+				if (tn->Checked || IsCheckedChildNode(tn)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		// 옵션 체크
+		bool CheckNodeOption(TreeNode^ node, String^ name) {
+			for each (TreeNode ^ tn in node->Nodes) {
+				if (tn->Name == name) {
+					return tn->Checked;
+				}
+			}
+			return false;
+		}
+		void DrawChart() {
+			// check display options
+			DisplayOptions options;
+			for each (TreeNode ^ node in tvDisplayOptions->Nodes)
+			{
+				if (node->Name == "Node") {
+					options.Node = node->Checked;
+					options.NodeID = CheckNodeOption(node, "NodeID");
+				}
+				else if (node->Name == "Link") {
+					options.Link = node->Checked;
+					options.LinkID = CheckNodeOption(node, "LinkID");
+				}
+			}
 
+			m_chart->Draw(chartViewer, "Road Network", options);
+		}
 		/*
 		void GenerateTrafficScenarios() {
 
@@ -428,6 +610,32 @@ namespace WinformProject {
 		*/
 
 
+		// 줌 인/아웃
+		void ZoomChartViewer()
+		{
+			if (!chartViewer->IsInViewPortChangedEvent)
+			{
+				//Remember the center point
+				double centerX = chartViewer->ViewPortLeft + chartViewer->ViewPortWidth / 2;
+				double centerY = chartViewer->ViewPortTop + chartViewer->ViewPortHeight / 2;
+
+				//Aspect ratio and zoom factor
+				double aspectRatio = chartViewer->ViewPortWidth / chartViewer->ViewPortHeight;
+				double zoomTo = ((double)Math::Round(Math::Min(chartViewer->ViewPortWidth, chartViewer->ViewPortHeight) * 100)) / 100;
+
+				//Zoom while respecting the aspect ratio
+				chartViewer->ViewPortWidth = zoomTo * Math::Max(1.0, aspectRatio);
+				chartViewer->ViewPortHeight = zoomTo * Math::Max(1.0, 1 / aspectRatio);
+
+				//Adjust ViewPortLeft and ViewPortTop to keep center point unchanged
+				chartViewer->ViewPortLeft = centerX - chartViewer->ViewPortWidth / 2;
+				chartViewer->ViewPortTop = centerY - chartViewer->ViewPortHeight / 2;
+
+				//update the chart, but no need to update the image map yet, as the chart is still
+				//zooming and is unstable
+				chartViewer->updateViewPort(true, false);
+			}
+		}
 
 	private: System::Void NeXTAInput_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->dataGridViewCellStyle = gcnew DataGridViewCellStyle();
@@ -457,6 +665,12 @@ namespace WinformProject {
 		// 동일 값 여부에 따라 그리드 읽기전용 여부 설정
 		SetReadOnlyODZoneYesNoGrid();
 		SetReadOnlyInputDemandMetaGrid();
+
+		tvDisplayOptions->ExpandAll();
+		chartViewer->updateViewPort(true, true);
+		//m_chart->Draw(chartViewer, "Road Network");
+		m_chart->Draw(chartViewer, viewPortControl, "Road Network");
+
 
 	}
 	private: System::Void cboODZoneParam_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
@@ -503,5 +717,95 @@ namespace WinformProject {
 	private: System::Void cboCountOD_SelectionChangeCommitted(System::Object^ sender, System::EventArgs^ e) {
 		SetReadOnlyODZoneCountGrid();
 	}
+	private: System::Void chartViewer_SizeChanged(System::Object^ sender, System::EventArgs^ e) {
+
+		//Step1Form 보다 먼저 호출 되면서 오류 발생함
+		//DrawChart();
+		if (this->m_dataSet != nullptr) {
+			DrawChart();
+		}
+	}
+		   // chartViewer에 연결된 viewport 값이 변경되면 실행 됨
+	private: System::Void chartViewer_ViewPortChanged(System::Object^ sender, ChartDirector::WinViewPortEventArgs^ e) {
+		ZoomChartViewer();
+		// Update the chart if necessary
+		if (e->NeedUpdateChart) {
+			DrawChart();
+		}
+	}
+private: System::Void chartViewer_ClickHotSpot(System::Object^ sender, ChartDirector::WinHotSpotEventArgs^ e) {
+	
+	//Alert::Error("ddereer");
+	Display(sender, e);
+}
+
+	   void Display(System::Object^ sender, ChartDirector::WinHotSpotEventArgs^ e) {
+		   // Add the name of the ChartViewer control that is being clicked
+		   array<String^>^ strArr = gcnew array<String^>(2);
+		   strArr[0] = "source";
+		   strArr[1] = ((ChartDirector::WinChartViewer^)sender)->Name;
+		 //  listView->Items->Add(gcnew ListViewItem(strArr));
+		   String^ NodeId;
+		   // List out the parameters of the hot spot
+		   // field0에 hotspot에서 사용할 데이터를 key=value;key=value 구조로 셋팅
+		   if (e->GetAttrValues()->ContainsKey("field0")) {
+			   String^ value = e->GetAttrValues()["field0"]->ToString();
+			   array<String^>^ attributes = value->Split(';');
+			   AttributeType type;
+			   for each (String ^ attribute in attributes)
+			   {
+				   array<String^>^ attr = attribute->Split('=');
+				   if (attr->Length == 2) {
+					   //AddList(attr[0], attr[1]);
+					   if (attr[0] == "TYPE") {
+						   Enum::TryParse(attr[1], type);
+					   }
+					   if (attr[0] == "ID") {
+						   NodeId = attr[1]->ToString();
+					   }
+				   }
+			   }
+			   String^ filter = "";
+			   array<DataRow^>^ foundRows = nullptr;
+			   DataRow^ row = nullptr;
+			   // 타입별 추가 parameter 설정
+			   switch (type)
+			   {
+			   case AttributeType::Link:
+
+				   break;
+			   case AttributeType::Node:
+				   if (NodeId != nullptr) {
+					   //Alert::Error(NodeId);
+					   this->dgvODZone->CurrentCell->Value = NodeId;
+				   }
+				   break;
+			   case AttributeType::Component:
+				   break;
+			   default:
+				   break;
+			   }
+		   }
+
+	   }
+private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+
+	if (checkBox1->Checked == true) {
+		this->tvDisplayOptions->Nodes[0]->Checked = false;
+		this->tvDisplayOptions->Nodes[0]->FirstNode->Checked = false;
+	}
+	else {
+		this->tvDisplayOptions->Nodes[0]->Checked = true;
+		this->tvDisplayOptions->Nodes[0]->FirstNode->Checked = true;
+	}
+
+	CheckChildNode(this->tvDisplayOptions->Nodes[0]);
+	CheckNode(this->tvDisplayOptions->Nodes[0]->FirstNode);
+	DrawChart();
+
+}
+
 };
 }

@@ -21,6 +21,7 @@ public protected:
 		this->m_fragParams = gcnew DataTable();
 		this->m_soilAmps = gcnew DataTable();
 		this->m_seismicSources = gcnew DataTable();
+		
 		this->m_seismicSourceDictionary = gcnew Dictionary<String^, DataTable^>();
 		this->m_seismicSourceContentDictionary = gcnew Dictionary<String^, DataTable^>();
 		this->m_trafficCarryingParams = gcnew DataTable();
@@ -77,6 +78,11 @@ public protected:
 
 		this->m_structureFileDictionary = gcnew Dictionary<String^, StructureFile^>();//structure File
 
+		this->m_constDefault;
+
+		this->m_constDefault_DataSet_Str = gcnew array<String^>(13);
+
+
 	}
 
 public protected:	
@@ -106,6 +112,7 @@ public protected:
 	DataTable^							m_linkTypes;
 
 	DataTable^							m_seismicSources;
+	//DataTable^                          m_constDefault; //내진성능관리 기본상수 설정
 	Dictionary<String^, DataTable^>^	m_seismicSourceDictionary;
 	Dictionary<String^, DataTable^>^    m_seismicSourceContentDictionary;//파일별 진앙지 엑셀 정보
 
@@ -177,6 +184,12 @@ public protected:
 
 
 	String^ m_seismicReinforce; // 화면에서 내진보강여부 설정[BEFORE, AFTER]
+
+	String^ m_constDefault; //내진성능관리 기본상수 설정[Y,N] Y:기본 defalut 상태 N:사용자 정의 가능 상태
+
+	array<String^>^ m_constDefault_DataSet_Str; //내진성능관리 기본상수 설정 dataset double
+
+
 	
 
 };
