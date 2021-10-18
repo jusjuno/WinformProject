@@ -258,6 +258,10 @@ namespace WinformProject {
 					this->form2SendEvent("ko-KR");
 				}
 			}
+			//세팅된게 없으면 BEFORE로 디폴트 세팅
+			if (this->m_dataSet->SeismicReinforce == nullptr) {				
+				this->m_dataSet->SeismicReinforce = "BEFORE";
+			}
 		}else {
 			this->radioKor->Checked = true;
 			CultureInfo::CurrentUICulture = CultureInfo::CreateSpecificCulture("ko-KR");//Localization과 관련

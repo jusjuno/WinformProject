@@ -576,6 +576,22 @@ namespace WinformProject {
 				IsModified = true;
 				//IsModified = false;
 				UpdateForm();
+
+				//환경설정 뛰우기 2021.10.18 추가
+				if (!IsCreatedFormInstance(m_preferenceForm)) {
+					PreferenceForm^ _form = gcnew PreferenceForm();
+
+					_form->MdiParent = this;
+					_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+					//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
+					_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
+					_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
+					//_form->SeismicChanged += gcnew EventHandler(this, &MainForm::UpdateResultMenu);
+
+
+					m_preferenceForm = _form;
+					m_preferenceForm->Show();
+				}
 			}
 		}
 		System::Void FileOpenMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {

@@ -28,6 +28,9 @@ namespace WinformProject {
 		NetworkComponent^ m_networkComponent;
 	private: System::Windows::Forms::TreeView^ tvDisplayOptions;
 	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::Button^ btnPoint;
+	private: System::Windows::Forms::Button^ btnZoomIn;
+	private: System::Windows::Forms::Button^ btnZoomOut;
 	private: ChartDirector::WinViewPortControl^ viewPortControl;
 	
 	public:
@@ -112,6 +115,9 @@ namespace WinformProject {
 			this->cboCountOD = (gcnew System::Windows::Forms::ComboBox());
 			this->tvDisplayOptions = (gcnew System::Windows::Forms::TreeView());
 			this->viewPortControl = (gcnew ChartDirector::WinViewPortControl(this->components));
+			this->btnPoint = (gcnew System::Windows::Forms::Button());
+			this->btnZoomIn = (gcnew System::Windows::Forms::Button());
+			this->btnZoomOut = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvInputDemandMeta))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvODZone))->BeginInit();
@@ -129,7 +135,7 @@ namespace WinformProject {
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				64.28572F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				70)));
+				73)));
 			this->tableLayoutPanel1->Controls->Add(this->label3, 2, 0);
 			this->tableLayoutPanel1->Controls->Add(this->dgvInputDemandMeta, 0, 3);
 			this->tableLayoutPanel1->Controls->Add(this->label2, 0, 2);
@@ -159,7 +165,7 @@ namespace WinformProject {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"굴림", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label3->Location = System::Drawing::Point(968, 7);
+			this->label3->Location = System::Drawing::Point(965, 7);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(327, 15);
@@ -177,7 +183,7 @@ namespace WinformProject {
 			this->dgvInputDemandMeta->Name = L"dgvInputDemandMeta";
 			this->dgvInputDemandMeta->RowHeadersWidth = 62;
 			this->dgvInputDemandMeta->RowTemplate->Height = 23;
-			this->dgvInputDemandMeta->Size = System::Drawing::Size(502, 302);
+			this->dgvInputDemandMeta->Size = System::Drawing::Size(501, 302);
 			this->dgvInputDemandMeta->TabIndex = 1;
 			this->dgvInputDemandMeta->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &NeXTAInput::dgvInputDemandMetaData_DataBindingComplete);
 			// 
@@ -189,7 +195,7 @@ namespace WinformProject {
 				static_cast<System::Byte>(129)));
 			this->label2->Location = System::Drawing::Point(3, 337);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(432, 29);
+			this->label2->Size = System::Drawing::Size(431, 29);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Is the default \"Input Demand Meta Data\"";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -199,9 +205,9 @@ namespace WinformProject {
 			this->cboDefaultODZoneParam->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboDefaultODZoneParam->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboDefaultODZoneParam->FormattingEnabled = true;
-			this->cboDefaultODZoneParam->Location = System::Drawing::Point(1300, 3);
+			this->cboDefaultODZoneParam->Location = System::Drawing::Point(1297, 3);
 			this->cboDefaultODZoneParam->Name = L"cboDefaultODZoneParam";
-			this->cboDefaultODZoneParam->Size = System::Drawing::Size(65, 23);
+			this->cboDefaultODZoneParam->Size = System::Drawing::Size(68, 23);
 			this->cboDefaultODZoneParam->TabIndex = 4;
 			this->cboDefaultODZoneParam->SelectionChangeCommitted += gcnew System::EventHandler(this, &NeXTAInput::cboODZoneParam_SelectionChangeCommitted);
 			// 
@@ -223,7 +229,7 @@ namespace WinformProject {
 			this->cboDefaultInputDemandMetaParam->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cboDefaultInputDemandMetaParam->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cboDefaultInputDemandMetaParam->FormattingEnabled = true;
-			this->cboDefaultInputDemandMetaParam->Location = System::Drawing::Point(441, 340);
+			this->cboDefaultInputDemandMetaParam->Location = System::Drawing::Point(440, 340);
 			this->cboDefaultInputDemandMetaParam->Name = L"cboDefaultInputDemandMetaParam";
 			this->cboDefaultInputDemandMetaParam->Size = System::Drawing::Size(64, 23);
 			this->cboDefaultInputDemandMetaParam->TabIndex = 5;
@@ -239,7 +245,7 @@ namespace WinformProject {
 			this->dgvODZone->Name = L"dgvODZone";
 			this->dgvODZone->RowHeadersWidth = 62;
 			this->dgvODZone->RowTemplate->Height = 23;
-			this->dgvODZone->Size = System::Drawing::Size(502, 302);
+			this->dgvODZone->Size = System::Drawing::Size(501, 302);
 			this->dgvODZone->TabIndex = 0;
 			this->dgvODZone->DataBindingComplete += gcnew System::Windows::Forms::DataGridViewBindingCompleteEventHandler(this, &NeXTAInput::dgvODZone_DataBindingComplete);
 			// 
@@ -251,13 +257,13 @@ namespace WinformProject {
 			this->tableLayoutPanel1->SetColumnSpan(this->chartViewer, 2);
 			this->chartViewer->HotSpotCursor = System::Windows::Forms::Cursors::Hand;
 			this->chartViewer->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->chartViewer->Location = System::Drawing::Point(511, 33);
+			this->chartViewer->Location = System::Drawing::Point(510, 33);
 			this->chartViewer->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->chartViewer->MouseUsage = ChartDirector::WinChartMouseUsage::ScrollOnDrag;
 			this->chartViewer->Name = L"chartViewer";
 			this->tableLayoutPanel1->SetRowSpan(this->chartViewer, 3);
 			this->chartViewer->ScrollDirection = ChartDirector::WinChartDirection::HorizontalVertical;
-			this->chartViewer->Size = System::Drawing::Size(854, 637);
+			this->chartViewer->Size = System::Drawing::Size(855, 637);
 			this->chartViewer->TabIndex = 7;
 			this->chartViewer->TabStop = false;
 			this->chartViewer->ZoomDirection = ChartDirector::WinChartDirection::HorizontalVertical;
@@ -269,7 +275,7 @@ namespace WinformProject {
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(699, 5);
+			this->checkBox1->Location = System::Drawing::Point(536, 5);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(55, 19);
 			this->checkBox1->TabIndex = 8;
@@ -320,11 +326,50 @@ namespace WinformProject {
 			this->viewPortControl->TabStop = false;
 			this->viewPortControl->Viewer = this->chartViewer;
 			// 
+			// btnPoint
+			// 
+			this->btnPoint->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btnPoint->Location = System::Drawing::Point(613, 4);
+			this->btnPoint->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnPoint->Name = L"btnPoint";
+			this->btnPoint->Size = System::Drawing::Size(100, 23);
+			this->btnPoint->TabIndex = 9;
+			this->btnPoint->Text = L"포인트";
+			this->btnPoint->UseVisualStyleBackColor = true;
+			this->btnPoint->Click += gcnew System::EventHandler(this, &NeXTAInput::btnPoint_Click);
+			// 
+			// btnZoomIn
+			// 
+			this->btnZoomIn->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btnZoomIn->Location = System::Drawing::Point(704, 4);
+			this->btnZoomIn->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnZoomIn->Name = L"btnZoomIn";
+			this->btnZoomIn->Size = System::Drawing::Size(94, 23);
+			this->btnZoomIn->TabIndex = 10;
+			this->btnZoomIn->Text = L"확대";
+			this->btnZoomIn->UseVisualStyleBackColor = true;
+			this->btnZoomIn->Click += gcnew System::EventHandler(this, &NeXTAInput::btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this->btnZoomOut->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btnZoomOut->Location = System::Drawing::Point(798, 4);
+			this->btnZoomOut->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnZoomOut->Name = L"btnZoomOut";
+			this->btnZoomOut->Size = System::Drawing::Size(94, 24);
+			this->btnZoomOut->TabIndex = 11;
+			this->btnZoomOut->Text = L"축소";
+			this->btnZoomOut->UseVisualStyleBackColor = true;
+			this->btnZoomOut->Click += gcnew System::EventHandler(this, &NeXTAInput::btnZoomOut_Click);
+			// 
 			// NeXTAInput
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1368, 714);
+			this->Controls->Add(this->btnZoomOut);
+			this->Controls->Add(this->btnZoomIn);
+			this->Controls->Add(this->btnPoint);
 			this->Controls->Add(this->cboCountOD);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->tableLayoutPanel1);
@@ -807,5 +852,17 @@ private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::E
 
 }
 
+private: System::Void btnPoint_Click(System::Object^ sender, System::EventArgs^ e) {
+	// 마우스 커서 변경(포인터)
+	chartViewer->MouseUsage = WinChartMouseUsage::ScrollOnDrag;
+}
+private: System::Void btnZoomIn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// 마우스 커서 변경(줌인)
+	chartViewer->MouseUsage = WinChartMouseUsage::ZoomIn;
+}
+private: System::Void btnZoomOut_Click(System::Object^ sender, System::EventArgs^ e) {
+	// 마우스 커스 변경(줌아웃)
+	chartViewer->MouseUsage = WinChartMouseUsage::ZoomOut;
+}
 };
 }
