@@ -81,6 +81,7 @@ namespace WinformProject {
 		/// </summary>
 		literal String^				TITLE = "노후 도로시설 내진성능관리 의사결정시스템";
 		static bool					IsModified; // save data modify status
+		static bool					IsFileCrated; // filecreated status
 
 		ProjectDataSetBinder^		m_projectDataSetBinder; // save project data
 
@@ -579,7 +580,9 @@ namespace WinformProject {
 				m_preferenceForm->Show();
 			}
 			else {
-				m_preferenceForm->Closed += gcnew EventHandler(this, &MainForm::FileNew);
+				if (!IsFileCrated) {
+					m_preferenceForm->Closed += gcnew EventHandler(this, &MainForm::FileNew);
+				}
 			}
 
 
@@ -605,11 +608,16 @@ namespace WinformProject {
 
 		// file create
 		System::Void FileNew(System::Object^ sender, System::EventArgs^ e) {
+			if (IsFileCrated) {
+				return;
+			}
+
 			NewProjectForm^ tmp = gcnew NewProjectForm();
 			if (::DialogResult::OK == tmp->ShowDialog())
 			{
 				m_newProjectForm = tmp;
 				m_projectDataSetBinder = gcnew ProjectDataSetBinder(tmp->ReturnDataSet);
+				IsFileCrated = true;
 				for each (Form ^ form in this->MdiChildren)
 				{
 					// 생성된 모든 창 닫기
@@ -617,6 +625,7 @@ namespace WinformProject {
 				}
 				IsModified = true;
 				//IsModified = false;
+				
 				UpdateForm();
 
 
