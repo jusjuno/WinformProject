@@ -527,7 +527,6 @@ namespace WinformProject {
 			_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
 			//_form->SeismicChanged += gcnew EventHandler(this, &MainForm::UpdateResultMenu);
 
-
 			m_preferenceForm = _form;
 			m_preferenceForm->Show();
 		}
@@ -563,12 +562,55 @@ namespace WinformProject {
 					return;
 				}
 			}
+
+			//환경설정 뛰우기 2021.10.18 추가
+			if (!IsCreatedFormInstance(m_preferenceForm)) {
+				PreferenceForm^ _form = gcnew PreferenceForm();
+
+				_form->MdiParent = this;
+				_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
+				//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
+				_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
+				_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
+				//_form->SeismicChanged += gcnew EventHandler(this, &MainForm::UpdateResultMenu);
+
+				_form->Closed += gcnew EventHandler(this, &MainForm::FileNew);
+				m_preferenceForm = _form;
+				m_preferenceForm->Show();
+			}
+			else {
+				m_preferenceForm->Closed += gcnew EventHandler(this, &MainForm::FileNew);
+			}
+
+
+
+			//	NewProjectForm^ tmp = gcnew NewProjectForm();
+			//	if (::DialogResult::OK == tmp->ShowDialog())
+			//	{
+			//		m_newProjectForm = tmp;
+			//		m_projectDataSetBinder = gcnew ProjectDataSetBinder(tmp->ReturnDataSet);
+			//		for each (Form ^ form in this->MdiChildren)
+			//		{
+			//			// 생성된 모든 창 닫기
+			//			form->Close();
+			//		}
+			//		IsModified = true;
+			//		//IsModified = false;
+			//		UpdateForm();
+
+
+			//	}
+		
+		}
+
+		// file create
+		System::Void FileNew(System::Object^ sender, System::EventArgs^ e) {
 			NewProjectForm^ tmp = gcnew NewProjectForm();
 			if (::DialogResult::OK == tmp->ShowDialog())
 			{
 				m_newProjectForm = tmp;
 				m_projectDataSetBinder = gcnew ProjectDataSetBinder(tmp->ReturnDataSet);
-				for each (Form^ form in this->MdiChildren)
+				for each (Form ^ form in this->MdiChildren)
 				{
 					// 생성된 모든 창 닫기
 					form->Close();
@@ -577,23 +619,10 @@ namespace WinformProject {
 				//IsModified = false;
 				UpdateForm();
 
-				//환경설정 뛰우기 2021.10.18 추가
-				if (!IsCreatedFormInstance(m_preferenceForm)) {
-					PreferenceForm^ _form = gcnew PreferenceForm();
 
-					_form->MdiParent = this;
-					_form->SaveDataChanged += gcnew EventHandler(this, &MainForm::OnSaveDataChanged);
-					//_form->form2SendEvent += gcnew EventHandler(this, &MainForm::receiveFormEvent);
-					_form->form2SendEvent += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::receiveFormEvent);
-					_form->SeismicChanged += gcnew WinformProject::PreferenceForm::FormSendDataHandler(this, &MainForm::UpdateResultMenu);
-					//_form->SeismicChanged += gcnew EventHandler(this, &MainForm::UpdateResultMenu);
-
-
-					m_preferenceForm = _form;
-					m_preferenceForm->Show();
-				}
 			}
 		}
+
 		System::Void FileOpenMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			if (IsModified) {
 				::DialogResult result = System::Windows::Forms::MessageBox::Show(this, "현재 프로젝트의 저장되지 않은 데이터가 존재합니다.\n파일을 불러오시겠습니까?", "불러오기", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
