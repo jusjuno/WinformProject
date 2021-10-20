@@ -228,6 +228,7 @@ namespace WinformProject {
 			this->m_dataSet->SeismicReinforce = "BEFORE";
 			this->SeismicChanged("BEFORE");
 		}
+		CommConst::SeismicReinforce = "BEFORE";
 	}
 
 	private: System::Void rdoSeismicAft_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -235,6 +236,7 @@ namespace WinformProject {
 			this->m_dataSet->SeismicReinforce = "AFTER";			
 			this->SeismicChanged("AFTER");
 		}
+		CommConst::SeismicReinforce = "AFTER";
 	}
 
 	private: System::Void PreferenceForm_Load(System::Object^ sender, System::EventArgs^ e) {

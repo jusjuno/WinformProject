@@ -152,6 +152,8 @@ public:
 	literal String^ DT_FRAG_CURV_DATA_COL05 = L"Severe";
 	literal String^ DT_FRAG_CURV_DATA_COL06 = L"Collapse";
 
+	// before /after 
+	static String^ SeismicReinforce = L"BEFORE";
 
 
 };

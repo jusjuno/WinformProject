@@ -385,7 +385,14 @@ namespace WinformProject {
 					}
 
 					//내진보강여부 값
-					String^ sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+					String^ sSeismicReinforce = nullptr;
+					if (this->m_dataSet->SeismicReinforce) {
+						sSeismicReinforce = this->m_dataSet->SeismicReinforce;
+					}
+					else {
+						sSeismicReinforce = CommConst::SeismicReinforce;
+					}
+
 					//Debug::WriteLine("=================>sSeismicReinforce:" + sSeismicReinforce);
 					String^ sFileName = "TrafficSimulationResult_summary.csv";
 					if (sSeismicReinforce->Equals("BEFORE")) {
