@@ -428,6 +428,8 @@ namespace WinformProject {
 			UpdateMainMenu();
 			// set main form title
 			this->Text = title;
+			// 파일 생성 초기화
+			IsFileCrated = false;
 		}
 		// Set enable/disable main menu
 		void UpdateMainMenu() {
